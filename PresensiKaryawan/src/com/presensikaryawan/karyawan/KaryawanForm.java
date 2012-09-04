@@ -79,6 +79,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         golonganKaryawanTextField = new javax.swing.JTextField();
         alamatKaryawanTextField = new javax.swing.JTextField();
         posisiKaryawanTextField = new javax.swing.JTextField();
+        tanggalMasukDateChooser = new com.toedter.calendar.JDateChooser();
         daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
@@ -267,7 +268,8 @@ public class KaryawanForm extends javax.swing.JFrame {
                             .add(namaKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(alamatKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 535, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(golonganKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(posisiKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(posisiKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(tanggalMasukDateChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 213, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(87, Short.MAX_VALUE))))
         );
         inputPanelLayout.setVerticalGroup(
@@ -286,8 +288,10 @@ public class KaryawanForm extends javax.swing.JFrame {
                     .add(alamatKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(alamatKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tanggalMasukKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(17, 17, 17)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(tanggalMasukKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(tanggalMasukDateChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(golonganKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(golonganKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -578,6 +582,7 @@ public class KaryawanForm extends javax.swing.JFrame {
     private javax.swing.JLabel posisiKaryawanLabel;
     private javax.swing.JTextField posisiKaryawanTextField;
     private javax.swing.JButton simpanButton;
+    private com.toedter.calendar.JDateChooser tanggalMasukDateChooser;
     private javax.swing.JLabel tanggalMasukKaryawanLabel;
     // End of variables declaration//GEN-END:variables
     

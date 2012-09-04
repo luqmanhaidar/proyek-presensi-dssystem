@@ -177,6 +177,7 @@
                                   <Component id="alamatKaryawanTextField" min="-2" pref="535" max="-2" attributes="0"/>
                                   <Component id="golonganKaryawanTextField" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                                   <Component id="posisiKaryawanTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="tanggalMasukDateChooser" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="87" max="32767" attributes="0"/>
                           </Group>
@@ -203,8 +204,11 @@
                           <Component id="alamatKaryawanTextField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tanggalMasukKaryawanLabel" min="-2" pref="20" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="tanggalMasukKaryawanLabel" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="tanggalMasukDateChooser" min="-2" pref="31" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="golonganKaryawanLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="golonganKaryawanTextField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
@@ -396,6 +400,8 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="posisiKaryawanTextFieldActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="tanggalMasukDateChooser">
             </Component>
           </SubComponents>
         </Container>
