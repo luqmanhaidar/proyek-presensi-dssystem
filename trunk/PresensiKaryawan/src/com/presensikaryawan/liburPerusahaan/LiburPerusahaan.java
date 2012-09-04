@@ -4,7 +4,6 @@
  */
 package com.presensikaryawan.liburPerusahaan;
 
-import com.presensikaryawan.liburNasional.*;
 import java.util.GregorianCalendar;
 
 /**
@@ -12,6 +11,7 @@ import java.util.GregorianCalendar;
  * @author Tinus
  */
 public class LiburPerusahaan {
+    private int no;
     private GregorianCalendar tanggal;
     private String keterangan;
 
@@ -44,6 +44,20 @@ public class LiburPerusahaan {
      */
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
+    }
+
+    /**
+     * @return the no
+     */
+    public int getNo() {
+        return no;
+    }
+
+    /**
+     * @param no the no to set
+     */
+    public void setNo(int no) {
+        this.no = no;
     }
     
     

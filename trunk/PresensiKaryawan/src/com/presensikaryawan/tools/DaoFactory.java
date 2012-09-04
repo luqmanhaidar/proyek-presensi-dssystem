@@ -12,6 +12,8 @@ import java.sql.Connection;
 import com.mysql.jdbc.Driver;
 import com.presensikaryawan.karyawan.KaryawanDao;
 import com.presensikaryawan.karyawan.KaryawanDaoImplemen;
+import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDao;
+import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -30,6 +32,7 @@ public class DaoFactory {
     private static Properties prop;
     private static GolonganDao golonganDao;
     private static KaryawanDao karyawanDao;
+    private static LiburPerusahaanDao liburPerusahaanDao;
 //    private static BankDao bankDao;
 
     public static Connection getConnection() throws SQLException {
@@ -67,6 +70,13 @@ public class DaoFactory {
         
         }
         return  karyawanDao;
+    }
+    
+    public static LiburPerusahaanDao getLiburPerusahaanDao() throws SQLException{
+        if (liburPerusahaanDao==null){
+            liburPerusahaanDao=new LiburPerusahaanDaoImplemen(getConnection());
+        }
+        return liburPerusahaanDao;
     }
 
 //    public static BankDao getBankDao() throws SQLException {
