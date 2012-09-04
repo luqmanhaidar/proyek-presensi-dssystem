@@ -4,30 +4,26 @@
  */
 package com.presensikaryawan.liburNasional;
 
-import java.util.GregorianCalendar;
-
 /**
  *
- * @author Tinus
+ * @author Eki
  */
 public class LiburNasional {
-    private GregorianCalendar tanggal;
+    
+    private String tanggal;
     private String keterangan;
-
-    public LiburNasional() {
-    }
 
     /**
      * @return the tanggal
      */
-    public GregorianCalendar getTanggal() {
+    public String getTanggal() {
         return tanggal;
     }
 
     /**
      * @param tanggal the tanggal to set
      */
-    public void setTanggal(GregorianCalendar tanggal) {
+    public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
     }
 
@@ -44,6 +40,5 @@ public class LiburNasional {
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
     }
-    
     
 }

@@ -1,15 +1,16 @@
 package com.presensikaryawan.liburNasional;
 
 
-import com.presensikaryawan.golongan.*;
-import com.presensikaryawan.karyawan.*;
-import com.presensikaryawan.golongan.*;
+
 import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
+import com.dssystem.umum.DateTool;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,8 @@ import javax.swing.*;
 public class LiburNasionalForm extends javax.swing.JFrame {
     
     private DaoFactory service;
-    private Golongan activeGolongan;
+    private LiburNasional activeLiburNasional;
+        GregorianCalendar gc=new GregorianCalendar();
     /** Creates new form masterInventoryGrup */
     public LiburNasionalForm() throws SQLException {
         initComponents();
@@ -38,18 +40,20 @@ public class LiburNasionalForm extends javax.swing.JFrame {
 //        Tampilan();
         // isitable();
         initComponentFocus();
-        keteranganTextField.setDocument(new ChangeCase().getToUpperCase());
-        GolonganDao dao = DaoFactory.getGolonganDao();
-        List<Golongan> golongans = dao.getAllGolongan();
-        GolonganTableModel model = new GolonganTableModel(golongans);
-        liburNasionalTable.setModel(model);
-        for(Golongan g :golongans){
-//            kodeGolonganCombo.addItem(g.getKodeGolongan());
-        }
+        tanggalDateChooser.setDate(gc.getTime());
+        namaGolonganTextField.setDocument(new ChangeCase().getToUpperCase());
+        LiburNasionalDao dao = DaoFactory.getLiburNasionalDao();
+        List<LiburNasional> liburNasionals = dao.getAllLiburNasional();
+        LiburNasionalTableModel model = new LiburNasionalTableModel(liburNasionals);
+        golonganTable.setModel(model);
+//        for(LiburNasional l :liburNasionals){
+//            kodeGolonganCombo.addItem(l.getTanggal());
+//        }
     }
     private void initComponentFocus() {
-        keteranganTextField.addFocusListener(new ComponentFocus(keteranganTextField));
+        namaGolonganTextField.addFocusListener(new ComponentFocus(namaGolonganTextField));
 //        kodeGolonganCombo.addFocusListener(new ComponentFocus(kodeGolonganCombo));
+        tanggalDateChooser.addFocusListener(new ComponentFocus(tanggalDateChooser));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
     }
     /** This method is called from within the constructor to
@@ -65,31 +69,36 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         logoLabel = new javax.swing.JLabel();
         menuLabel = new javax.swing.JLabel();
         fungsiLabel = new javax.swing.JLabel();
+        panelStatus1 = new com.sistem.panelstatus.PanelStatus();
         cmdKeluar = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
         keteranganLabel = new javax.swing.JLabel();
         tanggalLabel = new javax.swing.JLabel();
-        keteranganTextField = new javax.swing.JTextField();
+        namaGolonganTextField = new javax.swing.JTextField();
         simpanButton = new javax.swing.JButton();
         hapusButton = new javax.swing.JButton();
         batalButton = new javax.swing.JButton();
         tanggalDateChooser = new com.toedter.calendar.JDateChooser();
         liburNasionalPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        liburNasionalTable = new javax.swing.JTable();
+        golonganTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
+        jDesktopPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         headPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
+
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18));
         menuLabel.setText("Menu Libur Nasional");
 
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data libur nasional perusahaan");
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data libur nasional");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
         headPanel.setLayout(headPanelLayout);
@@ -101,8 +110,8 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 .add(4, 4, 4)
                 .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(menuLabel)
-                    .add(fungsiLabel))
-                .addContainerGap(81, Short.MAX_VALUE))
+                    .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         headPanelLayout.setVerticalGroup(
             headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -117,10 +126,12 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        headPanel.setBounds(0, 0, 550, 68);
+        headPanel.setBounds(0, 0, 550, 77);
         jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelStatus1.setBounds(0, 510, 560, 50);
+        jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -133,21 +144,21 @@ public class LiburNasionalForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        keteranganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        keteranganLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         keteranganLabel.setText("Keterangan");
 
-        tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         tanggalLabel.setText("Tanggal");
 
-        keteranganTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        keteranganTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        keteranganTextField.addActionListener(new java.awt.event.ActionListener() {
+        namaGolonganTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        namaGolonganTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        namaGolonganTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                keteranganTextFieldActionPerformed(evt);
+                namaGolonganTextFieldActionPerformed(evt);
             }
         });
 
-        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12));
         simpanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Save.gif"))); // NOI18N
         simpanButton.setMnemonic('S');
         simpanButton.setText("Simpan");
@@ -164,7 +175,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             }
         });
 
-        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12));
         hapusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Delete.gif"))); // NOI18N
         hapusButton.setMnemonic('H');
         hapusButton.setText("Hapus");
@@ -175,12 +186,18 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             }
         });
 
-        batalButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        batalButton.setFont(new java.awt.Font("Dialog", 0, 12));
         batalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Undo.gif"))); // NOI18N
         batalButton.setText("Batal");
         batalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batalButtonActionPerformed(evt);
+            }
+        });
+
+        tanggalDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tanggalDateChooserPropertyChange(evt);
             }
         });
 
@@ -195,9 +212,9 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, tanggalLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(keteranganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(tanggalDateChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 201, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(namaGolonganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(tanggalDateChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 183, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
                 .addContainerGap(185, Short.MAX_VALUE)
                 .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -211,13 +228,13 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(tanggalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(tanggalDateChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(tanggalDateChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .add(tanggalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(keteranganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keteranganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(namaGolonganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -234,24 +251,24 @@ public class LiburNasionalForm extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        liburNasionalTable.setAutoCreateRowSorter(true);
-        liburNasionalTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        liburNasionalTable.setModel(new javax.swing.table.DefaultTableModel(
+        golonganTable.setAutoCreateRowSorter(true);
+        golonganTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        golonganTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "No", "Tanggal", "Keterangan"
+                "Tanggal", "Keterangan"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -262,15 +279,12 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        liburNasionalTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        golonganTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                liburNasionalTableMouseClicked(evt);
+                golonganTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(liburNasionalTable);
-        liburNasionalTable.getColumnModel().getColumn(0).setResizable(false);
-        liburNasionalTable.getColumnModel().getColumn(1).setResizable(false);
-        liburNasionalTable.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(golonganTable);
 
         org.jdesktop.layout.GroupLayout liburNasionalPanelLayout = new org.jdesktop.layout.GroupLayout(liburNasionalPanel);
         liburNasionalPanel.setLayout(liburNasionalPanelLayout);
@@ -284,7 +298,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             liburNasionalPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(liburNasionalPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         liburNasionalPanel.setBounds(0, 200, 550, 250);
@@ -305,21 +319,25 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDesktopPane1.getAccessibleContext().setAccessibleName("");
+        jDesktopPane1.getAccessibleContext().setAccessibleDescription("");
+
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-563)/2, (screenSize.height-592)/2, 563, 592);
     }// </editor-fold>//GEN-END:initComponents
     
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-//        String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
-        String namaGolongan = keteranganTextField.getText();
-//        activeGolongan.setKodeGolongan(kodeGolongan);
-        activeGolongan.setNamaGolongan(namaGolongan);
-        int ok = JOptionPane.showConfirmDialog(null,"Anda Yakin Akan Menghapus Data\nDengan Nama = "+namaGolongan+"","Konfirmasi",JOptionPane.YES_NO_OPTION);
+//        String tanggal = String.valueOf(kodeGolonganCombo.getSelectedItem());
+        String tanggal=DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
+        String keterangan = namaGolonganTextField.getText();
+        activeLiburNasional.setTanggal(tanggal);
+        activeLiburNasional.setKeterangan(keterangan);
+        int ok = JOptionPane.showConfirmDialog(null,"Anda Yakin Akan Menghapus Data\nDengan Nama = "+keterangan+"","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if (ok==0){
             try {
-                DaoFactory.getGolonganDao().delete(activeGolongan);
+                DaoFactory.getLiburNasionalDao().delete(activeLiburNasional);
                 JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n" +
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        "<html><font color=#FF0000>"+keterangan+"</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n" +
@@ -331,13 +349,18 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         batalButton.doClick();
     }//GEN-LAST:event_hapusButtonActionPerformed
     
-    private void liburNasionalTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liburNasionalTableMouseClicked
-        int row = liburNasionalTable.getSelectedRow();
-        String kodegroup = liburNasionalTable.getValueAt(row, 0).toString();
-        String namagroup = liburNasionalTable.getValueAt(row,1).toString();
-        keteranganTextField.setText(namagroup);
-//        kodeGolonganCombo.setSelectedItem(kodegroup);// TODO add your handling code here:
-    }//GEN-LAST:event_liburNasionalTableMouseClicked
+    private void golonganTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_golonganTableMouseClicked
+        int row = golonganTable.getSelectedRow();
+        String tanggal = golonganTable.getValueAt(row, 0).toString();
+        String keterangan = golonganTable.getValueAt(row,1).toString();
+        int year = Integer.parseInt(tanggal.substring(0, 4));
+        int month = Integer.parseInt(tanggal.substring(5, 7));
+        int day = Integer.parseInt(tanggal.substring(8, 10));
+        Date date=new Date(year, month-1, day);
+        namaGolonganTextField.setText(keterangan);
+        tanggalDateChooser.setDate(date);
+//        kodeGolonganCombo.setSelectedItem(keterangan);// TODO add your handling code here:
+    }//GEN-LAST:event_golonganTableMouseClicked
     private void isitable(){
       
     }
@@ -347,17 +370,18 @@ public class LiburNasionalForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonKeyPressed
     
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-//        String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
-        String namaGolongan = keteranganTextField.getText();
-        Golongan golonganBaru = new Golongan();
-//        golonganBaru.setKodeGolongan(kodeGolongan);
-        golonganBaru.setNamaGolongan(namaGolongan);
+//        String tanggal = String.valueOf(kodeGolonganCombo.getSelectedItem());
+        String tanggal=DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
+        String keterangan = namaGolonganTextField.getText();
+        LiburNasional liburNasionalBaru = new LiburNasional();
+        liburNasionalBaru.setTanggal(tanggal);
+        liburNasionalBaru.setKeterangan(keterangan);
         if ("Simpan".equals(simpanButton.getText())){
             try {
-                DaoFactory.getGolonganDao().insert(golonganBaru);
+                DaoFactory.getLiburNasionalDao().insert(liburNasionalBaru);
 
                 JOptionPane.showMessageDialog(this, "Data dengan Nama \n"+
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>"+"\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        "<html><font color=#FF0000>"+keterangan+"</font></html>"+"\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
                 batalButton.doClick();
             } catch (Exception ex) {
@@ -365,12 +389,12 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             }
         }else{
             try {
-//                Golongan golonganLama = service.getGolonganDao().getByKodeGolongan(kodeGolongan);
-//                golonganLama.setKodeGolongan(kodeGolongan);
-//                golonganLama.setNamaGolongan(namaGolongan);
-//                service.getGolonganDao().update(golonganLama);
+                LiburNasional liburNasionalLama = service.getLiburNasionalDao().getByTanggalLibur(tanggal);
+                liburNasionalLama.setTanggal(tanggal);
+                liburNasionalLama.setKeterangan(keterangan);
+                service.getLiburNasionalDao().update(liburNasionalLama);
                 JOptionPane.showMessageDialog(this, "Data dengan nama\n"+
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>"+"\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        "<html><font color=#FF0000>"+keterangan+"</font></html>"+"\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
                 batalButton.doClick();
             } catch (Exception ex) {
@@ -384,32 +408,62 @@ public class LiburNasionalForm extends javax.swing.JFrame {
       this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
         
-    private void keteranganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keteranganTextFieldActionPerformed
+    private void namaGolonganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaGolonganTextFieldActionPerformed
         simpanButton.setEnabled(true);
         simpanButton.requestFocus();
 // TODO add your handling code here:
-    }//GEN-LAST:event_keteranganTextFieldActionPerformed
+    }//GEN-LAST:event_namaGolonganTextFieldActionPerformed
     
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
-        keteranganTextField.setText(null);
+        namaGolonganTextField.setText(null);
         simpanButton.setEnabled(false);
         hapusButton.setEnabled(true);
 //        kodeGolonganCombo.removeAllItems();
 //        kodeGolonganCombo.requestFocus();
-        List<Golongan> golongans = null;
+        tanggalDateChooser.setDate(gc.getTime());
+//        tanggalDateChooser.requestFocus();
+        List<LiburNasional> liburNasionals = null;
         try {
-            golongans = service.getGolonganDao().getAllGolongan();
+            liburNasionals = service.getLiburNasionalDao().getAllLiburNasional();
         } catch (SQLException ex) {
-            Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LiburNasionalForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        GolonganTableModel model = new GolonganTableModel(golongans);
-        liburNasionalTable.setModel(model);
+        LiburNasionalTableModel model = new LiburNasionalTableModel(liburNasionals);
+        golonganTable.setModel(model);
 
-        for(Golongan g :golongans){
-//            kodeGolonganCombo.addItem(g.getKodeGolongan());
-        }
+//        for(LiburNasional l :liburNasionals){
+//            kodeGolonganCombo.addItem(l.getTanggal());
+//        }
      
 }//GEN-LAST:event_batalButtonActionPerformed
+
+private void tanggalDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tanggalDateChooserPropertyChange
+// TODO add your handling code here:
+    String pilih=DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
+        try {
+            activeLiburNasional = service.getLiburNasionalDao().getByTanggalLibur(pilih);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //jika ditemukan
+        if(activeLiburNasional!=null){
+            namaGolonganTextField.setText(activeLiburNasional.getKeterangan());
+            simpanButton.setText("Update");
+            simpanButton.setMnemonic('U');
+            simpanButton.setEnabled(true);
+            hapusButton.setEnabled(true);
+//            kodeGolonganCombo.requestFocus();
+//            tanggalDateChooser.requestFocus();
+
+        } else{
+            namaGolonganTextField.setText(null);
+            namaGolonganTextField.requestFocus();
+            hapusButton.setEnabled(false);
+            simpanButton.setText("Simpan");
+            simpanButton.setMnemonic('S');
+            simpanButton.setEnabled(true);
+        }
+}//GEN-LAST:event_tanggalDateChooserPropertyChange
          
   
     /**
@@ -421,16 +475,16 @@ public class LiburNasionalForm extends javax.swing.JFrame {
            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LiburNasionalForm.class.getName()).log(Level.SEVERE, null, ex);
         }
           java.awt.EventQueue.invokeLater(new Runnable() {
         
             @Override
             public void run() {
                 try {
-                    new KaryawanForm().setVisible(true);
+                    new LiburNasionalForm().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LiburNasionalForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -440,17 +494,18 @@ public class LiburNasionalForm extends javax.swing.JFrame {
     private javax.swing.JButton batalButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JLabel fungsiLabel;
+    private javax.swing.JTable golonganTable;
     private javax.swing.JButton hapusButton;
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel keteranganLabel;
-    private javax.swing.JTextField keteranganTextField;
     private javax.swing.JPanel liburNasionalPanel;
-    private javax.swing.JTable liburNasionalTable;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
+    private javax.swing.JTextField namaGolonganTextField;
+    private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JButton simpanButton;
     private com.toedter.calendar.JDateChooser tanggalDateChooser;
     private javax.swing.JLabel tanggalLabel;
