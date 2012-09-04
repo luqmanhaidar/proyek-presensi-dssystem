@@ -1,6 +1,7 @@
-package com.presensikaryawan.liburNasional;
+package com.presensikaryawan.liburPerusahaan;
 
 
+import com.presensikaryawan.liburNasional.*;
 import com.presensikaryawan.golongan.*;
 import com.presensikaryawan.karyawan.*;
 import com.presensikaryawan.golongan.*;
@@ -25,12 +26,12 @@ import javax.swing.*;
  *
  * @author  Als
  */
-public class LiburNasionalForm extends javax.swing.JFrame {
+public class LiburPerusahaanForm extends javax.swing.JFrame {
     
     private DaoFactory service;
     private Golongan activeGolongan;
     /** Creates new form masterInventoryGrup */
-    public LiburNasionalForm() throws SQLException {
+    public LiburPerusahaanForm() throws SQLException {
         initComponents();
         UIManager.put("nimbusBase", new Color(204,204,255));
 //        UIManager.put("nimbusControl",new Color(153,255,153));
@@ -42,7 +43,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         GolonganDao dao = DaoFactory.getGolonganDao();
         List<Golongan> golongans = dao.getAllGolongan();
         GolonganTableModel model = new GolonganTableModel(golongans);
-        liburNasionalTable.setModel(model);
+        liburPerusahaanTable.setModel(model);
         for(Golongan g :golongans){
 //            kodeGolonganCombo.addItem(g.getKodeGolongan());
         }
@@ -74,9 +75,9 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         hapusButton = new javax.swing.JButton();
         batalButton = new javax.swing.JButton();
         tanggalDateChooser = new com.toedter.calendar.JDateChooser();
-        liburNasionalPanel = new javax.swing.JPanel();
+        liburPerusahaanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        liburNasionalTable = new javax.swing.JTable();
+        liburPerusahaanTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -86,10 +87,10 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         headPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Libur Nasional");
+        menuLabel.setText("Menu Libur Perusahaan");
 
         fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data libur nasional perusahaan");
+        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data libur  perusahaan");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
         headPanel.setLayout(headPanelLayout);
@@ -102,7 +103,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(menuLabel)
                     .add(fungsiLabel))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         headPanelLayout.setVerticalGroup(
             headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -229,14 +230,14 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         inputPanel.setBounds(0, 70, 550, 130);
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        liburNasionalPanel.setBackground(new java.awt.Color(204, 204, 204));
-        liburNasionalPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Libur Nasional"));
+        liburPerusahaanPanel.setBackground(new java.awt.Color(204, 204, 204));
+        liburPerusahaanPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Libur Nasional"));
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        liburNasionalTable.setAutoCreateRowSorter(true);
-        liburNasionalTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        liburNasionalTable.setModel(new javax.swing.table.DefaultTableModel(
+        liburPerusahaanTable.setAutoCreateRowSorter(true);
+        liburPerusahaanTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        liburPerusahaanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -262,33 +263,33 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        liburNasionalTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        liburPerusahaanTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                liburNasionalTableMouseClicked(evt);
+                liburPerusahaanTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(liburNasionalTable);
-        liburNasionalTable.getColumnModel().getColumn(0).setResizable(false);
-        liburNasionalTable.getColumnModel().getColumn(1).setResizable(false);
-        liburNasionalTable.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(liburPerusahaanTable);
+        liburPerusahaanTable.getColumnModel().getColumn(0).setResizable(false);
+        liburPerusahaanTable.getColumnModel().getColumn(1).setResizable(false);
+        liburPerusahaanTable.getColumnModel().getColumn(2).setResizable(false);
 
-        org.jdesktop.layout.GroupLayout liburNasionalPanelLayout = new org.jdesktop.layout.GroupLayout(liburNasionalPanel);
-        liburNasionalPanel.setLayout(liburNasionalPanelLayout);
-        liburNasionalPanelLayout.setHorizontalGroup(
-            liburNasionalPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(liburNasionalPanelLayout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout liburPerusahaanPanelLayout = new org.jdesktop.layout.GroupLayout(liburPerusahaanPanel);
+        liburPerusahaanPanel.setLayout(liburPerusahaanPanelLayout);
+        liburPerusahaanPanelLayout.setHorizontalGroup(
+            liburPerusahaanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(liburPerusahaanPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 522, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
-        liburNasionalPanelLayout.setVerticalGroup(
-            liburNasionalPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(liburNasionalPanelLayout.createSequentialGroup()
+        liburPerusahaanPanelLayout.setVerticalGroup(
+            liburPerusahaanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(liburPerusahaanPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        liburNasionalPanel.setBounds(0, 200, 550, 250);
-        jDesktopPane1.add(liburNasionalPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        liburPerusahaanPanel.setBounds(0, 200, 550, 250);
+        jDesktopPane1.add(liburPerusahaanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -331,13 +332,13 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         batalButton.doClick();
     }//GEN-LAST:event_hapusButtonActionPerformed
     
-    private void liburNasionalTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liburNasionalTableMouseClicked
-        int row = liburNasionalTable.getSelectedRow();
-        String kodegroup = liburNasionalTable.getValueAt(row, 0).toString();
-        String namagroup = liburNasionalTable.getValueAt(row,1).toString();
+    private void liburPerusahaanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liburPerusahaanTableMouseClicked
+        int row = liburPerusahaanTable.getSelectedRow();
+        String kodegroup = liburPerusahaanTable.getValueAt(row, 0).toString();
+        String namagroup = liburPerusahaanTable.getValueAt(row,1).toString();
         keteranganTextField.setText(namagroup);
 //        kodeGolonganCombo.setSelectedItem(kodegroup);// TODO add your handling code here:
-    }//GEN-LAST:event_liburNasionalTableMouseClicked
+    }//GEN-LAST:event_liburPerusahaanTableMouseClicked
     private void isitable(){
       
     }
@@ -403,7 +404,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         GolonganTableModel model = new GolonganTableModel(golongans);
-        liburNasionalTable.setModel(model);
+        liburPerusahaanTable.setModel(model);
 
         for(Golongan g :golongans){
 //            kodeGolonganCombo.addItem(g.getKodeGolongan());
@@ -447,8 +448,8 @@ public class LiburNasionalForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel keteranganLabel;
     private javax.swing.JTextField keteranganTextField;
-    private javax.swing.JPanel liburNasionalPanel;
-    private javax.swing.JTable liburNasionalTable;
+    private javax.swing.JPanel liburPerusahaanPanel;
+    private javax.swing.JTable liburPerusahaanTable;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
     private javax.swing.JButton simpanButton;

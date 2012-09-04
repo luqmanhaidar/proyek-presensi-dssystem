@@ -79,7 +79,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         golonganKaryawanTextField = new javax.swing.JTextField();
         alamatKaryawanTextField = new javax.swing.JTextField();
         posisiKaryawanTextField = new javax.swing.JTextField();
-        golonganPanel = new javax.swing.JPanel();
+        daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
 
@@ -306,8 +306,8 @@ public class KaryawanForm extends javax.swing.JFrame {
         inputPanel.setBounds(0, 70, 740, 280);
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        golonganPanel.setBackground(new java.awt.Color(204, 204, 204));
-        golonganPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Karyawan"));
+        daftarKaryawanPanel.setBackground(new java.awt.Color(204, 204, 204));
+        daftarKaryawanPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Karyawan"));
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -346,21 +346,21 @@ public class KaryawanForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(karyawanTable);
 
-        org.jdesktop.layout.GroupLayout golonganPanelLayout = new org.jdesktop.layout.GroupLayout(golonganPanel);
-        golonganPanel.setLayout(golonganPanelLayout);
-        golonganPanelLayout.setHorizontalGroup(
-            golonganPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout daftarKaryawanPanelLayout = new org.jdesktop.layout.GroupLayout(daftarKaryawanPanel);
+        daftarKaryawanPanel.setLayout(daftarKaryawanPanelLayout);
+        daftarKaryawanPanelLayout.setHorizontalGroup(
+            daftarKaryawanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
         );
-        golonganPanelLayout.setVerticalGroup(
-            golonganPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(golonganPanelLayout.createSequentialGroup()
+        daftarKaryawanPanelLayout.setVerticalGroup(
+            daftarKaryawanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(daftarKaryawanPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        golonganPanel.setBounds(0, 350, 740, 250);
-        jDesktopPane1.add(golonganPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        daftarKaryawanPanel.setBounds(0, 350, 740, 250);
+        jDesktopPane1.add(daftarKaryawanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -559,10 +559,10 @@ public class KaryawanForm extends javax.swing.JFrame {
     private javax.swing.JTextField alamatKaryawanTextField;
     private javax.swing.JButton batalButton;
     private javax.swing.JButton cmdKeluar;
+    private javax.swing.JPanel daftarKaryawanPanel;
     private javax.swing.JLabel fungsiLabel;
     private javax.swing.JLabel golonganKaryawanLabel;
     private javax.swing.JTextField golonganKaryawanTextField;
-    private javax.swing.JPanel golonganPanel;
     private javax.swing.JButton hapusButton;
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
