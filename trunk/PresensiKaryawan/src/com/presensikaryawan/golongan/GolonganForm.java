@@ -1,8 +1,6 @@
 package com.presensikaryawan.golongan;
 
 
-import com.presensikaryawan.karyawan.*;
-import com.presensikaryawan.golongan.*;
 import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
@@ -64,6 +62,7 @@ public class GolonganForm extends javax.swing.JFrame {
         logoLabel = new javax.swing.JLabel();
         menuLabel = new javax.swing.JLabel();
         fungsiLabel = new javax.swing.JLabel();
+        panelStatus1 = new com.sistem.panelstatus.PanelStatus();
         cmdKeluar = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
         namaGolonganLabel = new javax.swing.JLabel();
@@ -79,15 +78,19 @@ public class GolonganForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
+        jDesktopPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         headPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
+
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18));
         menuLabel.setText("Menu Golongan Karyawan");
 
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data golongan karyawan");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
@@ -101,7 +104,7 @@ public class GolonganForm extends javax.swing.JFrame {
                 .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(menuLabel)
                     .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         headPanelLayout.setVerticalGroup(
             headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -116,10 +119,12 @@ public class GolonganForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        headPanel.setBounds(0, 0, 550, 0);
+        headPanel.setBounds(0, 0, 550, 77);
         jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelStatus1.setBounds(0, 510, 560, 50);
+        jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,13 +137,13 @@ public class GolonganForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        namaGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         namaGolonganLabel.setText("Nama Golongan");
 
-        kodeGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        kodeGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         kodeGolonganLabel.setText("Kode Golongan");
 
-        namaGolonganTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        namaGolonganTextField.setFont(new java.awt.Font("Arial", 0, 11));
         namaGolonganTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         namaGolonganTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +151,7 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12));
         simpanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Save.gif"))); // NOI18N
         simpanButton.setMnemonic('S');
         simpanButton.setText("Simpan");
@@ -164,7 +169,7 @@ public class GolonganForm extends javax.swing.JFrame {
         });
 
         kodeGolonganCombo.setEditable(true);
-        kodeGolonganCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        kodeGolonganCombo.setFont(new java.awt.Font("Arial", 0, 11));
         kodeGolonganCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kodeGolonganComboActionPerformed(evt);
@@ -176,7 +181,7 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12));
         hapusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Delete.gif"))); // NOI18N
         hapusButton.setMnemonic('H');
         hapusButton.setText("Hapus");
@@ -187,7 +192,7 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        batalButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        batalButton.setFont(new java.awt.Font("Dialog", 0, 12));
         batalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Undo.gif"))); // NOI18N
         batalButton.setText("Batal");
         batalButton.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +252,7 @@ public class GolonganForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         golonganTable.setAutoCreateRowSorter(true);
-        golonganTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        golonganTable.setFont(new java.awt.Font("Arial", 0, 11));
         golonganTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -293,7 +298,7 @@ public class GolonganForm extends javax.swing.JFrame {
             golonganPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(golonganPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         golonganPanel.setBounds(0, 200, 550, 250);
@@ -313,6 +318,9 @@ public class GolonganForm extends javax.swing.JFrame {
                 .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jDesktopPane1.getAccessibleContext().setAccessibleName("");
+        jDesktopPane1.getAccessibleContext().setAccessibleDescription("");
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-563)/2, (screenSize.height-592)/2, 563, 592);
@@ -445,7 +453,7 @@ public class GolonganForm extends javax.swing.JFrame {
         try {
             golongans = service.getGolonganDao().getAllGolongan();
         } catch (SQLException ex) {
-            Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GolonganForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         GolonganTableModel model = new GolonganTableModel(golongans);
         golonganTable.setModel(model);
@@ -466,16 +474,16 @@ public class GolonganForm extends javax.swing.JFrame {
            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GolonganForm.class.getName()).log(Level.SEVERE, null, ex);
         }
           java.awt.EventQueue.invokeLater(new Runnable() {
         
             @Override
             public void run() {
                 try {
-                    new KaryawanForm().setVisible(true);
+                    new GolonganForm().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GolonganForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -498,6 +506,7 @@ public class GolonganForm extends javax.swing.JFrame {
     private javax.swing.JLabel menuLabel;
     private javax.swing.JLabel namaGolonganLabel;
     private javax.swing.JTextField namaGolonganTextField;
+    private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JButton simpanButton;
     // End of variables declaration//GEN-END:variables
     
