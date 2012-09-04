@@ -12,6 +12,7 @@ import java.util.List;
  * @author Tinus
  */
 public interface KaryawanDao {
+
     void insert(Karyawan karyawan) throws SQLException;
 
     void update(Karyawan karyawan) throws SQLException;

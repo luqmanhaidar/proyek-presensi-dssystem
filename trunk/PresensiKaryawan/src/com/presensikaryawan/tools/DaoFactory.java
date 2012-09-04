@@ -4,13 +4,14 @@
  */
 package com.presensikaryawan.tools;
 
-
 import com.presensikaryawan.golongan.GolonganDao;
 import com.presensikaryawan.golongan.GolonganDaoImplemen;
 import com.dssystem.bank.BankDao;
 import com.dssystem.bank.BankDaoImplemen;
 import java.sql.Connection;
 import com.mysql.jdbc.Driver;
+import com.presensikaryawan.karyawan.KaryawanDao;
+import com.presensikaryawan.karyawan.KaryawanDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -26,11 +27,11 @@ import java.util.logging.Logger;
 public class DaoFactory {
 
     private static Connection connection;
- 
     private static Properties prop;
     private static GolonganDao golonganDao;
-    private static BankDao bankDao;
-    
+    private static KaryawanDao karyawanDao;
+//    private static BankDao bankDao;
+
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
             try {
@@ -52,19 +53,26 @@ public class DaoFactory {
         }
         return connection;
     }
- 
+
     public static GolonganDao getGolonganDao() throws SQLException {
         if (golonganDao == null) {
             golonganDao = new GolonganDaoImplemen(getConnection());
         }
         return golonganDao;
     }
- public static BankDao getBankDao() throws SQLException {
-        if (bankDao == null) {
-            bankDao = new BankDaoImplemen(getConnection());
+
+    public static KaryawanDao getKaryawanDao() throws SQLException {
+        if (karyawanDao == null) {
+            karyawanDao = new KaryawanDaoImplemen(getConnection());
+        
         }
-        return bankDao;
+        return  karyawanDao;
     }
 
-  
+//    public static BankDao getBankDao() throws SQLException {
+//        if (bankDao == null) {
+//            bankDao = new BankDaoImplemen(getConnection());
+//        }
+//        return bankDao;
+//    }
 }
