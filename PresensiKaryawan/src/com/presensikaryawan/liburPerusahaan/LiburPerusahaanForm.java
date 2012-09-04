@@ -434,7 +434,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new KaryawanForm().setVisible(true);
+                    new LiburPerusahaanForm().setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
