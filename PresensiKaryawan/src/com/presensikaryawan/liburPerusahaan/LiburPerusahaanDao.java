@@ -19,5 +19,5 @@ public interface LiburPerusahaanDao {
 
     void delete(LiburPerusahaan liburPerusahaan) throws SQLException;
 
-    List<LiburPerusahaan> getAllLiburNasional() throws SQLException;
+    List<LiburPerusahaan> getAllLiburPerusahaan() throws SQLException;
 }

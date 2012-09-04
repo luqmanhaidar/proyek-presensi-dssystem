@@ -40,13 +40,18 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
         // isitable();
         initComponentFocus();
         keteranganTextField.setDocument(new ChangeCase().getToUpperCase());
-        GolonganDao dao = DaoFactory.getGolonganDao();
-        List<Golongan> golongans = dao.getAllGolongan();
-        GolonganTableModel model = new GolonganTableModel(golongans);
-        liburPerusahaanTable.setModel(model);
-        for(Golongan g :golongans){
+        LiburPerusahaanDao liburPerusahaanDao=DaoFactory.getLiburPerusahaanDao();
+        List<LiburPerusahaan> liburPerusahaans=liburPerusahaanDao.getAllLiburPerusahaan();
+        LiburPerusahaanTableModel liburPerusahaanModel=new LiburPerusahaanTableModel(liburPerusahaans);
+        liburPerusahaanTable.setModel(liburPerusahaanModel);
+        
+//        GolonganDao dao = DaoFactory.getGolonganDao();
+//        List<Golongan> golongans = dao.getAllGolongan();
+//        GolonganTableModel model = new GolonganTableModel(golongans);
+        
+//        for(Golongan g :golongans){
 //            kodeGolonganCombo.addItem(g.getKodeGolongan());
-        }
+//        }
     }
     private void initComponentFocus() {
         keteranganTextField.addFocusListener(new ComponentFocus(keteranganTextField));
