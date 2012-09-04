@@ -137,18 +137,19 @@ public class LiburPerusahaanDaoImplemen implements LiburPerusahaanDao {
                 LiburPerusahaan liburPerusahaan = new LiburPerusahaan();
 
                 String tanggal = result.getString("tanggal");
-                DateFormat df = new SimpleDateFormat("dd-MM-YYYY");
-                Date parsed = null;
-                try {
-                    parsed = df.parse(tanggal);
-                } catch (ParseException ex) {
-                    Logger.getLogger(LiburPerusahaanDaoImplemen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Calendar cal = new GregorianCalendar();
-                cal.setTime(parsed);
+//                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+//                Date parsed = null;
+//                try {
+//                    parsed = df.parse(tanggal);
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(LiburPerusahaanDaoImplemen.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                Calendar cal = new GregorianCalendar();
+//                cal.setTime(parsed);
 
-                liburPerusahaan.setTanggal((GregorianCalendar) cal);
+                liburPerusahaan.setTanggal(tanggal);
                 liburPerusahaan.setKeterangan(result.getString("keterangan"));
+                liburPerusahaan.setNo(result.getInt("no"));
                 liburPerusahaans.add(liburPerusahaan);
 
             }

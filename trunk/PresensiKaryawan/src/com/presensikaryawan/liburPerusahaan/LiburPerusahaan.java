@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
  */
 public class LiburPerusahaan {
     private int no;
-    private GregorianCalendar tanggal;
+    private String tanggal;
     private String keterangan;
 
     public LiburPerusahaan() {
@@ -21,14 +21,14 @@ public class LiburPerusahaan {
     /**
      * @return the tanggal
      */
-    public GregorianCalendar getTanggal() {
+    public String getTanggal() {
         return tanggal;
     }
 
     /**
      * @param tanggal the tanggal to set
      */
-    public void setTanggal(GregorianCalendar tanggal) {
+    public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
     }
 
