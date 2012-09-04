@@ -40,7 +40,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         GolonganDao dao = DaoFactory.getGolonganDao();
         List<Golongan> golongans = dao.getAllGolongan();
         GolonganTableModel model = new GolonganTableModel(golongans);
-        golonganTable.setModel(model);
+        karyawanTable.setModel(model);
         for(Golongan g :golongans){
             nipKaryawanCombo.addItem(g.getKodeGolongan());
         }
@@ -81,7 +81,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         posisiKaryawanTextField = new javax.swing.JTextField();
         golonganPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        golonganTable = new javax.swing.JTable();
+        karyawanTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -307,13 +307,13 @@ public class KaryawanForm extends javax.swing.JFrame {
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         golonganPanel.setBackground(new java.awt.Color(204, 204, 204));
-        golonganPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Golongan"));
+        golonganPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Karyawan"));
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        golonganTable.setAutoCreateRowSorter(true);
-        golonganTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        golonganTable.setModel(new javax.swing.table.DefaultTableModel(
+        karyawanTable.setAutoCreateRowSorter(true);
+        karyawanTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        karyawanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -339,12 +339,12 @@ public class KaryawanForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        golonganTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        karyawanTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                golonganTableMouseClicked(evt);
+                karyawanTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(golonganTable);
+        jScrollPane1.setViewportView(karyawanTable);
 
         org.jdesktop.layout.GroupLayout golonganPanelLayout = new org.jdesktop.layout.GroupLayout(golonganPanel);
         golonganPanel.setLayout(golonganPanelLayout);
@@ -401,13 +401,13 @@ public class KaryawanForm extends javax.swing.JFrame {
         batalButton.doClick();
     }//GEN-LAST:event_hapusButtonActionPerformed
     
-    private void golonganTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_golonganTableMouseClicked
-        int row = golonganTable.getSelectedRow();
-        String kodegroup = golonganTable.getValueAt(row, 0).toString();
-        String namagroup = golonganTable.getValueAt(row,1).toString();
+    private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_karyawanTableMouseClicked
+        int row = karyawanTable.getSelectedRow();
+        String kodegroup = karyawanTable.getValueAt(row, 0).toString();
+        String namagroup = karyawanTable.getValueAt(row,1).toString();
         namaKaryawanTextField.setText(namagroup);
         nipKaryawanCombo.setSelectedItem(kodegroup);// TODO add your handling code here:
-    }//GEN-LAST:event_golonganTableMouseClicked
+    }//GEN-LAST:event_karyawanTableMouseClicked
     private void isitable(){
       
     }
@@ -509,7 +509,7 @@ public class KaryawanForm extends javax.swing.JFrame {
             Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         GolonganTableModel model = new GolonganTableModel(golongans);
-        golonganTable.setModel(model);
+        karyawanTable.setModel(model);
 
         for(Golongan g :golongans){
             nipKaryawanCombo.addItem(g.getKodeGolongan());
@@ -563,12 +563,12 @@ public class KaryawanForm extends javax.swing.JFrame {
     private javax.swing.JLabel golonganKaryawanLabel;
     private javax.swing.JTextField golonganKaryawanTextField;
     private javax.swing.JPanel golonganPanel;
-    private javax.swing.JTable golonganTable;
     private javax.swing.JButton hapusButton;
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable karyawanTable;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
     private javax.swing.JLabel namaKaryawanLabel;
