@@ -92,4 +92,5 @@ public class Karyawan {
     public void setGolongan(Golongan golongan) {
         this.golongan = golongan;
     }
+    private String jamban;
 }
