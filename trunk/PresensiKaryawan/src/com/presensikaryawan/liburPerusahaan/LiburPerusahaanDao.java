@@ -18,6 +18,8 @@ public interface LiburPerusahaanDao {
     void update(LiburPerusahaan liburPerusahaan) throws SQLException;
 
     void delete(LiburPerusahaan liburPerusahaan) throws SQLException;
+    
+    LiburPerusahaan getByTanggal(String tanggal) throws SQLException;
 
     List<LiburPerusahaan> getAllLiburPerusahaan() throws SQLException;
 }
