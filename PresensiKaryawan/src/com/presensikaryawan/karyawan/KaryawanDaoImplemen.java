@@ -136,10 +136,10 @@ public class KaryawanDaoImplemen implements KaryawanDao {
              if (result.next()) {
                  karyawan = new Karyawan();
                  karyawan.setNip(result.getString("nip"));
-                 karyawan.setNama(result.getString("kode_golongan"));
-                 karyawan.setAlamat(result.getString("nama_karyawan"));
-                 karyawan.setTanggal_masuk(result.getString("alamat"));
-                 karyawan.setKodeGolongan(result.getString("tanggal_masuk"));
+                 karyawan.setNama(result.getString("nama_karyawan"));
+                 karyawan.setAlamat(result.getString("alamat"));
+                 karyawan.setTanggal_masuk(result.getString("tanggal_masuk"));
+                 karyawan.setKodeGolongan(result.getString("kode_golongan"));
              }
 
              connection.commit();
@@ -177,10 +177,10 @@ public class KaryawanDaoImplemen implements KaryawanDao {
              if (result.next()) {
                  karyawan = new Karyawan();
                  karyawan.setNip(result.getString("nip"));
-                 karyawan.setNama(result.getString("kode_golongan"));
-                 karyawan.setAlamat(result.getString("nama_karyawan"));
-                 karyawan.setTanggal_masuk(result.getString("alamat"));
-                 karyawan.setKodeGolongan(result.getString("tanggal_masuk"));
+                 karyawan.setNama(result.getString("nama_karyawan"));
+                 karyawan.setAlamat(result.getString("alamat"));
+                 karyawan.setTanggal_masuk(result.getString("tanggal_masuk"));
+                 karyawan.setKodeGolongan(result.getString("kode_golongan"));
              }
 
              connection.commit();
@@ -217,10 +217,10 @@ public class KaryawanDaoImplemen implements KaryawanDao {
              while (result.next()) {
                  Karyawan karyawan = new Karyawan();
                  karyawan.setNip(result.getString("nip"));
-                 karyawan.setNama(result.getString("kode_golongan"));
-                 karyawan.setAlamat(result.getString("nama_karyawan"));
-                 karyawan.setTanggal_masuk(result.getString("alamat"));
-                 karyawan.setKodeGolongan(result.getString("tanggal_masuk"));
+                 karyawan.setNama(result.getString("nama_karyawan"));
+                 karyawan.setAlamat(result.getString("alamat"));
+                 karyawan.setTanggal_masuk(result.getString("tanggal_masuk"));
+                 karyawan.setKodeGolongan(result.getString("kode_golongan"));
                  karyawans.add(karyawan);
              }
 
