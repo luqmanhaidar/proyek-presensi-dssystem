@@ -5,9 +5,12 @@ import com.presensikaryawan.golongan.*;
 import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
+import com.dssystem.umum.DateTool;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +29,8 @@ import javax.swing.*;
 public class KaryawanForm extends javax.swing.JFrame {
     
     private DaoFactory service;
-    private Golongan activeGolongan;
+    private Karyawan activeKaryawan;
+    GregorianCalendar gc=new GregorianCalendar();
     /** Creates new form masterInventoryGrup */
     public KaryawanForm() throws SQLException {
         initComponents();
@@ -36,13 +40,14 @@ public class KaryawanForm extends javax.swing.JFrame {
 //        Tampilan();
         // isitable();
         initComponentFocus();
+        tanggalMasukDateChooser.setDate(gc.getTime());
         namaKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
-        GolonganDao dao = DaoFactory.getGolonganDao();
-        List<Golongan> golongans = dao.getAllGolongan();
-        GolonganTableModel model = new GolonganTableModel(golongans);
+        KaryawanDao dao = DaoFactory.getKaryawanDao();
+        List<Karyawan> karyawans = dao.getAllKaryawan();
+        KaryawanTableModel model = new KaryawanTableModel(karyawans);
         karyawanTable.setModel(model);
-        for(Golongan g :golongans){
-            nipKaryawanCombo.addItem(g.getKodeGolongan());
+        for(Karyawan k :karyawans){
+            nipKaryawanCombo.addItem(k.getNip());
         }
     }
     private void initComponentFocus() {
@@ -384,16 +389,16 @@ public class KaryawanForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-        String kodeGolongan = String.valueOf(nipKaryawanCombo.getSelectedItem());
-        String namaGolongan = namaKaryawanTextField.getText();
-        activeGolongan.setKodeGolongan(kodeGolongan);
-        activeGolongan.setNamaGolongan(namaGolongan);
-        int ok = JOptionPane.showConfirmDialog(null,"Anda Yakin Akan Menghapus Data\nDengan Nama = "+namaGolongan+"","Konfirmasi",JOptionPane.YES_NO_OPTION);
+        String nip = String.valueOf(nipKaryawanCombo.getSelectedItem());
+        String nama = namaKaryawanTextField.getText();
+        activeKaryawan.setNip(nip);
+        activeKaryawan.setNama(nama);
+        int ok = JOptionPane.showConfirmDialog(null,"Anda Yakin Akan Menghapus Data\nDengan Nama = "+nama+"","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if (ok==0){
             try {
-                DaoFactory.getGolonganDao().delete(activeGolongan);
+                DaoFactory.getKaryawanDao().delete(activeKaryawan);
                 JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n" +
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        "<html><font color=#FF0000>"+nama+"</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n" +
@@ -407,10 +412,22 @@ public class KaryawanForm extends javax.swing.JFrame {
     
     private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_karyawanTableMouseClicked
         int row = karyawanTable.getSelectedRow();
-        String kodegroup = karyawanTable.getValueAt(row, 0).toString();
-        String namagroup = karyawanTable.getValueAt(row,1).toString();
-        namaKaryawanTextField.setText(namagroup);
-        nipKaryawanCombo.setSelectedItem(kodegroup);// TODO add your handling code here:
+        String nip = karyawanTable.getValueAt(row, 0).toString();
+        String nama = karyawanTable.getValueAt(row,1).toString();
+        String alamat = karyawanTable.getValueAt(row, 2).toString();
+        String tanggal = karyawanTable.getValueAt(row,3).toString();
+        int year = Integer.parseInt(tanggal.substring(0, 4));
+        int month = Integer.parseInt(tanggal.substring(5, 7));
+        int day = Integer.parseInt(tanggal.substring(8, 10));
+        Date date = new Date(year, month, day);
+        String kode = karyawanTable.getValueAt(row, 4).toString();
+        namaKaryawanTextField.setText(nama);
+        nipKaryawanCombo.setSelectedItem(nip);
+        alamatKaryawanTextField.setText(alamat);
+        tanggalMasukDateChooser.setDate(date);
+        golonganKaryawanTextField.setText(kode);
+        
+        // TODO add your handling code here:
     }//GEN-LAST:event_karyawanTableMouseClicked
     private void isitable(){
       
@@ -421,17 +438,23 @@ public class KaryawanForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonKeyPressed
     
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-        String kodeGolongan = String.valueOf(nipKaryawanCombo.getSelectedItem());
-        String namaGolongan = namaKaryawanTextField.getText();
-        Golongan golonganBaru = new Golongan();
-        golonganBaru.setKodeGolongan(kodeGolongan);
-        golonganBaru.setNamaGolongan(namaGolongan);
+        String nip = String.valueOf(nipKaryawanCombo.getSelectedItem());
+        String nama = namaKaryawanTextField.getText();
+        String alamat = alamatKaryawanTextField.getText();
+        String tanggal = DateTool.dateToString(tanggalMasukDateChooser.getDate(), "yyyy-MM-dd");
+        String golongan = golonganKaryawanTextField.getText();
+        Karyawan karyawanBaru = new Karyawan();
+        karyawanBaru.setNip(nip);
+        karyawanBaru.setNama(nama);
+        karyawanBaru.setAlamat(alamat);
+        karyawanBaru.setTanggal_masuk(tanggal);
+        karyawanBaru.setKodeGolongan(golongan);
         if ("Simpan".equals(simpanButton.getText())){
             try {
-                DaoFactory.getGolonganDao().insert(golonganBaru);
+                DaoFactory.getKaryawanDao().insert(karyawanBaru);
 
                 JOptionPane.showMessageDialog(this, "Data dengan Nama \n"+
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>"+"\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        "<html><font color=#FF0000>"+nama+"</font></html>"+"\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
                 batalButton.doClick();
             } catch (Exception ex) {
@@ -439,12 +462,15 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         }else{
             try {
-                Golongan golonganLama = service.getGolonganDao().getByKodeGolongan(kodeGolongan);
-                golonganLama.setKodeGolongan(kodeGolongan);
-                golonganLama.setNamaGolongan(namaGolongan);
-                service.getGolonganDao().update(golonganLama);
+                Karyawan karyawanLama = service.getKaryawanDao().getByNIPKaryawan(nip);
+                karyawanLama.setNip(nip);
+                karyawanLama.setNama(nama);
+                karyawanLama.setAlamat(alamat);
+                karyawanLama.setTanggal_masuk(tanggal);
+                karyawanLama.setKodeGolongan(golongan);
+                service.getKaryawanDao().update(karyawanLama);
                 JOptionPane.showMessageDialog(this, "Data dengan nama\n"+
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>"+"\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        "<html><font color=#FF0000>"+nama+"</font></html>"+"\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
                 batalButton.doClick();
             } catch (Exception ex) {
@@ -462,13 +488,13 @@ public class KaryawanForm extends javax.swing.JFrame {
         String pilih = String.valueOf(nipKaryawanCombo.getSelectedItem());
         
         try {
-            activeGolongan = service.getGolonganDao().getByKodeGolongan(pilih);
+            activeKaryawan = service.getKaryawanDao().getByNIPKaryawan(pilih);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         //jika ditemukan
-        if(activeGolongan!=null){
-            namaKaryawanTextField.setText(activeGolongan.getNamaGolongan());
+        if(activeKaryawan!=null){
+            namaKaryawanTextField.setText(activeKaryawan.getNama());
             simpanButton.setText("Update");
             simpanButton.setMnemonic('U');
             simpanButton.setEnabled(true);
@@ -504,6 +530,9 @@ public class KaryawanForm extends javax.swing.JFrame {
         namaKaryawanTextField.setText(null);
         simpanButton.setEnabled(false);
         hapusButton.setEnabled(true);
+        tanggalMasukDateChooser.setDate(gc.getTime());
+        alamatKaryawanTextField.setText(null);
+        golonganKaryawanTextField.setText(null);
         nipKaryawanCombo.removeAllItems();
         nipKaryawanCombo.requestFocus();
         List<Golongan> golongans = null;
