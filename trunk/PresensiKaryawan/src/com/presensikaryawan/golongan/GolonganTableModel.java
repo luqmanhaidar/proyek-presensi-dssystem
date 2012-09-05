@@ -20,17 +20,17 @@ public class GolonganTableModel extends AbstractTableModel {
         this.golongans = golongans;
     }
 
-    public void deleteKategori(int row){
+    public void deleteGolongan(int row){
         golongans.remove(row);
         fireTableRowsDeleted(row, row);
     }
 
-    public void updateKategori(int row, Golongan golongan){
+    public void updateGolongan(int row, Golongan golongan){
         golongans.set(row,golongan);
         fireTableRowsUpdated(row, row);
     }
 
-    public void addKategori(Golongan golongan) {
+    public void addGolongan(Golongan golongan) {
         golongans.add(golongan);
         fireTableRowsInserted(getRowCount() - 1, getColumnCount() - 1);
     }
@@ -61,9 +61,9 @@ public class GolonganTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "KODE KATEGORI";
+                return "KODE GOLONGAN";
             case 1:
-                return "NAMA KATEGORI";
+                return "NAMA GOLONGAN";
             default:
                 return "";
         }
