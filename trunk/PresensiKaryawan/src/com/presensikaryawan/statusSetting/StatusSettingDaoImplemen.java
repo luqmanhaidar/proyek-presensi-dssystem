@@ -4,10 +4,12 @@
  */
 package com.presensikaryawan.statusSetting;
 
+import com.presensikaryawan.liburPerusahaan.LiburPerusahaan;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,8 +25,10 @@ public class StatusSettingDaoImplemen implements StatusSettingDao {
     private final String SQL_GETALL = "select * from status_setting";
     private Connection connection;
 
-    
-    
+    public StatusSettingDaoImplemen(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public void insert(StatusSetting statusSetting) throws SQLException {
         PreparedStatement statement = null;
@@ -33,7 +37,7 @@ public class StatusSettingDaoImplemen implements StatusSettingDao {
             connection.setAutoCommit(false);
 
             statement = connection.prepareStatement(SQL_INSERT);
-            statement.setInt(1, statusSetting.getKodeStatus());
+            statement.setInt(1, Integer.parseInt(statusSetting.getKodeStatus()));
             statement.setString(2, statusSetting.getKeteranganStatus());
             statement.executeUpdate();
 
@@ -64,7 +68,7 @@ public class StatusSettingDaoImplemen implements StatusSettingDao {
 
             statement = connection.prepareStatement(SQL_UPDATE);
             statement.setString(1, statusSetting.getKeteranganStatus());
-            statement.setInt(2, statusSetting.getKodeStatus());
+            statement.setInt(2, Integer.parseInt(statusSetting.getKodeStatus()));
             statement.executeUpdate();
 
             connection.commit();
@@ -90,7 +94,7 @@ public class StatusSettingDaoImplemen implements StatusSettingDao {
             connection.setAutoCommit(false);
 
             statement = connection.prepareStatement(SQL_DELETE);
-            statement.setInt(1, statusSetting.getKodeStatus());
+            statement.setInt(1, Integer.parseInt(statusSetting.getKodeStatus()));
             statement.executeUpdate();
 
             connection.commit();
@@ -111,6 +115,79 @@ public class StatusSettingDaoImplemen implements StatusSettingDao {
 
     @Override
     public List<StatusSetting> getAllStatusSetting() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        try {
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(SQL_GETALL);
+
+            result = statement.executeQuery();
+            List<StatusSetting> statusSettings = new ArrayList<StatusSetting>();
+            while (result.next()) {
+                StatusSetting statusSetting = new StatusSetting();
+                statusSetting.setKodeStatus(String.valueOf(result.getInt("kode")));
+                statusSetting.setKeteranganStatus(result.getString("keterangan"));
+                statusSettings.add(statusSetting);
+            }
+
+            connection.commit();
+            return statusSettings;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
+    }
+
+    @Override
+    public StatusSetting getByKode(String kode) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        if (kode != null) {
+            try {
+                connection.setAutoCommit(false);
+                statement = connection.prepareStatement(SQL_GETBYKODE);
+
+                statement.setInt(1, Integer.parseInt(kode));
+                result = statement.executeQuery();
+                StatusSetting statusSetting = null;
+                if (result.next()) {
+                    statusSetting = new StatusSetting();
+                    statusSetting.setKodeStatus(String.valueOf(result.getInt("kode")));
+                    statusSetting.setKeteranganStatus(result.getString("keterangan"));
+                }
+
+                connection.commit();
+                return statusSetting;
+            } catch (SQLException exception) {
+                connection.rollback();
+                throw exception;
+            } finally {
+                try {
+                    connection.setAutoCommit(true);
+                    if (result != null) {
+                        result.close();
+                    }
+                    if (statement != null) {
+                        statement.close();
+                    }
+                } catch (SQLException exception) {
+                    throw exception;
+                }
+            }
+        }else{
+            return null;
+        }
     }
 }
