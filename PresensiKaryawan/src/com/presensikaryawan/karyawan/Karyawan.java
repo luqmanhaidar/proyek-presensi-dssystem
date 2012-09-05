@@ -5,6 +5,7 @@
 package com.presensikaryawan.karyawan;
 
 import com.presensikaryawan.golongan.Golongan;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -17,8 +18,9 @@ public class Karyawan {
     private String nip;
     private String nama;
     private String alamat;
-    private GregorianCalendar tanggal_masuk;
-    private Golongan golongan;
+    private String tanggal_masuk;
+//    private Golongan golongan;
+    private String kodeGolongan;
 
     public Karyawan() {
     }
@@ -68,29 +70,43 @@ public class Karyawan {
     /**
      * @return the tanggal_masuk
      */
-    public GregorianCalendar getTanggal_masuk() {
+    public String getTanggal_masuk() {
         return tanggal_masuk;
     }
 
     /**
      * @param tanggal_masuk the tanggal_masuk to set
      */
-    public void setTanggal_masuk(GregorianCalendar tanggal_masuk) {
+    public void setTanggal_masuk(String tanggal_masuk) {
         this.tanggal_masuk = tanggal_masuk;
+    }
+
+    /**
+     * @return the kodeGolongan
+     */
+    public String getKodeGolongan() {
+        return kodeGolongan;
+    }
+
+    /**
+     * @param kodeGolongan the kodeGolongan to set
+     */
+    public void setKodeGolongan(String kodeGolongan) {
+        this.kodeGolongan = kodeGolongan;
     }
 
     /**
      * @return the golongan
      */
-    public Golongan getGolongan() {
-        return golongan;
-    }
-
-    /**
-     * @param golongan the golongan to set
-     */
-    public void setGolongan(Golongan golongan) {
-        this.golongan = golongan;
-    }
-    private String jamban;
+//    public Golongan getGolongan() {
+//        return golongan;
+//    }
+//
+//    /**
+//     * @param golongan the golongan to set
+//     */
+//    public void setGolongan(Golongan golongan) {
+//        this.golongan = golongan;
+//    }
+//    private String jamban;
 }
