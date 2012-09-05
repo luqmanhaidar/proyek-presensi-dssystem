@@ -535,17 +535,17 @@ public class KaryawanForm extends javax.swing.JFrame {
         golonganKaryawanTextField.setText(null);
         nipKaryawanCombo.removeAllItems();
         nipKaryawanCombo.requestFocus();
-        List<Golongan> golongans = null;
+        List<Karyawan> karyawans = null;
         try {
-            golongans = service.getGolonganDao().getAllGolongan();
+            karyawans = service.getKaryawanDao().getAllKaryawan();
         } catch (SQLException ex) {
             Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        GolonganTableModel model = new GolonganTableModel(golongans);
+        KaryawanTableModel model = new KaryawanTableModel(karyawans);
         karyawanTable.setModel(model);
 
-        for(Golongan g :golongans){
-            nipKaryawanCombo.addItem(g.getKodeGolongan());
+        for(Karyawan k :karyawans){
+            nipKaryawanCombo.addItem(k.getKodeGolongan());
         }
      
 }//GEN-LAST:event_batalButtonActionPerformed

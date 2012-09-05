@@ -41,7 +41,7 @@ public class KaryawanTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 5;
     }
 
     @Override
