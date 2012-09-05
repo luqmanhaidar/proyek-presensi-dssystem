@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -32,6 +33,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
 
     private DaoFactory service;
     private LiburPerusahaan activeLiburPerusahaan;
+    private GregorianCalendar gc=new GregorianCalendar();
 
     /**
      * Creates new form masterInventoryGrup
@@ -44,6 +46,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
 //        Tampilan();
         // isitable();
         initComponentFocus();
+        tanggalDateChooser.setDate(gc.getTime());
         keteranganTextField.setDocument(new ChangeCase().getToUpperCase());
         LiburPerusahaanDao liburPerusahaanDao = DaoFactory.getLiburPerusahaanDao();
         List<LiburPerusahaan> liburPerusahaans = liburPerusahaanDao.getAllLiburPerusahaan();
@@ -332,18 +335,19 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
 //        String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf2= new SimpleDateFormat("dd-MM-yyyy");
         String tanggal = sdf.format(tanggalDateChooser.getDate());
         String keterangan = keteranganTextField.getText();
 //        activeGolongan.setKodeGolongan(kodeGolongan);
 //        activeGolongan.setNamaGolongan(namaGolongan);
         activeLiburPerusahaan.setTanggal(tanggal);
         activeLiburPerusahaan.setKeterangan(keterangan);
-        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Libur Perusahaan\nPada Tanggal = " + tanggal + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Libur Perusahaan\nPada Tanggal = " + sdf2.format(tanggalDateChooser.getDate()) + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
                 DaoFactory.getLiburPerusahaanDao().delete(activeLiburPerusahaan);
                 JOptionPane.showMessageDialog(this, "Data Libur Perusahaan Berhasil Dihapus Pada Tanggal\n"
-                        + "<html><font color=#FF0000>" + tanggal + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        + "<html><font color=#FF0000>" + sdf2.format(tanggalDateChooser.getDate()) + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Data Libur Perusahaan Gagal Dihapus\n"
