@@ -41,18 +41,17 @@ public class LiburPerusahaanTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 2;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         LiburPerusahaan lP = liburPerusahaans.get(rowIndex);
         switch (columnIndex) {
+
             case 0:
-                return lP.getNo();
-            case 1:
                 return lP.getTanggal();
-            case 2:
+            case 1:
                 return lP.getKeterangan();
             default:
                 return "";
@@ -63,10 +62,8 @@ public class LiburPerusahaanTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "NO";
-            case 1:
                 return "TANGGAL";
-            case 2:
+            case 1:
                 return "KETERANGAN";
             default:
                 return "";

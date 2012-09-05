@@ -259,20 +259,20 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
         liburPerusahaanTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         liburPerusahaanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "No", "Tanggal", "Keterangan"
+                "Tanggal", "Keterangan"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -291,7 +291,6 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(liburPerusahaanTable);
         liburPerusahaanTable.getColumnModel().getColumn(0).setResizable(false);
         liburPerusahaanTable.getColumnModel().getColumn(1).setResizable(false);
-        liburPerusahaanTable.getColumnModel().getColumn(2).setResizable(false);
 
         org.jdesktop.layout.GroupLayout liburPerusahaanPanelLayout = new org.jdesktop.layout.GroupLayout(liburPerusahaanPanel);
         liburPerusahaanPanel.setLayout(liburPerusahaanPanelLayout);
@@ -358,9 +357,9 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
 
     private void liburPerusahaanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liburPerusahaanTableMouseClicked
         int row = liburPerusahaanTable.getSelectedRow();
-        String no = liburPerusahaanTable.getValueAt(row, 0).toString();
-        String keterangan = liburPerusahaanTable.getValueAt(row, 2).toString();
-        String tanggalString=liburPerusahaanTable.getValueAt(row, 1).toString();
+//        String no = liburPerusahaanTable.getValueAt(row, 0).toString();
+        String keterangan = liburPerusahaanTable.getValueAt(row, 1).toString();
+        String tanggalString=liburPerusahaanTable.getValueAt(row, 0).toString();
         keteranganTextField.setText(keterangan);
         
         SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
