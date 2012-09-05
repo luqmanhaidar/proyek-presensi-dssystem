@@ -157,7 +157,6 @@ public class LiburPerusahaanDaoImplemen implements LiburPerusahaanDao {
 
                 liburPerusahaan.setTanggal(sdf.format(tanggal));
                 liburPerusahaan.setKeterangan(result.getString("keterangan"));
-                liburPerusahaan.setNo(result.getInt("no"));
                 liburPerusahaans.add(liburPerusahaan);
 
             }
@@ -201,7 +200,6 @@ public class LiburPerusahaanDaoImplemen implements LiburPerusahaanDao {
                 liburPerusahaan = new LiburPerusahaan();
                 liburPerusahaan.setTanggal(result.getString("tanggal"));
                 liburPerusahaan.setKeterangan(result.getString("keterangan"));
-                liburPerusahaan.setNo(result.getInt("no"));
             }
 
             connection.commit();
