@@ -4,6 +4,7 @@
  */
 package com.presensikaryawan.statusSetting;
 
+import com.presensikaryawan.liburPerusahaan.LiburPerusahaan;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,6 +18,8 @@ public interface StatusSettingDao {
     void update(StatusSetting statusSetting) throws SQLException;
 
     void delete(StatusSetting statusSetting) throws SQLException;
+    
+    StatusSetting getByKode(String kode) throws SQLException;
 
     List<StatusSetting> getAllStatusSetting() throws SQLException;
 }

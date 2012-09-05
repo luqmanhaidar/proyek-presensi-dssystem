@@ -16,6 +16,8 @@ import com.presensikaryawan.liburNasional.LiburNasionalDao;
 import com.presensikaryawan.liburNasional.LiburNasionalDaoImplemen;
 import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDao;
 import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDaoImplemen;
+import com.presensikaryawan.statusSetting.StatusSettingDao;
+import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -36,6 +38,7 @@ public class DaoFactory {
     private static KaryawanDao karyawanDao;
     private static LiburPerusahaanDao liburPerusahaanDao;
     private static LiburNasionalDao liburNasionalDao;
+    private static StatusSettingDao statusSettingDao;
 //    private static BankDao bankDao;
 
     public static Connection getConnection() throws SQLException {
@@ -94,5 +97,12 @@ public class DaoFactory {
             liburNasionalDao=new LiburNasionalDaoImplemen(getConnection());
         }
         return liburNasionalDao;
+    }
+    
+    public static StatusSettingDao getStatusSettingDao() throws SQLException{
+        if (statusSettingDao==null){
+            statusSettingDao=new StatusSettingDaoImplemen(getConnection());
+        }
+        return  statusSettingDao;
     }
 }
