@@ -41,7 +41,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         // isitable();
         initComponentFocus();
         tanggalDateChooser.setDate(gc.getTime());
-        namaGolonganTextField.setDocument(new ChangeCase().getToUpperCase());
+        keteranganTextField.setDocument(new ChangeCase().getToUpperCase());
         LiburNasionalDao dao = DaoFactory.getLiburNasionalDao();
         List<LiburNasional> liburNasionals = dao.getAllLiburNasional();
         LiburNasionalTableModel model = new LiburNasionalTableModel(liburNasionals);
@@ -51,7 +51,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
 //        }
     }
     private void initComponentFocus() {
-        namaGolonganTextField.addFocusListener(new ComponentFocus(namaGolonganTextField));
+        keteranganTextField.addFocusListener(new ComponentFocus(keteranganTextField));
 //        kodeGolonganCombo.addFocusListener(new ComponentFocus(kodeGolonganCombo));
         tanggalDateChooser.addFocusListener(new ComponentFocus(tanggalDateChooser));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
@@ -74,7 +74,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         inputPanel = new javax.swing.JPanel();
         keteranganLabel = new javax.swing.JLabel();
         tanggalLabel = new javax.swing.JLabel();
-        namaGolonganTextField = new javax.swing.JTextField();
+        keteranganTextField = new javax.swing.JTextField();
         simpanButton = new javax.swing.JButton();
         hapusButton = new javax.swing.JButton();
         batalButton = new javax.swing.JButton();
@@ -150,11 +150,11 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         tanggalLabel.setText("Tanggal");
 
-        namaGolonganTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        namaGolonganTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        namaGolonganTextField.addActionListener(new java.awt.event.ActionListener() {
+        keteranganTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        keteranganTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        keteranganTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namaGolonganTextFieldActionPerformed(evt);
+                keteranganTextFieldActionPerformed(evt);
             }
         });
 
@@ -212,7 +212,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, tanggalLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(namaGolonganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(keteranganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(tanggalDateChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 183, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(72, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
@@ -234,7 +234,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(keteranganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(namaGolonganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(keteranganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -329,15 +329,15 @@ public class LiburNasionalForm extends javax.swing.JFrame {
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
 //        String tanggal = String.valueOf(kodeGolonganCombo.getSelectedItem());
         String tanggal=DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
-        String keterangan = namaGolonganTextField.getText();
+        String keterangan = keteranganTextField.getText();
         activeLiburNasional.setTanggal(tanggal);
         activeLiburNasional.setKeterangan(keterangan);
         int ok = JOptionPane.showConfirmDialog(null,"Anda Yakin Akan Menghapus Data\nDengan Nama = "+keterangan+"","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if (ok==0){
             try {
                 DaoFactory.getLiburNasionalDao().delete(activeLiburNasional);
-                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n" +
-                        "<html><font color=#FF0000>"+keterangan+"</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan tanggal\n" +
+                        "<html><font color=#FF0000>"+tanggal+"</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n" +
@@ -357,8 +357,9 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         int month = Integer.parseInt(tanggal.substring(5, 7));
         int day = Integer.parseInt(tanggal.substring(8, 10));
         Date date=new Date(year, month-1, day);
-        namaGolonganTextField.setText(keterangan);
+        keteranganTextField.setText(keterangan);
         tanggalDateChooser.setDate(date);
+        keteranganTextField.requestFocus();
 //        kodeGolonganCombo.setSelectedItem(keterangan);// TODO add your handling code here:
     }//GEN-LAST:event_golonganTableMouseClicked
     private void isitable(){
@@ -372,7 +373,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
 //        String tanggal = String.valueOf(kodeGolonganCombo.getSelectedItem());
         String tanggal=DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
-        String keterangan = namaGolonganTextField.getText();
+        String keterangan = keteranganTextField.getText();
         LiburNasional liburNasionalBaru = new LiburNasional();
         liburNasionalBaru.setTanggal(tanggal);
         liburNasionalBaru.setKeterangan(keterangan);
@@ -380,8 +381,8 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             try {
                 DaoFactory.getLiburNasionalDao().insert(liburNasionalBaru);
 
-                JOptionPane.showMessageDialog(this, "Data dengan Nama \n"+
-                        "<html><font color=#FF0000>"+keterangan+"</font></html>"+"\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data dengan Tanggal \n"+
+                        "<html><font color=#FF0000>"+tanggal+"</font></html>"+"\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
                 batalButton.doClick();
             } catch (Exception ex) {
@@ -393,8 +394,8 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 liburNasionalLama.setTanggal(tanggal);
                 liburNasionalLama.setKeterangan(keterangan);
                 service.getLiburNasionalDao().update(liburNasionalLama);
-                JOptionPane.showMessageDialog(this, "Data dengan nama\n"+
-                        "<html><font color=#FF0000>"+keterangan+"</font></html>"+"\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data dengan Tanggal\n"+
+                        "<html><font color=#FF0000>"+tanggal+"</font></html>"+"\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
                 batalButton.doClick();
             } catch (Exception ex) {
@@ -408,14 +409,14 @@ public class LiburNasionalForm extends javax.swing.JFrame {
       this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
         
-    private void namaGolonganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaGolonganTextFieldActionPerformed
+    private void keteranganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keteranganTextFieldActionPerformed
         simpanButton.setEnabled(true);
         simpanButton.requestFocus();
 // TODO add your handling code here:
-    }//GEN-LAST:event_namaGolonganTextFieldActionPerformed
+    }//GEN-LAST:event_keteranganTextFieldActionPerformed
     
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
-        namaGolonganTextField.setText(null);
+        keteranganTextField.setText(null);
         simpanButton.setEnabled(false);
         hapusButton.setEnabled(true);
 //        kodeGolonganCombo.removeAllItems();
@@ -447,7 +448,7 @@ private void tanggalDateChooserPropertyChange(java.beans.PropertyChangeEvent evt
         }
         //jika ditemukan
         if(activeLiburNasional!=null){
-            namaGolonganTextField.setText(activeLiburNasional.getKeterangan());
+            keteranganTextField.setText(activeLiburNasional.getKeterangan());
             simpanButton.setText("Update");
             simpanButton.setMnemonic('U');
             simpanButton.setEnabled(true);
@@ -456,8 +457,8 @@ private void tanggalDateChooserPropertyChange(java.beans.PropertyChangeEvent evt
 //            tanggalDateChooser.requestFocus();
 
         } else{
-            namaGolonganTextField.setText(null);
-            namaGolonganTextField.requestFocus();
+            keteranganTextField.setText(null);
+            keteranganTextField.requestFocus();
             hapusButton.setEnabled(false);
             simpanButton.setText("Simpan");
             simpanButton.setMnemonic('S');
@@ -501,10 +502,10 @@ private void tanggalDateChooserPropertyChange(java.beans.PropertyChangeEvent evt
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel keteranganLabel;
+    private javax.swing.JTextField keteranganTextField;
     private javax.swing.JPanel liburNasionalPanel;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
-    private javax.swing.JTextField namaGolonganTextField;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JButton simpanButton;
     private com.toedter.calendar.JDateChooser tanggalDateChooser;
