@@ -9,7 +9,7 @@ package com.presensikaryawan.statusSetting;
  * @author Tinus
  */
 public class StatusSetting {
-    private String kodeStatus;
+    private int kodeStatus;
     private String keteranganStatus;
 
     public StatusSetting() {
@@ -18,14 +18,14 @@ public class StatusSetting {
     /**
      * @return the kodeStatus
      */
-    public String getKodeStatus() {
+    public int getKodeStatus() {
         return kodeStatus;
     }
 
     /**
      * @param kodeStatus the kodeStatus to set
      */
-    public void setKodeStatus(String kodeStatus) {
+    public void setKodeStatus(int kodeStatus) {
         this.kodeStatus = kodeStatus;
     }
 
