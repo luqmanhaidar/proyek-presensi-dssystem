@@ -23,7 +23,7 @@ public class GajiDaoImplemen implements GajiDao {
     private final String SQL_UPDATE = "update gaji set gaji_pokok = ?, uang_makan=?, uang_lembur=? where kode_golongan = ? and nip=?";
     private final String SQL_DELETE = "delete from gaji where nip like ? and kode_golongan like ?";
     private final String SQL_GETBYKODE = "select * from gaji where golongan like ?";
-    private final String SQL_GETBYNIPANDKODE = "select * from gaji where nip like ? and nip like ?";
+    private final String SQL_GETBYNIPANDKODE = "select * from gaji where nip like ? and kode_golongan like ?";
     private final String SQL_GETALL = "select * from gaji";
     private Connection connection;
 
@@ -178,8 +178,8 @@ public class GajiDaoImplemen implements GajiDao {
              connection.setAutoCommit(false);
              statement = connection.prepareStatement(SQL_GETBYNIPANDKODE);
 
-             statement.setString(1, kodeGolongan);
-             statement.setString(2, nip);
+             statement.setString(1, nip);
+             statement.setString(2, kodeGolongan);
              result = statement.executeQuery();
              Gaji gaji=null;
              Golongan golongan;

@@ -1,10 +1,9 @@
 package com.presensikaryawan.gaji;
 
-import com.presensikaryawan.golongan.*;
-import com.presensikaryawan.tools.DaoFactory;
-import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
+import com.presensikaryawan.golongan.*;
 import com.presensikaryawan.karyawan.Karyawan;
+import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ import javax.swing.*;
  * @author Als
  */
 public class GajiForm extends javax.swing.JFrame {
-    
+
     private DaoFactory service;
     private Gaji activeGaji;
 
@@ -54,11 +53,12 @@ public class GajiForm extends javax.swing.JFrame {
             kodeGolonganCombo.addItem(g.getGolongan().getKodeGolongan());
             nipCombo.addItem(g.getKaryawan().getNip());
         }
-        
+
     }
 
     private void initComponentFocus() {
 //        gajiPokokTextField.addFocusListener(new ComponentFocus(gajiPokokTextField));
+        nipCombo.addFocusListener(new ComponentFocus(nipCombo));
         kodeGolonganCombo.addFocusListener(new ComponentFocus(kodeGolonganCombo));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
     }
@@ -391,14 +391,16 @@ public class GajiForm extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-816)/2, (screenSize.height-688)/2, 816, 688);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
         String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
         String nip = String.valueOf(nipCombo.getSelectedItem());
         double gajiPokok = Double.parseDouble(gajiPokokTextField.getText());
         double uangMakan = Double.parseDouble(uangMakanTextField.getText());
         double uangLembur = Double.parseDouble(uangLemburTextField.getText());
-        
+        activeGaji.setGajiPokok(100000000);
+        System.out.println(activeGaji.getGajiPokok());
+
         activeGaji.setGajiPokok(gajiPokok);
         activeGaji.setUangMakan(uangMakan);
         activeGaji.setUangLembur(uangLembur);
@@ -408,24 +410,24 @@ public class GajiForm extends javax.swing.JFrame {
         Golongan g = new Golongan();
         g.setKodeGolongan(kodeGolongan);
         activeGaji.setGolongan(g);
-        
+
         int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Nip = " + nip + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
                 DaoFactory.getGajiDao().delete(activeGaji);
                 JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n"
                         + "<html><font color=#FF0000>" + nip + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                
+
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n"
                         + "<html><font color=#FF0000>" + ex + "</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
-                
+
             }
-            
+
         }
-//        batalButton.doClick();
+        batalButton.doClick();
     }//GEN-LAST:event_hapusButtonActionPerformed
-    
+
     private void gajiTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gajiTableMouseClicked
         int row = gajiTable.getSelectedRow();
         String kodegroup = gajiTable.getValueAt(row, 0).toString();
@@ -433,7 +435,7 @@ public class GajiForm extends javax.swing.JFrame {
         String gajipokokgroup = gajiTable.getValueAt(row, 3).toString();
         String uangmakangroup = gajiTable.getValueAt(row, 4).toString();
         String uanglemburgroup = gajiTable.getValueAt(row, 5).toString();
-        
+
         gajiPokokTextField.setText(gajipokokgroup);
         uangMakanTextField.setText(uangmakangroup);
         uangLemburTextField.setText(uanglemburgroup);
@@ -441,26 +443,30 @@ public class GajiForm extends javax.swing.JFrame {
         nipCombo.setSelectedItem(nipgroup);
     }//GEN-LAST:event_gajiTableMouseClicked
     private void isitable() {
-        
     }
-    
+
     private void simpanButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_simpanButtonKeyPressed
         simpanButton.doClick();// TODO add your handling code here:
     }//GEN-LAST:event_simpanButtonKeyPressed
-    
+
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
         String nip = String.valueOf(nipCombo.getSelectedItem());
         double gajiPokok = Double.parseDouble(gajiPokokTextField.getText());
         double uangMakan = Double.parseDouble(uangMakanTextField.getText());
         double uangLembur = Double.parseDouble(uangLemburTextField.getText());
-        
+
         Gaji gajiBaru = new Gaji();
         Karyawan k = new Karyawan();
+        try {
+            k.setNama(DaoFactory.getKaryawanDao().getByNIPKaryawan(nip).getNip());
+        } catch (SQLException e) {
+            System.out.println("error");
+        }
         k.setNip(nip);
         Golongan g = new Golongan();
         g.setKodeGolongan(kodeGolongan);
-        
+
         gajiBaru.setGajiPokok(gajiPokok);
         gajiBaru.setUangLembur(uangLembur);
         gajiBaru.setUangMakan(uangMakan);
@@ -469,10 +475,10 @@ public class GajiForm extends javax.swing.JFrame {
         if ("Simpan".equals(simpanButton.getText())) {
             try {
                 DaoFactory.getGajiDao().insert(gajiBaru);
-                
+
                 JOptionPane.showMessageDialog(this, "Data dengan Nama \n"
                         + "<html><font color=#FF0000>" + nip + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 batalButton.doClick();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -480,6 +486,11 @@ public class GajiForm extends javax.swing.JFrame {
         } else {
             try {
                 Gaji gajiLama = DaoFactory.getGajiDao().getByKodeGolonganAndNip(kodeGolongan, nip);
+                try {
+                    k.setNama(DaoFactory.getKaryawanDao().getByNIPKaryawan(nip).getNip());
+                } catch (SQLException e) {
+                    System.out.println("error");
+                }
                 k.setNip(nip);
                 g.setKodeGolongan(kodeGolongan);
                 gajiLama.setGajiPokok(gajiPokok);
@@ -487,87 +498,116 @@ public class GajiForm extends javax.swing.JFrame {
                 gajiLama.setUangLembur(uangLembur);
                 gajiLama.setGolongan(g);
                 gajiLama.setKaryawan(k);
-                
+
                 DaoFactory.getGajiDao().update(gajiLama);
                 JOptionPane.showMessageDialog(this, "Data dengan nama\n"
                         + "<html><font color=#FF0000>" + nip + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 batalButton.doClick();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
-    
+
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-        
+
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
-    
-    private void kodeGolonganComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeGolonganComboActionPerformed
-//        String pilih = String.valueOf(kodeGolonganCombo.getSelectedItem());
-//        
-//        try {
-//            activeGolongan = service.getGolonganDao().getByKodeGolongan(pilih);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        //jika ditemukan
-//        if (activeGolongan != null) {
-//            gajiPokokTextField.setText(activeGolongan.getNamaGolongan());
-//            simpanButton.setText("Update");
-//            simpanButton.setMnemonic('U');
-//            simpanButton.setEnabled(true);
-//            hapusButton.setEnabled(true);
-//            kodeGolonganCombo.requestFocus();
-//            
-//        } else {
-//            gajiPokokTextField.setText(null);
-//            gajiPokokTextField.requestFocus();
-//            hapusButton.setEnabled(false);
-//            simpanButton.setText("Simpan");
-//            simpanButton.setMnemonic('S');
-//            simpanButton.setEnabled(true);
-//        }
 
+    private void kodeGolonganComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeGolonganComboActionPerformed
+        String pilih = String.valueOf(kodeGolonganCombo.getSelectedItem());
+        String pilih2 = String.valueOf(nipCombo.getSelectedItem());
+
+        try {
+            activeGaji = DaoFactory.getGajiDao().getByKodeGolonganAndNip(pilih, pilih2);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //jika ditemukan
+        if (activeGaji != null) {
+            gajiPokokTextField.setText(String.valueOf(activeGaji.getGajiPokok()));
+            uangLemburTextField.setText(String.valueOf(activeGaji.getUangLembur()));
+            uangMakanTextField.setText(String.valueOf(activeGaji.getUangMakan()));
+            simpanButton.setText("Update");
+            simpanButton.setMnemonic('U');
+            simpanButton.setEnabled(true);
+            hapusButton.setEnabled(true);
+            kodeGolonganCombo.requestFocus();
+
+        } else {
+            gajiPokokTextField.setText(null);
+            gajiPokokTextField.requestFocus();
+            hapusButton.setEnabled(false);
+            simpanButton.setText("Simpan");
+            simpanButton.setMnemonic('S');
+            simpanButton.setEnabled(true);
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_kodeGolonganComboActionPerformed
-        
+
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
 //        gajiPokokTextField.setText(null);
 //        simpanButton.setEnabled(false);
 //        hapusButton.setEnabled(true);
 //        kodeGolonganCombo.removeAllItems();
-//        kodeGolonganCombo.requestFocus();
-//        List<Golongan> golongans = null;
-//        try {
-//            golongans = service.getGolonganDao().getAllGolongan();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(GolonganForm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        GolonganTableModel model = new GolonganTableModel(golongans);
-//        gajiTable.setModel(model);
-//        
-//        for (Golongan g : golongans) {
-//            kodeGolonganCombo.addItem(g.getKodeGolongan());
-//        }
-        
+        kodeGolonganCombo.requestFocus();
+        List<Gaji> gajis = null;
+        try {
+            gajis = DaoFactory.getGajiDao().getAllGaji();
+        } catch (SQLException ex) {
+            Logger.getLogger(GolonganForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        GajiTableModel model = new GajiTableModel(gajis);
+        gajiTable.setModel(model);
+
+        for (Gaji g : gajis) {
+            kodeGolonganCombo.addItem(g.getGolongan().getKodeGolongan());
+            nipCombo.addItem(g.getKaryawan().getNip());
+        }
 }//GEN-LAST:event_batalButtonActionPerformed
-    
+
     private void gajiPokokTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gajiPokokTextFieldActionPerformed
         simpanButton.setEnabled(true);
         simpanButton.requestFocus();
         // TODO add your handling code here:
     }//GEN-LAST:event_gajiPokokTextFieldActionPerformed
-    
+
     private void nipComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipComboActionPerformed
         // TODO add your handling code here:
+        String pilih = String.valueOf(kodeGolonganCombo.getSelectedItem());
+        String pilih2 = String.valueOf(nipCombo.getSelectedItem());
+
+        try {
+            activeGaji = DaoFactory.getGajiDao().getByKodeGolonganAndNip(pilih, pilih2);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //jika ditemukan
+        if (activeGaji != null) {
+            gajiPokokTextField.setText(String.valueOf(activeGaji.getGajiPokok()));
+            uangLemburTextField.setText(String.valueOf(activeGaji.getUangLembur()));
+            uangMakanTextField.setText(String.valueOf(activeGaji.getUangMakan()));
+            simpanButton.setText("Update");
+            simpanButton.setMnemonic('U');
+            simpanButton.setEnabled(true);
+            hapusButton.setEnabled(true);
+            kodeGolonganCombo.requestFocus();
+
+        } else {
+            gajiPokokTextField.setText(null);
+            gajiPokokTextField.requestFocus();
+            hapusButton.setEnabled(false);
+            simpanButton.setText("Simpan");
+            simpanButton.setMnemonic('S');
+            simpanButton.setEnabled(true);
+        }
     }//GEN-LAST:event_nipComboActionPerformed
-        
+
     private void uangMakanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uangMakanTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_uangMakanTextFieldActionPerformed
-    
+
     private void uangLemburTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uangLemburTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_uangLemburTextFieldActionPerformed
