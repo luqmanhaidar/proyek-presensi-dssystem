@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class GajiDaoImplemen implements GajiDao {
 
-    private final String SQL_INSERT = "insert into gaji(gaji_pokok, uang_makan, uang_lembur, golongan, nip) values (?,?,?,?,?)";
+    private final String SQL_INSERT = "insert into gaji(gaji_pokok, uang_makan, uang_lembur, golongan, nip, nama_karyawan) values (?,?,?,?,?,?)";
     private final String SQL_UPDATE = "update gaji set gaji_pokok = ?, uang_makan=?, uang_lembur=? where kode_golongan = ? and nip=?";
     private final String SQL_DELETE = "delete from gaji where nip like ? and kode_golongan like ?";
     private final String SQL_GETBYKODE = "select * from gaji where golongan like ?";
@@ -44,6 +44,7 @@ public class GajiDaoImplemen implements GajiDao {
             statement.setDouble(3, gaji.getUangLembur());
             statement.setString(4, gaji.getGolongan().getKodeGolongan());
             statement.setString(5, gaji.getKaryawan().getNip());
+            statement.setString(6, gaji.getKaryawan().getNama());
             statement.executeUpdate();
 
             connection.commit();
@@ -141,10 +142,12 @@ public class GajiDaoImplemen implements GajiDao {
                  
                  Karyawan karyawan=new Karyawan();
                  karyawan.setNip(result.getString("nip"));
+                 karyawan.setNama(result.getString("nama_karyawan"));
                  gaji.setKaryawan(karyawan);
                  
                  Golongan golongan=new Golongan();
                  golongan.setKodeGolongan(result.getString("kode_golongan"));
+                 gaji.setGolongan(golongan);
                  gajis.add(gaji);
              }
 
@@ -187,6 +190,7 @@ public class GajiDaoImplemen implements GajiDao {
                 
                  karyawan=new Karyawan();
                  karyawan.setNip(result.getString("nip"));
+                 karyawan.setNama(result.getString("nama_karyawan"));
                  
                  gaji=new Gaji();
                  gaji.setGajiPokok(result.getDouble("gaji_pokok"));
