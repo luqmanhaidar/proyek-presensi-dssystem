@@ -10,6 +10,8 @@ import com.dssystem.bank.BankDao;
 import com.dssystem.bank.BankDaoImplemen;
 import java.sql.Connection;
 import com.mysql.jdbc.Driver;
+import com.presensikaryawan.gaji.GajiDao;
+import com.presensikaryawan.gaji.GajiDaoImplemen;
 import com.presensikaryawan.karyawan.KaryawanDao;
 import com.presensikaryawan.karyawan.KaryawanDaoImplemen;
 import com.presensikaryawan.liburNasional.LiburNasionalDao;
@@ -39,6 +41,7 @@ public class DaoFactory {
     private static LiburPerusahaanDao liburPerusahaanDao;
     private static LiburNasionalDao liburNasionalDao;
     private static StatusSettingDao statusSettingDao;
+    private static GajiDao gajiDao;
 //    private static BankDao bankDao;
 
     public static Connection getConnection() throws SQLException {
@@ -104,5 +107,12 @@ public class DaoFactory {
             statusSettingDao=new StatusSettingDaoImplemen(getConnection());
         }
         return  statusSettingDao;
+    }
+    
+    public static GajiDao getGajiDao() throws SQLException{
+        if (gajiDao==null){
+            gajiDao=new GajiDaoImplemen(getConnection());
+        }
+        return gajiDao;
     }
 }
