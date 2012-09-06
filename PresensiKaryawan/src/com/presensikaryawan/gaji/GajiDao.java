@@ -19,9 +19,7 @@ public interface GajiDao {
 
     void delete(Gaji gaji) throws SQLException;
 
-    Gaji getByKodeGolongan(String kodeGolongan) throws SQLException;
-
-    Gaji getByNIPKaryawan(String namaGolongan) throws SQLException;
+    Gaji getByKodeGolonganAndNip(String kodeGolongan, String nip) throws SQLException;
 
     List<Gaji> getAllGaji() throws SQLException;
 }
