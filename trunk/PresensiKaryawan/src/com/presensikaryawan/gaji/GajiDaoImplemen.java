@@ -19,12 +19,12 @@ import java.util.List;
  */
 public class GajiDaoImplemen implements GajiDao {
 
-    private final String SQL_INSERT = "insert into gaji(gaji_pokok, uang_makan, uang_lembur, golongan, nip, nama_karyawan) values (?,?,?,?,?,?)";
+    private final String SQL_INSERT = "insert into gaji(gaji_pokok, uang_makan, uang_lembur, kode_golongan, nip, nama_karyawan) values (?,?,?,?,?,?)";
     private final String SQL_UPDATE = "update gaji set gaji_pokok = ?, uang_makan=?, uang_lembur=? where kode_golongan = ? and nip=?";
     private final String SQL_DELETE = "delete from gaji where nip like ? and kode_golongan like ?";
-    private final String SQL_GETBYKODE = "select * from gaji where golongan like ?";
+    private final String SQL_GETBYKODE = "select * from gaji where kode_golongan like ? order by nip asc";
     private final String SQL_GETBYNIPANDKODE = "select * from gaji where nip like ? and kode_golongan like ?";
-    private final String SQL_GETALL = "select * from gaji";
+    private final String SQL_GETALL = "select * from gaji order by kode_golongan asc";
     private Connection connection;
 
     public GajiDaoImplemen(Connection connection) {
@@ -217,6 +217,54 @@ public class GajiDaoImplemen implements GajiDao {
              } catch (SQLException exception) {
                  throw exception;
              }
+         }
+    }
+
+    @Override
+    public List<Gaji> getAllGajiByGolongan(String golongan) throws SQLException {
+                PreparedStatement statement = null;
+         ResultSet result = null;
+         try {
+             connection.setAutoCommit(false);
+
+             statement = connection.prepareStatement(SQL_GETBYKODE);
+             statement.setString(1, golongan);
+
+             result = statement.executeQuery();
+             List<Gaji> gajis = new ArrayList<Gaji>();
+             while (result.next()) {
+                 Gaji gaji = new Gaji();
+                 gaji.setGajiPokok(result.getDouble("gaji_pokok"));
+                 gaji.setUangMakan(result.getDouble("uang_makan"));
+                 gaji.setUangLembur(result.getDouble("uang_lembur"));
+                 
+                 Karyawan karyawan=new Karyawan();
+                 karyawan.setNip(result.getString("nip"));
+                 karyawan.setNama(result.getString("nama_karyawan"));
+                 gaji.setKaryawan(karyawan);
+                 
+                 Golongan golongan2=new Golongan();
+                 golongan2.setKodeGolongan(result.getString("kode_golongan"));
+                 gaji.setGolongan(golongan2);
+                 gajis.add(gaji);
+             }
+
+             connection.commit();
+             return gajis;
+         } catch (SQLException exception) {
+             throw exception;
+         } finally {
+             try {
+                 connection.setAutoCommit(true);
+                 if (result != null) {
+                     result.close();
+                 }
+                 if (statement != null) {
+                     statement.close();
+                 }
+             } catch (SQLException exception) {
+                 throw exception;
+            }
          }
     }
 }

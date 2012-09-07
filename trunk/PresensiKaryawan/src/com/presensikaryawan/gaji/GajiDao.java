@@ -22,4 +22,6 @@ public interface GajiDao {
     Gaji getByKodeGolonganAndNip(String kodeGolongan, String nip) throws SQLException;
 
     List<Gaji> getAllGaji() throws SQLException;
+    
+    List<Gaji> getAllGajiByGolongan(String golongan) throws SQLException;
 }

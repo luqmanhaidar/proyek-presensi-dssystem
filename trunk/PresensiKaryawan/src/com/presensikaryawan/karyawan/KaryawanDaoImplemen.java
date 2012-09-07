@@ -21,6 +21,7 @@ public class KaryawanDaoImplemen implements KaryawanDao {
     private final String SQL_UPDATE = "update karyawan set nama_karyawan = ? , alamat = ? , tanggal_masuk = ? , kode_golongan = ?  where nip = ?";
     private final String SQL_DELETE = "delete from karyawan where nip like ?";
     private final String SQL_GETBYNIP = "select * from karyawan where nip like ?";
+    private final String SQL_GETBYGOLONGAN = "select * from karyawan where kode_golongan like ?";
     private final String SQL_GETBYNAMA = "select * from karyawan where nama_karyawan like ?";
     private final String SQL_GETALL = "select * from karyawan";
     private final String SQL_GETALLNIP = "select nip from karyawan";
@@ -211,6 +212,47 @@ public class KaryawanDaoImplemen implements KaryawanDao {
              connection.setAutoCommit(false);
 
              statement = connection.prepareStatement(SQL_GETALL);
+
+             result = statement.executeQuery();
+             List<Karyawan> karyawans = new ArrayList<Karyawan>();
+             while (result.next()) {
+                 Karyawan karyawan = new Karyawan();
+                 karyawan.setNip(result.getString("nip"));
+                 karyawan.setNama(result.getString("nama_karyawan"));
+                 karyawan.setAlamat(result.getString("alamat"));
+                 karyawan.setTanggal_masuk(result.getString("tanggal_masuk"));
+                 karyawan.setKodeGolongan(result.getString("kode_golongan"));
+                 karyawans.add(karyawan);
+             }
+
+             connection.commit();
+             return karyawans;
+         } catch (SQLException exception) {
+             throw exception;
+         } finally {
+             try {
+                 connection.setAutoCommit(true);
+                 if (result != null) {
+                     result.close();
+                 }
+                 if (statement != null) {
+                     statement.close();
+                 }
+             } catch (SQLException exception) {
+                 throw exception;
+            }
+         }
+    }
+
+    @Override
+    public List<Karyawan> getAllKaryawanByGolongan(String golongan) throws SQLException {
+        PreparedStatement statement = null;
+         ResultSet result = null;
+         try {
+             connection.setAutoCommit(false);
+
+             statement = connection.prepareStatement(SQL_GETBYGOLONGAN);
+             statement.setString(1, golongan);
 
              result = statement.executeQuery();
              List<Karyawan> karyawans = new ArrayList<Karyawan>();

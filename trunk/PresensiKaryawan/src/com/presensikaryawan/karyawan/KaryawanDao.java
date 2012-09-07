@@ -24,4 +24,6 @@ public interface KaryawanDao {
     Karyawan getByNamaKaryawan(String namaKaryawan) throws SQLException;
 
     List<Karyawan> getAllKaryawan() throws SQLException;
+    
+    List<Karyawan> getAllKaryawanByGolongan(String golongan) throws SQLException;
 }
