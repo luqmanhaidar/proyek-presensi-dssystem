@@ -37,27 +37,29 @@ public class GajiForm extends javax.swing.JFrame {
 //        Tampilan();
         // isitable();
         initComponentFocus();
-//        gajiPokokTextField.setDocument(new ChangeCase().getToUpperCase());
-//        GolonganDao dao = DaoFactory.getGolonganDao();
-//        List<Golongan> golongans = dao.getAllGolongan();
-//        GolonganTableModel model = new GolonganTableModel(golongans);
-//        golonganTable.setModel(model);
-//        for(Golongan g :golongans){
-//            kodeGolonganCombo.addItem(g.getKodeGolongan());
-//        }
         GajiDao dao = DaoFactory.getGajiDao();
         List<Gaji> gajis = dao.getAllGaji();
-        GajiTableModel model = new GajiTableModel(gajis);
-        gajiTable.setModel(model);
+
+        String checkerDuplication = null;
         for (Gaji g : gajis) {
-            kodeGolonganCombo.addItem(g.getGolongan().getKodeGolongan());
-            nipCombo.addItem(g.getKaryawan().getNip());
+            if (!g.getGolongan().getKodeGolongan().equals(checkerDuplication)) {
+                kodeGolonganCombo.addItem(g.getGolongan().getKodeGolongan());
+                checkerDuplication = g.getGolongan().getKodeGolongan();
+            }
+
+        }
+        List<Gaji> gajis2 = dao.getAllGajiByGolongan(String.valueOf(kodeGolonganCombo.getSelectedItem()));
+        nipCombo.removeAllItems();
+        GajiTableModel model = new GajiTableModel(gajis2);
+        gajiTable.setModel(model);
+        List<Karyawan> karyawans = DaoFactory.getKaryawanDao().getAllKaryawanByGolongan(String.valueOf(kodeGolonganCombo.getSelectedItem()));
+        for (Karyawan k : karyawans) {
+            nipCombo.addItem(k.getNip());
         }
 
     }
 
     private void initComponentFocus() {
-//        gajiPokokTextField.addFocusListener(new ComponentFocus(gajiPokokTextField));
         nipCombo.addFocusListener(new ComponentFocus(nipCombo));
         kodeGolonganCombo.addFocusListener(new ComponentFocus(kodeGolonganCombo));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
@@ -215,7 +217,6 @@ public class GajiForm extends javax.swing.JFrame {
             }
         });
 
-        nipCombo.setEditable(true);
         nipCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         nipCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,12 +269,10 @@ public class GajiForm extends javax.swing.JFrame {
                             .add(kodeGolonganCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(nipCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(0, 0, Short.MAX_VALUE))
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, uangLemburTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, uangMakanTextField)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, gajiPokokTextField))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, uangLemburTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, uangMakanTextField)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, gajiPokokTextField)))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 130, Short.MAX_VALUE)
                 .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -398,8 +397,6 @@ public class GajiForm extends javax.swing.JFrame {
         double gajiPokok = Double.parseDouble(gajiPokokTextField.getText());
         double uangMakan = Double.parseDouble(uangMakanTextField.getText());
         double uangLembur = Double.parseDouble(uangLemburTextField.getText());
-        activeGaji.setGajiPokok(100000000);
-        System.out.println(activeGaji.getGajiPokok());
 
         activeGaji.setGajiPokok(gajiPokok);
         activeGaji.setUangMakan(uangMakan);
@@ -411,11 +408,11 @@ public class GajiForm extends javax.swing.JFrame {
         g.setKodeGolongan(kodeGolongan);
         activeGaji.setGolongan(g);
 
-        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Nip = " + nip + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data Gaji Karyawan\nDengan NIP = " + nip + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
                 DaoFactory.getGajiDao().delete(activeGaji);
-                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n"
+                JOptionPane.showMessageDialog(this, "Data Gaji Berhasil Dihapus Dengan NIP\n"
                         + "<html><font color=#FF0000>" + nip + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
@@ -459,10 +456,11 @@ public class GajiForm extends javax.swing.JFrame {
         Gaji gajiBaru = new Gaji();
         Karyawan k = new Karyawan();
         try {
-            k.setNama(DaoFactory.getKaryawanDao().getByNIPKaryawan(nip).getNip());
+            k.setNama(DaoFactory.getKaryawanDao().getByNIPKaryawan(nip).getNama());
         } catch (SQLException e) {
             System.out.println("error");
         }
+        System.out.println("nama k: "+k.getNama());
         k.setNip(nip);
         Golongan g = new Golongan();
         g.setKodeGolongan(kodeGolongan);
@@ -479,19 +477,17 @@ public class GajiForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Data dengan Nama \n"
                         + "<html><font color=#FF0000>" + nip + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                batalButton.doClick();
+                batalButton2();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {
             try {
                 Gaji gajiLama = DaoFactory.getGajiDao().getByKodeGolonganAndNip(kodeGolongan, nip);
-                try {
-                    k.setNama(DaoFactory.getKaryawanDao().getByNIPKaryawan(nip).getNip());
-                } catch (SQLException e) {
-                    System.out.println("error");
-                }
-                k.setNip(nip);
+                k = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip);
+
+                System.out.println(k.getNip());
+                System.out.println(k.getNama());
                 g.setKodeGolongan(kodeGolongan);
                 gajiLama.setGajiPokok(gajiPokok);
                 gajiLama.setUangMakan(uangMakan);
@@ -500,15 +496,27 @@ public class GajiForm extends javax.swing.JFrame {
                 gajiLama.setKaryawan(k);
 
                 DaoFactory.getGajiDao().update(gajiLama);
-                JOptionPane.showMessageDialog(this, "Data dengan nama\n"
+                JOptionPane.showMessageDialog(this, "Data Gaji Karyawan Dengan NIP\n"
                         + "<html><font color=#FF0000>" + nip + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                batalButton.doClick();
+                batalButton2();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
+
+    private void batalButton2() {
+        kodeGolonganCombo.requestFocus();
+        List<Gaji> gajis2 = null;
+        try {
+            gajis2 = DaoFactory.getGajiDao().getAllGajiByGolongan(String.valueOf(kodeGolonganCombo.getSelectedItem()));
+        } catch (SQLException ex) {
+            Logger.getLogger(GajiForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        GajiTableModel model = new GajiTableModel(gajis2);
+        gajiTable.setModel(model);
+    }
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
 
@@ -517,6 +525,24 @@ public class GajiForm extends javax.swing.JFrame {
 
     private void kodeGolonganComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeGolonganComboActionPerformed
         String pilih = String.valueOf(kodeGolonganCombo.getSelectedItem());
+        List<Gaji> gajis2 = null;
+        try {
+            gajis2 = DaoFactory.getGajiDao().getAllGajiByGolongan(String.valueOf(kodeGolonganCombo.getSelectedItem()));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        nipCombo.removeAllItems();
+        GajiTableModel model = new GajiTableModel(gajis2);
+        gajiTable.setModel(model);
+        List<Karyawan> karyawans=null;
+        try {
+            karyawans = DaoFactory.getKaryawanDao().getAllKaryawanByGolongan(String.valueOf(kodeGolonganCombo.getSelectedItem()));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        for (Karyawan k : karyawans) {
+            nipCombo.addItem(k.getNip());
+        }
         String pilih2 = String.valueOf(nipCombo.getSelectedItem());
 
         try {
@@ -537,6 +563,8 @@ public class GajiForm extends javax.swing.JFrame {
 
         } else {
             gajiPokokTextField.setText(null);
+            uangLemburTextField.setText(null);
+            uangMakanTextField.setText(null);
             gajiPokokTextField.requestFocus();
             hapusButton.setEnabled(false);
             simpanButton.setText("Simpan");
@@ -547,22 +575,33 @@ public class GajiForm extends javax.swing.JFrame {
     }//GEN-LAST:event_kodeGolonganComboActionPerformed
 
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
-//        gajiPokokTextField.setText(null);
-//        simpanButton.setEnabled(false);
-//        hapusButton.setEnabled(true);
-//        kodeGolonganCombo.removeAllItems();
+        kodeGolonganCombo.removeAllItems();
+        nipCombo.removeAllItems();
         kodeGolonganCombo.requestFocus();
         List<Gaji> gajis = null;
         try {
             gajis = DaoFactory.getGajiDao().getAllGaji();
         } catch (SQLException ex) {
-            Logger.getLogger(GolonganForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GajiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        GajiTableModel model = new GajiTableModel(gajis);
-        gajiTable.setModel(model);
-
+        String checkerDuplication = null;
         for (Gaji g : gajis) {
-            kodeGolonganCombo.addItem(g.getGolongan().getKodeGolongan());
+            if (!g.getGolongan().getKodeGolongan().equals(checkerDuplication)) {
+                kodeGolonganCombo.addItem(g.getGolongan().getKodeGolongan());
+                checkerDuplication = g.getGolongan().getKodeGolongan();
+            }
+
+        }
+        List<Gaji> gajis2 = null;
+        try {
+            gajis2 = DaoFactory.getGajiDao().getAllGajiByGolongan(String.valueOf(kodeGolonganCombo.getSelectedItem()));
+        } catch (SQLException ex) {
+            Logger.getLogger(GajiForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        nipCombo.removeAllItems();
+        GajiTableModel model = new GajiTableModel(gajis2);
+        gajiTable.setModel(model);
+        for (Gaji g : gajis2) {
             nipCombo.addItem(g.getKaryawan().getNip());
         }
 }//GEN-LAST:event_batalButtonActionPerformed
@@ -596,6 +635,8 @@ public class GajiForm extends javax.swing.JFrame {
 
         } else {
             gajiPokokTextField.setText(null);
+            uangLemburTextField.setText(null);
+            uangMakanTextField.setText(null);
             gajiPokokTextField.requestFocus();
             hapusButton.setEnabled(false);
             simpanButton.setText("Simpan");
