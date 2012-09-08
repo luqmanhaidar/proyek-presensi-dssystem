@@ -254,7 +254,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         liburPerusahaanPanel.setBackground(new java.awt.Color(204, 204, 204));
-        liburPerusahaanPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Libur Nasional"));
+        liburPerusahaanPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Libur Perusahaan"));
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -442,11 +442,12 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
 
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
         keteranganTextField.setText(null);
-        tanggalDateChooser.setDate(null);
         simpanButton.setEnabled(false);
         hapusButton.setEnabled(true);
 //        kodeGolonganCombo.removeAllItems();
 //        kodeGolonganCombo.requestFocus();
+        tanggalDateChooser.setDate(gc.getTime());
+        keteranganTextField.requestFocus();
         List<LiburPerusahaan> liburPerusahaans = null;
         try {
             liburPerusahaans = DaoFactory.getLiburPerusahaanDao().getAllLiburPerusahaan();
