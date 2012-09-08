@@ -18,6 +18,8 @@ import com.presensikaryawan.liburNasional.LiburNasionalDao;
 import com.presensikaryawan.liburNasional.LiburNasionalDaoImplemen;
 import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDao;
 import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDaoImplemen;
+import com.presensikaryawan.posisi.PosisiDao;
+import com.presensikaryawan.posisi.PosisiDaoImplemen;
 import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
 import java.io.FileInputStream;
@@ -34,13 +36,14 @@ import java.util.logging.Logger;
  */
 public class DaoFactory {
 
-    private static Connection connection;
-    private static Properties prop;
-    private static GolonganDao golonganDao;
-    private static KaryawanDao karyawanDao;
     private static LiburPerusahaanDao liburPerusahaanDao;
     private static LiburNasionalDao liburNasionalDao;
     private static StatusSettingDao statusSettingDao;
+    private static GolonganDao golonganDao;
+    private static PosisiDao posisiDao;
+    private static Connection connection;
+    private static Properties prop;
+    private static KaryawanDao karyawanDao;
     private static GajiDao gajiDao;
 //    private static BankDao bankDao;
 
@@ -76,14 +79,14 @@ public class DaoFactory {
     public static KaryawanDao getKaryawanDao() throws SQLException {
         if (karyawanDao == null) {
             karyawanDao = new KaryawanDaoImplemen(getConnection());
-        
+
         }
-        return  karyawanDao;
+        return karyawanDao;
     }
-    
-    public static LiburPerusahaanDao getLiburPerusahaanDao() throws SQLException{
-        if (liburPerusahaanDao==null){
-            liburPerusahaanDao=new LiburPerusahaanDaoImplemen(getConnection());
+
+    public static LiburPerusahaanDao getLiburPerusahaanDao() throws SQLException {
+        if (liburPerusahaanDao == null) {
+            liburPerusahaanDao = new LiburPerusahaanDaoImplemen(getConnection());
         }
         return liburPerusahaanDao;
     }
@@ -94,25 +97,31 @@ public class DaoFactory {
 //        }
 //        return bankDao;
 //    }
-
     public static LiburNasionalDao getLiburNasionalDao() throws SQLException {
-        if (liburNasionalDao==null){
-            liburNasionalDao=new LiburNasionalDaoImplemen(getConnection());
+        if (liburNasionalDao == null) {
+            liburNasionalDao = new LiburNasionalDaoImplemen(getConnection());
         }
         return liburNasionalDao;
     }
-    
-    public static StatusSettingDao getStatusSettingDao() throws SQLException{
-        if (statusSettingDao==null){
-            statusSettingDao=new StatusSettingDaoImplemen(getConnection());
+
+    public static StatusSettingDao getStatusSettingDao() throws SQLException {
+        if (statusSettingDao == null) {
+            statusSettingDao = new StatusSettingDaoImplemen(getConnection());
         }
-        return  statusSettingDao;
+        return statusSettingDao;
     }
-    
-    public static GajiDao getGajiDao() throws SQLException{
-        if (gajiDao==null){
-            gajiDao=new GajiDaoImplemen(getConnection());
+
+    public static GajiDao getGajiDao() throws SQLException {
+        if (gajiDao == null) {
+            gajiDao = new GajiDaoImplemen(getConnection());
         }
         return gajiDao;
+    }
+
+    public static PosisiDao getPosisiDao() throws SQLException {
+        if (posisiDao == null) {
+            posisiDao = new PosisiDaoImplemen(getConnection());
+        }
+        return posisiDao;
     }
 }
