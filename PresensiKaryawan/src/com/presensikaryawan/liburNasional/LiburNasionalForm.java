@@ -48,7 +48,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         LiburNasionalDao dao = DaoFactory.getLiburNasionalDao();
         List<LiburNasional> liburNasionals = dao.getAllLiburNasional();
         LiburNasionalTableModel model = new LiburNasionalTableModel(liburNasionals);
-        golonganTable.setModel(model);
+        liburNasionalTable.setModel(model);
 //        for(LiburNasional l :liburNasionals){
 //            kodeGolonganCombo.addItem(l.getTanggal());
 //        }
@@ -84,7 +84,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         tanggalDateChooser = new com.toedter.calendar.JDateChooser();
         liburNasionalPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        golonganTable = new javax.swing.JTable();
+        liburNasionalTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -255,9 +255,9 @@ public class LiburNasionalForm extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        golonganTable.setAutoCreateRowSorter(true);
-        golonganTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        golonganTable.setModel(new javax.swing.table.DefaultTableModel(
+        liburNasionalTable.setAutoCreateRowSorter(true);
+        liburNasionalTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        liburNasionalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -283,12 +283,12 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        golonganTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        liburNasionalTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                golonganTableMouseClicked(evt);
+                liburNasionalTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(golonganTable);
+        jScrollPane1.setViewportView(liburNasionalTable);
 
         org.jdesktop.layout.GroupLayout liburNasionalPanelLayout = new org.jdesktop.layout.GroupLayout(liburNasionalPanel);
         liburNasionalPanel.setLayout(liburNasionalPanelLayout);
@@ -354,7 +354,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         batalButton.doClick();
     }//GEN-LAST:event_hapusButtonActionPerformed
     
-    private void golonganTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_golonganTableMouseClicked
+    private void liburNasionalTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liburNasionalTableMouseClicked
 //        int row = golonganTable.getSelectedRow();
 //        String tanggal = golonganTable.getValueAt(row, 0).toString();
 //        String keterangan = golonganTable.getValueAt(row,1).toString();
@@ -366,10 +366,10 @@ public class LiburNasionalForm extends javax.swing.JFrame {
 //        tanggalDateChooser.setDate(date);
 //        keteranganTextField.requestFocus();
 //        kodeGolonganCombo.setSelectedItem(keterangan);// TODO add your handling code here:
-                int row = golonganTable.getSelectedRow();
+                int row = liburNasionalTable.getSelectedRow();
 //        String no = liburPerusahaanTable.getValueAt(row, 0).toString();
-        String keterangan = golonganTable.getValueAt(row, 1).toString();
-        String tanggalString=golonganTable.getValueAt(row, 0).toString();
+        String keterangan = liburNasionalTable.getValueAt(row, 1).toString();
+        String tanggalString=liburNasionalTable.getValueAt(row, 0).toString();
         keteranganTextField.setText(keterangan);
         
         SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
@@ -380,7 +380,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             Logger.getLogger(LiburPerusahaanForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         tanggalDateChooser.setDate(tanggal);
-    }//GEN-LAST:event_golonganTableMouseClicked
+    }//GEN-LAST:event_liburNasionalTableMouseClicked
     private void isitable(){
       
     }
@@ -441,6 +441,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         hapusButton.setEnabled(true);
 //        kodeGolonganCombo.removeAllItems();
 //        kodeGolonganCombo.requestFocus();
+        keteranganTextField.requestFocus();
         tanggalDateChooser.setDate(gc.getTime());
 //        tanggalDateChooser.requestFocus();
         List<LiburNasional> liburNasionals = null;
@@ -450,7 +451,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
             Logger.getLogger(LiburNasionalForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         LiburNasionalTableModel model = new LiburNasionalTableModel(liburNasionals);
-        golonganTable.setModel(model);
+        liburNasionalTable.setModel(model);
 
 //        for(LiburNasional l :liburNasionals){
 //            kodeGolonganCombo.addItem(l.getTanggal());
@@ -515,7 +516,6 @@ private void tanggalDateChooserPropertyChange(java.beans.PropertyChangeEvent evt
     private javax.swing.JButton batalButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JLabel fungsiLabel;
-    private javax.swing.JTable golonganTable;
     private javax.swing.JButton hapusButton;
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
@@ -524,6 +524,7 @@ private void tanggalDateChooserPropertyChange(java.beans.PropertyChangeEvent evt
     private javax.swing.JLabel keteranganLabel;
     private javax.swing.JTextField keteranganTextField;
     private javax.swing.JPanel liburNasionalPanel;
+    private javax.swing.JTable liburNasionalTable;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
