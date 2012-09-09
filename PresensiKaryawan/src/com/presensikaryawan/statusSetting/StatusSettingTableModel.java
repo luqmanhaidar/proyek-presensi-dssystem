@@ -30,7 +30,7 @@ public class StatusSettingTableModel extends AbstractTableModel{
         fireTableRowsUpdated(row, row);
     }
 
-    public void addLiburPerusahaan(StatusSetting statusSetting) {
+    public void addStatusSetting(StatusSetting statusSetting) {
         statusSettings.add(statusSetting);
         fireTableRowsInserted(getRowCount() - 1, getColumnCount() - 1);
     }
