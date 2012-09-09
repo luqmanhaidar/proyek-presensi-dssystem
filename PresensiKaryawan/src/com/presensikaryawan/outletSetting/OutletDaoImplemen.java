@@ -17,13 +17,13 @@ import java.util.List;
  */
 public class OutletDaoImplemen implements OutletDao{
     
-    private final String SQL_INSERT = "insert into outlet(kode_outlet,nama_outlet, alamat) values (?,?,?)";
-    private final String SQL_UPDATE = "update outlet set nama_outlet = ?, alamat = ? where kode_outlet = ?";
-    private final String SQL_DELETE = "delete from outlet where kode_outlet like ?";
-    private final String SQL_GETBYKODE = "select * from outlet where kode_outlet like ?";
-    private final String SQL_GETBYNAMA = "select * from outlet where nama_outlet like ?";
-    private final String SQL_GETALL = "select * from outlet";
-    private final String SQL_GETALLKODE = "select kode_outlet from outlet";
+    private final String SQL_INSERT = "insert into outlet_setting(kode_outlet,nama_outlet, alamat_outlet) values (?,?,?)";
+    private final String SQL_UPDATE = "update outlet_setting set nama_outlet = ?, alamat_outlet = ? where kode_outlet = ?";
+    private final String SQL_DELETE = "delete from outlet_setting where kode_outlet like ?";
+    private final String SQL_GETBYKODE = "select * from outlet_setting where kode_outlet like ?";
+    private final String SQL_GETBYNAMA = "select * from outlet_setting where nama_outlet like ?";
+    private final String SQL_GETALL = "select * from outlet_setting";
+    private final String SQL_GETALLKODE = "select kode_outlet from outlet_setting";
     private Connection connection;
 
     public OutletDaoImplemen(Connection connection) {
