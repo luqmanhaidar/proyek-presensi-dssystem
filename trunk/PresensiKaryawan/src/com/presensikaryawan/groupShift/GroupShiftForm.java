@@ -32,6 +32,9 @@ public class GroupShiftForm extends javax.swing.JFrame {
      */
     public GroupShiftForm() throws SQLException {
         initComponents();
+        JScrollPane scrollPane=new JScrollPane();
+        scrollPane.add(jDesktopPane1);
+        getContentPane().add(scrollPane);
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        UIManager.put("nimbusControl",new Color(153,255,153));
 //        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
