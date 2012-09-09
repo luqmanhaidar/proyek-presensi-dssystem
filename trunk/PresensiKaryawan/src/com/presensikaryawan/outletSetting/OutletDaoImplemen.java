@@ -131,7 +131,7 @@ public class OutletDaoImplemen implements OutletDao{
                  outlet = new Outlet();
                  outlet.setKodeOutlet(result.getString("kode_outlet"));
                  outlet.setNamaOutlet(result.getString("nama_outlet"));
-                 outlet.setAlamatOutlet(result.getString("alamat"));
+                 outlet.setAlamatOutlet(result.getString("alamat_outlet"));
              }
 
              connection.commit();
@@ -168,9 +168,9 @@ public class OutletDaoImplemen implements OutletDao{
              Outlet outlet = null;
              if (result.next()) {
                  outlet = new Outlet();
-                 outlet.setKodeOutlet(result.getString("kode_golongan"));
-                 outlet.setNamaOutlet(result.getString("nama_golongan"));
-                 outlet.setAlamatOutlet(result.getString("alamat"));
+                 outlet.setKodeOutlet(result.getString("kode_outlet"));
+                 outlet.setNamaOutlet(result.getString("nama_outlet"));
+                 outlet.setAlamatOutlet(result.getString("alamat_outlet"));
              }
 
              connection.commit();
@@ -208,7 +208,7 @@ public class OutletDaoImplemen implements OutletDao{
                  Outlet outlet = new Outlet();
                  outlet.setKodeOutlet(result.getString("kode_outlet"));
                  outlet.setNamaOutlet(result.getString("nama_outlet"));
-                 outlet.setAlamatOutlet(result.getString("alamat"));
+                 outlet.setAlamatOutlet(result.getString("alamat_outlet"));
                  outlets.add(outlet);
              }
 
