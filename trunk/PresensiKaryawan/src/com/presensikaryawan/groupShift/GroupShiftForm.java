@@ -358,6 +358,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
         jamLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jamLabel.setText("Waktu Shift");
 
+        waktuShiftSeninTextField.setEditable(false);
         waktuShiftSeninTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         waktuShiftSeninTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         waktuShiftSeninTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -366,6 +367,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
 
+        waktuShiftSelasaTextField.setEditable(false);
         waktuShiftSelasaTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         waktuShiftSelasaTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         waktuShiftSelasaTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -374,6 +376,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
 
+        waktuShiftRabuTextField.setEditable(false);
         waktuShiftRabuTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         waktuShiftRabuTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         waktuShiftRabuTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -382,6 +385,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
 
+        waktuShiftKamisTextField.setEditable(false);
         waktuShiftKamisTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         waktuShiftKamisTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         waktuShiftKamisTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -390,6 +394,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
 
+        waktuShiftJumatTextField.setEditable(false);
         waktuShiftJumatTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         waktuShiftJumatTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         waktuShiftJumatTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -398,6 +403,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
 
+        waktuShiftSabtuTextField.setEditable(false);
         waktuShiftSabtuTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         waktuShiftSabtuTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         waktuShiftSabtuTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -406,6 +412,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
 
+        waktuShiftMingguTextField.setEditable(false);
         waktuShiftMingguTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         waktuShiftMingguTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         waktuShiftMingguTextField.addActionListener(new java.awt.event.ActionListener() {

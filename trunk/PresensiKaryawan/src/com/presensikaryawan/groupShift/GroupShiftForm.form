@@ -618,6 +618,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="waktuShiftSeninTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -633,6 +634,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="waktuShiftSelasaTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -648,6 +650,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="waktuShiftRabuTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -663,6 +666,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="waktuShiftKamisTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -678,6 +682,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="waktuShiftJumatTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -693,6 +698,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="waktuShiftSabtuTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -708,6 +714,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="waktuShiftMingguTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
