@@ -18,6 +18,8 @@ import com.presensikaryawan.liburNasional.LiburNasionalDao;
 import com.presensikaryawan.liburNasional.LiburNasionalDaoImplemen;
 import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDao;
 import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDaoImplemen;
+import com.presensikaryawan.outletSetting.OutletDao;
+import com.presensikaryawan.outletSetting.OutletDaoImplemen;
 import com.presensikaryawan.posisi.PosisiDao;
 import com.presensikaryawan.posisi.PosisiDaoImplemen;
 import com.presensikaryawan.shiftSetting.ShiftDao;
@@ -44,6 +46,7 @@ public class DaoFactory {
     private static GolonganDao golonganDao;
     private static PosisiDao posisiDao;
     private static ShiftDao shiftDao;
+    private static OutletDao outletDao;
     private static Connection connection;
     private static Properties prop;
     private static KaryawanDao karyawanDao;
@@ -133,5 +136,12 @@ public class DaoFactory {
             shiftDao = new ShiftDaoImplemen(getConnection());
         }
         return shiftDao;
+    }
+    
+    public static OutletDao getOutletDao() throws SQLException {
+        if (outletDao == null) {
+            outletDao = new OutletDaoImplemen(getConnection());
+        }
+        return outletDao;
     }
 }
