@@ -10,6 +10,8 @@ import com.dssystem.bank.BankDao;
 import com.dssystem.bank.BankDaoImplemen;
 import java.sql.Connection;
 import com.mysql.jdbc.Driver;
+import com.presensikaryawan.departmentSetting.DepartmentDao;
+import com.presensikaryawan.departmentSetting.DepartmentDaoImplemen;
 import com.presensikaryawan.gaji.GajiDao;
 import com.presensikaryawan.gaji.GajiDaoImplemen;
 import com.presensikaryawan.groupShift.GroupShift;
@@ -51,6 +53,7 @@ public class DaoFactory {
     private static ShiftDao shiftDao;
     private static OutletDao outletDao;
     private static GroupShiftDao groupShiftDao;
+    private static DepartmentDao departmentDao;
     private static Connection connection;
     private static Properties prop;
     private static KaryawanDao karyawanDao;
@@ -154,5 +157,12 @@ public class DaoFactory {
             groupShiftDao = new GroupShiftDaoImplemen(getConnection());
         }
         return groupShiftDao;
+    }
+     
+     public static DepartmentDao getDepartmentDao() throws SQLException {
+        if (departmentDao == null) {
+            departmentDao = new DepartmentDaoImplemen(getConnection());
+        }
+        return departmentDao;
     }
 }
