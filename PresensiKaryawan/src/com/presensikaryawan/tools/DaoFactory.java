@@ -12,6 +12,9 @@ import java.sql.Connection;
 import com.mysql.jdbc.Driver;
 import com.presensikaryawan.gaji.GajiDao;
 import com.presensikaryawan.gaji.GajiDaoImplemen;
+import com.presensikaryawan.groupShift.GroupShift;
+import com.presensikaryawan.groupShift.GroupShiftDao;
+import com.presensikaryawan.groupShift.GroupShiftDaoImplemen;
 import com.presensikaryawan.karyawan.KaryawanDao;
 import com.presensikaryawan.karyawan.KaryawanDaoImplemen;
 import com.presensikaryawan.liburNasional.LiburNasionalDao;
@@ -47,6 +50,7 @@ public class DaoFactory {
     private static PosisiDao posisiDao;
     private static ShiftDao shiftDao;
     private static OutletDao outletDao;
+    private static GroupShiftDao groupShiftDao;
     private static Connection connection;
     private static Properties prop;
     private static KaryawanDao karyawanDao;
@@ -143,5 +147,12 @@ public class DaoFactory {
             outletDao = new OutletDaoImplemen(getConnection());
         }
         return outletDao;
+    }
+    
+     public static GroupShiftDao getGroupShiftDao() throws SQLException {
+        if (groupShiftDao == null) {
+            groupShiftDao = new GroupShiftDaoImplemen(getConnection());
+        }
+        return groupShiftDao;
     }
 }
