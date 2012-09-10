@@ -25,35 +25,46 @@ import javax.swing.*;
 public class GroupShiftForm extends javax.swing.JFrame {
 
     private DaoFactory service;
-    private Shift activeShift;
+    private GroupShift activeGroupShift;
 
     /**
      * Creates new form masterInventoryGrup
      */
     public GroupShiftForm() throws SQLException {
         initComponents();
-        JScrollPane scrollPane=new JScrollPane();
-        scrollPane.add(jDesktopPane1);
-        getContentPane().add(scrollPane);
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        UIManager.put("nimbusControl",new Color(153,255,153));
 //        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
 //        Tampilan();
         // isitable();
         initComponentFocus();
-//        namaGroupShiftTextField.setDocument(new ChangeCase().getToUpperCase());
-//        ShiftDao dao = DaoFactory.getShiftDao();
-//        List<Shift> shifts = dao.getAllShift();
-//        ShiftTableModel model = new ShiftTableModel(shifts);
-//        shiftTable.setModel(model);
-//        for (Shift s : shifts) {
-//            kodeGroupShiftCombo.addItem(s.getKodeShift());
-//        }
+        namaGroupShiftTextField.setDocument(new ChangeCase().getToUpperCase());
+        keteranganTextField.setDocument(new ChangeCase().getToUpperCase());
+        GroupShiftDao dao = DaoFactory.getGroupShiftDao();
+        List<GroupShift> groupShifts = dao.getAllGroupShift();
+        GroupShiftTableModel model = new GroupShiftTableModel(groupShifts);
+        groupShiftTable.setModel(model);
+        for (GroupShift gs : groupShifts) {
+            kodeGroupShiftCombo.addItem(gs.getKodeGroupShift());
+        }
+        ShiftDao daoShift = DaoFactory.getShiftDao();
+        List<Shift> shifts = daoShift.getAllShift();
+        for (Shift s : shifts) {
+            kodeShiftSeninCombo.addItem(s.getKodeShift());
+            kodeShiftSelasaCombo.addItem(s.getKodeShift());
+            kodeShiftRabuCombo.addItem(s.getKodeShift());
+            kodeShiftKamisCombo.addItem(s.getKodeShift());
+            kodeShiftJumatCombo.addItem(s.getKodeShift());
+            kodeShiftSabtuCombo.addItem(s.getKodeShift());
+            kodeShiftMingguCombo.addItem(s.getKodeShift());
+        }
     }
 
     private void initComponentFocus() {
         namaGroupShiftTextField.addFocusListener(new ComponentFocus(namaGroupShiftTextField));
+        keteranganTextField.addFocusListener(new ComponentFocus(keteranganTextField));
         kodeGroupShiftCombo.addFocusListener(new ComponentFocus(kodeGroupShiftCombo));
+        kodeShiftSeninCombo.addFocusListener(new ComponentFocus(kodeShiftSeninCombo));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
     }
 
@@ -92,14 +103,8 @@ public class GroupShiftForm extends javax.swing.JFrame {
         mingguLabel = new javax.swing.JLabel();
         kodeShiftLabel = new javax.swing.JLabel();
         kodeShiftSeninCombo = new javax.swing.JComboBox();
-        kodeShiftSelasaCombo = new javax.swing.JComboBox();
-        kodeShiftRabuCombo = new javax.swing.JComboBox();
-        kodeShiftKamisCombo = new javax.swing.JComboBox();
-        kodeShiftJumatCombo = new javax.swing.JComboBox();
-        kodeShiftSabtuCombo = new javax.swing.JComboBox();
-        kodeShiftMingguCombo = new javax.swing.JComboBox();
-        keteranganTextField = new javax.swing.JTextField();
         jamLabel = new javax.swing.JLabel();
+        keteranganTextField = new javax.swing.JTextField();
         waktuShiftSeninTextField = new javax.swing.JTextField();
         waktuShiftSelasaTextField = new javax.swing.JTextField();
         waktuShiftRabuTextField = new javax.swing.JTextField();
@@ -107,9 +112,15 @@ public class GroupShiftForm extends javax.swing.JFrame {
         waktuShiftJumatTextField = new javax.swing.JTextField();
         waktuShiftSabtuTextField = new javax.swing.JTextField();
         waktuShiftMingguTextField = new javax.swing.JTextField();
+        kodeShiftSelasaCombo = new javax.swing.JComboBox();
+        kodeShiftRabuCombo = new javax.swing.JComboBox();
+        kodeShiftKamisCombo = new javax.swing.JComboBox();
+        kodeShiftJumatCombo = new javax.swing.JComboBox();
+        kodeShiftSabtuCombo = new javax.swing.JComboBox();
+        kodeShiftMingguCombo = new javax.swing.JComboBox();
         shiftPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        shiftTable = new javax.swing.JTable();
+        groupShiftTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -280,6 +291,80 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
 
+        jamLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jamLabel.setText("Waktu Shift");
+
+        keteranganTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        keteranganTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        keteranganTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keteranganTextFieldActionPerformed(evt);
+            }
+        });
+
+        waktuShiftSeninTextField.setEditable(false);
+        waktuShiftSeninTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        waktuShiftSeninTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        waktuShiftSeninTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waktuShiftSeninTextFieldActionPerformed(evt);
+            }
+        });
+
+        waktuShiftSelasaTextField.setEditable(false);
+        waktuShiftSelasaTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        waktuShiftSelasaTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        waktuShiftSelasaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waktuShiftSelasaTextFieldActionPerformed(evt);
+            }
+        });
+
+        waktuShiftRabuTextField.setEditable(false);
+        waktuShiftRabuTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        waktuShiftRabuTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        waktuShiftRabuTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waktuShiftRabuTextFieldActionPerformed(evt);
+            }
+        });
+
+        waktuShiftKamisTextField.setEditable(false);
+        waktuShiftKamisTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        waktuShiftKamisTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        waktuShiftKamisTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waktuShiftKamisTextFieldActionPerformed(evt);
+            }
+        });
+
+        waktuShiftJumatTextField.setEditable(false);
+        waktuShiftJumatTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        waktuShiftJumatTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        waktuShiftJumatTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waktuShiftJumatTextFieldActionPerformed(evt);
+            }
+        });
+
+        waktuShiftSabtuTextField.setEditable(false);
+        waktuShiftSabtuTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        waktuShiftSabtuTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        waktuShiftSabtuTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waktuShiftSabtuTextFieldActionPerformed(evt);
+            }
+        });
+
+        waktuShiftMingguTextField.setEditable(false);
+        waktuShiftMingguTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        waktuShiftMingguTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        waktuShiftMingguTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waktuShiftMingguTextFieldActionPerformed(evt);
+            }
+        });
+
         kodeShiftSelasaCombo.setEditable(true);
         kodeShiftSelasaCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         kodeShiftSelasaCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -358,80 +443,31 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
 
-        jamLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jamLabel.setText("Waktu Shift");
-
-        waktuShiftSeninTextField.setEditable(false);
-        waktuShiftSeninTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        waktuShiftSeninTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        waktuShiftSeninTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                waktuShiftSeninTextFieldActionPerformed(evt);
-            }
-        });
-
-        waktuShiftSelasaTextField.setEditable(false);
-        waktuShiftSelasaTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        waktuShiftSelasaTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        waktuShiftSelasaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                waktuShiftSelasaTextFieldActionPerformed(evt);
-            }
-        });
-
-        waktuShiftRabuTextField.setEditable(false);
-        waktuShiftRabuTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        waktuShiftRabuTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        waktuShiftRabuTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                waktuShiftRabuTextFieldActionPerformed(evt);
-            }
-        });
-
-        waktuShiftKamisTextField.setEditable(false);
-        waktuShiftKamisTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        waktuShiftKamisTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        waktuShiftKamisTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                waktuShiftKamisTextFieldActionPerformed(evt);
-            }
-        });
-
-        waktuShiftJumatTextField.setEditable(false);
-        waktuShiftJumatTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        waktuShiftJumatTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        waktuShiftJumatTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                waktuShiftJumatTextFieldActionPerformed(evt);
-            }
-        });
-
-        waktuShiftSabtuTextField.setEditable(false);
-        waktuShiftSabtuTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        waktuShiftSabtuTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        waktuShiftSabtuTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                waktuShiftSabtuTextFieldActionPerformed(evt);
-            }
-        });
-
-        waktuShiftMingguTextField.setEditable(false);
-        waktuShiftMingguTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        waktuShiftMingguTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        waktuShiftMingguTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                waktuShiftMingguTextFieldActionPerformed(evt);
-            }
-        });
-
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jSeparator1)
-            .add(inputPanelLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(6, 6, 6))
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, keteranganGroupShiftLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(namaGroupShiftLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(kodeGroupShiftLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(kodeGroupShiftCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(namaGroupShiftTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keteranganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 300, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(inputPanelLayout.createSequentialGroup()
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(hariLabel)
@@ -445,40 +481,28 @@ public class GroupShiftForm extends javax.swing.JFrame {
                         .add(51, 51, 51)
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(kodeShiftLabel)
-                            .add(kodeShiftSelasaCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(kodeShiftSeninCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(kodeShiftSelasaCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(kodeShiftRabuCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(kodeShiftKamisCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(kodeShiftJumatCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(kodeShiftSabtuCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(kodeShiftMingguCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(56, 56, 56)
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(waktuShiftMingguTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(waktuShiftSabtuTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(waktuShiftJumatTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(waktuShiftKamisTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(waktuShiftRabuTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(waktuShiftSeninTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jamLabel)
-                            .add(waktuShiftSelasaTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, keteranganGroupShiftLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(namaGroupShiftLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(kodeGroupShiftLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(kodeGroupShiftCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(namaGroupShiftTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keteranganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 500, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(82, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                            .add(inputPanelLayout.createSequentialGroup()
+                                .add(56, 56, 56)
+                                .add(jamLabel))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 46, Short.MAX_VALUE)
+                                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(waktuShiftSelasaTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(waktuShiftSeninTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(waktuShiftRabuTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(waktuShiftKamisTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(waktuShiftJumatTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(waktuShiftSabtuTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(waktuShiftMingguTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(161, 161, 161)))))
                 .add(batalButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -486,70 +510,66 @@ public class GroupShiftForm extends javax.swing.JFrame {
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(kodeGroupShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeGroupShiftCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(kodeGroupShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(kodeGroupShiftCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(namaGroupShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(namaGroupShiftTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(namaGroupShiftTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(keteranganGroupShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keteranganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(keteranganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(7, 7, 7)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(hariLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(kodeShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jamLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(seninLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeShiftSeninCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(waktuShiftSeninTextField))
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(seninLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(kodeShiftSeninCombo)
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(waktuShiftSeninTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(selasaLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeShiftSelasaCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(waktuShiftSelasaTextField))
+                    .add(waktuShiftSelasaTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(kodeShiftSelasaCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(rabuLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeShiftRabuCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(waktuShiftRabuTextField))
+                    .add(waktuShiftRabuTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(kodeShiftRabuCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(kamisLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeShiftKamisCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(waktuShiftKamisTextField))
+                    .add(waktuShiftKamisTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(kodeShiftKamisCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jumatLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeShiftJumatCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(waktuShiftJumatTextField))
+                    .add(waktuShiftJumatTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(kodeShiftJumatCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(sabtuLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeShiftSabtuCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(waktuShiftSabtuTextField))
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(mingguLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(kodeShiftMingguCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(11, 11, 11)
-                        .add(waktuShiftMingguTextField)
-                        .add(8, 8, 8)
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(batalButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(30, 30, 30))))
+                    .add(waktuShiftSabtuTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(kodeShiftSabtuCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(mingguLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(waktuShiftMingguTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(kodeShiftMingguCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(25, 25, 25)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(batalButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(30, 30, 30))
         );
 
         inputPanel.setBounds(0, 70, 700, 410);
@@ -560,23 +580,23 @@ public class GroupShiftForm extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        shiftTable.setAutoCreateRowSorter(true);
-        shiftTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        shiftTable.setModel(new javax.swing.table.DefaultTableModel(
+        groupShiftTable.setAutoCreateRowSorter(true);
+        groupShiftTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        groupShiftTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Kode Shift", "Nama Shift", "Waktu Mulai", "Title 4"
+                "KODE", "NAMA", "KETERANGAN", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU", "MINGGU"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false, false, true, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -587,12 +607,19 @@ public class GroupShiftForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        shiftTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        groupShiftTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                shiftTableMouseClicked(evt);
+                groupShiftTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(shiftTable);
+        jScrollPane1.setViewportView(groupShiftTable);
+        groupShiftTable.getColumnModel().getColumn(3).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(4).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(5).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(6).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(7).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(8).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(9).setResizable(false);
 
         org.jdesktop.layout.GroupLayout shiftPanelLayout = new org.jdesktop.layout.GroupLayout(shiftPanel);
         shiftPanel.setLayout(shiftPanelLayout);
@@ -612,12 +639,12 @@ public class GroupShiftForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -625,24 +652,18 @@ public class GroupShiftForm extends javax.swing.JFrame {
         jDesktopPane1.getAccessibleContext().setAccessibleDescription("");
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-716)/2, (screenSize.height-753)/2, 716, 753);
+        setBounds((screenSize.width-708)/2, (screenSize.height-726)/2, 708, 726);
     }// </editor-fold>//GEN-END:initComponents
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-        String kodeShift = String.valueOf(kodeGroupShiftCombo.getSelectedItem());
-        String namaShift = namaGroupShiftTextField.getText();
-        activeShift.setKodeShift(kodeShift);
-        activeShift.setNamaShift(namaShift);
-        String waktuMulai = String.valueOf(jamMulaiCombo.getSelectedItem()) + ":" + String.valueOf(menitMulaiCombo.getSelectedItem());
-        String waktuSelesai = String.valueOf(jamSelesaiCombo.getSelectedItem()) + ":" + String.valueOf(menitSelesaiCombo.getSelectedItem());
-        activeShift.setWaktuMulai(waktuMulai);
-        activeShift.setWaktuSelesai(waktuSelesai);
-        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Shift Kerja\nDengan Kode = " + kodeShift + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        String kodeGroupShift = String.valueOf(kodeGroupShiftCombo.getSelectedItem());
+
+        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Group Shift Kerja\nDengan Kode = " + kodeGroupShift + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
-                DaoFactory.getShiftDao().delete(activeShift);
+                DaoFactory.getGroupShiftDao().delete(activeGroupShift);
                 JOptionPane.showMessageDialog(this, "Data Shift Kerja Berhasil Dihapus Dengan Kode\n"
-                        + "<html><font color=#FF0000>" + kodeShift + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        + "<html><font color=#FF0000>" + kodeGroupShift + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n"
@@ -654,20 +675,42 @@ public class GroupShiftForm extends javax.swing.JFrame {
         batalButton.doClick();
     }//GEN-LAST:event_hapusButtonActionPerformed
 
-    private void shiftTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shiftTableMouseClicked
-        int row = shiftTable.getSelectedRow();
-        String kodegroup = shiftTable.getValueAt(row, 0).toString();
-        String namagroup = shiftTable.getValueAt(row, 1).toString();
-        String waktuMulaiGroup = shiftTable.getValueAt(row, 2).toString();
-        String waktuSelesaiGroup = shiftTable.getValueAt(row, 3).toString();
+    private void groupShiftTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupShiftTableMouseClicked
+        try {
+            int row = groupShiftTable.getSelectedRow();
+            String kodegroup = groupShiftTable.getValueAt(row, 0).toString();
+            String namagroup = groupShiftTable.getValueAt(row, 1).toString();
+            String deskripsi = groupShiftTable.getValueAt(row, 2).toString();
+            String senin_code = groupShiftTable.getValueAt(row, 3).toString();
+            String selasa_code = groupShiftTable.getValueAt(row, 4).toString();
+            String rabu_code = groupShiftTable.getValueAt(row, 5).toString();
+            String kamis_code = groupShiftTable.getValueAt(row, 6).toString();
+            String jumat_code = groupShiftTable.getValueAt(row, 7).toString();
+            String sabtu_code = groupShiftTable.getValueAt(row, 8).toString();
+            String minggu_code = groupShiftTable.getValueAt(row, 9).toString();
 
-        namaGroupShiftTextField.setText(namagroup);
-        kodeGroupShiftCombo.setSelectedItem(kodegroup);// TODO add your handling code here:
-        jamMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(0, 2));
-        jamSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(0, 2));
-        menitMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(3, 5));
-        menitSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(3, 5));
-    }//GEN-LAST:event_shiftTableMouseClicked
+            namaGroupShiftTextField.setText(namagroup);
+            kodeGroupShiftCombo.setSelectedItem(kodegroup);// TODO add your handling code here:
+            keteranganTextField.setText(deskripsi);
+            kodeShiftSeninCombo.setSelectedItem(senin_code);
+            kodeShiftSelasaCombo.setSelectedItem(selasa_code);
+            kodeShiftRabuCombo.setSelectedItem(rabu_code);
+            kodeShiftKamisCombo.setSelectedItem(kamis_code);
+            kodeShiftJumatCombo.setSelectedItem(jumat_code);
+            kodeShiftSabtuCombo.setSelectedItem(sabtu_code);
+            kodeShiftMingguCombo.setSelectedItem(minggu_code);
+
+            waktuShiftSeninTextField.setText(DaoFactory.getShiftDao().getByKode(senin_code).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(senin_code).getWaktuSelesai());
+            waktuShiftSelasaTextField.setText(DaoFactory.getShiftDao().getByKode(selasa_code).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(selasa_code).getWaktuSelesai());
+            waktuShiftRabuTextField.setText(DaoFactory.getShiftDao().getByKode(rabu_code).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(rabu_code).getWaktuSelesai());
+            waktuShiftKamisTextField.setText(DaoFactory.getShiftDao().getByKode(kamis_code).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kamis_code).getWaktuSelesai());
+            waktuShiftJumatTextField.setText(DaoFactory.getShiftDao().getByKode(jumat_code).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(jumat_code).getWaktuSelesai());
+            waktuShiftSabtuTextField.setText(DaoFactory.getShiftDao().getByKode(sabtu_code).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(sabtu_code).getWaktuSelesai());
+            waktuShiftMingguTextField.setText(DaoFactory.getShiftDao().getByKode(minggu_code).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(minggu_code).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_groupShiftTableMouseClicked
     private void isitable() {
     }
 
@@ -676,37 +719,70 @@ public class GroupShiftForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonKeyPressed
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-        String kodeShift = String.valueOf(kodeGroupShiftCombo.getSelectedItem());
-        String namaShift = namaGroupShiftTextField.getText();
-        Shift shiftBaru = new Shift();
-        String waktuMulai = String.valueOf(jamMulaiCombo.getSelectedItem()) + ":" + String.valueOf(menitMulaiCombo.getSelectedItem());
-        String waktuSelesai = String.valueOf(jamSelesaiCombo.getSelectedItem()) + ":" + String.valueOf(menitSelesaiCombo.getSelectedItem());
-        shiftBaru.setKodeShift(kodeShift);
-        shiftBaru.setNamaShift(namaShift);
-        shiftBaru.setWaktuMulai(waktuMulai);
-        shiftBaru.setWaktuSelesai(waktuSelesai);
+        String kodeGroupShift = String.valueOf(kodeGroupShiftCombo.getSelectedItem());
+        String namaGroupShift = namaGroupShiftTextField.getText();
+        String keteranganGroupShift = keteranganTextField.getText();
+        String senin_code = String.valueOf(kodeShiftSeninCombo.getSelectedItem());
+        String selasa_code = String.valueOf(kodeShiftSelasaCombo.getSelectedItem());
+        String rabu_code = String.valueOf(kodeShiftRabuCombo.getSelectedItem());
+        String kamis_code = String.valueOf(kodeShiftKamisCombo.getSelectedItem());
+        String jumat_code = String.valueOf(kodeShiftJumatCombo.getSelectedItem());
+        String sabtu_code = String.valueOf(kodeShiftSabtuCombo.getSelectedItem());
+        String minggu_code = String.valueOf(kodeShiftMingguCombo.getSelectedItem());
+
+        GroupShift groupShiftBaru = new GroupShift();
+        groupShiftBaru.setKodeGroupShift(kodeGroupShift);
+        groupShiftBaru.setNamaGroupShift(namaGroupShift);
+        groupShiftBaru.setKeterangan(keteranganGroupShift);
+
+        Shift[] shift = new Shift[7];
+        for (int i = 0; i < shift.length; i++) {
+            shift[i] = new Shift();
+        }
+        shift[0].setKodeShift(senin_code);
+        shift[1].setKodeShift(selasa_code);
+        shift[2].setKodeShift(rabu_code);
+        shift[3].setKodeShift(kamis_code);
+        shift[4].setKodeShift(jumat_code);
+        shift[5].setKodeShift(sabtu_code);
+        shift[6].setKodeShift(minggu_code);
+
+        groupShiftBaru.setShift(shift);
         if ("Simpan".equals(simpanButton.getText())) {
             try {
-                DaoFactory.getShiftDao().insert(shiftBaru);
-                JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode \n"
-                        + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                GroupShift gShift = DaoFactory.getGroupShiftDao().getByDayShiftKode(senin_code, selasa_code, rabu_code, kamis_code, jumat_code, sabtu_code, minggu_code);
+                if (gShift != null) {
+                    JOptionPane.showMessageDialog(this, "Data Gagal Disimpan Data Dengan Property Tersebut Telah Ada\n"
+                            + "<html><font color=#FF0000>Data Dengan Property Tersebut Telah Ada</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    DaoFactory.getGroupShiftDao().insert(groupShiftBaru);
+                    JOptionPane.showMessageDialog(this, "Data Group Shift Kerja Dengan Kode \n"
+                            + "<html><font color=#FF0000>" + kodeGroupShift + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                batalButton.doClick();
+                    batalButton.doClick();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {
             try {
-                Shift shiftLama = DaoFactory.getShiftDao().getByKode(kodeShift);
-                shiftLama.setKodeShift(kodeShift);
-                shiftLama.setNamaShift(namaShift);
-                shiftLama.setWaktuMulai(waktuMulai);
-                shiftLama.setWaktuSelesai(waktuSelesai);
-                DaoFactory.getShiftDao().update(shiftLama);
-                JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode\n"
-                        + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                GroupShift groupShiftLama = DaoFactory.getGroupShiftDao().getByKode(kodeGroupShift);
+                groupShiftLama.setKodeGroupShift(kodeGroupShift);
+                groupShiftLama.setNamaGroupShift(namaGroupShift);
+                groupShiftLama.setKeterangan(keteranganGroupShift);
+                groupShiftLama.setShift(shift);
 
-                batalButton.doClick();
+                GroupShift gShift = DaoFactory.getGroupShiftDao().getByDayShiftKode(senin_code, selasa_code, rabu_code, kamis_code, jumat_code, sabtu_code, minggu_code);
+                if (gShift != null) {
+                    JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\n"
+                            + "<html><font color=#FF0000>Data Dengan Property Tersebut Telah Ada</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    DaoFactory.getGroupShiftDao().update(groupShiftLama);
+                    JOptionPane.showMessageDialog(this, "Data Group Shift Kerja Dengan Kode\n"
+                            + "<html><font color=#FF0000>" + kodeGroupShift + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                    batalButton.doClick();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -724,20 +800,35 @@ public class GroupShiftForm extends javax.swing.JFrame {
             if (pilih != null) {
 
                 try {
-                    activeShift = DaoFactory.getShiftDao().getByKode(pilih);
+                    activeGroupShift = DaoFactory.getGroupShiftDao().getByKode(pilih);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
             //jika ditemukan
-            if (activeShift != null) {
-                namaGroupShiftTextField.setText(activeShift.getNamaShift());
-                String waktuMulaiGroup = activeShift.getWaktuMulai();
-                String waktuSelesaiGroup = activeShift.getWaktuSelesai();
-                jamMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(0, 2));
-                jamSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(0, 2));
-                menitMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(3, 5));
-                menitSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(3, 5));
+            if (activeGroupShift != null) {
+                namaGroupShiftTextField.setText(activeGroupShift.getNamaGroupShift());
+                keteranganTextField.setText(activeGroupShift.getKeterangan());
+
+                kodeShiftSeninCombo.setSelectedItem(activeGroupShift.getShift()[0].getKodeShift());
+                kodeShiftSelasaCombo.setSelectedItem(activeGroupShift.getShift()[1].getKodeShift());
+                kodeShiftRabuCombo.setSelectedItem(activeGroupShift.getShift()[2].getKodeShift());
+                kodeShiftKamisCombo.setSelectedItem(activeGroupShift.getShift()[3].getKodeShift());
+                kodeShiftJumatCombo.setSelectedItem(activeGroupShift.getShift()[4].getKodeShift());
+                kodeShiftSabtuCombo.setSelectedItem(activeGroupShift.getShift()[5].getKodeShift());
+                kodeShiftMingguCombo.setSelectedItem(activeGroupShift.getShift()[6].getKodeShift());
+
+                try {
+                    waktuShiftSeninTextField.setText(DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[0].getKodeShift()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[0].getKodeShift()).getWaktuSelesai());
+                    waktuShiftSelasaTextField.setText(DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[1].getKodeShift()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[1].getKodeShift()).getWaktuSelesai());
+                    waktuShiftRabuTextField.setText(DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[2].getKodeShift()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[2].getKodeShift()).getWaktuSelesai());
+                    waktuShiftKamisTextField.setText(DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[3].getKodeShift()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[3].getKodeShift()).getWaktuSelesai());
+                    waktuShiftJumatTextField.setText(DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[4].getKodeShift()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[4].getKodeShift()).getWaktuSelesai());
+                    waktuShiftSabtuTextField.setText(DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[5].getKodeShift()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[5].getKodeShift()).getWaktuSelesai());
+                    waktuShiftMingguTextField.setText(DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[6].getKodeShift()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(activeGroupShift.getShift()[6].getKodeShift()).getWaktuSelesai());
+                } catch (SQLException ex) {
+                    Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 simpanButton.setText("Update");
                 simpanButton.setMnemonic('U');
                 simpanButton.setEnabled(true);
@@ -747,6 +838,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             } else {
                 namaGroupShiftTextField.setText(null);
                 namaGroupShiftTextField.requestFocus();
+                keteranganTextField.setText(null);
                 hapusButton.setEnabled(false);
                 simpanButton.setText("Simpan");
                 simpanButton.setMnemonic('S');
@@ -758,7 +850,6 @@ public class GroupShiftForm extends javax.swing.JFrame {
 
     private void namaGroupShiftTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaGroupShiftTextFieldActionPerformed
         simpanButton.setEnabled(true);
-        jamMulaiCombo.requestFocus();
 // TODO add your handling code here:
     }//GEN-LAST:event_namaGroupShiftTextFieldActionPerformed
 
@@ -773,81 +864,45 @@ public class GroupShiftForm extends javax.swing.JFrame {
         simpanButton.setEnabled(false);
         hapusButton.setEnabled(true);
         kodeGroupShiftCombo.removeAllItems();
-        jamMulaiCombo.removeAllItems();
-        menitMulaiCombo.removeAllItems();
-        jamSelesaiCombo.removeAllItems();
-        menitSelesaiCombo.removeAllItems();
         kodeGroupShiftCombo.requestFocus();
-        List<Shift> shifts = null;
+        List<GroupShift> groupShifts = null;
         try {
-            shifts = DaoFactory.getShiftDao().getAllShift();
+            groupShifts = DaoFactory.getGroupShiftDao().getAllGroupShift();
         } catch (SQLException ex) {
             Logger.getLogger(ShiftForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ShiftTableModel model = new ShiftTableModel(shifts);
-        shiftTable.setModel(model);
+        GroupShiftTableModel model = new GroupShiftTableModel(groupShifts);
+        groupShiftTable.setModel(model);
 
-        for (Shift s : shifts) {
-            kodeGroupShiftCombo.addItem(s.getKodeShift());
+        for (GroupShift gs : groupShifts) {
+            kodeGroupShiftCombo.addItem(gs.getKodeGroupShift());
         }
 
 }//GEN-LAST:event_batalButtonActionPerformed
 
     private void kodeShiftSeninComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftSeninComboActionPerformed
         // TODO add your handling code here:
+        try {
+            waktuShiftSeninTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftSeninCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftSeninCombo.getSelectedItem().toString()).getWaktuSelesai());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_kodeShiftSeninComboActionPerformed
 
     private void kodeShiftSeninComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftSeninComboKeyPressed
         // TODO add your handling code here:
+        try {
+            waktuShiftSeninTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftSeninCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftSeninCombo.getSelectedItem().toString()).getWaktuSelesai());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_kodeShiftSeninComboKeyPressed
 
-    private void kodeShiftSelasaComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftSelasaComboActionPerformed
+    private void keteranganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keteranganTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftSelasaComboActionPerformed
-
-    private void kodeShiftSelasaComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftSelasaComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftSelasaComboKeyPressed
-
-    private void kodeShiftRabuComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftRabuComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftRabuComboActionPerformed
-
-    private void kodeShiftRabuComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftRabuComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftRabuComboKeyPressed
-
-    private void kodeShiftKamisComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftKamisComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftKamisComboActionPerformed
-
-    private void kodeShiftKamisComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftKamisComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftKamisComboKeyPressed
-
-    private void kodeShiftJumatComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftJumatComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftJumatComboActionPerformed
-
-    private void kodeShiftJumatComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftJumatComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftJumatComboKeyPressed
-
-    private void kodeShiftSabtuComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftSabtuComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftSabtuComboActionPerformed
-
-    private void kodeShiftSabtuComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftSabtuComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftSabtuComboKeyPressed
-
-    private void kodeShiftMingguComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftMingguComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftMingguComboActionPerformed
-
-    private void kodeShiftMingguComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftMingguComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kodeShiftMingguComboKeyPressed
+    }//GEN-LAST:event_keteranganTextFieldActionPerformed
 
     private void waktuShiftSeninTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waktuShiftSeninTextFieldActionPerformed
         // TODO add your handling code here:
@@ -877,6 +932,116 @@ public class GroupShiftForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_waktuShiftMingguTextFieldActionPerformed
 
+    private void kodeShiftSelasaComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftSelasaComboActionPerformed
+        // TODO add your handling code here:
+        try {
+            waktuShiftSelasaTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftSelasaCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftSelasaCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftSelasaComboActionPerformed
+
+    private void kodeShiftSelasaComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftSelasaComboKeyPressed
+        // TODO add your handling code here:
+        try {
+            waktuShiftSelasaTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftSelasaCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftSelasaCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftSelasaComboKeyPressed
+
+    private void kodeShiftRabuComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftRabuComboActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            waktuShiftRabuTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftRabuCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftRabuCombo.getSelectedItem().toString()).getWaktuSelesai());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftRabuComboActionPerformed
+
+    private void kodeShiftRabuComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftRabuComboKeyPressed
+        // TODO add your handling code here:
+        try {
+            waktuShiftRabuTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftRabuCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftRabuCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftRabuComboKeyPressed
+
+    private void kodeShiftKamisComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftKamisComboActionPerformed
+        // TODO add your handling code here:
+        try {
+            waktuShiftKamisTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftKamisCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftKamisCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftKamisComboActionPerformed
+
+    private void kodeShiftKamisComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftKamisComboKeyPressed
+        // TODO add your handling code here:
+        try {
+            waktuShiftKamisTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftKamisCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftKamisCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftKamisComboKeyPressed
+
+    private void kodeShiftJumatComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftJumatComboActionPerformed
+        // TODO add your handling code here:
+        try {
+            waktuShiftJumatTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftJumatCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftJumatCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftJumatComboActionPerformed
+
+    private void kodeShiftJumatComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftJumatComboKeyPressed
+        // TODO add your handling code here:
+        try {
+            waktuShiftJumatTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftJumatCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftJumatCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftJumatComboKeyPressed
+
+    private void kodeShiftSabtuComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftSabtuComboActionPerformed
+        // TODO add your handling code here:
+        try {
+            waktuShiftSabtuTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftSabtuCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftSabtuCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftSabtuComboActionPerformed
+
+    private void kodeShiftSabtuComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftSabtuComboKeyPressed
+        // TODO add your handling code here:
+        try {
+            waktuShiftSabtuTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftSabtuCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftSabtuCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftSabtuComboKeyPressed
+
+    private void kodeShiftMingguComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeShiftMingguComboActionPerformed
+        // TODO add your handling code here:
+        try {
+            waktuShiftMingguTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftMingguCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftMingguCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftMingguComboActionPerformed
+
+    private void kodeShiftMingguComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeShiftMingguComboKeyPressed
+        // TODO add your handling code here:
+        try {
+            waktuShiftMingguTextField.setText(DaoFactory.getShiftDao().getByKode(kodeShiftMingguCombo.getSelectedItem().toString()).getWaktuMulai() + " - " + DaoFactory.getShiftDao().getByKode(kodeShiftMingguCombo.getSelectedItem().toString()).getWaktuSelesai());
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_kodeShiftMingguComboKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -894,7 +1059,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
                 try {
                     new GroupShiftForm().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(PosisiForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -903,6 +1068,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
     private javax.swing.JButton batalButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JLabel fungsiLabel;
+    private javax.swing.JTable groupShiftTable;
     private javax.swing.JButton hapusButton;
     private javax.swing.JLabel hariLabel;
     private javax.swing.JPanel headPanel;
@@ -936,7 +1102,6 @@ public class GroupShiftForm extends javax.swing.JFrame {
     private javax.swing.JLabel selasaLabel;
     private javax.swing.JLabel seninLabel;
     private javax.swing.JPanel shiftPanel;
-    private javax.swing.JTable shiftTable;
     private javax.swing.JButton simpanButton;
     private javax.swing.JTextField waktuShiftJumatTextField;
     private javax.swing.JTextField waktuShiftKamisTextField;
