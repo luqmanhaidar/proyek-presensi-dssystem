@@ -31,10 +31,6 @@ public class StatusSettingForm extends javax.swing.JFrame {
     public StatusSettingForm() throws SQLException {
         initComponents();
         UIManager.put("nimbusBase", new Color(204, 204, 255));
-//        UIManager.put("nimbusControl",new Color(153,255,153));
-//        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
-//        Tampilan();
-        // isitable();
         initComponentFocus();
         keteranganStatusTextField.setDocument(new ChangeCase().getToUpperCase());
         StatusSettingDao dao = DaoFactory.getStatusSettingDao();
@@ -43,6 +39,9 @@ public class StatusSettingForm extends javax.swing.JFrame {
         statusTable.setModel(model);
         for (StatusSetting s : statusSettings) {
             kodeStatusCombo.addItem(s.getKodeStatus());
+        }
+        if (statusSettings.isEmpty()) {
+            hapusButton.setEnabled(false);
         }
     }
 
@@ -181,6 +180,9 @@ public class StatusSettingForm extends javax.swing.JFrame {
         kodeStatusCombo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 kodeStatusComboKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                kodeStatusComboKeyReleased(evt);
             }
         });
 
@@ -371,29 +373,40 @@ public class StatusSettingForm extends javax.swing.JFrame {
         StatusSetting statusSettingBaru = new StatusSetting();
         statusSettingBaru.setKodeStatus(kodeStatus);
         statusSettingBaru.setKeteranganStatus(keteranganStatus);
-        if ("Simpan".equals(simpanButton.getText())) {
-            try {
-                DaoFactory.getStatusSettingDao().insert(statusSettingBaru);
-                JOptionPane.showMessageDialog(this, "Data Status Karyawan Dengan Kode \n"
-                        + "<html><font color=#FF0000>" + kodeStatus + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+        if (!keteranganStatusTextField.getText().matches("") && !String.valueOf(kodeStatusCombo.getSelectedItem()).matches("")) {
 
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+
+
+            if ("Simpan".equals(simpanButton.getText())) {
+                try {
+                    DaoFactory.getStatusSettingDao().insert(statusSettingBaru);
+                    JOptionPane.showMessageDialog(this, "Data Status Karyawan Dengan Kode \n"
+                            + "<html><font color=#FF0000>" + kodeStatus + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                try {
+                    StatusSetting statusSettingLama = DaoFactory.getStatusSettingDao().getByKode(kodeStatus);
+                    statusSettingLama.setKodeStatus(kodeStatus);
+                    statusSettingLama.setKeteranganStatus(keteranganStatus);
+                    DaoFactory.getStatusSettingDao().update(statusSettingLama);
+                    JOptionPane.showMessageDialog(this, "Data Status Karyawan Dengan Kode\n"
+                            + "<html><font color=#FF0000>" + kodeStatus + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
+        } else if (String.valueOf(kodeStatusCombo.getSelectedItem()).matches("")) {
+            JOptionPane.showMessageDialog(this, "Kode Status Belum Diisi");
+            kodeStatusCombo.requestFocus();
         } else {
-            try {
-                StatusSetting statusSettingLama = DaoFactory.getStatusSettingDao().getByKode(kodeStatus);
-                statusSettingLama.setKodeStatus(kodeStatus);
-                statusSettingLama.setKeteranganStatus(keteranganStatus);
-                DaoFactory.getStatusSettingDao().update(statusSettingLama);
-                JOptionPane.showMessageDialog(this, "Data Status Karyawan Dengan Kode\n"
-                        + "<html><font color=#FF0000>" + kodeStatus + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            JOptionPane.showMessageDialog(this, "Keterangan Status Belum Disii");
+            keteranganStatusTextField.requestFocus();
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
@@ -406,7 +419,6 @@ public class StatusSettingForm extends javax.swing.JFrame {
         if (kodeStatusCombo.getSelectedItem() != null) {
             String pilih = String.valueOf(kodeStatusCombo.getSelectedItem());
             if (pilih != null) {
-
                 try {
                     activeStatusSetting = DaoFactory.getStatusSettingDao().getByKode(pilih);
                 } catch (Exception ex) {
@@ -430,6 +442,9 @@ public class StatusSettingForm extends javax.swing.JFrame {
                 simpanButton.setMnemonic('S');
                 simpanButton.setEnabled(true);
             }
+        } else {
+            simpanButton.setEnabled(false);
+            hapusButton.setEnabled(false);
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_kodeStatusComboActionPerformed
@@ -441,7 +456,35 @@ public class StatusSettingForm extends javax.swing.JFrame {
     }//GEN-LAST:event_keteranganStatusTextFieldActionPerformed
 
     private void kodeStatusComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeStatusComboKeyPressed
-        if (evt.getKeyCode() == 10) {
+        if (kodeStatusCombo.getSelectedItem() != null) {
+            String pilih = String.valueOf(kodeStatusCombo.getSelectedItem());
+            if (pilih != null) {
+                try {
+                    activeStatusSetting = DaoFactory.getStatusSettingDao().getByKode(pilih);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            //jika ditemukan
+            if (activeStatusSetting != null) {
+                keteranganStatusTextField.setText(activeStatusSetting.getKeteranganStatus());
+                simpanButton.setText("Update");
+                simpanButton.setMnemonic('U');
+                simpanButton.setEnabled(true);
+                hapusButton.setEnabled(true);
+                kodeStatusCombo.requestFocus();
+
+            } else {
+                keteranganStatusTextField.setText(null);
+                keteranganStatusTextField.requestFocus();
+                hapusButton.setEnabled(false);
+                simpanButton.setText("Simpan");
+                simpanButton.setMnemonic('S');
+                simpanButton.setEnabled(true);
+            }
+        }else{
+            simpanButton.setEnabled(false);
+            hapusButton.setEnabled(false);
         }
 
     }//GEN-LAST:event_kodeStatusComboKeyPressed
@@ -461,12 +504,50 @@ public class StatusSettingForm extends javax.swing.JFrame {
         StatusSettingTableModel model = new StatusSettingTableModel(statusSettings);
         statusTable.setModel(model);
 
+        if (statusSettings.isEmpty()){
+            hapusButton.setEnabled(false);
+        }else{
+            hapusButton.setEnabled(true);
+        }
         for (StatusSetting s : statusSettings) {
             kodeStatusCombo.addItem(s.getKodeStatus());
         }
 
 }//GEN-LAST:event_batalButtonActionPerformed
 
+    private void kodeStatusComboKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeStatusComboKeyReleased
+        // TODO add your handling code here:
+        if (kodeStatusCombo.getSelectedItem() != null) {
+            String pilih = String.valueOf(kodeStatusCombo.getSelectedItem());
+            if (pilih != null) {
+                try {
+                    activeStatusSetting = DaoFactory.getStatusSettingDao().getByKode(pilih);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            //jika ditemukan
+            if (activeStatusSetting != null) {
+                keteranganStatusTextField.setText(activeStatusSetting.getKeteranganStatus());
+                simpanButton.setText("Update");
+                simpanButton.setMnemonic('U');
+                simpanButton.setEnabled(true);
+                hapusButton.setEnabled(true);
+                kodeStatusCombo.requestFocus();
+
+            } else {
+                keteranganStatusTextField.setText(null);
+                keteranganStatusTextField.requestFocus();
+                hapusButton.setEnabled(false);
+                simpanButton.setText("Simpan");
+                simpanButton.setMnemonic('S');
+                simpanButton.setEnabled(true);
+            }
+        } else {
+            simpanButton.setEnabled(false);
+            hapusButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_kodeStatusComboKeyReleased
     /**
      * @param args the command line arguments
      */
@@ -475,16 +556,22 @@ public class StatusSettingForm extends javax.swing.JFrame {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
             //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
+
+
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(StatusSettingForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StatusSettingForm.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
                     new StatusSettingForm().setVisible(true);
+
+
                 } catch (SQLException ex) {
-                    Logger.getLogger(StatusSettingForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(StatusSettingForm.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
