@@ -1,12 +1,10 @@
 package com.presensikaryawan.liburPerusahaan;
 
-import com.presensikaryawan.liburNasional.*;
-import com.presensikaryawan.golongan.*;
 import com.presensikaryawan.karyawan.*;
-import com.presensikaryawan.golongan.*;
 import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
+import com.dssystem.umum.DateTool;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -15,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -33,7 +30,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
 
     private DaoFactory service;
     private LiburPerusahaan activeLiburPerusahaan;
-    private GregorianCalendar gc=new GregorianCalendar();
+    private GregorianCalendar gc = new GregorianCalendar();
 
     /**
      * Creates new form masterInventoryGrup
@@ -41,10 +38,6 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     public LiburPerusahaanForm() throws SQLException {
         initComponents();
         UIManager.put("nimbusBase", new Color(204, 204, 255));
-//        UIManager.put("nimbusControl",new Color(153,255,153));
-//        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
-//        Tampilan();
-        // isitable();
         initComponentFocus();
         tanggalDateChooser.setDate(gc.getTime());
         keteranganTextField.setDocument(new ChangeCase().getToUpperCase());
@@ -52,20 +45,11 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
         List<LiburPerusahaan> liburPerusahaans = liburPerusahaanDao.getAllLiburPerusahaan();
         LiburPerusahaanTableModel liburPerusahaanModel = new LiburPerusahaanTableModel(liburPerusahaans);
         liburPerusahaanTable.setModel(liburPerusahaanModel);
-
-//        GolonganDao dao = DaoFactory.getGolonganDao();
-//        List<Golongan> golongans = dao.getAllGolongan();
-//        GolonganTableModel model = new GolonganTableModel(golongans);
-
-//        for(Golongan g :golongans){
-//            kodeGolonganCombo.addItem(g.getKodeGolongan());
-//        }
     }
 
     private void initComponentFocus() {
         keteranganTextField.addFocusListener(new ComponentFocus(keteranganTextField));
         tanggalDateChooser.addFocusListener(new ComponentFocus(tanggalDateChooser));
-//        kodeGolonganCombo.addFocusListener(new ComponentFocus(kodeGolonganCombo));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
     }
 
@@ -161,6 +145,11 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
         keteranganTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 keteranganTextFieldActionPerformed(evt);
+            }
+        });
+        keteranganTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                keteranganTextFieldKeyReleased(evt);
             }
         });
 
@@ -333,24 +322,21 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-//        String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sdf2= new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
         String tanggal = sdf.format(tanggalDateChooser.getDate());
         String keterangan = keteranganTextField.getText();
-//        activeGolongan.setKodeGolongan(kodeGolongan);
-//        activeGolongan.setNamaGolongan(namaGolongan);
         activeLiburPerusahaan.setTanggal(tanggal);
         activeLiburPerusahaan.setKeterangan(keterangan);
-        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Libur Perusahaan\nPada Tanggal = " + sdf2.format(tanggalDateChooser.getDate()) + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Tanggal : \n" + "<html><font color=#FF0000>" + sdf2.format(tanggalDateChooser.getDate()) + "</font></html>", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
                 DaoFactory.getLiburPerusahaanDao().delete(activeLiburPerusahaan);
-                JOptionPane.showMessageDialog(this, "Data Libur Perusahaan Berhasil Dihapus Pada Tanggal\n"
+                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus Dengan Tanggal\n"
                         + "<html><font color=#FF0000>" + sdf2.format(tanggalDateChooser.getDate()) + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Data Libur Perusahaan Gagal Dihapus\n"
+                JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n"
                         + "<html><font color=#FF0000>" + ex + "</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
 
             }
@@ -361,20 +347,18 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
 
     private void liburPerusahaanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liburPerusahaanTableMouseClicked
         int row = liburPerusahaanTable.getSelectedRow();
-//        String no = liburPerusahaanTable.getValueAt(row, 0).toString();
         String keterangan = liburPerusahaanTable.getValueAt(row, 1).toString();
-        String tanggalString=liburPerusahaanTable.getValueAt(row, 0).toString();
+        String tanggalString = liburPerusahaanTable.getValueAt(row, 0).toString();
         keteranganTextField.setText(keterangan);
-        
-        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
-        Date tanggal=null;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date tanggal = null;
         try {
-            tanggal=sdf.parse(tanggalString);
+            tanggal = sdf.parse(tanggalString);
         } catch (ParseException ex) {
             Logger.getLogger(LiburPerusahaanForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         tanggalDateChooser.setDate(tanggal);
-//        kodeGolonganCombo.setSelectedItem(kodegroup);// TODO add your handling code here:
     }//GEN-LAST:event_liburPerusahaanTableMouseClicked
     private void isitable() {
     }
@@ -384,50 +368,86 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonKeyPressed
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-//        String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
-//        String namaGolongan = keteranganTextField.getText();
-//        Golongan golonganBaru = new Golongan();
-//        golonganBaru.setKodeGolongan(kodeGolongan);
-//        golonganBaru.setNamaGolongan(namaGolongan);
-        SimpleDateFormat sdf2=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String tanggal = sdf.format(tanggalDateChooser.getDate());
         String keterangan = keteranganTextField.getText();
         LiburPerusahaan liburPerusahaanBaru = new LiburPerusahaan();
-        liburPerusahaanBaru.setTanggal(tanggal);
-        liburPerusahaanBaru.setKeterangan(keterangan);
+       
+        if (tanggalDateChooser.getDate() != null && !keterangan.matches("")) {
+            liburPerusahaanBaru.setKeterangan(keterangan);
+            String tanggal = sdf.format(tanggalDateChooser.getDate());
+            liburPerusahaanBaru.setTanggal(tanggal);
+            if ("Simpan".equals(simpanButton.getText())) {
+                try {
+                    DaoFactory.getLiburPerusahaanDao().insert(liburPerusahaanBaru);
 
-        if ("Simpan".equals(simpanButton.getText())) {
-            try {
-                DaoFactory.getLiburPerusahaanDao().insert(liburPerusahaanBaru);
+                    JOptionPane.showMessageDialog(this, "Data Dengan Tanggal \n"
+                            + "<html><font color=#FF0000>" + sdf2.format(tanggalDateChooser.getDate()) + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                JOptionPane.showMessageDialog(this, "Data Libur Perusahaan pada Tanggal \n"
-                        + "<html><font color=#FF0000>" + sdf2.format(tanggalDateChooser.getDate()) + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                    afterSimpanClicked();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                try {
+                    LiburPerusahaan liburPerusahaanLama = DaoFactory.getLiburPerusahaanDao().getByTanggal(tanggal);
+                    liburPerusahaanLama.setTanggal(tanggal);
+                    liburPerusahaanLama.setKeterangan(keterangan);
+                    DaoFactory.getLiburPerusahaanDao().update(liburPerusahaanLama);
 
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Data Dengan Tanggal\n"
+                            + "<html><font color=#FF0000>" + sdf2.format(tanggalDateChooser.getDate()) + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                    afterSimpanClicked();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         } else {
-            try {
-//                Golongan golonganLama = service.getGolonganDao().getByKodeGolongan(kodeGolongan);
-//                golonganLama.setKodeGolongan(kodeGolongan);
-//                golonganLama.setNamaGolongan(namaGolongan);
-//                service.getGolonganDao().update(golonganLama);
-                LiburPerusahaan liburPerusahaanLama = DaoFactory.getLiburPerusahaanDao().getByTanggal(tanggal);
-                liburPerusahaanLama.setTanggal(tanggal);
-                liburPerusahaanLama.setKeterangan(keterangan);
-                DaoFactory.getLiburPerusahaanDao().update(liburPerusahaanLama);
+            if (tanggalDateChooser.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Tanggal Libur Belum Diisi");
+                tanggalDateChooser.requestFocus();
 
-                JOptionPane.showMessageDialog(this, "Data Libur Perusahaan pada Tanggal\n"
-                        + "<html><font color=#FF0000>" + sdf2.format(tanggalDateChooser.getDate()) + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } else {
+                JOptionPane.showMessageDialog(this, "Keterangan Libur Belum Diisi");
+                keteranganTextField.requestFocus();
             }
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
+
+    public void afterSimpanClicked() throws SQLException {
+        tanggalDateChooser.setDate(gc.getTime());
+        keteranganTextField.setDocument(new ChangeCase().getToUpperCase());
+        LiburPerusahaanDao dao = DaoFactory.getLiburPerusahaanDao();
+        List<LiburPerusahaan> liburPerusahaans = dao.getAllLiburPerusahaan();
+        LiburPerusahaanTableModel model = new LiburPerusahaanTableModel(liburPerusahaans);
+        liburPerusahaanTable.setModel(model);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        LiburPerusahaan liburPerusahaan = dao.getByTanggal(sdf.format(tanggalDateChooser.getDate()));
+        keteranganTextField.setText(liburPerusahaan.getKeterangan());
+        String pilih = DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
+        try {
+            activeLiburPerusahaan = service.getLiburPerusahaanDao().getByTanggal(pilih);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //jika ditemukan
+        if (activeLiburPerusahaan != null) {
+            keteranganTextField.setText(activeLiburPerusahaan.getKeterangan());
+            simpanButton.setText("Update");
+            simpanButton.setMnemonic('U');
+            simpanButton.setEnabled(true);
+            hapusButton.setEnabled(true);
+
+        } else {
+            keteranganTextField.requestFocus();
+            hapusButton.setEnabled(false);
+            simpanButton.setText("Simpan");
+            simpanButton.setMnemonic('S');
+        }
+
+    }
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
 
@@ -435,31 +455,46 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
     private void keteranganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keteranganTextFieldActionPerformed
-        simpanButton.setEnabled(true);
-        simpanButton.requestFocus();
+        if (tanggalDateChooser.getDate() != null) {
+            simpanButton.setEnabled(true);
+            simpanButton.requestFocus();
+        } else {
+            simpanButton.setEnabled(false);
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_keteranganTextFieldActionPerformed
 
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
-        keteranganTextField.setText(null);
-        simpanButton.setEnabled(false);
-        hapusButton.setEnabled(true);
-//        kodeGolonganCombo.removeAllItems();
-//        kodeGolonganCombo.requestFocus();
-        tanggalDateChooser.setDate(gc.getTime());
-        keteranganTextField.requestFocus();
-        List<LiburPerusahaan> liburPerusahaans = null;
         try {
-            liburPerusahaans = DaoFactory.getLiburPerusahaanDao().getAllLiburPerusahaan();
-        } catch (SQLException ex) {
-            Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        LiburPerusahaanTableModel model = new LiburPerusahaanTableModel(liburPerusahaans);
-        liburPerusahaanTable.setModel(model);
+            simpanButton.setEnabled(false);
+            hapusButton.setEnabled(true);
+            keteranganTextField.requestFocus();
+            tanggalDateChooser.setDate(gc.getTime());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            LiburPerusahaanDao dao = DaoFactory.getLiburPerusahaanDao();
+            LiburPerusahaan liburPerusahaan = dao.getByTanggal(sdf.format(tanggalDateChooser.getDate()));
+            if (liburPerusahaan == null) {
+                keteranganTextField.setText(null);
+                hapusButton.setEnabled(false);
+                simpanButton.setText("Simpan");
+                simpanButton.setMnemonic('S');
+            } else {
+                simpanButton.setEnabled(true);
+                keteranganTextField.setText(liburPerusahaan.getKeterangan());
 
-//        for(Golongan g :golongans){
-////            kodeGolonganCombo.addItem(g.getKodeGolongan());
-//        }
+            }
+            List<LiburPerusahaan> liburPerusahaans = null;
+            try {
+                liburPerusahaans = service.getLiburPerusahaanDao().getAllLiburPerusahaan();
+            } catch (SQLException ex) {
+                Logger.getLogger(LiburPerusahaanForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            LiburPerusahaanTableModel model = new LiburPerusahaanTableModel(liburPerusahaans);
+            liburPerusahaanTable.setModel(model);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(LiburPerusahaanForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 }//GEN-LAST:event_batalButtonActionPerformed
 
@@ -481,18 +516,35 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
                 simpanButton.setMnemonic('U');
                 simpanButton.setEnabled(true);
                 hapusButton.setEnabled(true);
-                keteranganTextField.requestFocus();
 
             } else {
-                keteranganTextField.setText(null);
-                keteranganTextField.requestFocus();
                 hapusButton.setEnabled(false);
                 simpanButton.setText("Simpan");
                 simpanButton.setMnemonic('S');
-                simpanButton.setEnabled(true);
             }
         }
     }//GEN-LAST:event_tanggalDateChooserPropertyChange
+
+    private void keteranganTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keteranganTextFieldKeyReleased
+        // TODO add your handling code here:
+        if (tanggalDateChooser.getDate() != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                LiburPerusahaanDao dao = DaoFactory.getLiburPerusahaanDao();
+                LiburPerusahaan liburPerusahaan = dao.getByTanggal(sdf.format(tanggalDateChooser.getDate()));
+                if (liburPerusahaan == null) {
+                    hapusButton.setEnabled(false);
+                    simpanButton.setText("Simpan");
+                    simpanButton.setMnemonic('S');
+                    simpanButton.setEnabled(true);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(LiburPerusahaanForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            simpanButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_keteranganTextFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -500,7 +552,6 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(LiburPerusahaanForm.class.getName()).log(Level.SEVERE, null, ex);
