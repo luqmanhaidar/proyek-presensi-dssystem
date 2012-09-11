@@ -41,7 +41,7 @@ public class GolonganTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 7;
     }
 
     @Override
@@ -58,6 +58,10 @@ public class GolonganTableModel extends AbstractTableModel {
                 return g.getUangMakan();
             case 4:
                 return g.getUangLembur();
+            case 5:
+                return g.getUangHadir();
+            case 6:
+                return g.getPotonganTelat();
             default:
                 return "";
         }
@@ -76,6 +80,10 @@ public class GolonganTableModel extends AbstractTableModel {
                 return "UANG MAKAN";
             case 4:
                 return "UANG LEMBUR";
+            case 5:
+                return "UANG HADIR";
+            case 6:
+                return "POTONGAN TELAT";
             default:
                 return "";
         }

@@ -21,6 +21,9 @@ public class Karyawan {
     private String tanggal_masuk;
 //    private Golongan golongan;
     private String kodeGolongan;
+    private String kodePosisi;
+    private String kodeOutlet;
+    private String kodeDepartment;
 
     public Karyawan() {
     }
@@ -93,6 +96,48 @@ public class Karyawan {
      */
     public void setKodeGolongan(String kodeGolongan) {
         this.kodeGolongan = kodeGolongan;
+    }
+
+    /**
+     * @return the kodePosisi
+     */
+    public String getKodePosisi() {
+        return kodePosisi;
+    }
+
+    /**
+     * @param kodePosisi the kodePosisi to set
+     */
+    public void setKodePosisi(String kodePosisi) {
+        this.kodePosisi = kodePosisi;
+    }
+
+    /**
+     * @return the kodeOutlet
+     */
+    public String getKodeOutlet() {
+        return kodeOutlet;
+    }
+
+    /**
+     * @param kodeOutlet the kodeOutlet to set
+     */
+    public void setKodeOutlet(String kodeOutlet) {
+        this.kodeOutlet = kodeOutlet;
+    }
+
+    /**
+     * @return the kodeDepartment
+     */
+    public String getKodeDepartment() {
+        return kodeDepartment;
+    }
+
+    /**
+     * @param kodeDepartment the kodeDepartment to set
+     */
+    public void setKodeDepartment(String kodeDepartment) {
+        this.kodeDepartment = kodeDepartment;
     }
 
     /**
