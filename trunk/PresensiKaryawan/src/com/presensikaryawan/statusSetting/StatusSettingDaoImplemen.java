@@ -21,8 +21,8 @@ public class StatusSettingDaoImplemen implements StatusSettingDao {
     private final String SQL_INSERT = "insert into status_setting(kode,keterangan) values (?,?)";
     private final String SQL_UPDATE = "update status_setting set keterangan = ? where kode = ?";
     private final String SQL_DELETE = "delete from status_setting where kode like ?";
-    private final String SQL_GETBYKODE = "select * from status_setting where kode like ?";
-    private final String SQL_GETALL = "select * from status_setting";
+    private final String SQL_GETBYKODE = "select * from status_setting where kode like ? order by kode asc";
+    private final String SQL_GETALL = "select * from status_setting order by kode asc";
     private Connection connection;
 
     public StatusSettingDaoImplemen(Connection connection) {
