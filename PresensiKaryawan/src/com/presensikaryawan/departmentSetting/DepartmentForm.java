@@ -40,6 +40,8 @@ public class DepartmentForm extends javax.swing.JFrame {
         // isitable();
         initComponentFocus();
         namaGroupShiftTextField.setDocument(new ChangeCase().getToUpperCase());
+        keteranganTextField.setDocument(new ChangeCase().getToUpperCase());
+        namaDepartmentTextField.setDocument(new ChangeCase().getToUpperCase());
         deskripsiDepartmentTextArea.setDocument(new ChangeCase().getToUpperCase());
         DepartmentDao dao = DaoFactory.getDepartmentDao();
         List<Department> departments = dao.getAllDepartment();
@@ -51,12 +53,17 @@ public class DepartmentForm extends javax.swing.JFrame {
 
         List<GroupShift> groupShifts = DaoFactory.getGroupShiftDao().getAllGroupShift();
         for (GroupShift gs : groupShifts) {
-            kodeDepartmentCombo.addItem(gs.getKodeGroupShift());
+            kodeGroupShiftCombo.addItem(gs.getKodeGroupShift());
         }
+        
     }
 
     private void initComponentFocus() {
         namaGroupShiftTextField.addFocusListener(new ComponentFocus(namaGroupShiftTextField));
+        namaDepartmentTextField.addFocusListener(new ComponentFocus(namaDepartmentTextField));
+        deskripsiDepartmentTextArea.addFocusListener(new ComponentFocus(deskripsiDepartmentTextArea));
+        keteranganTextField.addFocusListener(new ComponentFocus(keteranganTextField));
+        kodeDepartmentCombo.addFocusListener(new ComponentFocus(kodeDepartmentCombo));
         kodeGroupShiftCombo.addFocusListener(new ComponentFocus(kodeGroupShiftCombo));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
     }
@@ -451,14 +458,14 @@ public class DepartmentForm extends javax.swing.JFrame {
         namaGroupShiftTextField.setText(null);
         simpanButton.setEnabled(false);
         hapusButton.setEnabled(true);
-        kodeGroupShiftCombo.removeAllItems();
+//        kodeGroupShiftCombo.removeAllItems();
         kodeDepartmentCombo.removeAllItems();
 
         List<Department> departments = null;
         List<GroupShift> groupShifts = null;
         try {
             departments = DaoFactory.getDepartmentDao().getAllDepartment();
-            groupShifts = DaoFactory.getGroupShiftDao().getAllGroupShift();
+//            groupShifts = DaoFactory.getGroupShiftDao().getAllGroupShift();
         } catch (SQLException ex) {
             Logger.getLogger(ShiftForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -468,10 +475,13 @@ public class DepartmentForm extends javax.swing.JFrame {
         for (Department d : departments) {
             kodeDepartmentCombo.addItem(d.getKodeDepartment());
         }
+        kodeDepartmentCombo.requestFocus();
+        namaDepartmentTextField.setText(null);
+        deskripsiDepartmentTextArea.setText(null);
 
-        for (GroupShift gs : groupShifts) {
-            kodeDepartmentCombo.addItem(gs.getKodeGroupShift());
-        }
+//        for (GroupShift gs : groupShifts) {
+//            kodeDepartmentCombo.addItem(gs.getKodeGroupShift());
+//        }
     }//GEN-LAST:event_batalButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
@@ -480,7 +490,7 @@ public class DepartmentForm extends javax.swing.JFrame {
         int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Department\nDengan Kode = " + kodeDepartment + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
-//                DaoFactory.getShiftDao().delete(activeShift);
+                DaoFactory.getDepartmentDao().delete(activeDepartment);
                 JOptionPane.showMessageDialog(this, "Data Department Berhasil Dihapus Dengan Kode\n"
                         + "<html><font color=#FF0000>" + kodeDepartment + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
@@ -501,8 +511,8 @@ public class DepartmentForm extends javax.swing.JFrame {
 
     private void kodeGroupShiftComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeGroupShiftComboActionPerformed
         try {
-            keteranganGroupShiftLabel.setText(DaoFactory.getGroupShiftDao().getByKode(String.valueOf(kodeDepartmentCombo.getSelectedItem())).getKeterangan());
-            namaGroupShiftTextField.setText(DaoFactory.getGroupShiftDao().getByKode(String.valueOf(kodeDepartmentCombo.getSelectedItem())).getNamaGroupShift());
+            keteranganTextField.setText(DaoFactory.getGroupShiftDao().getByKode(String.valueOf(kodeGroupShiftCombo.getSelectedItem())).getKeterangan());
+            namaGroupShiftTextField.setText(DaoFactory.getGroupShiftDao().getByKode(String.valueOf(kodeGroupShiftCombo.getSelectedItem())).getNamaGroupShift());
         } catch (SQLException ex) {
             Logger.getLogger(ShiftForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -530,7 +540,7 @@ public class DepartmentForm extends javax.swing.JFrame {
 
         if ("Simpan".equals(simpanButton.getText())) {
             try {
-                DaoFactory.getShiftDao().insert(shiftBaru);
+                DaoFactory.getDepartmentDao().insert(departmentBaru);
                 JOptionPane.showMessageDialog(this, "Data Department Dengan Kode \n"
                         + "<html><font color=#FF0000>" + kodeDepartment + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
@@ -597,7 +607,6 @@ public class DepartmentForm extends javax.swing.JFrame {
                 kodeDepartmentCombo.requestFocus();
 
             } else {
-                namaGroupShiftTextField.setText(null);
                 namaDepartmentTextField.requestFocus();
                 hapusButton.setEnabled(false);
                 simpanButton.setText("Simpan");
