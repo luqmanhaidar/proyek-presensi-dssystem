@@ -27,10 +27,10 @@ public class LiburNasionalDaoImplemen implements LiburNasionalDao {
     private final String SQL_INSERT = "insert into libur_nasional(tanggal,keterangan) values (?,?)";
     private final String SQL_UPDATE = "update libur_nasional set keterangan = ? where tanggal = ?";
     private final String SQL_DELETE = "delete from libur_nasional where tanggal like ?";
-    private final String SQL_GETBYKODE = "select * from libur_nasional where tanggal like ?";
-    private final String SQL_GETBYNAMA = "select * from libur_nasional where keterangan like ?";
-    private final String SQL_GETALL = "select * from libur_nasional";
-    private final String SQL_GETALLKODE = "select tanggal from libur_nasional";
+    private final String SQL_GETBYKODE = "select * from libur_nasional where tanggal like ? order by tanggal asc";
+    private final String SQL_GETBYNAMA = "select * from libur_nasional where keterangan like ? order by tanggal asc";
+    private final String SQL_GETALL = "select * from libur_nasional order by tanggal asc";
+    private final String SQL_GETALLKODE = "select tanggal from libur_nasional order by tanggal asc";
     private Connection connection;
 
     public LiburNasionalDaoImplemen(Connection connection) {
@@ -167,7 +167,6 @@ public class LiburNasionalDaoImplemen implements LiburNasionalDao {
             statement = connection.prepareStatement(SQL_GETBYNAMA);
 
             statement.setString(1, keterangan);
-            System.out.println(SQL_GETBYNAMA);
             result = statement.executeQuery();
             LiburNasional liburNasional = null;
             if (result.next()) {
