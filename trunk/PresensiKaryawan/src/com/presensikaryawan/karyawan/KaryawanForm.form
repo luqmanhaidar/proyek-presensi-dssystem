@@ -171,13 +171,31 @@
                                   <Component id="nipKaryawanLabel" alignment="1" pref="100" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="nipKaryawanCombo" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="namaKaryawanTextField" min="-2" pref="360" max="-2" attributes="0"/>
                                   <Component id="alamatKaryawanTextField" min="-2" pref="535" max="-2" attributes="0"/>
-                                  <Component id="golonganKaryawanTextField" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="posisiKaryawanTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="tanggalMasukDateChooser" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="golonganCombo" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                          <Component id="posisiKaryawanTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="42" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="kodeDepartmentLabel" min="-2" pref="83" max="-2" attributes="1"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="departmentCombo" min="-2" pref="109" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="1">
+                                              <Component id="kodeOutletLabel" min="-2" pref="83" max="-2" attributes="1"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="outletCombo" min="-2" pref="109" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace pref="87" max="32767" attributes="0"/>
                           </Group>
@@ -211,14 +229,18 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="golonganKaryawanLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="golonganKaryawanTextField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="golonganCombo" alignment="3" min="-2" pref="20" max="-2" attributes="1"/>
+                          <Component id="kodeOutletLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="outletCombo" alignment="3" min="-2" pref="20" max="-2" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="posisiKaryawanLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="posisiKaryawanTextField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="kodeDepartmentLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="departmentCombo" alignment="3" min="-2" pref="20" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="14" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="simpanButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="hapusButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -356,21 +378,6 @@
                 <Property name="text" type="java.lang.String" value="Posisi"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="golonganKaryawanTextField">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="11" style="0"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                    <EtchetBorder/>
-                  </Border>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="golonganKaryawanTextFieldActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JTextField" name="alamatKaryawanTextField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -402,6 +409,49 @@
               </Events>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="tanggalMasukDateChooser">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+              </Properties>
+              <Events>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="tanggalMasukDateChooserPropertyChange"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="golonganCombo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="kodeOutletLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Outlet"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="outletCombo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="kodeDepartmentLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Department"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="departmentCombo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

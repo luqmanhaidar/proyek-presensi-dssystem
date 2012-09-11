@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class GolonganDaoImplemen implements GolonganDao {
 
-    private final String SQL_INSERT = "insert into golongan(kode_golongan,nama_golongan, gaji_pokok, uang_makan, uang_lembur) values (?,?,?,?,?)";
-    private final String SQL_UPDATE = "update golongan set nama_golongan = ?, gaji_pokok = ?, uang_makan = ?, uang_lembur = ? where kode_golongan = ?";
+    private final String SQL_INSERT = "insert into golongan(kode_golongan,nama_golongan, gaji_pokok, uang_makan, uang_lembur, uang_hadir, potongan_telat) values (?,?,?,?,?,?,?)";
+    private final String SQL_UPDATE = "update golongan set nama_golongan = ?, gaji_pokok = ?, uang_makan = ?, uang_lembur = ?, uang_hadir = ?, potongan_telat = ? where kode_golongan = ?";
     private final String SQL_DELETE = "delete from golongan where kode_golongan like ?";
     private final String SQL_GETBYKODE = "select * from golongan where kode_golongan like ?";
     private final String SQL_GETBYNAMA = "select * from golongan where nama_golongan like ?";
@@ -43,6 +43,8 @@ public class GolonganDaoImplemen implements GolonganDao {
             statement.setDouble(3, golongan.getGajiPokok());
             statement.setDouble(4, golongan.getUangMakan());
             statement.setDouble(5, golongan.getUangLembur());
+            statement.setDouble(6, golongan.getUangHadir());
+            statement.setDouble(7, golongan.getPotonganTelat());
             statement.executeUpdate();
 
             connection.commit();
@@ -72,10 +74,12 @@ public class GolonganDaoImplemen implements GolonganDao {
 
             statement = connection.prepareStatement(SQL_UPDATE);
             statement.setString(1, golongan.getNamaGolongan());
-            statement.setString(5, golongan.getKodeGolongan());
             statement.setDouble(2, golongan.getGajiPokok());
             statement.setDouble(3, golongan.getUangMakan());
             statement.setDouble(4, golongan.getUangLembur());
+            statement.setDouble(5, golongan.getUangHadir());
+            statement.setDouble(6, golongan.getPotonganTelat());
+            statement.setString(7, golongan.getKodeGolongan());
             statement.executeUpdate();
 
             connection.commit();
@@ -138,6 +142,8 @@ public class GolonganDaoImplemen implements GolonganDao {
                 golongan.setGajiPokok(result.getDouble("gaji_pokok"));
                 golongan.setUangMakan(result.getDouble("uang_makan"));
                 golongan.setUangLembur(result.getDouble("uang_lembur"));
+                golongan.setUangHadir(result.getDouble("uang_hadir"));
+                golongan.setPotonganTelat(result.getDouble("potongan_telat"));
             }
 
             connection.commit();
@@ -179,6 +185,8 @@ public class GolonganDaoImplemen implements GolonganDao {
                 golongan.setGajiPokok(result.getDouble("gaji_pokok"));
                 golongan.setUangMakan(result.getDouble("uang_makan"));
                 golongan.setUangLembur(result.getDouble("uang_lembur"));
+                golongan.setUangHadir(result.getDouble("uang_hadir"));
+                golongan.setPotonganTelat(result.getDouble("potongan_telat"));
             }
 
             connection.commit();
@@ -219,6 +227,8 @@ public class GolonganDaoImplemen implements GolonganDao {
                 golongan.setGajiPokok(result.getDouble("gaji_pokok"));
                 golongan.setUangMakan(result.getDouble("uang_makan"));
                 golongan.setUangLembur(result.getDouble("uang_lembur"));
+                golongan.setUangHadir(result.getDouble("uang_hadir"));
+                golongan.setPotonganTelat(result.getDouble("potongan_telat"));
                 golongans.add(golongan);
             }
 

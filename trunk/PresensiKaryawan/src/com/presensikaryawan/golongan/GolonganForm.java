@@ -72,12 +72,16 @@ public class GolonganForm extends javax.swing.JFrame {
         kodeGolonganCombo = new javax.swing.JComboBox();
         hapusButton = new javax.swing.JButton();
         batalButton = new javax.swing.JButton();
-        namaGolonganLabel1 = new javax.swing.JLabel();
+        gajiPokokLabel = new javax.swing.JLabel();
         gajiPokokTextField = new javax.swing.JTextField();
-        namaGolonganLabel2 = new javax.swing.JLabel();
+        uangMakanLabel = new javax.swing.JLabel();
         uangMakanTextField = new javax.swing.JTextField();
-        namaGolonganLabel3 = new javax.swing.JLabel();
+        uangLemburLabel = new javax.swing.JLabel();
         uangLemburTextField = new javax.swing.JTextField();
+        uangHadirLabel = new javax.swing.JLabel();
+        uangHadirTextField = new javax.swing.JTextField();
+        potonganTelatLabel = new javax.swing.JLabel();
+        potonganTelatTextField = new javax.swing.JTextField();
         golonganPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         golonganTable = new javax.swing.JTable();
@@ -127,7 +131,7 @@ public class GolonganForm extends javax.swing.JFrame {
 
         headPanel.setBounds(0, 0, 550, 77);
         jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panelStatus1.setBounds(0, 510, 560, 50);
+        panelStatus1.setBounds(0, 600, 560, 50);
         jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
@@ -138,7 +142,7 @@ public class GolonganForm extends javax.swing.JFrame {
                 cmdKeluarActionPerformed(evt);
             }
         });
-        cmdKeluar.setBounds(430, 460, 110, 40);
+        cmdKeluar.setBounds(430, 550, 110, 40);
         jDesktopPane1.add(cmdKeluar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -207,8 +211,8 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        namaGolonganLabel1.setFont(new java.awt.Font("Dialog", 0, 12));
-        namaGolonganLabel1.setText("Gaji Pokok");
+        gajiPokokLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        gajiPokokLabel.setText("Gaji Pokok");
 
         gajiPokokTextField.setFont(new java.awt.Font("Arial", 0, 11));
         gajiPokokTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -218,8 +222,8 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        namaGolonganLabel2.setFont(new java.awt.Font("Dialog", 0, 12));
-        namaGolonganLabel2.setText("Uang Makan");
+        uangMakanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        uangMakanLabel.setText("Uang Makan");
 
         uangMakanTextField.setFont(new java.awt.Font("Arial", 0, 11));
         uangMakanTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -229,14 +233,36 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        namaGolonganLabel3.setFont(new java.awt.Font("Dialog", 0, 12));
-        namaGolonganLabel3.setText("Uang Lembur");
+        uangLemburLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        uangLemburLabel.setText("Uang Lembur");
 
         uangLemburTextField.setFont(new java.awt.Font("Arial", 0, 11));
         uangLemburTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         uangLemburTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uangLemburTextFieldActionPerformed(evt);
+            }
+        });
+
+        uangHadirLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        uangHadirLabel.setText("Uang Hadir");
+
+        uangHadirTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        uangHadirTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        uangHadirTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uangHadirTextFieldActionPerformed(evt);
+            }
+        });
+
+        potonganTelatLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        potonganTelatLabel.setText("Potongan Telat");
+
+        potonganTelatTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        potonganTelatTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        potonganTelatTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                potonganTelatTextFieldActionPerformed(evt);
             }
         });
 
@@ -266,17 +292,27 @@ public class GolonganForm extends javax.swing.JFrame {
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, inputPanelLayout.createSequentialGroup()
-                                .add(namaGolonganLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .add(uangLemburLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(uangLemburTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                             .add(org.jdesktop.layout.GroupLayout.LEADING, inputPanelLayout.createSequentialGroup()
-                                .add(namaGolonganLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .add(uangMakanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(uangMakanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                             .add(inputPanelLayout.createSequentialGroup()
-                                .add(namaGolonganLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .add(gajiPokokLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(gajiPokokTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(290, 290, 290))
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(uangHadirLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(uangHadirTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(290, 290, 290))
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(potonganTelatLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(potonganTelatTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(290, 290, 290))))
         );
         inputPanelLayout.setVerticalGroup(
@@ -292,17 +328,25 @@ public class GolonganForm extends javax.swing.JFrame {
                     .add(namaGolonganTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(namaGolonganLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(gajiPokokLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(gajiPokokTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(namaGolonganLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(uangMakanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(uangMakanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(namaGolonganLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(uangLemburLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(uangLemburTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(uangHadirLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(uangHadirTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(potonganTelatLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(potonganTelatTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 33, Short.MAX_VALUE)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(batalButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +354,7 @@ public class GolonganForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        inputPanel.setBounds(0, 70, 550, 250);
+        inputPanel.setBounds(0, 70, 550, 340);
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         golonganPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -322,28 +366,21 @@ public class GolonganForm extends javax.swing.JFrame {
         golonganTable.setFont(new java.awt.Font("Arial", 0, 11));
         golonganTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Kode Golongan", "Nama Golongan", "Gaji Pokok", "Uang Makan", "Uang Lembur"
+                "Kode Golongan", "Nama Golongan", "Gaji Pokok", "Uang Makan", "Uang Lembur", "Uang Hadir", "Potongan Telat"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         golonganTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -357,9 +394,7 @@ public class GolonganForm extends javax.swing.JFrame {
         golonganPanel.setLayout(golonganPanelLayout);
         golonganPanelLayout.setHorizontalGroup(
             golonganPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(golonganPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 522, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
         );
         golonganPanelLayout.setVerticalGroup(
             golonganPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -368,7 +403,7 @@ public class GolonganForm extends javax.swing.JFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        golonganPanel.setBounds(0, 320, 550, 130);
+        golonganPanel.setBounds(0, 410, 550, 130);
         jDesktopPane1.add(golonganPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -382,7 +417,7 @@ public class GolonganForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -390,7 +425,7 @@ public class GolonganForm extends javax.swing.JFrame {
         jDesktopPane1.getAccessibleContext().setAccessibleDescription("");
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-563)/2, (screenSize.height-592)/2, 563, 592);
+        setBounds((screenSize.width-563)/2, (screenSize.height-694)/2, 563, 694);
     }// </editor-fold>//GEN-END:initComponents
     
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
@@ -399,11 +434,15 @@ public class GolonganForm extends javax.swing.JFrame {
         double gajiPokok = Double.parseDouble(gajiPokokTextField.getText());
         double uangMakan = Double.parseDouble(uangMakanTextField.getText());
         double uangLembur = Double.parseDouble(uangLemburTextField.getText());
+        double uangHadir = Double.parseDouble(uangHadirTextField.getText());
+        double potonganTelat = Double.parseDouble(potonganTelatTextField.getText());
         activeGolongan.setKodeGolongan(kodeGolongan);
         activeGolongan.setNamaGolongan(namaGolongan);
         activeGolongan.setGajiPokok(gajiPokok);
         activeGolongan.setUangMakan(uangMakan);
         activeGolongan.setUangLembur(uangLembur);
+        activeGolongan.setUangHadir(uangHadir);
+        activeGolongan.setPotonganTelat(potonganTelat);
         int ok = JOptionPane.showConfirmDialog(null,"Anda Yakin Akan Menghapus Data\nDengan Nama = "+namaGolongan+"","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if (ok==0){
             try {
@@ -428,11 +467,15 @@ public class GolonganForm extends javax.swing.JFrame {
         double gajiPokok = Double.parseDouble(golonganTable.getValueAt(row,2).toString());
         double uangMakan = Double.parseDouble(golonganTable.getValueAt(row,3).toString());
         double uangLembur = Double.parseDouble(golonganTable.getValueAt(row,4).toString());
+        double uangHadir = Double.parseDouble(golonganTable.getValueAt(row, 5).toString());
+        double potonganTelat = Double.parseDouble(golonganTable.getValueAt(row, 6).toString());
         namaGolonganTextField.setText(namagroup);
         kodeGolonganCombo.setSelectedItem(kodegroup);
         gajiPokokTextField.setText(String.valueOf(gajiPokok));
         uangMakanTextField.setText(String.valueOf(uangMakan));
         uangLemburTextField.setText(String.valueOf(uangLembur));
+        uangHadirTextField.setText(String.valueOf(uangHadir));
+        potonganTelatTextField.setText(String.valueOf(potonganTelat));
         // TODO add your handling code here:
     }//GEN-LAST:event_golonganTableMouseClicked
     private void isitable(){
@@ -449,12 +492,16 @@ public class GolonganForm extends javax.swing.JFrame {
         double gajiPokok = Double.parseDouble(gajiPokokTextField.getText());
         double uangMakan = Double.parseDouble(uangMakanTextField.getText());
         double uangLembur = Double.parseDouble(uangLemburTextField.getText());
+        double uangHadir = Double.parseDouble(uangHadirTextField.getText());
+        double potonganTelat = Double.parseDouble(potonganTelatTextField.getText());
         Golongan golonganBaru = new Golongan();
         golonganBaru.setKodeGolongan(kodeGolongan);
         golonganBaru.setNamaGolongan(namaGolongan);
         golonganBaru.setGajiPokok(gajiPokok);
         golonganBaru.setUangMakan(uangMakan);
         golonganBaru.setUangLembur(uangLembur);
+        golonganBaru.setUangHadir(uangHadir);
+        golonganBaru.setPotonganTelat(potonganTelat);
         if ("Simpan".equals(simpanButton.getText())){
             try {
                 DaoFactory.getGolonganDao().insert(golonganBaru);
@@ -474,6 +521,8 @@ public class GolonganForm extends javax.swing.JFrame {
                 golonganLama.setGajiPokok(gajiPokok);
                 golonganLama.setUangMakan(uangMakan);
                 golonganLama.setUangLembur(uangLembur);
+                golonganLama.setUangHadir(uangHadir);
+                golonganLama.setPotonganTelat(potonganTelat);
                 service.getGolonganDao().update(golonganLama);
                 JOptionPane.showMessageDialog(this, "Data dengan nama\n"+
                         "<html><font color=#FF0000>"+namaGolongan+"</font></html>"+"\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
@@ -564,6 +613,14 @@ private void uangMakanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {
 private void uangLemburTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uangLemburTextFieldActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_uangLemburTextFieldActionPerformed
+
+private void uangHadirTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uangHadirTextFieldActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_uangHadirTextFieldActionPerformed
+
+private void potonganTelatTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potonganTelatTextFieldActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_potonganTelatTextFieldActionPerformed
          
   
     /**
@@ -594,6 +651,7 @@ private void uangLemburTextFieldActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JButton batalButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JLabel fungsiLabel;
+    private javax.swing.JLabel gajiPokokLabel;
     private javax.swing.JTextField gajiPokokTextField;
     private javax.swing.JPanel golonganPanel;
     private javax.swing.JTable golonganTable;
@@ -607,13 +665,16 @@ private void uangLemburTextFieldActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
     private javax.swing.JLabel namaGolonganLabel;
-    private javax.swing.JLabel namaGolonganLabel1;
-    private javax.swing.JLabel namaGolonganLabel2;
-    private javax.swing.JLabel namaGolonganLabel3;
     private javax.swing.JTextField namaGolonganTextField;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
+    private javax.swing.JLabel potonganTelatLabel;
+    private javax.swing.JTextField potonganTelatTextField;
     private javax.swing.JButton simpanButton;
+    private javax.swing.JLabel uangHadirLabel;
+    private javax.swing.JTextField uangHadirTextField;
+    private javax.swing.JLabel uangLemburLabel;
     private javax.swing.JTextField uangLemburTextField;
+    private javax.swing.JLabel uangMakanLabel;
     private javax.swing.JTextField uangMakanTextField;
     // End of variables declaration//GEN-END:variables
     

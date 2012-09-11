@@ -15,6 +15,8 @@ public class Golongan {
     private double gajiPokok;
     private double uangMakan;
     private double uangLembur;
+    private double uangHadir;
+    private double potonganTelat;
 
     /**
      * @return the kodeGolongan
@@ -84,6 +86,34 @@ public class Golongan {
      */
     public void setUangLembur(double uangLembur) {
         this.uangLembur = uangLembur;
+    }
+
+    /**
+     * @return the uangHadir
+     */
+    public double getUangHadir() {
+        return uangHadir;
+    }
+
+    /**
+     * @param uangHadir the uangHadir to set
+     */
+    public void setUangHadir(double uangHadir) {
+        this.uangHadir = uangHadir;
+    }
+
+    /**
+     * @return the potonganTelat
+     */
+    public double getPotonganTelat() {
+        return potonganTelat;
+    }
+
+    /**
+     * @param potonganTelat the potonganTelat to set
+     */
+    public void setPotonganTelat(double potonganTelat) {
+        this.potonganTelat = potonganTelat;
     }
     
 }

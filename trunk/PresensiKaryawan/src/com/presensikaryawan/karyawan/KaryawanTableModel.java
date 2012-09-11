@@ -41,7 +41,7 @@ public class KaryawanTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 8;
     }
 
     @Override
@@ -58,6 +58,12 @@ public class KaryawanTableModel extends AbstractTableModel {
                 return k.getTanggal_masuk();
             case 4:
                 return k.getKodeGolongan();
+            case 5:
+                return k.getKodePosisi();
+            case 6:
+                return k.getKodeOutlet();
+            case 7:
+                return k.getKodeDepartment();
             default:
                 return "";
         }
@@ -76,6 +82,12 @@ public class KaryawanTableModel extends AbstractTableModel {
                 return "TANGGAL MASUK";
             case 4:
                 return "KODE GOLONGAN";
+            case 5:
+                return "POSISI";
+            case 6:
+                return "OUTLET";
+            case 7:
+                return "DEPARTMENT";
             default:
                 return "";
         }
