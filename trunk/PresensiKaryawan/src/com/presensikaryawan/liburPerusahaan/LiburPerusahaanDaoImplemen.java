@@ -29,10 +29,8 @@ public class LiburPerusahaanDaoImplemen implements LiburPerusahaanDao {
     private final String SQL_INSERT = "insert into libur_perusahaan(tanggal,keterangan) values (?,?)";
     private final String SQL_UPDATE = "update libur_perusahaan set keterangan = ? where tanggal = ?";
     private final String SQL_DELETE = "delete from libur_perusahaan where tanggal like ?";
-    private final String SQL_GETBYTANGGAL = "select * from libur_perusahaan where tanggal like ?";
-    //private final String SQL_GETBYNAMA = "select * from libur_perusahaan where namaKategori like ?";
-    private final String SQL_GETALL = "select * from libur_perusahaan";
-    //private final String SQL_GETALLKODE = "select kodeKategori from libur_perusahaan";
+    private final String SQL_GETBYTANGGAL = "select * from libur_perusahaan where tanggal like ? order by tanggal asc";
+    private final String SQL_GETALL = "select * from libur_perusahaan order by tanggal asc";
     private Connection connection;
 
     public LiburPerusahaanDaoImplemen(Connection connection) {
@@ -190,13 +188,8 @@ public class LiburPerusahaanDaoImplemen implements LiburPerusahaanDao {
 
             statement.setString(1, tanggal);
             result = statement.executeQuery();
-//             Kategori kategori = null;
             LiburPerusahaan liburPerusahaan = null;
             if (result.next()) {
-//                 kategori = new Kategori();
-//                 kategori.setKodeKategori(result.getString("kodeKategori"));
-//                 kategori.setNamaKategori(result.getString("namaKategori"));
-
                 liburPerusahaan = new LiburPerusahaan();
                 liburPerusahaan.setTanggal(result.getString("tanggal"));
                 liburPerusahaan.setKeterangan(result.getString("keterangan"));
