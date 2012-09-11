@@ -374,9 +374,6 @@ public class StatusSettingForm extends javax.swing.JFrame {
         statusSettingBaru.setKodeStatus(kodeStatus);
         statusSettingBaru.setKeteranganStatus(keteranganStatus);
         if (!keteranganStatusTextField.getText().matches("") && !String.valueOf(kodeStatusCombo.getSelectedItem()).matches("")) {
-
-
-
             if ("Simpan".equals(simpanButton.getText())) {
                 try {
                     DaoFactory.getStatusSettingDao().insert(statusSettingBaru);

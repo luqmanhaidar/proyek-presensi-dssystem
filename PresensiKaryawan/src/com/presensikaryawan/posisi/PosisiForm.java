@@ -31,10 +31,7 @@ public class PosisiForm extends javax.swing.JFrame {
     public PosisiForm() throws SQLException {
         initComponents();
         UIManager.put("nimbusBase", new Color(204, 204, 255));
-//        UIManager.put("nimbusControl",new Color(153,255,153));
-//        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
-//        Tampilan();
-        // isitable();
+
         initComponentFocus();
         namaPosisiTextField.setDocument(new ChangeCase().getToUpperCase());
         PosisiDao dao = DaoFactory.getPosisiDao();
@@ -43,6 +40,9 @@ public class PosisiForm extends javax.swing.JFrame {
         posisiTable.setModel(model);
         for (Posisi p : posisis) {
             kodePosisiCombo.addItem(p.getKode_posisi());
+        }
+        if (posisis.isEmpty()) {
+            hapusButton.setEnabled(false);
         }
     }
 
@@ -366,34 +366,42 @@ public class PosisiForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonKeyPressed
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-       String kodePosisi = String.valueOf(kodePosisiCombo.getSelectedItem());
+        String kodePosisi = String.valueOf(kodePosisiCombo.getSelectedItem());
         String namaPosisi = namaPosisiTextField.getText();
-        Posisi posisiBaru=new Posisi();
+        Posisi posisiBaru = new Posisi();
         posisiBaru.setKode_posisi(kodePosisi);
         posisiBaru.setNama_posisi(namaPosisi);
-        if ("Simpan".equals(simpanButton.getText())) {
-            try {
-                DaoFactory.getPosisiDao().insert(posisiBaru);
-                JOptionPane.showMessageDialog(this, "Data Posisi Karyawan Dengan Kode \n"
-                        + "<html><font color=#FF0000>" + kodePosisi + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+        if (!namaPosisiTextField.getText().matches("") && !String.valueOf(kodePosisiCombo.getSelectedItem()).matches("")) {
+            if ("Simpan".equals(simpanButton.getText())) {
+                try {
+                    DaoFactory.getPosisiDao().insert(posisiBaru);
+                    JOptionPane.showMessageDialog(this, "Data Posisi Karyawan Dengan Kode \n"
+                            + "<html><font color=#FF0000>" + kodePosisi + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                try {
+                    Posisi posisiLama = DaoFactory.getPosisiDao().getByKode(kodePosisi);
+                    posisiLama.setKode_posisi(kodePosisi);
+                    posisiLama.setNama_posisi(namaPosisi);
+                    DaoFactory.getPosisiDao().update(posisiLama);
+                    JOptionPane.showMessageDialog(this, "Data Posisi Karyawan Dengan Kode\n"
+                            + "<html><font color=#FF0000>" + kodePosisi + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
+        } else if (String.valueOf(kodePosisiCombo.getSelectedItem()).matches("")) {
+            JOptionPane.showMessageDialog(this, "Kode Posisi Belum Diisi");
+            kodePosisiCombo.requestFocus();
         } else {
-            try {
-                Posisi posisiLama = DaoFactory.getPosisiDao().getByKode(kodePosisi);
-                posisiLama.setKode_posisi(kodePosisi);
-                posisiLama.setNama_posisi(namaPosisi);
-                DaoFactory.getPosisiDao().update(posisiLama);
-                JOptionPane.showMessageDialog(this, "Data Posisi Karyawan Dengan Kode\n"
-                        + "<html><font color=#FF0000>" + kodePosisi + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            JOptionPane.showMessageDialog(this, "Nama Posisi Belum Disii");
+            namaPosisiTextField.requestFocus();
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
@@ -430,6 +438,9 @@ public class PosisiForm extends javax.swing.JFrame {
                 simpanButton.setMnemonic('S');
                 simpanButton.setEnabled(true);
             }
+        } else {
+            simpanButton.setEnabled(false);
+            hapusButton.setEnabled(false);
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_kodePosisiComboActionPerformed
@@ -461,6 +472,11 @@ public class PosisiForm extends javax.swing.JFrame {
         PosisiTableModel model = new PosisiTableModel(posisis);
         posisiTable.setModel(model);
 
+        if (posisis.isEmpty()) {
+            hapusButton.setEnabled(false);
+        } else {
+            hapusButton.setEnabled(true);
+        }
         for (Posisi p : posisis) {
             kodePosisiCombo.addItem(p.getKode_posisi());
         }

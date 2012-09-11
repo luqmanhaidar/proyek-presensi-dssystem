@@ -20,8 +20,8 @@ public class PosisiDaoImplemen implements PosisiDao {
     private final String SQL_INSERT = "insert into posisi(kode_posisi,nama_posisi) values (?,?)";
     private final String SQL_UPDATE = "update posisi set nama_posisi = ? where kode_posisi = ?";
     private final String SQL_DELETE = "delete from posisi where kode_posisi like ?";
-    private final String SQL_GETBYKODE = "select * from posisi where kode_posisi like ?";
-    private final String SQL_GETALL = "select * from posisi";
+    private final String SQL_GETBYKODE = "select * from posisi where kode_posisi like ? order by kode_posisi asc";
+    private final String SQL_GETALL = "select * from posisi order by kode_posisi asc";
     private Connection connection;
 
     public PosisiDaoImplemen(Connection connection) {
