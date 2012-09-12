@@ -21,8 +21,8 @@ public class DepartmentDaoImplemen implements DepartmentDao {
     private final String SQL_INSERT = "insert into department_setting(kode_department,nama_department, deskripsi, kode_group_shift) values (?,?,?,?)";
     private final String SQL_UPDATE = "update department_setting set nama_department = ?, deskripsi=?, kode_group_shift=? where kode_department = ?";
     private final String SQL_DELETE = "delete from department_setting where kode_department like ?";
-    private final String SQL_GETBYKODE = "select * from department_setting where kode_department like ?";
-    private final String SQL_GETALL = "select * from department_setting";
+    private final String SQL_GETBYKODE = "select * from department_setting where kode_department like ? order by kode_department asc";
+    private final String SQL_GETALL = "select * from department_setting order by kode_department asc";
     private Connection connection;
 
     public DepartmentDaoImplemen(Connection connection) {
