@@ -45,6 +45,9 @@ public class ShiftForm extends javax.swing.JFrame {
         for (Shift s : shifts) {
             kodeShiftCombo.addItem(s.getKodeShift());
         }
+        if (shifts.isEmpty()) {
+            hapusButton.setEnabled(false);
+        }
     }
 
     private void initComponentFocus() {
@@ -233,7 +236,6 @@ public class ShiftForm extends javax.swing.JFrame {
         menitSelesaiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         menitSelesaiLabel.setText("Menit :");
 
-        menitMulaiCombo.setEditable(true);
         menitMulaiCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         menitMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         menitMulaiCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +249,6 @@ public class ShiftForm extends javax.swing.JFrame {
             }
         });
 
-        jamMulaiCombo.setEditable(true);
         jamMulaiCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jamMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
         jamMulaiCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -261,7 +262,6 @@ public class ShiftForm extends javax.swing.JFrame {
             }
         });
 
-        menitSelesaiCombo.setEditable(true);
         menitSelesaiCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         menitSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         menitSelesaiCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +275,6 @@ public class ShiftForm extends javax.swing.JFrame {
             }
         });
 
-        jamSelesaiCombo.setEditable(true);
         jamSelesaiCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jamSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
         jamSelesaiCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -328,9 +327,7 @@ public class ShiftForm extends javax.swing.JFrame {
                                                 .add(menitMulaiCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                                     .add(namaShiftTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 233, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .add(0, 0, Short.MAX_VALUE))
-                            .add(inputPanelLayout.createSequentialGroup()
-                                .add(kodeShiftCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .add(kodeShiftCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
                         .add(0, 0, Short.MAX_VALUE)
                         .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -509,31 +506,39 @@ public class ShiftForm extends javax.swing.JFrame {
         shiftBaru.setNamaShift(namaShift);
         shiftBaru.setWaktuMulai(waktuMulai);
         shiftBaru.setWaktuSelesai(waktuSelesai);
-        if ("Simpan".equals(simpanButton.getText())) {
-            try {
-                DaoFactory.getShiftDao().insert(shiftBaru);
-                JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode \n"
-                        + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+        if (!namaShiftTextField.getText().matches("") && !String.valueOf(kodeShiftCombo.getSelectedItem()).matches("")) {
+            if ("Simpan".equals(simpanButton.getText())) {
+                try {
+                    DaoFactory.getShiftDao().insert(shiftBaru);
+                    JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode \n"
+                            + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                try {
+                    Shift shiftLama = DaoFactory.getShiftDao().getByKode(kodeShift);
+                    shiftLama.setKodeShift(kodeShift);
+                    shiftLama.setNamaShift(namaShift);
+                    shiftLama.setWaktuMulai(waktuMulai);
+                    shiftLama.setWaktuSelesai(waktuSelesai);
+                    DaoFactory.getShiftDao().update(shiftLama);
+                    JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode\n"
+                            + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
+        } else if (String.valueOf(kodeShiftCombo.getSelectedItem()).matches("")) {
+            JOptionPane.showMessageDialog(this, "Kode Shift Belum Diisi");
+            kodeShiftCombo.requestFocus();
         } else {
-            try {
-                Shift shiftLama = DaoFactory.getShiftDao().getByKode(kodeShift);
-                shiftLama.setKodeShift(kodeShift);
-                shiftLama.setNamaShift(namaShift);
-                shiftLama.setWaktuMulai(waktuMulai);
-                shiftLama.setWaktuSelesai(waktuSelesai);
-                DaoFactory.getShiftDao().update(shiftLama);
-                JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode\n"
-                        + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            JOptionPane.showMessageDialog(this, "Nama Shift Belum Disii");
+            namaShiftTextField.requestFocus();
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
@@ -558,16 +563,20 @@ public class ShiftForm extends javax.swing.JFrame {
                 namaShiftTextField.setText(activeShift.getNamaShift());
                 String waktuMulaiGroup = activeShift.getWaktuMulai();
                 String waktuSelesaiGroup = activeShift.getWaktuSelesai();
-                jamMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(0, 2));
-                jamSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(0, 2));
-                menitMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(3, 5));
-                menitSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(3, 5));
+
                 simpanButton.setText("Update");
                 simpanButton.setMnemonic('U');
                 simpanButton.setEnabled(true);
                 hapusButton.setEnabled(true);
                 kodeShiftCombo.requestFocus();
-
+                menitMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+                jamMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
+                menitSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+                jamSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
+                jamMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(0, 2));
+                jamSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(0, 2));
+                menitMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(3, 5));
+                menitSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(3, 5));
             } else {
                 namaShiftTextField.setText(null);
                 namaShiftTextField.requestFocus();
@@ -576,6 +585,9 @@ public class ShiftForm extends javax.swing.JFrame {
                 simpanButton.setMnemonic('S');
                 simpanButton.setEnabled(true);
             }
+        } else {
+            simpanButton.setEnabled(false);
+            hapusButton.setEnabled(false);
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_kodeShiftComboActionPerformed
@@ -602,6 +614,10 @@ public class ShiftForm extends javax.swing.JFrame {
         jamSelesaiCombo.removeAllItems();
         menitSelesaiCombo.removeAllItems();
         kodeShiftCombo.requestFocus();
+        menitMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+        jamMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
+        menitSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+        jamSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
         List<Shift> shifts = null;
         try {
             shifts = DaoFactory.getShiftDao().getAllShift();
@@ -610,6 +626,12 @@ public class ShiftForm extends javax.swing.JFrame {
         }
         ShiftTableModel model = new ShiftTableModel(shifts);
         shiftTable.setModel(model);
+
+        if (shifts.isEmpty()) {
+            hapusButton.setEnabled(false);
+        } else {
+            hapusButton.setEnabled(true);
+        }
 
         for (Shift s : shifts) {
             kodeShiftCombo.addItem(s.getKodeShift());

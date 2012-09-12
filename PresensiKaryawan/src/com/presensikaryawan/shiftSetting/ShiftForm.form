@@ -216,10 +216,7 @@
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="kodeShiftCombo" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <EmptySpace min="148" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="kodeShiftCombo" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -420,7 +417,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="menitMulaiCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -496,7 +492,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="jamMulaiCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -536,7 +531,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="menitSelesaiCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -612,7 +606,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="jamSelesaiCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
