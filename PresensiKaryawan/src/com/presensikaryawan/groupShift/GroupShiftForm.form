@@ -505,7 +505,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="kodeShiftSeninCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -655,7 +654,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="kodeShiftSelasaCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -670,7 +668,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="kodeShiftRabuCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -685,7 +682,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="kodeShiftKamisCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -700,7 +696,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="kodeShiftJumatCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -715,7 +710,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="kodeShiftSabtuCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
@@ -730,7 +724,6 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="kodeShiftMingguCombo">
               <Properties>
-                <Property name="editable" type="boolean" value="true"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="11" style="0"/>
                 </Property>
