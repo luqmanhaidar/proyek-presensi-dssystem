@@ -21,9 +21,9 @@ public class GroupShiftDaoImplemen implements GroupShiftDao {
     private final String SQL_INSERT = "insert into group_shift(kode_group_shift,nama_group_shift,deskripsi,senin_code,selasa_code,rabu_code,kamis_code,jumat_code,sabtu_code,minggu_code) values (?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_UPDATE = "update group_shift set nama_group_shift = ?, deskripsi = ?, senin_code = ?, selasa_code = ?,rabu_code = ?,kamis_code = ?,jumat_code = ?,sabtu_code = ?,minggu_code = ? where kode_group_shift = ?";
     private final String SQL_DELETE = "delete from group_shift where kode_group_shift like ?";
-    private final String SQL_GETBYKODE = "select * from group_shift where kode_group_shift like ?";
-    private final String SQL_GETALL = "select * from group_shift";
-    private final String SQL_GETBYKODEDAYSHIFT = "select * from group_shift where senin_code like ? and selasa_code like ? and rabu_code like ? and kamis_code like ? and jumat_code like ? and sabtu_code like ? and minggu_code like ?";
+    private final String SQL_GETBYKODE = "select * from group_shift where kode_group_shift like ? order by kode_group_shift asc";
+    private final String SQL_GETALL = "select * from group_shift order by kode_group_shift asc";
+    private final String SQL_GETBYKODEDAYSHIFT = "select * from group_shift where senin_code like ? and selasa_code like ? and rabu_code like ? and kamis_code like ? and jumat_code like ? and sabtu_code like ? and minggu_code like ? order by kode_group_shift asc";
     private Connection connection;
 
     public GroupShiftDaoImplemen(Connection connection) {
