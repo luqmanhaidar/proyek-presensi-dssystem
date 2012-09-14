@@ -105,10 +105,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
         menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Posisi Karyawan");
+        menuLabel.setText("Menu Transaksi Gaji Karyawan");
 
         fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data posisi karyawan");
+        fungsiLabel.setText("Digunakan menghitung transaksi gaji & rekap karyawan per bulan/per tahun");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
         headPanel.setLayout(headPanelLayout);
