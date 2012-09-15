@@ -4,17 +4,13 @@
  */
 package com.presensikaryawan.tools;
 
-import com.presensikaryawan.golongan.GolonganDao;
-import com.presensikaryawan.golongan.GolonganDaoImplemen;
-import com.dssystem.bank.BankDao;
-import com.dssystem.bank.BankDaoImplemen;
-import java.sql.Connection;
 import com.mysql.jdbc.Driver;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.presensikaryawan.departmentSetting.DepartmentDaoImplemen;
 import com.presensikaryawan.gaji.GajiDao;
 import com.presensikaryawan.gaji.GajiDaoImplemen;
-import com.presensikaryawan.groupShift.GroupShift;
+import com.presensikaryawan.golongan.GolonganDao;
+import com.presensikaryawan.golongan.GolonganDaoImplemen;
 import com.presensikaryawan.groupShift.GroupShiftDao;
 import com.presensikaryawan.groupShift.GroupShiftDaoImplemen;
 import com.presensikaryawan.karyawan.KaryawanDao;
@@ -31,8 +27,11 @@ import com.presensikaryawan.shiftSetting.ShiftDao;
 import com.presensikaryawan.shiftSetting.ShiftDaoImplemen;
 import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
+import com.presensikaryawan.transaksi.TransaksiGajiDao;
+import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -58,7 +57,7 @@ public class DaoFactory {
     private static Properties prop;
     private static KaryawanDao karyawanDao;
     private static GajiDao gajiDao;
-//    private static BankDao bankDao;
+    private static TransaksiGajiDao transaksiGajiDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -104,12 +103,6 @@ public class DaoFactory {
         return liburPerusahaanDao;
     }
 
-//    public static BankDao getBankDao() throws SQLException {
-//        if (bankDao == null) {
-//            bankDao = new BankDaoImplemen(getConnection());
-//        }
-//        return bankDao;
-//    }
     public static LiburNasionalDao getLiburNasionalDao() throws SQLException {
         if (liburNasionalDao == null) {
             liburNasionalDao = new LiburNasionalDaoImplemen(getConnection());
@@ -165,4 +158,11 @@ public class DaoFactory {
         }
         return departmentDao;
     }
+     
+     public static TransaksiGajiDao getTransaksiGajiDao() throws SQLException{
+         if (transaksiGajiDao==null){
+             transaksiGajiDao=new TransaksiGajiDaoImplemen(getConnection());
+         }
+         return transaksiGajiDao;
+     }
 }
