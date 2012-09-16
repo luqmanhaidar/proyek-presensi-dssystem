@@ -1,5 +1,6 @@
 package com.presensikaryawan.transaksi;
 
+import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.posisi.*;
@@ -66,12 +67,22 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
+        String bulan = String.valueOf(monthChooser.getMonth());
+        String tahun=String.valueOf(yearChooser.getYear());
+        String bulanTahun=tahun+"-0"+bulan+"-%";
+        System.out.println(bulanTahun);
+        String nip2="%";
+        List<PresensiKaryawan> presensiKaryawans=DaoFactory.getTransaksiGajiDao().getPresensiByMonth(bulanTahun, nip2);
+        PresensiTableModel model=new PresensiTableModel(presensiKaryawans);
+        presenstiTable.setModel(model);
+        System.out.println(monthChooser.getMonth()+",year "+yearChooser.getYear());
     }
 
     private void initComponentFocus() {
-//        namaPosisiTextField.addFocusListener(new ComponentFocus(namaPosisiTextField));
-//        kodePosisiCombo.addFocusListener(new ComponentFocus(kodePosisiCombo));
-//        simpanButton.addFocusListener(new ComponentFocus(simpanButton));
+        departmentCombo.addFocusListener(new ComponentFocus(departmentCombo));
+        golonganCombo.addFocusListener(new ComponentFocus(golonganCombo));
+        nipKaryawanCombo.addFocusListener(new ComponentFocus(nipKaryawanCombo));
+        namaKaryawanCombo.addFocusListener(new ComponentFocus(namaKaryawanCombo));
     }
 
     /**
@@ -91,8 +102,8 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         cmdKeluar = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
         bulanLabel = new javax.swing.JLabel();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        monthChooser = new com.toedter.calendar.JMonthChooser();
+        yearChooser = new com.toedter.calendar.JYearChooser();
         departmentLabel = new javax.swing.JLabel();
         departmentCombo = new javax.swing.JComboBox();
         golonganCombo = new javax.swing.JComboBox();
@@ -103,7 +114,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         nipKaryawanLabel = new javax.swing.JLabel();
         posisiPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        posisiTable = new javax.swing.JTable();
+        presenstiTable = new javax.swing.JTable();
         resultPanel = new javax.swing.JPanel();
         terlambatLabel = new javax.swing.JLabel();
         tidakMasukLabel = new javax.swing.JLabel();
@@ -266,9 +277,9 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                         .add(471, 471, 471)
                         .add(bulanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(18, 18, 18)
-                        .add(jMonthChooser1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(monthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jYearChooser1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(45, 45, 45))
         );
         inputPanelLayout.setVerticalGroup(
@@ -278,8 +289,8 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                         .add(bulanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jMonthChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jYearChooser1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(monthChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
@@ -306,9 +317,9 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        posisiTable.setAutoCreateRowSorter(true);
-        posisiTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        posisiTable.setModel(new javax.swing.table.DefaultTableModel(
+        presenstiTable.setAutoCreateRowSorter(true);
+        presenstiTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        presenstiTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -334,12 +345,12 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        posisiTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        presenstiTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                posisiTableMouseClicked(evt);
+                presenstiTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(posisiTable);
+        jScrollPane1.setViewportView(presenstiTable);
 
         org.jdesktop.layout.GroupLayout posisiPanelLayout = new org.jdesktop.layout.GroupLayout(posisiPanel);
         posisiPanel.setLayout(posisiPanelLayout);
@@ -447,13 +458,12 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         setBounds((screenSize.width-1036)/2, (screenSize.height-738)/2, 1036, 738);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void posisiTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posisiTableMouseClicked
-        int row = posisiTable.getSelectedRow();
-        String kodegroup = posisiTable.getValueAt(row, 0).toString();
-        String namagroup = posisiTable.getValueAt(row, 1).toString();
-        namaPosisiTextField.setText(namagroup);
-        kodePosisiCombo.setSelectedItem(kodegroup);// TODO add your handling code here:
-    }//GEN-LAST:event_posisiTableMouseClicked
+    private void presenstiTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_presenstiTableMouseClicked
+        int row = presenstiTable.getSelectedRow();
+        String kodegroup = presenstiTable.getValueAt(row, 0).toString();
+        String namagroup = presenstiTable.getValueAt(row, 1).toString();
+
+    }//GEN-LAST:event_presenstiTableMouseClicked
     private void isitable() {
     }
 
@@ -571,11 +581,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
+    private com.toedter.calendar.JMonthChooser monthChooser;
     private javax.swing.JComboBox namaKaryawanCombo;
     private javax.swing.JLabel namaKaryawanLabel;
     private javax.swing.JLabel nilaiLembur;
@@ -585,10 +594,11 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private javax.swing.JLabel nipKaryawanLabel;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JPanel posisiPanel;
-    private javax.swing.JTable posisiTable;
+    private javax.swing.JTable presenstiTable;
     private javax.swing.JPanel resultPanel;
     private javax.swing.JLabel terlambatLabel;
     private javax.swing.JLabel terlambatLabel2;
     private javax.swing.JLabel tidakMasukLabel;
+    private com.toedter.calendar.JYearChooser yearChooser;
     // End of variables declaration//GEN-END:variables
 }

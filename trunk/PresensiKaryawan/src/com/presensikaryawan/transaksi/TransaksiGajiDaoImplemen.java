@@ -26,8 +26,8 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
             + "AND gs.rabu_code = s.kode_shift AND gs.rabu_code = s.kode_shift AND gs.kamis_code = s.kode_shift AND gs.jumat_code = s.kode_shift"
             + "AND gs.sabtu_code = s.kode_shift AND gs.minggu_code = s.kode_shift AND d.kode_department like ?";
     private final String SQL_GETNAMADANNIP = "SELECT distinct k.nip,k.nama,k.kode_golongan FROM karyawan k, department_setting d, golongan g WHERE k.kode_department=d.kode_department AND k.kode_golongan=g.kode_golongan AND d.kode_department LIKE ? OR g.kode_golongan LIKE ? OR k.nama LIKE ? order by nip asc";
-    private final String SQL_GETPRESENSIDANAKTUMULAI = "SELECT e.DateLog, e.TimeLog, k.nip, k.nama FROM eventlog e, karyawan k WHERE e.UserId=k.nip AND e.FKMode = 0 where e.UserId LIKE ? AND e.DateLog LIKE ? order by e.DateLog asc";
-    private final String SQL_GETWAKTUSELESAI = "SELECT e.TimeLog FROM eventlog e, karyawan k WHERE e.UserId=k.nip AND e.FKMode = 1 where e.UserId LIKE ? AND e.DateLog LIKE ? order by e.DateLog asc";
+    private final String SQL_GETPRESENSIDANAKTUMULAI = "SELECT e.DateLog, e.TimeLog, e.UserId, k.nama FROM eventlog e, karyawan k WHERE e.UserId=k.nip AND e.FKMode = '0' OR e.UserId LIKE ? OR e.DateLog LIKE ? order by e.DateLog asc";
+    private final String SQL_GETWAKTUSELESAI = "SELECT e.TimeLog FROM eventlog e, karyawan k WHERE e.UserId=k.nip AND e.FKMode = 1 AND e.UserId LIKE ? AND e.DateLog LIKE ? order by e.DateLog asc";
     private Connection connection;
 
     public TransaksiGajiDaoImplemen(Connection connection) {
@@ -121,6 +121,7 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
             statement = connection.prepareStatement(SQL_GETNAMADANNIP);
             statement.setString(1, kode_department);
             statement.setString(2, kode_golongan);
+            statement.setString(3, nama);
 
             result = statement.executeQuery();
             List<Karyawan> karyawans = new ArrayList<Karyawan>();
@@ -164,19 +165,19 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
 
             result = statement.executeQuery();
             List<PresensiKaryawan> presensiKaryawans = new ArrayList<PresensiKaryawan>();
-            List<PresensiKaryawan> presensiKaryawansDummy = getWaktuSelesaiByNIP(bulan, nip);
+//            List<PresensiKaryawan> presensiKaryawansDummy = getWaktuSelesaiByNIP(bulan, nip);
             int index = 0;
             while (result.next()) {
                 Karyawan karyawan = new Karyawan();
-                karyawan.setNip(result.getString("nip"));
+                karyawan.setNip(result.getString("UserID"));
                 karyawan.setNama(result.getString("nama"));
                 PresensiKaryawan presensiKaryawan = new PresensiKaryawan();
                 presensiKaryawan.setWaktu_mulai(result.getString("TimeLog"));
-                if (presensiKaryawansDummy.isEmpty()) {
-                    presensiKaryawan.setWaktu_selesai("");
-                } else {
-                    presensiKaryawan.setWaktu_selesai(presensiKaryawansDummy.remove(index).getWaktu_selesai());
-                }
+//                if (presensiKaryawansDummy.isEmpty()) {
+//                    presensiKaryawan.setWaktu_selesai("");
+//                } else {
+//                    presensiKaryawan.setWaktu_selesai(presensiKaryawansDummy.remove(index).getWaktu_selesai());
+//                }
                 presensiKaryawan.setTanggal(result.getString("DateLog"));
                 presensiKaryawan.setKaryawan(karyawan);
                 index++;
