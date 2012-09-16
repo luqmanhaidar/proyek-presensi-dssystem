@@ -39,59 +39,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-
-        if (departmentCombo.getSelectedItem() == null) {
-            kode_department = "%";
-        } else {
-            kode_department = String.valueOf(departmentCombo.getSelectedItem());
-        }
-        if (golonganCombo.getSelectedItem() == null) {
-            kode_golongan = "%";
-        } else {
-            kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
-        }
-        if (nipKaryawanCombo.getSelectedItem() == null) {
-            nip = "%";
-        } else {
-            nip = "%" + String.valueOf(nipKaryawanCombo.getSelectedItem());
-        }
-        if (namaKaryawanCombo.getSelectedItem() == null) {
-            nama = "%";
-        } else {
-            nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
-        }
-
-        List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
-//        List<Shift> shifts = DaoFactory.getTransaksiGajiDao().getWaktuMulaiDanSelesaiByDepartment(kode_department);
-        List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
-        for (Karyawan k : karyawans) {
-            nipKaryawanCombo.addItem(k.getNip());
-            namaKaryawanCombo.addItem(k.getNama());
-            golonganCombo.addItem(k.getKodeGolongan());
-        }
-        List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
-        for (Golongan g : golongans) {
-            golonganCombo.addItem(g.getKodeGolongan());
-        }
-        for (Department d : departments) {
-            departmentCombo.addItem(d.getKodeDepartment());
-        }
-        String bulan = String.valueOf(monthChooser.getMonth());
-        String tahun = String.valueOf(yearChooser.getYear());
-        String bulanTahun = tahun + "-0" + bulan + "-%";
-        System.out.println(bulanTahun);
-        String nip2 = "%";
-        List<PresensiKaryawan> presensiKaryawans = DaoFactory.getTransaksiGajiDao().getPresensiByMonth(bulanTahun, nip2);
-        PresensiTableModel model = new PresensiTableModel(presensiKaryawans);
-        presenstiTable.setModel(model);
-        System.out.println(monthChooser.getMonth() + ",year " + yearChooser.getYear());
     }
 
     private void initComponentFocus() {
         departmentCombo.addFocusListener(new ComponentFocus(departmentCombo));
-        golonganCombo.addFocusListener(new ComponentFocus(golonganCombo));
-        nipKaryawanCombo.addFocusListener(new ComponentFocus(nipKaryawanCombo));
-        namaKaryawanCombo.addFocusListener(new ComponentFocus(namaKaryawanCombo));
     }
 
     /**
@@ -115,12 +66,6 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         yearChooser = new com.toedter.calendar.JYearChooser();
         departmentLabel = new javax.swing.JLabel();
         departmentCombo = new javax.swing.JComboBox();
-        golonganCombo = new javax.swing.JComboBox();
-        golonganLabel = new javax.swing.JLabel();
-        namaKaryawanLabel = new javax.swing.JLabel();
-        namaKaryawanCombo = new javax.swing.JComboBox();
-        nipKaryawanCombo = new javax.swing.JComboBox();
-        nipKaryawanLabel = new javax.swing.JLabel();
         posisiPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         presenstiTable = new javax.swing.JTable();
@@ -133,6 +78,14 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         nilaiTerlambatLabel = new javax.swing.JLabel();
         nilaiTidakMasukLabel = new javax.swing.JLabel();
         nilaiLembur = new javax.swing.JLabel();
+        nipLabel = new javax.swing.JLabel();
+        namaLabel = new javax.swing.JLabel();
+        golonganLabel = new javax.swing.JLabel();
+        nilaiGolonganLabel = new javax.swing.JLabel();
+        nilaiNamaLabel = new javax.swing.JLabel();
+        nilaiNIPLabel = new javax.swing.JLabel();
+        posisiLabel = new javax.swing.JLabel();
+        nilaiPosisiLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -214,81 +167,21 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             }
         });
 
-        golonganCombo.setEditable(true);
-        golonganCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        golonganCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                golonganComboActionPerformed(evt);
-            }
-        });
-        golonganCombo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                golonganComboKeyPressed(evt);
-            }
-        });
-
-        golonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        golonganLabel.setText("Golongan");
-
-        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        namaKaryawanLabel.setText("Nama Karyawan");
-
-        namaKaryawanCombo.setEditable(true);
-        namaKaryawanCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        namaKaryawanCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namaKaryawanComboActionPerformed(evt);
-            }
-        });
-        namaKaryawanCombo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                namaKaryawanComboKeyPressed(evt);
-            }
-        });
-
-        nipKaryawanCombo.setEditable(true);
-        nipKaryawanCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        nipKaryawanCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nipKaryawanComboActionPerformed(evt);
-            }
-        });
-        nipKaryawanCombo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                nipKaryawanComboKeyPressed(evt);
-            }
-        });
-
-        nipKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nipKaryawanLabel.setText("NIP");
-
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(nipKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(golonganLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(golonganCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(namaKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 350, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(nipKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(471, 471, 471)
-                        .add(bulanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(18, 18, 18)
-                        .add(monthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(471, 471, 471)
+                .add(bulanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(18, 18, 18)
+                .add(monthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(45, 45, 45))
         );
         inputPanelLayout.setVerticalGroup(
@@ -303,22 +196,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                     .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(golonganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(golonganCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(namaKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(nipKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nipKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        inputPanel.setBounds(0, 70, 1020, 170);
+        inputPanel.setBounds(0, 70, 1020, 60);
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         posisiPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -374,7 +255,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        posisiPanel.setBounds(0, 240, 1020, 250);
+        posisiPanel.setBounds(0, 130, 1020, 250);
         jDesktopPane1.add(posisiPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
@@ -390,7 +271,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         buttonKlarifikasi1.setText("Klarifikasi");
 
         terlambatLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        terlambatLabel2.setText("Lembur         :");
+        terlambatLabel2.setText("Lembur                  :");
 
         nilaiTerlambatLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiTerlambatLabel.setText("nilai terlambat");
@@ -401,52 +282,123 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         nilaiLembur.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiLembur.setText("nilai lembur");
 
+        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nipLabel.setText("NIP                         :");
+
+        namaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaLabel.setText("Nama Karyawan :");
+
+        golonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        golonganLabel.setText("Golongan              :");
+
+        nilaiGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiGolonganLabel.setText("nilai golongan");
+
+        nilaiNamaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaLabel.setText("nilai nama");
+
+        nilaiNIPLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNIPLabel.setText("nilai NIP");
+
+        posisiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        posisiLabel.setText("Posisi                    :");
+
+        nilaiPosisiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiPosisiLabel.setText("nilai posisi");
+
         org.jdesktop.layout.GroupLayout resultPanelLayout = new org.jdesktop.layout.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
             resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, resultPanelLayout.createSequentialGroup()
+            .add(resultPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(tidakMasukLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .add(terlambatLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(resultPanelLayout.createSequentialGroup()
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, namaLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, nipLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(resultPanelLayout.createSequentialGroup()
+                                .add(golonganLabel)
+                                .add(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(resultPanelLayout.createSequentialGroup()
+                                    .add(nilaiNIPLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(43, 43, 43))
+                                .add(nilaiNamaLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(resultPanelLayout.createSequentialGroup()
+                                .add(nilaiGolonganLabel)
+                                .add(86, 86, 86)))
+                        .add(393, 393, 393))
+                    .add(resultPanelLayout.createSequentialGroup()
+                        .add(posisiLabel)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(nilaiPosisiLabel)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, tidakMasukLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, terlambatLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(resultPanelLayout.createSequentialGroup()
+                        .add(terlambatLabel2)
+                        .add(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(resultPanelLayout.createSequentialGroup()
-                        .add(nilaiTerlambatLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                        .add(47, 47, 47))
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(resultPanelLayout.createSequentialGroup()
+                                .add(nilaiTerlambatLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                .add(47, 47, 47))
+                            .add(resultPanelLayout.createSequentialGroup()
+                                .add(nilaiTidakMasukLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(buttonKlarifikasi1)
+                            .add(buttonKlarifikasi)))
                     .add(resultPanelLayout.createSequentialGroup()
-                        .add(nilaiTidakMasukLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
-                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(buttonKlarifikasi1)
-                    .add(resultPanelLayout.createSequentialGroup()
-                        .add(buttonKlarifikasi)
-                        .add(117, 117, 117)
-                        .add(terlambatLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(nilaiLembur)))
-                .add(414, 414, 414))
+                        .add(nilaiLembur)
+                        .add(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(resultPanelLayout.createSequentialGroup()
-                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(terlambatLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(buttonKlarifikasi)
-                    .add(terlambatLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nilaiTerlambatLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nilaiLembur, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(tidakMasukLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(nilaiTidakMasukLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(buttonKlarifikasi1))
-                .add(0, 41, Short.MAX_VALUE))
+                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(resultPanelLayout.createSequentialGroup()
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(terlambatLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(buttonKlarifikasi)
+                            .add(nilaiTerlambatLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(tidakMasukLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(nilaiTidakMasukLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(buttonKlarifikasi1))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(nilaiLembur, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(terlambatLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(resultPanelLayout.createSequentialGroup()
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(nilaiNIPLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(namaLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(nilaiNamaLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(nilaiGolonganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(golonganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(posisiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(nilaiPosisiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
-        resultPanel.setBounds(0, 490, 1020, 120);
+        resultPanel.setBounds(0, 380, 1020, 230);
         jDesktopPane1.add(resultPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -531,156 +483,6 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_departmentComboKeyPressed
 
-    private void golonganComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_golonganComboActionPerformed
-        // TODO add your handling code here:
-        kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
-        if (kode_golongan != null) {
-
-            if (departmentCombo.getSelectedItem() == null) {
-                kode_department = "%";
-            } else {
-                kode_department = String.valueOf(departmentCombo.getSelectedItem());
-            }
-            if (golonganCombo.getSelectedItem() == null) {
-                kode_golongan = "%";
-            } else {
-                kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
-            }
-
-            if (namaKaryawanCombo.getSelectedItem() == null) {
-                nama = "%";
-            } else {
-                nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
-            }
-            departmentCombo.removeAllItems();
-            namaKaryawanCombo.removeAllItems();
-            golonganCombo.removeAllItems();
-            nipKaryawanCombo.removeAllItems();
-            try {
-                List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
-                for (Golongan g : golongans) {
-                    golonganCombo.addItem(g.getKodeGolongan());
-                }
-                List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
-                for (Department d : departments) {
-                    departmentCombo.addItem(d.getKodeDepartment());
-                }
-                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
-                for (Karyawan k : karyawans) {
-                    nipKaryawanCombo.addItem(k.getNip());
-                    namaKaryawanCombo.addItem(k.getNama());
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_golonganComboActionPerformed
-
-    private void golonganComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_golonganComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_golonganComboKeyPressed
-
-    private void namaKaryawanComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaKaryawanComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namaKaryawanComboKeyPressed
-
-    private void nipKaryawanComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipKaryawanComboActionPerformed
-        nip = "%" + String.valueOf(nipKaryawanCombo.getSelectedItem());
-        if (nip != null) {
-
-            if (departmentCombo.getSelectedItem() == null) {
-                kode_department = "%";
-            } else {
-                kode_department = String.valueOf(departmentCombo.getSelectedItem());
-            }
-            if (golonganCombo.getSelectedItem() == null) {
-                kode_golongan = "%";
-            } else {
-                kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
-            }
-
-            if (namaKaryawanCombo.getSelectedItem() == null) {
-                nama = "%";
-            } else {
-                nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
-            }
-            departmentCombo.removeAllItems();
-            namaKaryawanCombo.removeAllItems();
-            golonganCombo.removeAllItems();
-            nipKaryawanCombo.removeAllItems();
-            try {
-                List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
-                for (Golongan g : golongans) {
-                    golonganCombo.addItem(g.getKodeGolongan());
-                }
-                List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
-                for (Department d : departments) {
-                    departmentCombo.addItem(d.getKodeDepartment());
-                }
-                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
-                for (Karyawan k : karyawans) {
-                    nipKaryawanCombo.addItem(k.getNip());
-                    namaKaryawanCombo.addItem(k.getNama());
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_nipKaryawanComboActionPerformed
-
-    private void nipKaryawanComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipKaryawanComboKeyPressed
-        if (evt.getKeyCode() == 10) {
-        }
-    }//GEN-LAST:event_nipKaryawanComboKeyPressed
-
-    private void namaKaryawanComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaKaryawanComboActionPerformed
-        // TODO add your handling code here:
-        nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
-        if (nama != null) {
-
-            if (departmentCombo.getSelectedItem() == null) {
-                kode_department = "%";
-            } else {
-                kode_department = String.valueOf(departmentCombo.getSelectedItem());
-            }
-            if (golonganCombo.getSelectedItem() == null) {
-                kode_golongan = "%";
-            } else {
-                kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
-            }
-
-            if (namaKaryawanCombo.getSelectedItem() == null) {
-                nama = "%";
-            } else {
-                nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
-            }
-            departmentCombo.removeAllItems();
-            namaKaryawanCombo.removeAllItems();
-            golonganCombo.removeAllItems();
-            nipKaryawanCombo.removeAllItems();
-            try {
-                List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
-                for (Golongan g : golongans) {
-                    golonganCombo.addItem(g.getKodeGolongan());
-                }
-                List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
-                for (Department d : departments) {
-                    departmentCombo.addItem(d.getKodeDepartment());
-                }
-                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
-                for (Karyawan k : karyawans) {
-                    nipKaryawanCombo.addItem(k.getNip());
-                    namaKaryawanCombo.addItem(k.getNama());
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_namaKaryawanComboActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -711,7 +513,6 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private javax.swing.JComboBox departmentCombo;
     private javax.swing.JLabel departmentLabel;
     private javax.swing.JLabel fungsiLabel;
-    private javax.swing.JComboBox golonganCombo;
     private javax.swing.JLabel golonganLabel;
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
@@ -720,14 +521,17 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
     private com.toedter.calendar.JMonthChooser monthChooser;
-    private javax.swing.JComboBox namaKaryawanCombo;
-    private javax.swing.JLabel namaKaryawanLabel;
+    private javax.swing.JLabel namaLabel;
+    private javax.swing.JLabel nilaiGolonganLabel;
     private javax.swing.JLabel nilaiLembur;
+    private javax.swing.JLabel nilaiNIPLabel;
+    private javax.swing.JLabel nilaiNamaLabel;
+    private javax.swing.JLabel nilaiPosisiLabel;
     private javax.swing.JLabel nilaiTerlambatLabel;
     private javax.swing.JLabel nilaiTidakMasukLabel;
-    private javax.swing.JComboBox nipKaryawanCombo;
-    private javax.swing.JLabel nipKaryawanLabel;
+    private javax.swing.JLabel nipLabel;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
+    private javax.swing.JLabel posisiLabel;
     private javax.swing.JPanel posisiPanel;
     private javax.swing.JTable presenstiTable;
     private javax.swing.JPanel resultPanel;

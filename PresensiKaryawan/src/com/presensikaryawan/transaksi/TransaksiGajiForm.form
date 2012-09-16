@@ -161,7 +161,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-              <JLayeredPaneConstraints x="0" y="70" width="1020" height="170" layer="0" position="-1"/>
+              <JLayeredPaneConstraints x="0" y="70" width="1020" height="60" layer="0" position="-1"/>
             </Constraint>
           </Constraints>
 
@@ -170,32 +170,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="nipKaryawanLabel" alignment="0" max="32767" attributes="1"/>
-                          <Component id="namaKaryawanLabel" alignment="0" max="32767" attributes="1"/>
-                          <Component id="golonganLabel" alignment="0" max="32767" attributes="1"/>
-                          <Component id="departmentLabel" alignment="0" min="-2" pref="100" max="-2" attributes="1"/>
-                      </Group>
+                      <Component id="departmentLabel" min="-2" pref="100" max="-2" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="golonganCombo" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="namaKaryawanCombo" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
-                                  <Component id="nipKaryawanCombo" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="departmentCombo" min="-2" pref="200" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
-                              <Component id="bulanLabel" max="32767" attributes="1"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="monthChooser" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="yearChooser" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="departmentCombo" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
+                      <Component id="bulanLabel" max="32767" attributes="1"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="monthChooser" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="yearChooser" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -215,22 +198,7 @@
                               <Component id="departmentCombo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="golonganLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="golonganCombo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="namaKaryawanLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="namaKaryawanCombo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nipKaryawanLabel" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="nipKaryawanCombo" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -271,75 +239,6 @@
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="departmentComboKeyPressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="golonganCombo">
-              <Properties>
-                <Property name="editable" type="boolean" value="true"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="11" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="golonganComboActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="golonganComboKeyPressed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="golonganLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Golongan"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="namaKaryawanLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Nama Karyawan"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="namaKaryawanCombo">
-              <Properties>
-                <Property name="editable" type="boolean" value="true"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="11" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="namaKaryawanComboActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="namaKaryawanComboKeyPressed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="nipKaryawanCombo">
-              <Properties>
-                <Property name="editable" type="boolean" value="true"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="11" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nipKaryawanComboActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nipKaryawanComboKeyPressed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="nipKaryawanLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="NIP"/>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="posisiPanel">
@@ -355,7 +254,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-              <JLayeredPaneConstraints x="0" y="240" width="1020" height="250" layer="0" position="-1"/>
+              <JLayeredPaneConstraints x="0" y="130" width="1020" height="250" layer="0" position="-1"/>
             </Constraint>
           </Constraints>
 
@@ -455,63 +354,130 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-              <JLayeredPaneConstraints x="0" y="490" width="1020" height="120" layer="0" position="-1"/>
+              <JLayeredPaneConstraints x="0" y="380" width="1020" height="230" layer="0" position="-1"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="tidakMasukLabel" pref="106" max="32767" attributes="1"/>
-                          <Component id="terlambatLabel" max="32767" attributes="1"/>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="nilaiTerlambatLabel" pref="85" max="32767" attributes="1"/>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="nilaiTidakMasukLabel" max="32767" attributes="1"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="namaLabel" alignment="1" max="32767" attributes="1"/>
+                                  <Component id="nipLabel" alignment="1" max="32767" attributes="1"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="golonganLabel" min="-2" max="-2" attributes="1"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="nilaiNIPLabel" max="32767" attributes="1"/>
+                                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="nilaiNamaLabel" alignment="0" max="32767" attributes="1"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="nilaiGolonganLabel" min="-2" max="-2" attributes="1"/>
+                                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="393" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="buttonKlarifikasi1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="buttonKlarifikasi" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                              <Component id="terlambatLabel2" min="-2" pref="75" max="-2" attributes="1"/>
+                              <Component id="posisiLabel" min="-2" max="-2" attributes="1"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="nilaiLembur" min="-2" max="-2" attributes="1"/>
+                              <Component id="nilaiPosisiLabel" min="-2" max="-2" attributes="1"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="414" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="tidakMasukLabel" alignment="1" max="32767" attributes="1"/>
+                          <Component id="terlambatLabel" alignment="1" max="32767" attributes="1"/>
+                          <Group type="102" attributes="0">
+                              <Component id="terlambatLabel2" min="-2" max="-2" attributes="1"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="nilaiTerlambatLabel" pref="96" max="32767" attributes="1"/>
+                                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="nilaiTidakMasukLabel" max="32767" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="buttonKlarifikasi1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buttonKlarifikasi" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="nilaiLembur" min="-2" max="-2" attributes="1"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="terlambatLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="buttonKlarifikasi" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="terlambatLabel2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="nilaiTerlambatLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="nilaiLembur" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tidakMasukLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="nilaiTidakMasukLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="terlambatLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="buttonKlarifikasi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nilaiTerlambatLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="tidakMasukLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="nilaiTidakMasukLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="buttonKlarifikasi1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="nilaiLembur" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="terlambatLabel2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="buttonKlarifikasi1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="nipLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="nilaiNIPLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="namaLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="nilaiNamaLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="nilaiGolonganLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="golonganLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="posisiLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="nilaiPosisiLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
+                      <EmptySpace pref="105" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -548,7 +514,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Lembur         :"/>
+                <Property name="text" type="java.lang.String" value="Lembur                  :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="nilaiTerlambatLabel">
@@ -573,6 +539,70 @@
                   <Font name="Dialog" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="nilai lembur"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nipLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="NIP                         :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="namaLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Nama Karyawan :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="golonganLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Golongan              :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nilaiGolonganLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="nilai golongan"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nilaiNamaLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="nilai nama"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nilaiNIPLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="nilai NIP"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="posisiLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Posisi                    :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nilaiPosisiLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="nilai posisi"/>
               </Properties>
             </Component>
           </SubComponents>
