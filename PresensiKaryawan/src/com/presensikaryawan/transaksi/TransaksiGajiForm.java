@@ -1,9 +1,10 @@
 package com.presensikaryawan.transaksi;
 
+import com.presensikaryawan.departmentSetting.Department;
+import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.posisi.*;
+import com.presensikaryawan.shiftSetting.Shift;
 import com.presensikaryawan.tools.DaoFactory;
-import com.dssystem.umum.ChangeCase;
-import com.dssystem.umum.ComponentFocus;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -25,6 +26,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
     private DaoFactory service;
     private Posisi activePosisi;
+    private String kode_golongan, kode_department, nip, nama;
 
     /**
      * Creates new form masterInventoryGrup
@@ -34,17 +36,36 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-//        namaPosisiTextField.setDocument(new ChangeCase().getToUpperCase());
-//        PosisiDao dao = DaoFactory.getPosisiDao();
-//        List<Posisi> posisis = dao.getAllPosisi();
-//        PosisiTableModel model = new PosisiTableModel(posisis);
-//        posisiTable.setModel(model);
-//        for (Posisi p : posisis) {
-//            kodePosisiCombo.addItem(p.getKode_posisi());
-//        }
-//        if (posisis.isEmpty()) {
-//            hapusButton.setEnabled(false);
-//        }
+        
+        if (departmentCombo.getSelectedItem() == null) {
+            kode_department = "%";
+        } else {
+            kode_department = String.valueOf(departmentCombo.getSelectedItem());
+        }
+        if (golonganCombo.getSelectedItem() == null) {
+            kode_golongan = "%";
+        } else {
+            kode_golongan = "%"+String.valueOf(golonganCombo.getSelectedItem());
+        }
+        if (nipKaryawanCombo.getSelectedItem() == null || namaKaryawanCombo.getSelectedItem() == null) {
+            nip = "%";
+            nama = "%";
+        } else {
+            nip = "%" + String.valueOf(nipKaryawanCombo.getSelectedItem());
+            nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
+        }
+        
+        List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
+//        List<Shift> shifts = DaoFactory.getTransaksiGajiDao().getWaktuMulaiDanSelesaiByDepartment(kode_department);
+        List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
+        for (Karyawan k : karyawans) {
+            nipKaryawanCombo.addItem(k.getNip());
+            namaKaryawanCombo.addItem(k.getNama());
+            golonganCombo.addItem(k.getKodeGolongan());
+        }
+        for (Department d : departments) {
+            departmentCombo.addItem(d.getKodeDepartment());
+        }
     }
 
     private void initComponentFocus() {
@@ -77,7 +98,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         golonganCombo = new javax.swing.JComboBox();
         golonganLabel = new javax.swing.JLabel();
         namaKaryawanLabel = new javax.swing.JLabel();
-        nipKaryawanCombo1 = new javax.swing.JComboBox();
+        namaKaryawanCombo = new javax.swing.JComboBox();
         nipKaryawanCombo = new javax.swing.JComboBox();
         nipKaryawanLabel = new javax.swing.JLabel();
         posisiPanel = new javax.swing.JPanel();
@@ -138,7 +159,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
         headPanel.setBounds(0, 0, 1020, 77);
         jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panelStatus1.setBounds(0, 650, 1030, 50);
+        panelStatus1.setBounds(0, 650, 1020, 50);
         jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -192,16 +213,16 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaKaryawanLabel.setText("Nama Karyawan");
 
-        nipKaryawanCombo1.setEditable(true);
-        nipKaryawanCombo1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        nipKaryawanCombo1.addActionListener(new java.awt.event.ActionListener() {
+        namaKaryawanCombo.setEditable(true);
+        namaKaryawanCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        namaKaryawanCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nipKaryawanCombo1ActionPerformed(evt);
+                namaKaryawanComboActionPerformed(evt);
             }
         });
-        nipKaryawanCombo1.addKeyListener(new java.awt.event.KeyAdapter() {
+        namaKaryawanCombo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                nipKaryawanCombo1KeyPressed(evt);
+                namaKaryawanComboKeyPressed(evt);
             }
         });
 
@@ -237,7 +258,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                     .add(inputPanelLayout.createSequentialGroup()
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(golonganCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(nipKaryawanCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 350, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(namaKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 350, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(nipKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(0, 0, Short.MAX_VALUE))
                     .add(inputPanelLayout.createSequentialGroup()
@@ -269,7 +290,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nipKaryawanCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(namaKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(nipKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -412,7 +433,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1025, Short.MAX_VALUE)
+            .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -423,7 +444,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         jDesktopPane1.getAccessibleContext().setAccessibleDescription("");
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-1041)/2, (screenSize.height-738)/2, 1041, 738);
+        setBounds((screenSize.width-1036)/2, (screenSize.height-738)/2, 1036, 738);
     }// </editor-fold>//GEN-END:initComponents
 
     private void posisiTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posisiTableMouseClicked
@@ -457,56 +478,56 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_golonganComboKeyPressed
 
-    private void nipKaryawanCombo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipKaryawanCombo1ActionPerformed
+    private void namaKaryawanComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaKaryawanComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nipKaryawanCombo1ActionPerformed
+    }//GEN-LAST:event_namaKaryawanComboActionPerformed
 
-    private void nipKaryawanCombo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipKaryawanCombo1KeyPressed
+    private void namaKaryawanComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaKaryawanComboKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nipKaryawanCombo1KeyPressed
+    }//GEN-LAST:event_namaKaryawanComboKeyPressed
 
     private void nipKaryawanComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipKaryawanComboActionPerformed
-        if (nipKaryawanCombo.getSelectedItem() != null) {
-            String pilih = String.valueOf(nipKaryawanCombo.getSelectedItem());
-            if (pilih != null) {
-
-                try {
-                    activeShift = DaoFactory.getShiftDao().getByKode(pilih);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-            //jika ditemukan
-            if (activeShift != null) {
-                namaShiftTextField.setText(activeShift.getNamaShift());
-                String waktuMulaiGroup = activeShift.getWaktuMulai();
-                String waktuSelesaiGroup = activeShift.getWaktuSelesai();
-
-                simpanButton.setText("Update");
-                simpanButton.setMnemonic('U');
-                simpanButton.setEnabled(true);
-                hapusButton.setEnabled(true);
-                nipKaryawanCombo.requestFocus();
-                menitMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
-                jamMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
-                menitSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
-                jamSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
-                jamMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(0, 2));
-                jamSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(0, 2));
-                menitMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(3, 5));
-                menitSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(3, 5));
-            } else {
-                namaShiftTextField.setText(null);
-                namaShiftTextField.requestFocus();
-                hapusButton.setEnabled(false);
-                simpanButton.setText("Simpan");
-                simpanButton.setMnemonic('S');
-                simpanButton.setEnabled(true);
-            }
-        } else {
-            simpanButton.setEnabled(false);
-            hapusButton.setEnabled(false);
-        }
+//        if (nipKaryawanCombo.getSelectedItem() != null) {
+//            String pilih = String.valueOf(nipKaryawanCombo.getSelectedItem());
+//            if (pilih != null) {
+//
+//                try {
+//                    activeShift = DaoFactory.getShiftDao().getByKode(pilih);
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//            //jika ditemukan
+//            if (activeShift != null) {
+//                namaShiftTextField.setText(activeShift.getNamaShift());
+//                String waktuMulaiGroup = activeShift.getWaktuMulai();
+//                String waktuSelesaiGroup = activeShift.getWaktuSelesai();
+//
+//                simpanButton.setText("Update");
+//                simpanButton.setMnemonic('U');
+//                simpanButton.setEnabled(true);
+//                hapusButton.setEnabled(true);
+//                nipKaryawanCombo.requestFocus();
+//                menitMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+//                jamMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
+//                menitSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+//                jamSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
+//                jamMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(0, 2));
+//                jamSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(0, 2));
+//                menitMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(3, 5));
+//                menitSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(3, 5));
+//            } else {
+//                namaShiftTextField.setText(null);
+//                namaShiftTextField.requestFocus();
+//                hapusButton.setEnabled(false);
+//                simpanButton.setText("Simpan");
+//                simpanButton.setMnemonic('S');
+//                simpanButton.setEnabled(true);
+//            }
+//        } else {
+//            simpanButton.setEnabled(false);
+//            hapusButton.setEnabled(false);
+//        }
         // TODO add your handling code here:
     }//GEN-LAST:event_nipKaryawanComboActionPerformed
 
@@ -555,12 +576,12 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
+    private javax.swing.JComboBox namaKaryawanCombo;
     private javax.swing.JLabel namaKaryawanLabel;
     private javax.swing.JLabel nilaiLembur;
     private javax.swing.JLabel nilaiTerlambatLabel;
     private javax.swing.JLabel nilaiTidakMasukLabel;
     private javax.swing.JComboBox nipKaryawanCombo;
-    private javax.swing.JComboBox nipKaryawanCombo1;
     private javax.swing.JLabel nipKaryawanLabel;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JPanel posisiPanel;
