@@ -16,10 +16,5 @@ import java.util.List;
  * @author Tinus
  */
 public interface TransaksiGajiDao {
-    List<Department> getAllDepartmentCodeByAnything(String nip, String nama) throws SQLException;
-    List<Shift> getWaktuMulaiDanSelesaiByDepartment(String kode_department) throws SQLException;
-    List<Karyawan> getNamaDanNIPKaryawanByAnything(String kode_department, String kode_golongan, String nama) throws SQLException;
-    List<PresensiKaryawan> getPresensiByMonth(String bulan, String nip) throws SQLException;   
-    List<PresensiKaryawan> getWaktuSelesaiByNIP(String bulan, String nip) throws SQLException;
-    List<Golongan> getGolonganByNIPOrNama(String nama, String nip) throws SQLException;
+    List<Karyawan> getKaryawanByDepartment(String kode_department) throws SQLException;
 }
