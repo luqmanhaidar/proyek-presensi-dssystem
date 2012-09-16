@@ -191,9 +191,9 @@
                               <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
                               <Component id="bulanLabel" max="32767" attributes="1"/>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="jMonthChooser1" min="-2" max="-2" attributes="0"/>
+                              <Component id="monthChooser" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jYearChooser1" min="-2" max="-2" attributes="0"/>
+                              <Component id="yearChooser" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
@@ -207,8 +207,8 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="bulanLabel" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jMonthChooser1" max="32767" attributes="0"/>
-                              <Component id="jYearChooser1" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="monthChooser" max="32767" attributes="0"/>
+                              <Component id="yearChooser" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="departmentLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
@@ -244,9 +244,9 @@
                 <Property name="text" type="java.lang.String" value="Bulan :"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JMonthChooser" name="jMonthChooser1">
+            <Component class="com.toedter.calendar.JMonthChooser" name="monthChooser">
             </Component>
-            <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
+            <Component class="com.toedter.calendar.JYearChooser" name="yearChooser">
             </Component>
             <Component class="javax.swing.JLabel" name="departmentLabel">
               <Properties>
@@ -389,7 +389,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="posisiTable">
+                <Component class="javax.swing.JTable" name="presenstiTable">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -438,7 +438,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="posisiTableMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="presenstiTableMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
