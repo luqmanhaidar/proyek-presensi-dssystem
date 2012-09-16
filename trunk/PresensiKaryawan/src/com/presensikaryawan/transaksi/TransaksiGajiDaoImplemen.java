@@ -5,6 +5,7 @@
 package com.presensikaryawan.transaksi;
 
 import com.presensikaryawan.departmentSetting.Department;
+import com.presensikaryawan.golongan.Golongan;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.shiftSetting.Shift;
 import java.sql.Connection;
@@ -28,6 +29,7 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
     private final String SQL_GETNAMADANNIP = "SELECT distinct k.nip,k.nama,k.kode_golongan FROM karyawan k, department_setting d, golongan g WHERE k.kode_department=d.kode_department AND k.kode_golongan=g.kode_golongan AND d.kode_department LIKE ? OR g.kode_golongan LIKE ? OR k.nama LIKE ? order by nip asc";
     private final String SQL_GETPRESENSIDANAKTUMULAI = "SELECT e.DateLog, e.TimeLog, e.UserId, k.nama FROM eventlog e, karyawan k WHERE e.UserId=k.nip AND e.FKMode = '0' OR e.UserId LIKE ? OR e.DateLog LIKE ? order by e.DateLog asc";
     private final String SQL_GETWAKTUSELESAI = "SELECT e.TimeLog FROM eventlog e, karyawan k WHERE e.UserId=k.nip AND e.FKMode = 1 AND e.UserId LIKE ? AND e.DateLog LIKE ? order by e.DateLog asc";
+    private final String SQL_GETGOLONGAN="SELECT DISTINCT g.kode_golongan FROM golongan g, karyawan k WHERE g.kode_golongan=k.kode_golongan AND (k.nip LIKE ? OR k.nama LIKE ?)";
     private Connection connection;
 
     public TransaksiGajiDaoImplemen(Connection connection) {
@@ -224,6 +226,44 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
 
             connection.commit();
             return presensiKaryawans;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
+    }
+
+    @Override
+    public List<Golongan> getGolonganByNIPOrNama(String nama, String nip) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        try {
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(SQL_GETGOLONGAN);
+            statement.setString(1, nip);
+            statement.setString(2, nama);
+
+            result = statement.executeQuery();
+            List<Golongan> golongans = new ArrayList<Golongan>();
+            while (result.next()) {
+                Golongan gol=new Golongan();
+                gol.setKodeGolongan(result.getString("kode_golongan"));
+                golongans.add(gol);
+            }
+
+            connection.commit();
+            return golongans;
         } catch (SQLException exception) {
             throw exception;
         } finally {

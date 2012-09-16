@@ -2,6 +2,7 @@ package com.presensikaryawan.transaksi;
 
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
+import com.presensikaryawan.golongan.Golongan;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.posisi.*;
 import com.presensikaryawan.shiftSetting.Shift;
@@ -9,6 +10,7 @@ import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +39,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-        
+
         if (departmentCombo.getSelectedItem() == null) {
             kode_department = "%";
         } else {
@@ -46,16 +48,19 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         if (golonganCombo.getSelectedItem() == null) {
             kode_golongan = "%";
         } else {
-            kode_golongan = "%"+String.valueOf(golonganCombo.getSelectedItem());
+            kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
         }
-        if (nipKaryawanCombo.getSelectedItem() == null || namaKaryawanCombo.getSelectedItem() == null) {
+        if (nipKaryawanCombo.getSelectedItem() == null) {
             nip = "%";
-            nama = "%";
         } else {
             nip = "%" + String.valueOf(nipKaryawanCombo.getSelectedItem());
+        }
+        if (namaKaryawanCombo.getSelectedItem() == null) {
+            nama = "%";
+        } else {
             nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
         }
-        
+
         List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
 //        List<Shift> shifts = DaoFactory.getTransaksiGajiDao().getWaktuMulaiDanSelesaiByDepartment(kode_department);
         List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
@@ -64,18 +69,22 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             namaKaryawanCombo.addItem(k.getNama());
             golonganCombo.addItem(k.getKodeGolongan());
         }
+        List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
+        for (Golongan g : golongans) {
+            golonganCombo.addItem(g.getKodeGolongan());
+        }
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
         String bulan = String.valueOf(monthChooser.getMonth());
-        String tahun=String.valueOf(yearChooser.getYear());
-        String bulanTahun=tahun+"-0"+bulan+"-%";
+        String tahun = String.valueOf(yearChooser.getYear());
+        String bulanTahun = tahun + "-0" + bulan + "-%";
         System.out.println(bulanTahun);
-        String nip2="%";
-        List<PresensiKaryawan> presensiKaryawans=DaoFactory.getTransaksiGajiDao().getPresensiByMonth(bulanTahun, nip2);
-        PresensiTableModel model=new PresensiTableModel(presensiKaryawans);
+        String nip2 = "%";
+        List<PresensiKaryawan> presensiKaryawans = DaoFactory.getTransaksiGajiDao().getPresensiByMonth(bulanTahun, nip2);
+        PresensiTableModel model = new PresensiTableModel(presensiKaryawans);
         presenstiTable.setModel(model);
-        System.out.println(monthChooser.getMonth()+",year "+yearChooser.getYear());
+        System.out.println(monthChooser.getMonth() + ",year " + yearChooser.getYear());
     }
 
     private void initComponentFocus() {
@@ -474,6 +483,48 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
     private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
         // TODO add your handling code here:
+        kode_department = "%" + String.valueOf(departmentCombo.getSelectedItem());
+        if (kode_department != null) {
+
+            if (departmentCombo.getSelectedItem() == null) {
+                kode_department = "%";
+            } else {
+                kode_department = String.valueOf(departmentCombo.getSelectedItem());
+            }
+            if (golonganCombo.getSelectedItem() == null) {
+                kode_golongan = "%";
+            } else {
+                kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
+            }
+
+            if (namaKaryawanCombo.getSelectedItem() == null) {
+                nama = "%";
+            } else {
+                nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
+            }
+            departmentCombo.removeAllItems();
+            namaKaryawanCombo.removeAllItems();
+            golonganCombo.removeAllItems();
+            nipKaryawanCombo.removeAllItems();
+            try {
+                List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
+                for (Golongan g : golongans) {
+                    golonganCombo.addItem(g.getKodeGolongan());
+                }
+                List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
+                for (Department d : departments) {
+                    departmentCombo.addItem(d.getKodeDepartment());
+                }
+                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
+                for (Karyawan k : karyawans) {
+                    nipKaryawanCombo.addItem(k.getNip());
+                    namaKaryawanCombo.addItem(k.getNama());
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_departmentComboActionPerformed
 
     private void departmentComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentComboKeyPressed
@@ -482,69 +533,153 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
     private void golonganComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_golonganComboActionPerformed
         // TODO add your handling code here:
+        kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
+        if (kode_golongan != null) {
+
+            if (departmentCombo.getSelectedItem() == null) {
+                kode_department = "%";
+            } else {
+                kode_department = String.valueOf(departmentCombo.getSelectedItem());
+            }
+            if (golonganCombo.getSelectedItem() == null) {
+                kode_golongan = "%";
+            } else {
+                kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
+            }
+
+            if (namaKaryawanCombo.getSelectedItem() == null) {
+                nama = "%";
+            } else {
+                nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
+            }
+            departmentCombo.removeAllItems();
+            namaKaryawanCombo.removeAllItems();
+            golonganCombo.removeAllItems();
+            nipKaryawanCombo.removeAllItems();
+            try {
+                List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
+                for (Golongan g : golongans) {
+                    golonganCombo.addItem(g.getKodeGolongan());
+                }
+                List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
+                for (Department d : departments) {
+                    departmentCombo.addItem(d.getKodeDepartment());
+                }
+                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
+                for (Karyawan k : karyawans) {
+                    nipKaryawanCombo.addItem(k.getNip());
+                    namaKaryawanCombo.addItem(k.getNama());
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_golonganComboActionPerformed
 
     private void golonganComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_golonganComboKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_golonganComboKeyPressed
 
-    private void namaKaryawanComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaKaryawanComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namaKaryawanComboActionPerformed
-
     private void namaKaryawanComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaKaryawanComboKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_namaKaryawanComboKeyPressed
 
     private void nipKaryawanComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipKaryawanComboActionPerformed
-//        if (nipKaryawanCombo.getSelectedItem() != null) {
-//            String pilih = String.valueOf(nipKaryawanCombo.getSelectedItem());
-//            if (pilih != null) {
-//
-//                try {
-//                    activeShift = DaoFactory.getShiftDao().getByKode(pilih);
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//            //jika ditemukan
-//            if (activeShift != null) {
-//                namaShiftTextField.setText(activeShift.getNamaShift());
-//                String waktuMulaiGroup = activeShift.getWaktuMulai();
-//                String waktuSelesaiGroup = activeShift.getWaktuSelesai();
-//
-//                simpanButton.setText("Update");
-//                simpanButton.setMnemonic('U');
-//                simpanButton.setEnabled(true);
-//                hapusButton.setEnabled(true);
-//                nipKaryawanCombo.requestFocus();
-//                menitMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
-//                jamMulaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
-//                menitSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
-//                jamSelesaiCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
-//                jamMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(0, 2));
-//                jamSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(0, 2));
-//                menitMulaiCombo.setSelectedItem(waktuMulaiGroup.substring(3, 5));
-//                menitSelesaiCombo.setSelectedItem(waktuSelesaiGroup.substring(3, 5));
-//            } else {
-//                namaShiftTextField.setText(null);
-//                namaShiftTextField.requestFocus();
-//                hapusButton.setEnabled(false);
-//                simpanButton.setText("Simpan");
-//                simpanButton.setMnemonic('S');
-//                simpanButton.setEnabled(true);
-//            }
-//        } else {
-//            simpanButton.setEnabled(false);
-//            hapusButton.setEnabled(false);
-//        }
-        // TODO add your handling code here:
+        nip = "%" + String.valueOf(nipKaryawanCombo.getSelectedItem());
+        if (nip != null) {
+
+            if (departmentCombo.getSelectedItem() == null) {
+                kode_department = "%";
+            } else {
+                kode_department = String.valueOf(departmentCombo.getSelectedItem());
+            }
+            if (golonganCombo.getSelectedItem() == null) {
+                kode_golongan = "%";
+            } else {
+                kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
+            }
+
+            if (namaKaryawanCombo.getSelectedItem() == null) {
+                nama = "%";
+            } else {
+                nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
+            }
+            departmentCombo.removeAllItems();
+            namaKaryawanCombo.removeAllItems();
+            golonganCombo.removeAllItems();
+            nipKaryawanCombo.removeAllItems();
+            try {
+                List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
+                for (Golongan g : golongans) {
+                    golonganCombo.addItem(g.getKodeGolongan());
+                }
+                List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
+                for (Department d : departments) {
+                    departmentCombo.addItem(d.getKodeDepartment());
+                }
+                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
+                for (Karyawan k : karyawans) {
+                    nipKaryawanCombo.addItem(k.getNip());
+                    namaKaryawanCombo.addItem(k.getNama());
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_nipKaryawanComboActionPerformed
 
     private void nipKaryawanComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipKaryawanComboKeyPressed
         if (evt.getKeyCode() == 10) {
         }
     }//GEN-LAST:event_nipKaryawanComboKeyPressed
+
+    private void namaKaryawanComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaKaryawanComboActionPerformed
+        // TODO add your handling code here:
+        nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
+        if (nama != null) {
+
+            if (departmentCombo.getSelectedItem() == null) {
+                kode_department = "%";
+            } else {
+                kode_department = String.valueOf(departmentCombo.getSelectedItem());
+            }
+            if (golonganCombo.getSelectedItem() == null) {
+                kode_golongan = "%";
+            } else {
+                kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
+            }
+
+            if (namaKaryawanCombo.getSelectedItem() == null) {
+                nama = "%";
+            } else {
+                nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
+            }
+            departmentCombo.removeAllItems();
+            namaKaryawanCombo.removeAllItems();
+            golonganCombo.removeAllItems();
+            nipKaryawanCombo.removeAllItems();
+            try {
+                List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
+                for (Golongan g : golongans) {
+                    golonganCombo.addItem(g.getKodeGolongan());
+                }
+                List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
+                for (Department d : departments) {
+                    departmentCombo.addItem(d.getKodeDepartment());
+                }
+                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
+                for (Karyawan k : karyawans) {
+                    nipKaryawanCombo.addItem(k.getNip());
+                    namaKaryawanCombo.addItem(k.getNama());
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_namaKaryawanComboActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,7 @@
 package com.presensikaryawan.transaksi;
 
 import com.presensikaryawan.departmentSetting.Department;
+import com.presensikaryawan.golongan.Golongan;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.shiftSetting.Shift;
 import java.sql.SQLException;
@@ -20,4 +21,5 @@ public interface TransaksiGajiDao {
     List<Karyawan> getNamaDanNIPKaryawanByAnything(String kode_department, String kode_golongan, String nama) throws SQLException;
     List<PresensiKaryawan> getPresensiByMonth(String bulan, String nip) throws SQLException;   
     List<PresensiKaryawan> getWaktuSelesaiByNIP(String bulan, String nip) throws SQLException;
+    List<Golongan> getGolonganByNIPOrNama(String nama, String nip) throws SQLException;
 }
