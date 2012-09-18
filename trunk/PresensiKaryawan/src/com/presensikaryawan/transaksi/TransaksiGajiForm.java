@@ -39,6 +39,23 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
+        List<Department> departments = DaoFactory.getDepartmentDao().getAllDepartment();
+        for (Department d:departments){
+            departmentCombo.addItem(d.getKodeDepartment());
+        }
+        if (departmentCombo.getSelectedItem()!=null){
+            kode_department=String.valueOf(departmentCombo.getSelectedItem());
+            nilaiNamaDepartment.setText(DaoFactory.getDepartmentDao().getByKode(kode_department).getNamaDepartment());
+        }else{
+            nilaiNamaDepartment.setText("-");
+        }
+        String[] shiftCodes=DaoFactory.getTransaksiGajiDao().getSeninTillMingguCode(kode_department);
+        String[] waktuMulaiSeminggu=new String[7];
+        for (int i = 0; i < waktuMulaiSeminggu.length; i++) {
+            waktuMulaiSeminggu[i]=DaoFactory.getTransaksiGajiDao().getWaktuMulaiByShiftCode(shiftCodes[i]);
+            System.out.println(waktuMulaiSeminggu[i]);
+        }
+        
     }
 
     private void initComponentFocus() {
@@ -66,6 +83,8 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         yearChooser = new com.toedter.calendar.JYearChooser();
         departmentLabel = new javax.swing.JLabel();
         departmentCombo = new javax.swing.JComboBox();
+        namaDepartmentLabel = new javax.swing.JLabel();
+        nilaiNamaDepartment = new javax.swing.JLabel();
         posisiPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         presenstiTable = new javax.swing.JTable();
@@ -152,7 +171,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         bulanLabel.setText("Bulan :");
 
         departmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        departmentLabel.setText("Department");
+        departmentLabel.setText("Kode Department");
 
         departmentCombo.setEditable(true);
         departmentCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -167,16 +186,26 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             }
         });
 
+        namaDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaDepartmentLabel.setText("Nama Department");
+
+        nilaiNamaDepartment.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaDepartment.setText("Nilai Nama Department");
+
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+            .add(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .add(departmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(471, 471, 471)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(departmentCombo, 0, 200, Short.MAX_VALUE)
+                    .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(457, 457, 457)
                 .add(bulanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(18, 18, 18)
                 .add(monthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -196,10 +225,14 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                     .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        inputPanel.setBounds(0, 70, 1020, 60);
+        inputPanel.setBounds(0, 70, 1020, 100);
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         posisiPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -211,20 +244,20 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         presenstiTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         presenstiTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "NIP", "Nama Karyawan", "Tanggal", "Waktu Mulai", "Waktu Selesai"
+                "NIP", "Nama Karyawan", "S", "I", "A", "T", "M"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -255,7 +288,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        posisiPanel.setBounds(0, 130, 1020, 250);
+        posisiPanel.setBounds(0, 170, 1020, 250);
         jDesktopPane1.add(posisiPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
@@ -395,10 +428,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                         .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(posisiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(nilaiPosisiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        resultPanel.setBounds(0, 380, 1020, 230);
+        resultPanel.setBounds(0, 420, 1020, 160);
         jDesktopPane1.add(resultPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -435,48 +468,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
     private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
         // TODO add your handling code here:
-        kode_department = "%" + String.valueOf(departmentCombo.getSelectedItem());
-        if (kode_department != null) {
 
-            if (departmentCombo.getSelectedItem() == null) {
-                kode_department = "%";
-            } else {
-                kode_department = String.valueOf(departmentCombo.getSelectedItem());
-            }
-            if (golonganCombo.getSelectedItem() == null) {
-                kode_golongan = "%";
-            } else {
-                kode_golongan = "%" + String.valueOf(golonganCombo.getSelectedItem());
-            }
-
-            if (namaKaryawanCombo.getSelectedItem() == null) {
-                nama = "%";
-            } else {
-                nama = "%" + String.valueOf(namaKaryawanCombo.getSelectedItem());
-            }
-            departmentCombo.removeAllItems();
-            namaKaryawanCombo.removeAllItems();
-            golonganCombo.removeAllItems();
-            nipKaryawanCombo.removeAllItems();
-            try {
-                List<Golongan> golongans = DaoFactory.getTransaksiGajiDao().getGolonganByNIPOrNama(nama, nip);
-                for (Golongan g : golongans) {
-                    golonganCombo.addItem(g.getKodeGolongan());
-                }
-                List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartmentCodeByAnything(nip, nama);
-                for (Department d : departments) {
-                    departmentCombo.addItem(d.getKodeDepartment());
-                }
-                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getNamaDanNIPKaryawanByAnything(kode_department, kode_golongan, nama);
-                for (Karyawan k : karyawans) {
-                    nipKaryawanCombo.addItem(k.getNip());
-                    namaKaryawanCombo.addItem(k.getNama());
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }//GEN-LAST:event_departmentComboActionPerformed
 
     private void departmentComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentComboKeyPressed
@@ -521,10 +513,12 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
     private com.toedter.calendar.JMonthChooser monthChooser;
+    private javax.swing.JLabel namaDepartmentLabel;
     private javax.swing.JLabel namaLabel;
     private javax.swing.JLabel nilaiGolonganLabel;
     private javax.swing.JLabel nilaiLembur;
     private javax.swing.JLabel nilaiNIPLabel;
+    private javax.swing.JLabel nilaiNamaDepartment;
     private javax.swing.JLabel nilaiNamaLabel;
     private javax.swing.JLabel nilaiPosisiLabel;
     private javax.swing.JLabel nilaiTerlambatLabel;
