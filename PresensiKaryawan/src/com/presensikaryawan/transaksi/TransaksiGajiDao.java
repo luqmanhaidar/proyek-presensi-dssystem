@@ -8,6 +8,7 @@ import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.golongan.Golongan;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.shiftSetting.Shift;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,5 +17,6 @@ import java.util.List;
  * @author Tinus
  */
 public interface TransaksiGajiDao {
-    List<Karyawan> getKaryawanByDepartment(String kode_department) throws SQLException;
+    String[] getSeninTillMingguCode(String kode_department) throws SQLException;
+    String getWaktuMulaiByShiftCode(String kode_shift) throws SQLException;
 }

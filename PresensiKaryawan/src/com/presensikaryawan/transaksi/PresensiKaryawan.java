@@ -11,68 +11,22 @@ import com.presensikaryawan.karyawan.Karyawan;
  * @author Tinus
  */
 public class PresensiKaryawan {
-    private Karyawan karyawan;
-    private String tanggal;
-    private String waktu_mulai;
-    private String waktu_selesai;
+    private int jumlahTerlambat;
 
     public PresensiKaryawan() {
     }
 
     /**
-     * @return the karyawan
+     * @return the jumlahTerlambat
      */
-    public Karyawan getKaryawan() {
-        return karyawan;
+    public int getJumlahTerlambat() {
+        return jumlahTerlambat;
     }
 
     /**
-     * @param karyawan the karyawan to set
+     * @param jumlahTerlambat the jumlahTerlambat to set
      */
-    public void setKaryawan(Karyawan karyawan) {
-        this.karyawan = karyawan;
+    public void setJumlahTerlambat(int jumlahTerlambat) {
+        this.jumlahTerlambat = jumlahTerlambat;
     }
-
-    /**
-     * @return the tanggal
-     */
-    public String getTanggal() {
-        return tanggal;
-    }
-
-    /**
-     * @param tanggal the tanggal to set
-     */
-    public void setTanggal(String tanggal) {
-        this.tanggal = tanggal;
-    }
-
-    /**
-     * @return the waktu_mulai
-     */
-    public String getWaktu_mulai() {
-        return waktu_mulai;
-    }
-
-    /**
-     * @param waktu_mulai the waktu_mulai to set
-     */
-    public void setWaktu_mulai(String waktu_mulai) {
-        this.waktu_mulai = waktu_mulai;
-    }
-
-    /**
-     * @return the waktu_selesai
-     */
-    public String getWaktu_selesai() {
-        return waktu_selesai;
-    }
-
-    /**
-     * @param waktu_selesai the waktu_selesai to set
-     */
-    public void setWaktu_selesai(String waktu_selesai) {
-        this.waktu_selesai = waktu_selesai;
-    }
-    
 }
