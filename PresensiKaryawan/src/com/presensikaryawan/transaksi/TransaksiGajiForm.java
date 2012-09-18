@@ -1,17 +1,11 @@
 package com.presensikaryawan.transaksi;
 
 import com.dssystem.umum.ComponentFocus;
-import com.presensikaryawan.departmentSetting.Department;
-import com.presensikaryawan.golongan.Golongan;
-import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.posisi.*;
-import com.presensikaryawan.shiftSetting.Shift;
 import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -39,22 +33,24 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-        List<Department> departments = DaoFactory.getDepartmentDao().getAllDepartment();
-        for (Department d:departments){
-            departmentCombo.addItem(d.getKodeDepartment());
-        }
-        if (departmentCombo.getSelectedItem()!=null){
-            kode_department=String.valueOf(departmentCombo.getSelectedItem());
-            nilaiNamaDepartment.setText(DaoFactory.getDepartmentDao().getByKode(kode_department).getNamaDepartment());
-        }else{
-            nilaiNamaDepartment.setText("-");
-        }
-        String[] shiftCodes=DaoFactory.getTransaksiGajiDao().getSeninTillMingguCode(kode_department);
-        String[] waktuMulaiSeminggu=new String[7];
-        for (int i = 0; i < waktuMulaiSeminggu.length; i++) {
-            waktuMulaiSeminggu[i]=DaoFactory.getTransaksiGajiDao().getWaktuMulaiByShiftCode(shiftCodes[i]);
-            System.out.println(waktuMulaiSeminggu[i]);
-        }
+        PresensiTableModel model=new PresensiTableModel(null);
+        presenstiTable.setModel(model);
+//        List<Department> departments = DaoFactory.getDepartmentDao().getAllDepartment();
+//        for (Department d:departments){
+//            departmentCombo.addItem(d.getKodeDepartment());
+//        }
+//        if (departmentCombo.getSelectedItem()!=null){
+//            kode_department=String.valueOf(departmentCombo.getSelectedItem());
+//            nilaiNamaDepartment.setText(DaoFactory.getDepartmentDao().getByKode(kode_department).getNamaDepartment());
+//        }else{
+//            nilaiNamaDepartment.setText("-");
+//        }
+//        String[] shiftCodes=DaoFactory.getTransaksiGajiDao().getSeninTillMingguCode(kode_department);
+//        String[] waktuMulaiSeminggu=new String[7];
+//        for (int i = 0; i < waktuMulaiSeminggu.length; i++) {
+//            waktuMulaiSeminggu[i]=DaoFactory.getTransaksiGajiDao().getWaktuMulaiByShiftCode(shiftCodes[i]);
+//            System.out.println(waktuMulaiSeminggu[i]);
+//        }
         
     }
 
@@ -88,23 +84,6 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         posisiPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         presenstiTable = new javax.swing.JTable();
-        resultPanel = new javax.swing.JPanel();
-        terlambatLabel = new javax.swing.JLabel();
-        tidakMasukLabel = new javax.swing.JLabel();
-        buttonKlarifikasi = new javax.swing.JButton();
-        buttonKlarifikasi1 = new javax.swing.JButton();
-        terlambatLabel2 = new javax.swing.JLabel();
-        nilaiTerlambatLabel = new javax.swing.JLabel();
-        nilaiTidakMasukLabel = new javax.swing.JLabel();
-        nilaiLembur = new javax.swing.JLabel();
-        nipLabel = new javax.swing.JLabel();
-        namaLabel = new javax.swing.JLabel();
-        golonganLabel = new javax.swing.JLabel();
-        nilaiGolonganLabel = new javax.swing.JLabel();
-        nilaiNamaLabel = new javax.swing.JLabel();
-        nilaiNIPLabel = new javax.swing.JLabel();
-        posisiLabel = new javax.swing.JLabel();
-        nilaiPosisiLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -284,155 +263,12 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         posisiPanelLayout.setVerticalGroup(
             posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(posisiPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 358, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 45, Short.MAX_VALUE))
         );
 
-        posisiPanel.setBounds(0, 170, 1020, 250);
+        posisiPanel.setBounds(0, 170, 1020, 430);
         jDesktopPane1.add(posisiPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
-
-        terlambatLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        terlambatLabel.setText("Terlambat             :");
-
-        tidakMasukLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        tidakMasukLabel.setText("Tidak Masuk         :");
-
-        buttonKlarifikasi.setText("Klarifikasi");
-
-        buttonKlarifikasi1.setText("Klarifikasi");
-
-        terlambatLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        terlambatLabel2.setText("Lembur                  :");
-
-        nilaiTerlambatLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiTerlambatLabel.setText("nilai terlambat");
-
-        nilaiTidakMasukLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiTidakMasukLabel.setText("nilai tidak masuk");
-
-        nilaiLembur.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiLembur.setText("nilai lembur");
-
-        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nipLabel.setText("NIP                         :");
-
-        namaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        namaLabel.setText("Nama Karyawan :");
-
-        golonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        golonganLabel.setText("Golongan              :");
-
-        nilaiGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiGolonganLabel.setText("nilai golongan");
-
-        nilaiNamaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiNamaLabel.setText("nilai nama");
-
-        nilaiNIPLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiNIPLabel.setText("nilai NIP");
-
-        posisiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        posisiLabel.setText("Posisi                    :");
-
-        nilaiPosisiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiPosisiLabel.setText("nilai posisi");
-
-        org.jdesktop.layout.GroupLayout resultPanelLayout = new org.jdesktop.layout.GroupLayout(resultPanel);
-        resultPanel.setLayout(resultPanelLayout);
-        resultPanelLayout.setHorizontalGroup(
-            resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(resultPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(resultPanelLayout.createSequentialGroup()
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, namaLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, nipLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(resultPanelLayout.createSequentialGroup()
-                                .add(golonganLabel)
-                                .add(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                .add(resultPanelLayout.createSequentialGroup()
-                                    .add(nilaiNIPLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(43, 43, 43))
-                                .add(nilaiNamaLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .add(resultPanelLayout.createSequentialGroup()
-                                .add(nilaiGolonganLabel)
-                                .add(86, 86, 86)))
-                        .add(393, 393, 393))
-                    .add(resultPanelLayout.createSequentialGroup()
-                        .add(posisiLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(nilaiPosisiLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, tidakMasukLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, terlambatLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(resultPanelLayout.createSequentialGroup()
-                        .add(terlambatLabel2)
-                        .add(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(resultPanelLayout.createSequentialGroup()
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(resultPanelLayout.createSequentialGroup()
-                                .add(nilaiTerlambatLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                .add(47, 47, 47))
-                            .add(resultPanelLayout.createSequentialGroup()
-                                .add(nilaiTidakMasukLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(buttonKlarifikasi1)
-                            .add(buttonKlarifikasi)))
-                    .add(resultPanelLayout.createSequentialGroup()
-                        .add(nilaiLembur)
-                        .add(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        resultPanelLayout.setVerticalGroup(
-            resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(resultPanelLayout.createSequentialGroup()
-                .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(resultPanelLayout.createSequentialGroup()
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(terlambatLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(buttonKlarifikasi)
-                            .add(nilaiTerlambatLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                .add(tidakMasukLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(nilaiTidakMasukLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(buttonKlarifikasi1))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(nilaiLembur, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(terlambatLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                    .add(resultPanelLayout.createSequentialGroup()
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(nilaiNIPLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(namaLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(nilaiNamaLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(nilaiGolonganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(golonganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(resultPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(posisiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(nilaiPosisiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-
-        resultPanel.setBounds(0, 420, 1020, 160);
-        jDesktopPane1.add(resultPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -456,6 +292,9 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         int row = presenstiTable.getSelectedRow();
         String kodegroup = presenstiTable.getValueAt(row, 0).toString();
         String namagroup = presenstiTable.getValueAt(row, 1).toString();
+        
+        DetailPresensiDialog detailDialog=new DetailPresensiDialog(this, rootPaneCheckingEnabled,kodegroup, namagroup);
+        detailDialog.setVisible(true);
 
     }//GEN-LAST:event_presenstiTableMouseClicked
     private void isitable() {
@@ -499,13 +338,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bulanLabel;
-    private javax.swing.JButton buttonKlarifikasi;
-    private javax.swing.JButton buttonKlarifikasi1;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JComboBox departmentCombo;
     private javax.swing.JLabel departmentLabel;
     private javax.swing.JLabel fungsiLabel;
-    private javax.swing.JLabel golonganLabel;
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -514,24 +350,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private javax.swing.JLabel menuLabel;
     private com.toedter.calendar.JMonthChooser monthChooser;
     private javax.swing.JLabel namaDepartmentLabel;
-    private javax.swing.JLabel namaLabel;
-    private javax.swing.JLabel nilaiGolonganLabel;
-    private javax.swing.JLabel nilaiLembur;
-    private javax.swing.JLabel nilaiNIPLabel;
     private javax.swing.JLabel nilaiNamaDepartment;
-    private javax.swing.JLabel nilaiNamaLabel;
-    private javax.swing.JLabel nilaiPosisiLabel;
-    private javax.swing.JLabel nilaiTerlambatLabel;
-    private javax.swing.JLabel nilaiTidakMasukLabel;
-    private javax.swing.JLabel nipLabel;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
-    private javax.swing.JLabel posisiLabel;
     private javax.swing.JPanel posisiPanel;
     private javax.swing.JTable presenstiTable;
-    private javax.swing.JPanel resultPanel;
-    private javax.swing.JLabel terlambatLabel;
-    private javax.swing.JLabel terlambatLabel2;
-    private javax.swing.JLabel tidakMasukLabel;
     private com.toedter.calendar.JYearChooser yearChooser;
     // End of variables declaration//GEN-END:variables
 }

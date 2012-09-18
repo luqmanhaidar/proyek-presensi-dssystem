@@ -22,7 +22,7 @@ public class PresensiTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return presensiKaryawans.size();
+        return 1;
     }
 
     @Override
@@ -32,22 +32,22 @@ public class PresensiTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        PresensiKaryawan pK = presensiKaryawans.get(rowIndex);
-//        switch (columnIndex) {
-//            case 0:
-//                return pK.getKaryawan().getNip();
-//            case 1:
-//                return pK.getKaryawan().getNama();
-//            case 2:
-//                return pK.getTanggal();
-//            case 3:
-//                return pK.getWaktu_mulai();
-//            case 4:
-//                return pK.getWaktu_selesai();
-//            default:
+//        PresensiKaryawan pK = presensiKaryawans.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return "095314053";
+            case 1:
+                return "Agustinus";
+            case 2:
+                return null;
+            case 3:
+                return null;
+            case 4:
+                return null;
+            default:
                 return "";
         }
-//    }
+    }
 
     @Override
     public String getColumnName(int column) {
@@ -57,11 +57,15 @@ public class PresensiTableModel extends AbstractTableModel {
             case 1:
                 return "NAMA";
             case 2:
-                return "TANGGAL";
+                return "S";
             case 3:
-                return "WAKTU MULAI";
+                return "I";
             case 4:
-                return "WAKTU SELESAI";
+                return "A";
+            case 5:
+                return "T";
+            case 6:
+                return "M";
             default:
                 return "";
         }
