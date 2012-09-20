@@ -17,6 +17,8 @@ import java.util.List;
  * @author Tinus
  */
 public interface TransaksiGajiDao {
-    String[] getSeninTillMingguCode(String kode_department) throws SQLException;
-    String getWaktuMulaiByShiftCode(String kode_shift) throws SQLException;
+    List<Karyawan> getAllKaryawanByDepartmentCode(String code) throws SQLException;
+    List<Department> getAllDepartments() throws SQLException;
+    Department getNamaDepartmentByCode(String code) throws SQLException;
+    void callInsertAlfa(String maxTanggal, String nip) throws SQLException;
 }
