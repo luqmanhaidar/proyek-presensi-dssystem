@@ -1,12 +1,18 @@
 package com.presensikaryawan.transaksi;
 
 import com.dssystem.umum.ComponentFocus;
+import com.mysql.jdbc.CallableStatement;
+import com.presensikaryawan.departmentSetting.Department;
+import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.posisi.*;
 import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -22,9 +28,8 @@ import javax.swing.*;
  */
 public class TransaksiGajiForm extends javax.swing.JFrame {
 
-    private DaoFactory service;
     private Posisi activePosisi;
-    private String kode_golongan, kode_department, nip, nama;
+    private Department activeDepartment;
 
     /**
      * Creates new form masterInventoryGrup
@@ -34,10 +39,11 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-//        System.out.println(yearChooser.getYear());
-//        Date date=new Date();
-//        System.out.println(date.getYear()+1900);
-        
+        List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartments();
+        for (Department d : departments) {
+            departmentCombo.addItem(d.getKodeDepartment());
+        }
+
     }
 
     private void initComponentFocus() {
@@ -294,8 +300,8 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         int row = presenstiTable.getSelectedRow();
         String kodegroup = presenstiTable.getValueAt(row, 0).toString();
         String namagroup = presenstiTable.getValueAt(row, 1).toString();
-        
-        DetailPresensiDialog detailDialog=new DetailPresensiDialog(this, rootPaneCheckingEnabled,kodegroup, namagroup);
+
+        DetailPresensiDialog detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup);
         detailDialog.setVisible(true);
 
     }//GEN-LAST:event_presenstiTableMouseClicked
@@ -309,7 +315,25 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
     private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
         // TODO add your handling code here:
+        if (departmentCombo.getSelectedItem() != null) {
+            String pilih = String.valueOf(departmentCombo.getSelectedItem());
+            if (pilih != null) {
+                try {
+                    activeDepartment = DaoFactory.getTransaksiGajiDao().getNamaDepartmentByCode(pilih);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            //jika ditemukan
+            if (activeDepartment != null) {
+                nilaiNamaDepartment.setText(activeDepartment.getNamaDepartment());
+                departmentCombo.requestFocus();
 
+            } else {
+                JOptionPane.showMessageDialog(this, "Tidak Ada Department Dengan Code Tersebut", "Error", JOptionPane.ERROR_MESSAGE);
+                departmentCombo.requestFocus();
+            }
+        }
     }//GEN-LAST:event_departmentComboActionPerformed
 
     private void departmentComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentComboKeyPressed
@@ -318,9 +342,28 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
     private void prosesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prosesButtonActionPerformed
         // TODO add your handling code here:
-        Date date=new Date();
-        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear()+1900)){
+        Date date = new Date();
+        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
             JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
+            String year = String.valueOf(yearChooser.getYear());
+            String month = String.valueOf(monthChooser.getMonth()+1);
+            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+            String maxDayOfMonth = year+"-"+month+"-"+day;
+            
+            String kode_department = String.valueOf(departmentCombo.getSelectedItem());
+            try {
+                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getAllKaryawanByDepartmentCode(kode_department);
+                int counter = 0;
+                while (!karyawans.isEmpty()) {
+                    Karyawan karyawan=karyawans.remove(counter);
+                    DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth,karyawan.getNip());
+                    counter++;
+                }
+            } catch (SQLException ex) {
+            }
         }
     }//GEN-LAST:event_prosesButtonActionPerformed
 
