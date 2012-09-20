@@ -40,7 +40,6 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
         callableStatement.execute();
         callableStatement.close();
         connection.commit();
-        connection.close();
 
     }
 
