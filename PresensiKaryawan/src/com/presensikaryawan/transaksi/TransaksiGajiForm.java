@@ -6,6 +6,7 @@ import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -33,24 +34,9 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-        PresensiTableModel model=new PresensiTableModel(null);
-        presenstiTable.setModel(model);
-//        List<Department> departments = DaoFactory.getDepartmentDao().getAllDepartment();
-//        for (Department d:departments){
-//            departmentCombo.addItem(d.getKodeDepartment());
-//        }
-//        if (departmentCombo.getSelectedItem()!=null){
-//            kode_department=String.valueOf(departmentCombo.getSelectedItem());
-//            nilaiNamaDepartment.setText(DaoFactory.getDepartmentDao().getByKode(kode_department).getNamaDepartment());
-//        }else{
-//            nilaiNamaDepartment.setText("-");
-//        }
-//        String[] shiftCodes=DaoFactory.getTransaksiGajiDao().getSeninTillMingguCode(kode_department);
-//        String[] waktuMulaiSeminggu=new String[7];
-//        for (int i = 0; i < waktuMulaiSeminggu.length; i++) {
-//            waktuMulaiSeminggu[i]=DaoFactory.getTransaksiGajiDao().getWaktuMulaiByShiftCode(shiftCodes[i]);
-//            System.out.println(waktuMulaiSeminggu[i]);
-//        }
+//        System.out.println(yearChooser.getYear());
+//        Date date=new Date();
+//        System.out.println(date.getYear()+1900);
         
     }
 
@@ -81,6 +67,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         departmentCombo = new javax.swing.JComboBox();
         namaDepartmentLabel = new javax.swing.JLabel();
         nilaiNamaDepartment = new javax.swing.JLabel();
+        prosesButton = new javax.swing.JButton();
         posisiPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         presenstiTable = new javax.swing.JTable();
@@ -171,6 +158,13 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         nilaiNamaDepartment.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiNamaDepartment.setText("Nilai Nama Department");
 
+        prosesButton.setText("Proses");
+        prosesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prosesButtonActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
@@ -185,12 +179,18 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                     .add(departmentCombo, 0, 200, Short.MAX_VALUE)
                     .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .add(457, 457, 457)
-                .add(bulanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(18, 18, 18)
-                .add(monthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(45, 45, 45))
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(bulanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(18, 18, 18)
+                        .add(monthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(45, 45, 45))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(prosesButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(73, 73, 73))))
         );
         inputPanelLayout.setVerticalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -208,10 +208,12 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 35, Short.MAX_VALUE)
+                .add(prosesButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        inputPanel.setBounds(0, 70, 1020, 100);
+        inputPanel.setBounds(0, 70, 1020, 150);
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         posisiPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -263,11 +265,11 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         posisiPanelLayout.setVerticalGroup(
             posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(posisiPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 358, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 45, Short.MAX_VALUE))
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 291, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 62, Short.MAX_VALUE))
         );
 
-        posisiPanel.setBounds(0, 170, 1020, 430);
+        posisiPanel.setBounds(0, 220, 1020, 380);
         jDesktopPane1.add(posisiPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -314,6 +316,14 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_departmentComboKeyPressed
 
+    private void prosesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prosesButtonActionPerformed
+        // TODO add your handling code here:
+        Date date=new Date();
+        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear()+1900)){
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_prosesButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -354,6 +364,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JPanel posisiPanel;
     private javax.swing.JTable presenstiTable;
+    private javax.swing.JButton prosesButton;
     private com.toedter.calendar.JYearChooser yearChooser;
     // End of variables declaration//GEN-END:variables
 }
