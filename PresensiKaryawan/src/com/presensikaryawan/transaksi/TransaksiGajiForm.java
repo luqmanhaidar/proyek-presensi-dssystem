@@ -356,11 +356,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             String kode_department = String.valueOf(departmentCombo.getSelectedItem());
             try {
                 List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getAllKaryawanByDepartmentCode(kode_department);
-                int counter = 0;
                 while (!karyawans.isEmpty()) {
-                    Karyawan karyawan=karyawans.remove(counter);
-                    DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth,karyawan.getNip());
-                    counter++;
+                    Karyawan karyawan=karyawans.remove(0);
+                    System.out.println(karyawan.getNip());
+                    DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth,"98");
                 }
             } catch (SQLException ex) {
             }
