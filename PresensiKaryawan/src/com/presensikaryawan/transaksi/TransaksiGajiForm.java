@@ -1,21 +1,26 @@
 package com.presensikaryawan.transaksi;
 
 import com.dssystem.umum.ComponentFocus;
-import com.mysql.jdbc.CallableStatement;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.posisi.*;
 import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
-import java.sql.Connection;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * masterInventoryGrup.java
@@ -64,7 +69,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         menuLabel = new javax.swing.JLabel();
         fungsiLabel = new javax.swing.JLabel();
         panelStatus1 = new com.sistem.panelstatus.PanelStatus();
-        cmdKeluar = new javax.swing.JButton();
+        cetakButton = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
         bulanLabel = new javax.swing.JLabel();
         monthChooser = new com.toedter.calendar.JMonthChooser();
@@ -126,16 +131,16 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         panelStatus1.setBounds(0, 650, 1020, 50);
         jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
-        cmdKeluar.setText("Cetak");
-        cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
+        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
+        cetakButton.setText("Cetak");
+        cetakButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdKeluarActionPerformed(evt);
+                cetakButtonActionPerformed(evt);
             }
         });
-        cmdKeluar.setBounds(900, 610, 110, 40);
-        jDesktopPane1.add(cmdKeluar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        cetakButton.setBounds(900, 600, 110, 40);
+        jDesktopPane1.add(cetakButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -272,10 +277,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(posisiPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 291, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 62, Short.MAX_VALUE))
+                .add(0, 52, Short.MAX_VALUE))
         );
 
-        posisiPanel.setBounds(0, 220, 1020, 380);
+        posisiPanel.setBounds(0, 220, 1020, 370);
         jDesktopPane1.add(posisiPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -308,10 +313,60 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     private void isitable() {
     }
 
-    private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
+    private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
+        try {
+            String reportSource = "./report/RekapPresensiReport.jasper";
+            Map<String, Object> params = new HashMap<String, Object>();
+            String bulan = null;
+            switch (monthChooser.getMonth()) {
+                case 0:
+                    bulan = "JANUARI";
+                    break;
+                case 1:
+                    bulan = "FEBRUARI";
+                    break;
+                case 2:
+                    bulan = "MARET";
+                    break;
+                case 3:
+                    bulan = "APRIL";
+                    break;
+                case 4:
+                    bulan = "MEI";
+                    break;
+                case 5:
+                    bulan = "JUNI";
+                    break;
+                case 6:
+                    bulan = "JULI";
+                    break;
+                case 7:
+                    bulan = "AGUSTUS";
+                    break;
+                case 8:
+                    bulan = "SEPTEMBER";
+                    break;
+                case 9:
+                    bulan = "OKTOBER";
+                    break;
+                case 10:
+                    bulan = "NOVEMBER";
+                    break;
+                case 11:
+                    bulan = "DESEMBER";
+                    break;
+            }
+            bulan=bulan + " " + String.valueOf(yearChooser.getYear());
+            System.out.println(bulan);
+            params.put("bulan", bulan);
+//            params=null;
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params);
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException ex) {
+            Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        this.dispose();
-}//GEN-LAST:event_cmdKeluarActionPerformed
+}//GEN-LAST:event_cetakButtonActionPerformed
 
     private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
         // TODO add your handling code here:
@@ -349,17 +404,17 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             GregorianCalendar gc = new GregorianCalendar();
             gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
             String year = String.valueOf(yearChooser.getYear());
-            String month = String.valueOf(monthChooser.getMonth()+1);
+            String month = String.valueOf(monthChooser.getMonth() + 1);
             String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-            String maxDayOfMonth = year+"-"+month+"-"+day;
-            
+            String maxDayOfMonth = year + "-" + month + "-" + day;
+
             String kode_department = String.valueOf(departmentCombo.getSelectedItem());
             try {
                 List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getAllKaryawanByDepartmentCode(kode_department);
                 while (!karyawans.isEmpty()) {
-                    Karyawan karyawan=karyawans.remove(0);
+                    Karyawan karyawan = karyawans.remove(0);
                     System.out.println(karyawan.getNip());
-                    DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth,"98");
+                    DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth, "98");
                 }
             } catch (SQLException ex) {
             }
@@ -390,7 +445,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bulanLabel;
-    private javax.swing.JButton cmdKeluar;
+    private javax.swing.JButton cetakButton;
     private javax.swing.JComboBox departmentCombo;
     private javax.swing.JLabel departmentLabel;
     private javax.swing.JLabel fungsiLabel;
