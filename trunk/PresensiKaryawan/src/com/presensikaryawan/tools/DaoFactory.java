@@ -4,11 +4,11 @@
  */
 package com.presensikaryawan.tools;
 
+import com.dssystem.bank.BankDao;
+import com.dssystem.bank.BankDaoImplemen;
 import com.mysql.jdbc.Driver;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.presensikaryawan.departmentSetting.DepartmentDaoImplemen;
-import com.presensikaryawan.gaji.GajiDao;
-import com.presensikaryawan.gaji.GajiDaoImplemen;
 import com.presensikaryawan.golongan.GolonganDao;
 import com.presensikaryawan.golongan.GolonganDaoImplemen;
 import com.presensikaryawan.groupShift.GroupShiftDao;
@@ -27,8 +27,9 @@ import com.presensikaryawan.shiftSetting.ShiftDao;
 import com.presensikaryawan.shiftSetting.ShiftDaoImplemen;
 import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
-import com.presensikaryawan.transaksi.TransaksiGajiDao;
-import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
+import com.presensikaryawan.transaksi.TransaksiDepartment;
+import com.presensikaryawan.transaksi.TransaksiDepartmentDao;
+import com.presensikaryawan.transaksi.TransaksiDepartmentDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -56,13 +57,13 @@ public class DaoFactory {
     private static Connection connection;
     private static Properties prop;
     private static KaryawanDao karyawanDao;
-    private static GajiDao gajiDao;
-    private static TransaksiGajiDao transaksiGajiDao;
+    private static TransaksiDepartmentDao transaksiDepartmentDao;
+    private static BankDao bankDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
             try {
-                FileInputStream in = new FileInputStream("C:\\WINDOWS\\ipAddressDatabasePresensi.xml");
+                FileInputStream in = new FileInputStream("D:\\Documents\\Project\\progdss\\ipAddressContoh.xml");
                 prop = new Properties();
                 prop.loadFromXML(in);
 
@@ -75,7 +76,7 @@ public class DaoFactory {
 
             String url = "jdbc:mysql://" + alamatIp + "/" + namaDB;
             String user = "presensi";
-            String password = "adminpresensi";
+            String password = "presensi";
             connection = DriverManager.getConnection(url, user, password);
         }
         return connection;
@@ -117,13 +118,6 @@ public class DaoFactory {
         return statusSettingDao;
     }
 
-    public static GajiDao getGajiDao() throws SQLException {
-        if (gajiDao == null) {
-            gajiDao = new GajiDaoImplemen(getConnection());
-        }
-        return gajiDao;
-    }
-
     public static PosisiDao getPosisiDao() throws SQLException {
         if (posisiDao == null) {
             posisiDao = new PosisiDaoImplemen(getConnection());
@@ -159,10 +153,17 @@ public class DaoFactory {
         return departmentDao;
     }
      
-     public static TransaksiGajiDao getTransaksiGajiDao() throws SQLException{
-         if (transaksiGajiDao==null){
-             transaksiGajiDao=new TransaksiGajiDaoImplemen(getConnection());
-         }
-         return transaksiGajiDao;
-     }
+     public static TransaksiDepartmentDao getTransaksiDepartmentDao() throws SQLException {
+        if (transaksiDepartmentDao == null) {
+            transaksiDepartmentDao = new TransaksiDepartmentDaoImplemen(getConnection());
+        }
+        return transaksiDepartmentDao;
+    }
+     
+     public static BankDao getBankDao() throws SQLException {
+        if (bankDao == null) {
+            bankDao = new BankDaoImplemen(getConnection());
+        }
+        return bankDao;
+    }
 }
