@@ -7,7 +7,6 @@ import com.presensikaryawan.posisi.*;
 import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
-import java.io.File;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -315,8 +314,6 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
         try {
-            String reportSource = "./report/RekapPresensiReport.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
             String bulan = null;
             switch (monthChooser.getMonth()) {
                 case 0:
@@ -356,10 +353,10 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                     bulan = "DESEMBER";
                     break;
             }
-            bulan=bulan + " " + String.valueOf(yearChooser.getYear());
-            System.out.println(bulan);
-            params.put("bulan", bulan);
-//            params=null;
+            bulan = bulan + " " + String.valueOf(yearChooser.getYear());
+            String reportSource = "./report/rekapReport.jasper";
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("bulan" , bulan);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params);
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {

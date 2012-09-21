@@ -30,6 +30,8 @@ import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
 import com.presensikaaryawan.transaksiDepartment.TransaksiDepartment;
 import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDao;
 import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
+import com.presensikaryawan.transaksi.TransaksiGajiDao;
+import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -58,6 +60,7 @@ public class DaoFactory {
     private static Properties prop;
     private static KaryawanDao karyawanDao;
     private static TransaksiDepartmentDao transaksiDepartmentDao;
+    private static TransaksiGajiDao transaksiGajiDao;
     private static BankDao bankDao;
 
     public static Connection getConnection() throws SQLException {
@@ -166,4 +169,11 @@ public class DaoFactory {
         }
         return bankDao;
     }
+    
+     public static TransaksiGajiDao getTransaksiGajiDao() throws SQLException{
+         if (transaksiGajiDao == null){
+             transaksiGajiDao = new TransaksiGajiDaoImplemen(getConnection());
+         }
+         return  transaksiGajiDao;
+     }
 }

@@ -24,6 +24,7 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
     private final String SQL_GETKARYAWANBYDEPARTMENT = "SELECT nip, nama FROM karyawan WHERE kode_department LIKE ? order by nip asc";
     private final String SQL_GETDEPARTMENTNAME_BYCODE = "SELECT nama_department from department_setting where kode_department LIKE ?";
     private final String SQL_GET_INSERTALFA_SP = "CALL insertAlfa (?,?)";
+    private final String SQL_GET_GETPRESENSI_SP="CALL getPresensi (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private Connection connection;
 
     public TransaksiGajiDaoImplemen(Connection connection) {
@@ -149,5 +150,10 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
                 throw exception;
             }
         }
+    }
+
+    @Override
+    public List<String[]> callGetPresensi(String bulan, String tahun, String kode_department) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
