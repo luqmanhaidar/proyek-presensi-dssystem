@@ -47,6 +47,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         initComponentFocus();
         tanggalMasukDateChooser.setDate(gc.getTime());
         namaKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
+        alamatKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
         KaryawanDao dao = DaoFactory.getKaryawanDao();
         List<Karyawan> karyawans = dao.getAllKaryawan();
         KaryawanTableModel model = new KaryawanTableModel(karyawans);
@@ -59,28 +60,30 @@ public class KaryawanForm extends javax.swing.JFrame {
 //        KaryawanTableModel model = new KaryawanTableModel(karyawans);
 //        karyawanTable.setModel(model);
         for (Golongan g : golongans) {
-            golonganCombo.addItem(g.getKodeGolongan() + " " + g.getNamaGolongan());
+            golonganCombo.addItem(g.getKodeGolongan() + "-" + g.getNamaGolongan());
         }
         PosisiDao dao2 = DaoFactory.getPosisiDao();
         List<Posisi> posisis = dao2.getAllPosisi();
         for (Posisi p : posisis) {
-//            golonganCombo.addItem(p.getKode_posisi() + " " + p.getNama_posisi());
+            posisiCombo.addItem(p.getKode_posisi() + "-" + p.getNama_posisi());
+            
         }
         OutletDao dao3 = DaoFactory.getOutletDao();
         List<Outlet> outlets = dao3.getAllOutlet();
         for (Outlet o : outlets) {
-            golonganCombo.addItem(o.getKodeOutlet() + " " + o.getNamaOutlet());
+            outletCombo.addItem(o.getKodeOutlet() + "-" + o.getNamaOutlet());
         }
         DepartmentDao dao4 = DaoFactory.getDepartmentDao();
         List<Department> departments = dao4.getAllDepartment();
         for (Department d : departments) {
-            golonganCombo.addItem(d.getKodeDepartment() + " " + d.getNamaDepartment());
+            departmentCombo.addItem(d.getKodeDepartment() + "-" + d.getNamaDepartment());
         }
 
     }
 
     private void initComponentFocus() {
         namaKaryawanTextField.addFocusListener(new ComponentFocus(namaKaryawanTextField));
+        alamatKaryawanTextField.addFocusListener(new ComponentFocus(alamatKaryawanTextField));
         nipKaryawanCombo.addFocusListener(new ComponentFocus(nipKaryawanCombo));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
     }
@@ -112,13 +115,17 @@ public class KaryawanForm extends javax.swing.JFrame {
         golonganKaryawanLabel = new javax.swing.JLabel();
         posisiKaryawanLabel = new javax.swing.JLabel();
         alamatKaryawanTextField = new javax.swing.JTextField();
-        posisiKaryawanTextField = new javax.swing.JTextField();
         tanggalMasukDateChooser = new com.toedter.calendar.JDateChooser();
         golonganCombo = new javax.swing.JComboBox();
         kodeOutletLabel = new javax.swing.JLabel();
-        outletCombo = new javax.swing.JComboBox();
         kodeDepartmentLabel = new javax.swing.JLabel();
+        posisiCombo = new javax.swing.JComboBox();
+        outletCombo = new javax.swing.JComboBox();
         departmentCombo = new javax.swing.JComboBox();
+        noRekeningLabel = new javax.swing.JLabel();
+        noRekeningTextField = new javax.swing.JTextField();
+        bankLabel = new javax.swing.JLabel();
+        bankCombo = new javax.swing.JComboBox();
         daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
@@ -262,14 +269,6 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
-        posisiKaryawanTextField.setFont(new java.awt.Font("Arial", 0, 11));
-        posisiKaryawanTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        posisiKaryawanTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                posisiKaryawanTextFieldActionPerformed(evt);
-            }
-        });
-
         tanggalMasukDateChooser.setDateFormatString("dd-MM-yyyy");
         tanggalMasukDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -282,6 +281,20 @@ public class KaryawanForm extends javax.swing.JFrame {
 
         kodeDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         kodeDepartmentLabel.setText("Department");
+
+        noRekeningLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        noRekeningLabel.setText("No REK");
+
+        noRekeningTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        noRekeningTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        noRekeningTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noRekeningTextFieldActionPerformed(evt);
+            }
+        });
+
+        bankLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        bankLabel.setText("BANK");
 
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
@@ -298,36 +311,45 @@ public class KaryawanForm extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(batalButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(19, 19, 19))
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, posisiKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, golonganKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, tanggalMasukKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, alamatKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(nipKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(nipKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(namaKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(alamatKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 535, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(tanggalMasukDateChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 213, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, inputPanelLayout.createSequentialGroup()
+                                .add(noRekeningLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(noRekeningTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 213, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(32, 32, 32)
+                                .add(bankLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(bankCombo, 0, 216, Short.MAX_VALUE))
+                            .add(inputPanelLayout.createSequentialGroup()
+                                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, posisiKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, golonganKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, tanggalMasukKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, alamatKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(nipKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(golonganCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(posisiKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 42, Short.MAX_VALUE)
-                                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(nipKaryawanCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(namaKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(alamatKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 535, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(inputPanelLayout.createSequentialGroup()
-                                        .add(kodeDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                        .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                    .add(inputPanelLayout.createSequentialGroup()
-                                        .add(kodeOutletLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                        .add(outletCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                                .add(91, 91, 91)))
-                        .addContainerGap(87, Short.MAX_VALUE))))
+                                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                            .add(golonganCombo, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .add(tanggalMasukDateChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                                            .add(posisiCombo, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .add(32, 32, 32)
+                                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                            .add(inputPanelLayout.createSequentialGroup()
+                                                .add(kodeDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(departmentCombo, 0, 216, Short.MAX_VALUE))
+                                            .add(inputPanelLayout.createSequentialGroup()
+                                                .add(kodeOutletLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(outletCombo, 0, 216, Short.MAX_VALUE)))))))
+                        .addContainerGap(74, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
         );
         inputPanelLayout.setVerticalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -349,18 +371,30 @@ public class KaryawanForm extends javax.swing.JFrame {
                     .add(tanggalMasukKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(tanggalMasukDateChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(golonganKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(golonganCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeOutletLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(outletCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(golonganKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(golonganCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(posisiKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(posisiCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(kodeOutletLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(outletCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(kodeDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(posisiKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(posisiKaryawanTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(kodeDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 14, Short.MAX_VALUE)
+                    .add(noRekeningLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(noRekeningTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(bankLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(bankCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -368,7 +402,7 @@ public class KaryawanForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        inputPanel.setBounds(0, 70, 740, 280);
+        inputPanel.setBounds(0, 70, 740, 320);
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         daftarKaryawanPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -419,12 +453,10 @@ public class KaryawanForm extends javax.swing.JFrame {
         );
         daftarKaryawanPanelLayout.setVerticalGroup(
             daftarKaryawanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(daftarKaryawanPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
         );
 
-        daftarKaryawanPanel.setBounds(0, 350, 740, 250);
+        daftarKaryawanPanel.setBounds(0, 390, 740, 210);
         jDesktopPane1.add(daftarKaryawanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -436,12 +468,12 @@ public class KaryawanForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-756)/2, (screenSize.height-698)/2, 756, 698);
+        setBounds((screenSize.width-756)/2, (screenSize.height-708)/2, 756, 708);
     }// </editor-fold>//GEN-END:initComponents
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
@@ -467,30 +499,41 @@ public class KaryawanForm extends javax.swing.JFrame {
     }//GEN-LAST:event_hapusButtonActionPerformed
 
     private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_karyawanTableMouseClicked
-        int row = karyawanTable.getSelectedRow();
-        String nip = karyawanTable.getValueAt(row, 0).toString();
-        String nama = karyawanTable.getValueAt(row, 1).toString();
-        String alamat = karyawanTable.getValueAt(row, 2).toString();
-        String tanggal = karyawanTable.getValueAt(row, 3).toString();
-        String golongan = karyawanTable.getValueAt(row, 4).toString();
-        String posisi = karyawanTable.getValueAt(row, 5).toString();
-        String outlet = karyawanTable.getValueAt(row, 6).toString();
-        String department = karyawanTable.getValueAt(row, 7).toString();
-        int year = Integer.parseInt(tanggal.substring(0, 4));
-        int month = Integer.parseInt(tanggal.substring(5, 7));
-        int day = Integer.parseInt(tanggal.substring(8, 10));
-        Date date = new Date(year, month, day);
-        String kode = karyawanTable.getValueAt(row, 4).toString();
-        namaKaryawanTextField.setText(nama);
-        nipKaryawanCombo.setSelectedItem(nip);
-        alamatKaryawanTextField.setText(alamat);
-        tanggalMasukDateChooser.setDate(date);
-        golonganCombo.setSelectedItem(golongan);
-        posisiKaryawanTextField.setText(posisi);
-        outletCombo.setSelectedItem(outlet);
-        departmentCombo.setSelectedItem(department);
+        try {
+            int row = karyawanTable.getSelectedRow();
+            String nip = karyawanTable.getValueAt(row, 0).toString();
+            String nama = karyawanTable.getValueAt(row, 1).toString();
+            String alamat = karyawanTable.getValueAt(row, 2).toString();
+            String tanggal = karyawanTable.getValueAt(row, 3).toString();
+            String golongan = karyawanTable.getValueAt(row, 4).toString();
+    //        String kodeGolongan = golongan.substring(0, golongan.indexOf("-"));
+            String posisi = karyawanTable.getValueAt(row, 5).toString();
+    //        String kodePosisi = golongan.substring(0, posisi.indexOf("-"));
+            String outlet = karyawanTable.getValueAt(row, 6).toString();
+    //        String kodeOutlet = golongan.substring(0, outlet.indexOf("-"));
+            String department = karyawanTable.getValueAt(row, 7).toString();
+    //        String kodeDepartment = golongan.substring(0, department.indexOf("-"));
+            int year = Integer.parseInt(tanggal.substring(0, 4));
+            year=year-1900;
+            int month = Integer.parseInt(tanggal.substring(5, 7));
+            month=month-1;
+            int day = Integer.parseInt(tanggal.substring(8, 10));
+//            System.out.println(tanggal+"   "+year+"   "+month+"   "+day);
+            Date date = new Date(year, month, day);
+            String kode = karyawanTable.getValueAt(row, 4).toString();
+            namaKaryawanTextField.setText(nama);
+            nipKaryawanCombo.setSelectedItem(nip);
+            alamatKaryawanTextField.setText(alamat);
+            tanggalMasukDateChooser.setDate(date);
+            golonganCombo.setSelectedItem(golongan+"-"+DaoFactory.getGolonganDao().getByKodeGolongan(golongan).getNamaGolongan());
+            posisiCombo.setSelectedItem(posisi+"-"+DaoFactory.getPosisiDao().getByKode(posisi).getNama_posisi());
+            outletCombo.setSelectedItem(outlet+"-"+DaoFactory.getOutletDao().getByKodeOutlet(outlet).getNamaOutlet());
+            departmentCombo.setSelectedItem(department+"-"+DaoFactory.getDepartmentDao().getByKode(department).getNamaDepartment());
 
-        // TODO add your handling code here:
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_karyawanTableMouseClicked
     private void isitable() {
     }
@@ -505,18 +548,22 @@ public class KaryawanForm extends javax.swing.JFrame {
         String alamat = alamatKaryawanTextField.getText();
         String tanggal = DateTool.dateToString(tanggalMasukDateChooser.getDate(), "yyyy-MM-dd");
         String golongan = golonganCombo.getSelectedItem().toString();
-        String posisi = posisiKaryawanTextField.getText();
+        String kodeGolongan = golongan.substring(0, golongan.indexOf("-"));
+        String posisi = posisiCombo.getSelectedItem().toString();
+        String kodePosisi = posisi.substring(0, posisi.indexOf("-"));
         String outlet = outletCombo.getSelectedItem().toString();
+        String kodeOutlet = outlet.substring(0, outlet.indexOf("-"));
         String department = departmentCombo.getSelectedItem().toString();
+        String kodeDepartment = department.substring(0, department.indexOf("-"));
         Karyawan karyawanBaru = new Karyawan();
         karyawanBaru.setNip(nip);
         karyawanBaru.setNama(nama);
         karyawanBaru.setAlamat(alamat);
         karyawanBaru.setTanggal_masuk(tanggal);
-        karyawanBaru.setKodeGolongan(golongan);
-        karyawanBaru.setKodePosisi(posisi);
-        karyawanBaru.setKodeOutlet(outlet);
-        karyawanBaru.setKodeDepartment(department);
+        karyawanBaru.setKodeGolongan(kodeGolongan);
+        karyawanBaru.setKodePosisi(kodePosisi);
+        karyawanBaru.setKodeOutlet(kodeOutlet);
+        karyawanBaru.setKodeDepartment(kodeDepartment);
         if ("Simpan".equals(simpanButton.getText())) {
             try {
                 DaoFactory.getKaryawanDao().insert(karyawanBaru);
@@ -535,10 +582,10 @@ public class KaryawanForm extends javax.swing.JFrame {
                 karyawanLama.setNama(nama);
                 karyawanLama.setAlamat(alamat);
                 karyawanLama.setTanggal_masuk(tanggal);
-                karyawanLama.setKodeGolongan(golongan);
-                karyawanLama.setKodePosisi(posisi);
-                karyawanLama.setKodeOutlet(outlet);
-                karyawanLama.setKodeDepartment(department);
+                karyawanLama.setKodeGolongan(kodeGolongan);
+                karyawanLama.setKodePosisi(kodePosisi);
+                karyawanLama.setKodeOutlet(kodeOutlet);
+                karyawanLama.setKodeDepartment(kodeDepartment);
                 service.getKaryawanDao().update(karyawanLama);
                 JOptionPane.showMessageDialog(this, "Data dengan nama\n"
                         + "<html><font color=#FF0000>" + nama + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
@@ -574,6 +621,9 @@ public class KaryawanForm extends javax.swing.JFrame {
             alamatKaryawanTextField.setText(activeKaryawan.getAlamat());
             tanggalMasukDateChooser.setDate(date);
             golonganCombo.setSelectedItem(activeKaryawan.getKodeGolongan());
+            posisiCombo.setSelectedItem(activeKaryawan.getKodePosisi());
+            outletCombo.setSelectedItem(activeKaryawan.getKodeOutlet());
+            departmentCombo.setSelectedItem(activeKaryawan.getKodeDepartment());
             simpanButton.setText("Update");
             simpanButton.setMnemonic('U');
             simpanButton.setEnabled(true);
@@ -611,7 +661,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         tanggalMasukDateChooser.setDate(gc.getTime());
         alamatKaryawanTextField.setText(null);
         golonganCombo.setSelectedIndex(0);
-        posisiKaryawanTextField.setText(null);
+        posisiCombo.setSelectedIndex(0);
         outletCombo.setSelectedIndex(0);
         departmentCombo.setSelectedIndex(0);
         nipKaryawanCombo.removeAllItems();
@@ -626,7 +676,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         karyawanTable.setModel(model);
 
         for (Karyawan k : karyawans) {
-            nipKaryawanCombo.addItem(k.getKodeGolongan());
+            nipKaryawanCombo.addItem(k.getNip());
         }
 
 }//GEN-LAST:event_batalButtonActionPerformed
@@ -635,13 +685,13 @@ public class KaryawanForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_alamatKaryawanTextFieldActionPerformed
 
-    private void posisiKaryawanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posisiKaryawanTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_posisiKaryawanTextFieldActionPerformed
-
 private void tanggalMasukDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tanggalMasukDateChooserPropertyChange
 // TODO add your handling code here:
 }//GEN-LAST:event_tanggalMasukDateChooserPropertyChange
+
+private void noRekeningTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noRekeningTextFieldActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_noRekeningTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -669,6 +719,8 @@ private void tanggalMasukDateChooserPropertyChange(java.beans.PropertyChangeEven
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel alamatKaryawanLabel;
     private javax.swing.JTextField alamatKaryawanTextField;
+    private javax.swing.JComboBox bankCombo;
+    private javax.swing.JLabel bankLabel;
     private javax.swing.JButton batalButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JPanel daftarKaryawanPanel;
@@ -690,9 +742,11 @@ private void tanggalMasukDateChooserPropertyChange(java.beans.PropertyChangeEven
     private javax.swing.JTextField namaKaryawanTextField;
     private javax.swing.JComboBox nipKaryawanCombo;
     private javax.swing.JLabel nipKaryawanLabel;
+    private javax.swing.JLabel noRekeningLabel;
+    private javax.swing.JTextField noRekeningTextField;
     private javax.swing.JComboBox outletCombo;
+    private javax.swing.JComboBox posisiCombo;
     private javax.swing.JLabel posisiKaryawanLabel;
-    private javax.swing.JTextField posisiKaryawanTextField;
     private javax.swing.JButton simpanButton;
     private com.toedter.calendar.JDateChooser tanggalMasukDateChooser;
     private javax.swing.JLabel tanggalMasukKaryawanLabel;
