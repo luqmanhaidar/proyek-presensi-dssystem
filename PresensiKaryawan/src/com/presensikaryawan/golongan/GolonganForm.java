@@ -1,8 +1,8 @@
 package com.presensikaryawan.golongan;
 
-
 import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ChangeCase;
+import com.dssystem.umum.ChangeFormatDoubleToString;
 import com.dssystem.umum.ComponentFocus;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
@@ -17,19 +17,19 @@ import javax.swing.*;
  *
  * Created on October 21, 2006, 10:06 AM
  */
-
 /**
  *
  * @author  Als
  */
 public class GolonganForm extends javax.swing.JFrame {
-    
+
     private DaoFactory service;
     private Golongan activeGolongan;
+
     /** Creates new form masterInventoryGrup */
     public GolonganForm() throws SQLException {
         initComponents();
-        UIManager.put("nimbusBase", new Color(204,204,255));
+        UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        UIManager.put("nimbusControl",new Color(153,255,153));
 //        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
 //        Tampilan();
@@ -40,15 +40,17 @@ public class GolonganForm extends javax.swing.JFrame {
         List<Golongan> golongans = dao.getAllGolongan();
         GolonganTableModel model = new GolonganTableModel(golongans);
         golonganTable.setModel(model);
-        for(Golongan g :golongans){
+        for (Golongan g : golongans) {
             kodeGolonganCombo.addItem(g.getKodeGolongan());
         }
     }
+
     private void initComponentFocus() {
         namaGolonganTextField.addFocusListener(new ComponentFocus(namaGolonganTextField));
         kodeGolonganCombo.addFocusListener(new ComponentFocus(kodeGolonganCombo));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
     }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -161,7 +163,7 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         simpanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Save.gif"))); // NOI18N
         simpanButton.setMnemonic('S');
         simpanButton.setText("Simpan");
@@ -221,6 +223,17 @@ public class GolonganForm extends javax.swing.JFrame {
                 gajiPokokTextFieldActionPerformed(evt);
             }
         });
+        gajiPokokTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                gajiPokokTextFieldKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                gajiPokokTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                gajiPokokTextFieldKeyTyped(evt);
+            }
+        });
 
         uangMakanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         uangMakanLabel.setText("Uang Makan");
@@ -230,6 +243,11 @@ public class GolonganForm extends javax.swing.JFrame {
         uangMakanTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uangMakanTextFieldActionPerformed(evt);
+            }
+        });
+        uangMakanTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                uangMakanTextFieldKeyReleased(evt);
             }
         });
 
@@ -243,6 +261,11 @@ public class GolonganForm extends javax.swing.JFrame {
                 uangLemburTextFieldActionPerformed(evt);
             }
         });
+        uangLemburTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                uangLemburTextFieldKeyReleased(evt);
+            }
+        });
 
         uangHadirLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         uangHadirLabel.setText("Uang Hadir");
@@ -254,6 +277,11 @@ public class GolonganForm extends javax.swing.JFrame {
                 uangHadirTextFieldActionPerformed(evt);
             }
         });
+        uangHadirTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                uangHadirTextFieldKeyReleased(evt);
+            }
+        });
 
         potonganTelatLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         potonganTelatLabel.setText("Potongan Telat");
@@ -263,6 +291,11 @@ public class GolonganForm extends javax.swing.JFrame {
         potonganTelatTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 potonganTelatTextFieldActionPerformed(evt);
+            }
+        });
+        potonganTelatTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                potonganTelatTextFieldKeyReleased(evt);
             }
         });
 
@@ -363,7 +396,7 @@ public class GolonganForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         golonganTable.setAutoCreateRowSorter(true);
-        golonganTable.setFont(new java.awt.Font("Arial", 0, 11));
+        golonganTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         golonganTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -427,7 +460,7 @@ public class GolonganForm extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-563)/2, (screenSize.height-694)/2, 563, 694);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
         String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
         String namaGolongan = namaGolonganTextField.getText();
@@ -443,57 +476,56 @@ public class GolonganForm extends javax.swing.JFrame {
         activeGolongan.setUangLembur(uangLembur);
         activeGolongan.setUangHadir(uangHadir);
         activeGolongan.setPotonganTelat(potonganTelat);
-        int ok = JOptionPane.showConfirmDialog(null,"Anda Yakin Akan Menghapus Data\nDengan Nama = "+namaGolongan+"","Konfirmasi",JOptionPane.YES_NO_OPTION);
-        if (ok==0){
+        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Nama = " + namaGolongan + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (ok == 0) {
             try {
                 DaoFactory.getGolonganDao().delete(activeGolongan);
-                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n" +
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n"
+                        + "<html><font color=#FF0000>" + namaGolongan + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n" +
-                        "<html><font color=#FF0000>"+ex+"</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n"
+                        + "<html><font color=#FF0000>" + ex + "</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
 
             }
 
         }
         batalButton.doClick();
     }//GEN-LAST:event_hapusButtonActionPerformed
-    
+
     private void golonganTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_golonganTableMouseClicked
         int row = golonganTable.getSelectedRow();
         String kodegroup = golonganTable.getValueAt(row, 0).toString();
-        String namagroup = golonganTable.getValueAt(row,1).toString();
-        double gajiPokok = Double.parseDouble(golonganTable.getValueAt(row,2).toString());
-        double uangMakan = Double.parseDouble(golonganTable.getValueAt(row,3).toString());
-        double uangLembur = Double.parseDouble(golonganTable.getValueAt(row,4).toString());
+        String namagroup = golonganTable.getValueAt(row, 1).toString();
+        double gajiPokok = Double.parseDouble(golonganTable.getValueAt(row, 2).toString());
+        double uangMakan = Double.parseDouble(golonganTable.getValueAt(row, 3).toString());
+        double uangLembur = Double.parseDouble(golonganTable.getValueAt(row, 4).toString());
         double uangHadir = Double.parseDouble(golonganTable.getValueAt(row, 5).toString());
         double potonganTelat = Double.parseDouble(golonganTable.getValueAt(row, 6).toString());
         namaGolonganTextField.setText(namagroup);
         kodeGolonganCombo.setSelectedItem(kodegroup);
-        gajiPokokTextField.setText(String.valueOf(gajiPokok));
-        uangMakanTextField.setText(String.valueOf(uangMakan));
-        uangLemburTextField.setText(String.valueOf(uangLembur));
-        uangHadirTextField.setText(String.valueOf(uangHadir));
-        potonganTelatTextField.setText(String.valueOf(potonganTelat));
+        gajiPokokTextField.setText(ChangeFormatDoubleToString.getToString(gajiPokok));
+        uangMakanTextField.setText(ChangeFormatDoubleToString.getToString(uangMakan));
+        uangLemburTextField.setText(ChangeFormatDoubleToString.getToString(uangLembur));
+        uangHadirTextField.setText(ChangeFormatDoubleToString.getToString(uangHadir));
+        potonganTelatTextField.setText(ChangeFormatDoubleToString.getToString(potonganTelat));
         // TODO add your handling code here:
     }//GEN-LAST:event_golonganTableMouseClicked
-    private void isitable(){
-      
+    private void isitable() {
     }
-    
+
     private void simpanButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_simpanButtonKeyPressed
         simpanButton.doClick();// TODO add your handling code here:
     }//GEN-LAST:event_simpanButtonKeyPressed
-    
+
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         String kodeGolongan = String.valueOf(kodeGolonganCombo.getSelectedItem());
         String namaGolongan = namaGolonganTextField.getText();
-        double gajiPokok = Double.parseDouble(gajiPokokTextField.getText());
-        double uangMakan = Double.parseDouble(uangMakanTextField.getText());
-        double uangLembur = Double.parseDouble(uangLemburTextField.getText());
-        double uangHadir = Double.parseDouble(uangHadirTextField.getText());
-        double potonganTelat = Double.parseDouble(potonganTelatTextField.getText());
+        double gajiPokok = Double.parseDouble(gajiPokokTextField.getText().replace(".", ""));
+        double uangMakan = Double.parseDouble(uangMakanTextField.getText().replace(".", ""));
+        double uangLembur = Double.parseDouble(uangLemburTextField.getText().replace(".", ""));
+        double uangHadir = Double.parseDouble(uangHadirTextField.getText().replace(".", ""));
+        double potonganTelat = Double.parseDouble(potonganTelatTextField.getText().replace(".", ""));
         Golongan golonganBaru = new Golongan();
         golonganBaru.setKodeGolongan(kodeGolongan);
         golonganBaru.setNamaGolongan(namaGolongan);
@@ -502,18 +534,18 @@ public class GolonganForm extends javax.swing.JFrame {
         golonganBaru.setUangLembur(uangLembur);
         golonganBaru.setUangHadir(uangHadir);
         golonganBaru.setPotonganTelat(potonganTelat);
-        if ("Simpan".equals(simpanButton.getText())){
+        if ("Simpan".equals(simpanButton.getText())) {
             try {
                 DaoFactory.getGolonganDao().insert(golonganBaru);
 
-                JOptionPane.showMessageDialog(this, "Data dengan Nama \n"+
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>"+"\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data dengan Nama \n"
+                        + "<html><font color=#FF0000>" + namaGolongan + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
                 batalButton.doClick();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        }else{
+        } else {
             try {
                 Golongan golonganLama = service.getGolonganDao().getByKodeGolongan(kodeGolongan);
                 golonganLama.setKodeGolongan(kodeGolongan);
@@ -524,8 +556,8 @@ public class GolonganForm extends javax.swing.JFrame {
                 golonganLama.setUangHadir(uangHadir);
                 golonganLama.setPotonganTelat(potonganTelat);
                 service.getGolonganDao().update(golonganLama);
-                JOptionPane.showMessageDialog(this, "Data dengan nama\n"+
-                        "<html><font color=#FF0000>"+namaGolongan+"</font></html>"+"\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data dengan nama\n"
+                        + "<html><font color=#FF0000>" + namaGolongan + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
                 batalButton.doClick();
             } catch (Exception ex) {
@@ -533,22 +565,22 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
-    
+
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-       
-      this.dispose();
+
+        this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
-    
+
     private void kodeGolonganComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeGolonganComboActionPerformed
         String pilih = String.valueOf(kodeGolonganCombo.getSelectedItem());
-        
+
         try {
             activeGolongan = service.getGolonganDao().getByKodeGolongan(pilih);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         //jika ditemukan
-        if(activeGolongan!=null){
+        if (activeGolongan != null) {
             namaGolonganTextField.setText(activeGolongan.getNamaGolongan());
             simpanButton.setText("Update");
             simpanButton.setMnemonic('U');
@@ -556,7 +588,7 @@ public class GolonganForm extends javax.swing.JFrame {
             hapusButton.setEnabled(true);
             kodeGolonganCombo.requestFocus();
 
-        } else{
+        } else {
             namaGolonganTextField.setText(null);
             namaGolonganTextField.requestFocus();
             hapusButton.setEnabled(false);
@@ -564,21 +596,20 @@ public class GolonganForm extends javax.swing.JFrame {
             simpanButton.setMnemonic('S');
             simpanButton.setEnabled(true);
         }
-        
+
 // TODO add your handling code here:
     }//GEN-LAST:event_kodeGolonganComboActionPerformed
-    
+
     private void namaGolonganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaGolonganTextFieldActionPerformed
         simpanButton.setEnabled(true);
         simpanButton.requestFocus();
 // TODO add your handling code here:
     }//GEN-LAST:event_namaGolonganTextFieldActionPerformed
-    
+
     private void kodeGolonganComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeGolonganComboKeyPressed
-        if(evt.getKeyCode() == 10) {
-            
+        if (evt.getKeyCode() == 10) {
         }
-        
+
     }//GEN-LAST:event_kodeGolonganComboKeyPressed
 
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
@@ -596,10 +627,10 @@ public class GolonganForm extends javax.swing.JFrame {
         GolonganTableModel model = new GolonganTableModel(golongans);
         golonganTable.setModel(model);
 
-        for(Golongan g :golongans){
+        for (Golongan g : golongans) {
             kodeGolonganCombo.addItem(g.getKodeGolongan());
         }
-     
+
 }//GEN-LAST:event_batalButtonActionPerformed
 
 private void gajiPokokTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gajiPokokTextFieldActionPerformed
@@ -621,21 +652,96 @@ private void uangHadirTextFieldActionPerformed(java.awt.event.ActionEvent evt) {
 private void potonganTelatTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potonganTelatTextFieldActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_potonganTelatTextFieldActionPerformed
-         
-  
+
+private void gajiPokokTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_gajiPokokTextFieldKeyTyped
+// TODO add your handling code here:
+//    double gaji=Double.parseDouble(gajiPokokTextField.getText());
+//    System.out.println(ChangeFormatDoubleToString.getToString(10000.0));
+//    gajiPokokTextField.setText(ChangeFormatDoubleToString.getToString(gaji));
+}//GEN-LAST:event_gajiPokokTextFieldKeyTyped
+
+private void gajiPokokTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_gajiPokokTextFieldKeyReleased
+// TODO add your handling code here:
+    if (!Character.isDigit(evt.getKeyChar())) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "masukan harus berupa angka");
+    } else {
+        if (!gajiPokokTextField.getText().isEmpty()) {
+            double gaji = Double.parseDouble(gajiPokokTextField.getText().replace(".", ""));
+            gajiPokokTextField.setText(ChangeFormatDoubleToString.getToString(gaji));
+        }
+    }
+}//GEN-LAST:event_gajiPokokTextFieldKeyReleased
+
+private void uangMakanTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uangMakanTextFieldKeyReleased
+// TODO add your handling code here:
+    if (!Character.isDigit(evt.getKeyChar())) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "masukan harus berupa angka");
+    } else {
+        if (!uangMakanTextField.getText().isEmpty()) {
+            double gaji = Double.parseDouble(uangMakanTextField.getText().replace(".", ""));
+            uangMakanTextField.setText(ChangeFormatDoubleToString.getToString(gaji));
+        }
+    }
+}//GEN-LAST:event_uangMakanTextFieldKeyReleased
+
+private void uangLemburTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uangLemburTextFieldKeyReleased
+// TODO add your handling code here:
+    if (!Character.isDigit(evt.getKeyChar())) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "masukan harus berupa angka");
+    } else {
+        if (!uangLemburTextField.getText().isEmpty()) {
+            double gaji = Double.parseDouble(uangLemburTextField.getText().replace(".", ""));
+            uangLemburTextField.setText(ChangeFormatDoubleToString.getToString(gaji));
+        }
+    }
+}//GEN-LAST:event_uangLemburTextFieldKeyReleased
+
+private void uangHadirTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uangHadirTextFieldKeyReleased
+// TODO add your handling code here:
+    if (!Character.isDigit(evt.getKeyChar())) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "masukan harus berupa angka");
+    } else {
+        if (!uangHadirTextField.getText().isEmpty()) {
+            double gaji = Double.parseDouble(uangHadirTextField.getText().replace(".", ""));
+            uangHadirTextField.setText(ChangeFormatDoubleToString.getToString(gaji));
+        }
+    }
+}//GEN-LAST:event_uangHadirTextFieldKeyReleased
+
+private void potonganTelatTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_potonganTelatTextFieldKeyReleased
+// TODO add your handling code here:
+    if (!Character.isDigit(evt.getKeyChar())) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "masukan harus berupa angka");
+    } else {
+        if (!potonganTelatTextField.getText().isEmpty()) {
+            double gaji = Double.parseDouble(potonganTelatTextField.getText().replace(".", ""));
+            potonganTelatTextField.setText(ChangeFormatDoubleToString.getToString(gaji));
+        }
+    }
+}//GEN-LAST:event_potonganTelatTextFieldKeyReleased
+
+private void gajiPokokTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_gajiPokokTextFieldKeyPressed
+// TODO add your handling code here:
+}//GEN-LAST:event_gajiPokokTextFieldKeyPressed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         try {
-           UIManager.setLookAndFeel(new NimbusLookAndFeel());
-           //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
+            UIManager.setLookAndFeel(new NimbusLookAndFeel());
+            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(GolonganForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-          java.awt.EventQueue.invokeLater(new Runnable() {
-        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 try {
@@ -646,7 +752,6 @@ private void potonganTelatTextFieldActionPerformed(java.awt.event.ActionEvent ev
             }
         });
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalButton;
     private javax.swing.JButton cmdKeluar;
@@ -677,5 +782,4 @@ private void potonganTelatTextFieldActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JLabel uangMakanLabel;
     private javax.swing.JTextField uangMakanTextField;
     // End of variables declaration//GEN-END:variables
-    
 }
