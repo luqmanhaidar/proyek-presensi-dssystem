@@ -12,7 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -24,7 +27,7 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
     private final String SQL_GETKARYAWANBYDEPARTMENT = "SELECT nip, nama FROM karyawan WHERE kode_department LIKE ? order by nip asc";
     private final String SQL_GETDEPARTMENTNAME_BYCODE = "SELECT nama_department from department_setting where kode_department LIKE ?";
     private final String SQL_GET_INSERTALFA_SP = "CALL insertAlfa (?,?)";
-    private final String SQL_GET_GETPRESENSI_SP="CALL getPresensi (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String SQL_GET_GETPRESENSI_SP = "CALL getPresensi (?,?,?)";
     private Connection connection;
 
     public TransaksiGajiDaoImplemen(Connection connection) {
@@ -154,6 +157,33 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
 
     @Override
     public List<String[]> callGetPresensi(String bulan, String tahun, String kode_department) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        ResultSet result;
+        connection.setAutoCommit(false);
+        CallableStatement callableStatement;
+        callableStatement = connection.prepareCall(SQL_GET_GETPRESENSI_SP);
+        callableStatement.setString(1, bulan);
+        callableStatement.setString(2, tahun);
+        callableStatement.setString(3, kode_department);
+        result = callableStatement.executeQuery();
+
+        List<String[]> listString = new ArrayList<String[]>();
+        while (result.next()) {
+            String[] string = new String[7];
+            for (int i = 0; i < string.length; i++) {
+                string[i] = new String();
+            }
+            string[0] = callableStatement.getString("nip");
+            string[1] = callableStatement.getString("nama");
+            string[2] = callableStatement.getString("S");
+            string[3] = callableStatement.getString("I");
+            string[4] = callableStatement.getString("A");
+            string[5] = callableStatement.getString("T");
+            string[6] = callableStatement.getString("M");
+
+            listString.add(string);
+        }
+        connection.commit();
+        return listString;
+
     }
 }

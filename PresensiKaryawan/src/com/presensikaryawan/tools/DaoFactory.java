@@ -66,7 +66,7 @@ public class DaoFactory {
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
             try {
-                FileInputStream in = new FileInputStream("D:\\Documents\\Project\\progdss\\ipAddressContoh.xml");
+                FileInputStream in = new FileInputStream("C:/Windows/ipAddressDatabasePresensi.xml");
                 prop = new Properties();
                 prop.loadFromXML(in);
 
@@ -79,7 +79,7 @@ public class DaoFactory {
 
             String url = "jdbc:mysql://" + alamatIp + "/" + namaDB;
             String user = "presensi";
-            String password = "presensi";
+            String password = "adminpresensi";
             connection = DriverManager.getConnection(url, user, password);
         }
         return connection;

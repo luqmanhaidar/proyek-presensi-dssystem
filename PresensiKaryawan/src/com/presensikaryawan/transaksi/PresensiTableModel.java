@@ -14,10 +14,10 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PresensiTableModel extends AbstractTableModel {
 
-    private List<PresensiKaryawan> presensiKaryawans = new ArrayList<PresensiKaryawan>();
+    private List<String[]> listString = new ArrayList<String[]>();
 
-    public PresensiTableModel(List<PresensiKaryawan> presensiKaryawans) {
-        this.presensiKaryawans = presensiKaryawans;
+    public PresensiTableModel(List<String[]> listString) {
+        this.listString = listString;
     }
 
     @Override
@@ -27,23 +27,27 @@ public class PresensiTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-//        PresensiKaryawan pK = presensiKaryawans.get(rowIndex);
+        String[] string=listString.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return "095314053";
+                return string[0];
             case 1:
-                return "Agustinus";
+                return string[1];
             case 2:
-                return null;
+                return string[2];
             case 3:
-                return null;
+                return string[3];
             case 4:
-                return null;
+                return string[4];
+            case 5:
+                return string[5];
+            case 6:
+                return string[6];
             default:
                 return "";
         }

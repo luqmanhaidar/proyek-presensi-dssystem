@@ -410,11 +410,14 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                 List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getAllKaryawanByDepartmentCode(kode_department);
                 while (!karyawans.isEmpty()) {
                     Karyawan karyawan = karyawans.remove(0);
-                    System.out.println(karyawan.getNip());
-                    DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth, "98");
+                    DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
                 }
+                 List<String[]> listStrings = DaoFactory.getTransaksiGajiDao().callGetPresensi(month, year, kode_department);
+                 PresensiTableModel model=new PresensiTableModel(listStrings);
+                 presenstiTable.setModel(model);
             } catch (SQLException ex) {
             }
+           
         }
     }//GEN-LAST:event_prosesButtonActionPerformed
 
