@@ -208,7 +208,7 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
             tanggal = dateFormat.format(date);
             String nip = nilaiNIPLabel.getText();
             try {
-                DaoFactory.getPresensiTidakMasukDao().updateDetailPresensi(tanggal, nip);
+                DaoFactory.getPresensiTidakMasukDao().updateDetailPresensi(tanggal, nip, keteranganTextField.getText());
             } catch (SQLException ex) {
                 ex.getMessage();
             }

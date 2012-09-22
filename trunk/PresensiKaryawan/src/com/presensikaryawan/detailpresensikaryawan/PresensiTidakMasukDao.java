@@ -11,5 +11,5 @@ import java.sql.SQLException;
  * @author Tinus
  */
 public interface PresensiTidakMasukDao {
-    void updateDetailPresensi(String tanggal, String nip) throws SQLException;
+    void updateDetailPresensi(String tanggal, String nip, String keterangan) throws SQLException;
 }
