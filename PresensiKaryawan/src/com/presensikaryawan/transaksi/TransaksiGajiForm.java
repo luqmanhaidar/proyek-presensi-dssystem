@@ -1,5 +1,6 @@
 package com.presensikaryawan.transaksi;
 
+import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDialog;
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.karyawan.Karyawan;

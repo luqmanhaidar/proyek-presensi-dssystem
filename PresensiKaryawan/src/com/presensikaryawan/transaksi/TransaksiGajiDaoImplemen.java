@@ -188,30 +188,5 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
 
     }
 
-    @Override
-    public void updateDetailPresensi(String tanggal, String nip) throws SQLException {
-        PreparedStatement statement = null;
-        try {
-            connection.setAutoCommit(false);
 
-            statement = connection.prepareStatement(SQL_UPDATE_GETPRESENSI);
-            statement.setString(1, tanggal);
-            statement.setString(2, nip);
-            statement.executeUpdate();
-
-            connection.commit();
-        } catch (SQLException exception) {
-            connection.rollback();
-            throw exception;
-        } finally {
-            try {
-                connection.setAutoCommit(true);
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException exception) {
-                throw exception;
-            }
-        }
-    }
 }
