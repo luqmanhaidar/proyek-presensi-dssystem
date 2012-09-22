@@ -28,6 +28,7 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
     private final String SQL_GETDEPARTMENTNAME_BYCODE = "SELECT nama_department from department_setting where kode_department LIKE ?";
     private final String SQL_GET_INSERTALFA_SP = "CALL insertAlfa (?,?)";
     private final String SQL_GET_GETPRESENSI_SP = "CALL getPresensi (?,?,?)";
+    private final String SQL_UPDATE_GETPRESENSI="UPDATE detail_presensi set keterangan =?";
     private Connection connection;
 
     public TransaksiGajiDaoImplemen(Connection connection) {
@@ -185,5 +186,32 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
         connection.commit();
         return listString;
 
+    }
+
+    @Override
+    public void updateDetailPresensi(String tanggal, String nip) throws SQLException {
+        PreparedStatement statement = null;
+        try {
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(SQL_UPDATE_GETPRESENSI);
+            statement.setString(1, tanggal);
+            statement.setString(2, nip);
+            statement.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException exception) {
+            connection.rollback();
+            throw exception;
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
     }
 }

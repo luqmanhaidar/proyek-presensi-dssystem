@@ -5,10 +5,7 @@
 package com.presensikaryawan.transaksi;
 
 import com.presensikaryawan.departmentSetting.Department;
-import com.presensikaryawan.golongan.Golongan;
 import com.presensikaryawan.karyawan.Karyawan;
-import com.presensikaryawan.shiftSetting.Shift;
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,4 +19,5 @@ public interface TransaksiGajiDao {
     Department getNamaDepartmentByCode(String code) throws SQLException;
     void callInsertAlfa(String maxTanggal, String nip) throws SQLException;
     List<String[]> callGetPresensi(String bulan, String tahun, String kode_department) throws SQLException;
+    void updateDetailPresensi(String tanggal, String nip) throws SQLException;
 }
