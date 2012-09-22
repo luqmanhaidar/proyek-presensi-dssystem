@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class PresensiTidakMasukDaoImplemen implements PresensiTidakMasukDao {
 
-    private final String SQL_UPDATE_GETPRESENSI = "UPDATE detail_presensi set keterangan =?";
+    private final String SQL_UPDATE_GETPRESENSI = "UPDATE detail_presensi set keterangan = ? where nip = ? and tanggal = ?";
     private Connection connection;
 
     public PresensiTidakMasukDaoImplemen(Connection connection) {
@@ -22,7 +22,7 @@ public class PresensiTidakMasukDaoImplemen implements PresensiTidakMasukDao {
     }
 
     @Override
-    public void updateDetailPresensi(String tanggal, String nip) throws SQLException {
+    public void updateDetailPresensi(String tanggal, String nip, String keterangan) throws SQLException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
@@ -30,6 +30,7 @@ public class PresensiTidakMasukDaoImplemen implements PresensiTidakMasukDao {
             statement = connection.prepareStatement(SQL_UPDATE_GETPRESENSI);
             statement.setString(1, tanggal);
             statement.setString(2, nip);
+            statement.setString(3, keterangan);
             statement.executeUpdate();
 
             connection.commit();
