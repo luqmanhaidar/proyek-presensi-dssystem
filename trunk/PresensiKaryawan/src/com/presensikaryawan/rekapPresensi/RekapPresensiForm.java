@@ -1,4 +1,4 @@
-package com.presensikaryawan.transaksi;
+package com.presensikaryawan.rekapPresensi;
 
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
@@ -32,7 +32,7 @@ import net.sf.jasperreports.engine.data.JRTableModelDataSource;
  *
  * @author Als
  */
-public class TransaksiGajiForm extends javax.swing.JFrame {
+public class RekapPresensiForm extends javax.swing.JFrame {
 
     private Posisi activePosisi;
     private Department activeDepartment;
@@ -40,7 +40,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
     /**
      * Creates new form masterInventoryGrup
      */
-    public TransaksiGajiForm() throws SQLException {
+    public RekapPresensiForm() throws SQLException {
         initComponents();
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
@@ -128,7 +128,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        headPanel.setBounds(0, 0, 1020, 77);
+        headPanel.setBounds(0, 0, 1020, 0);
         jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelStatus1.setBounds(0, 650, 1020, 50);
         jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -312,7 +312,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         try {
             detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup);
         } catch (SQLException ex) {
-            Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         detailDialog.setVisible(true);
 
@@ -368,7 +368,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(presenstiTable.getModel()));
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {
-            Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 }//GEN-LAST:event_cetakButtonActionPerformed
@@ -439,15 +439,15 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new TransaksiGajiForm().setVisible(true);
+                    new RekapPresensiForm().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
