@@ -3,9 +3,6 @@
  * and open the template in the editor.
  */
 package com.presensikaaryawan.transaksiDepartment;
-import com.presensikaryawan.posisi.*;
-
-import com.presensikaryawan.statusSetting.StatusSetting;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

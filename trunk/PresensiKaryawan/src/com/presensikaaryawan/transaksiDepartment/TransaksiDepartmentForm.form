@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
@@ -80,7 +80,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="logoLabel" alignment="0" pref="46" max="32767" attributes="0"/>
+                          <Component id="logoLabel" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="menuLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -163,7 +163,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="namaKaryawanLabel" pref="100" max="32767" attributes="1"/>
+                                  <Component id="namaKaryawanLabel" max="32767" attributes="1"/>
                                   <Component id="departmentLabel" alignment="1" min="-2" pref="100" max="-2" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -172,7 +172,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="bulanMonthChooser" min="-2" pref="109" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="tahunYearChooser1" pref="73" max="32767" attributes="0"/>
+                                      <Component id="tahunYearChooser1" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="422" max="32767" attributes="0"/>
@@ -198,7 +198,7 @@
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="tahunYearChooser1" alignment="0" max="32767" attributes="1"/>
-                              <Component id="namaKaryawanLabel" alignment="0" pref="20" max="32767" attributes="1"/>
+                              <Component id="namaKaryawanLabel" alignment="0" max="32767" attributes="1"/>
                               <Component id="bulanMonthChooser" alignment="0" min="-2" pref="32" max="-2" attributes="1"/>
                           </Group>
                       </Group>
@@ -319,7 +319,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

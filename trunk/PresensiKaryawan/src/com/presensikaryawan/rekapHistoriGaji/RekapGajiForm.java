@@ -387,16 +387,16 @@ public class RekapGajiForm extends javax.swing.JFrame {
     }
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        try {
-
-            String reportSource = "./report/rekapReport.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("bulan", bulan);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(rekapTable.getModel()));
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (JRException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//
+//            String reportSource = "./report/rekapReport.jasper";
+//            Map<String, Object> params = new HashMap<String, Object>();
+//            params.put("bulan", bulan);
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(rekapTable.getModel()));
+//            JasperViewer.viewReport(jasperPrint, false);
+//        } catch (JRException ex) {
+//            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
 }//GEN-LAST:event_cetakButtonActionPerformed
 
