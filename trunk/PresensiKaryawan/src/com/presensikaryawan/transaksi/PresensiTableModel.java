@@ -59,7 +59,7 @@ public class PresensiTableModel extends AbstractTableModel {
             case 0:
                 return "NIP";
             case 1:
-                return "NAMA";
+                return "Nama Karyawan";
             case 2:
                 return "S";
             case 3:
