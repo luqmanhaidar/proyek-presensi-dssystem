@@ -91,40 +91,64 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-              <JLayeredPaneConstraints x="0" y="70" width="1020" height="150" layer="0" position="-1"/>
+              <JLayeredPaneConstraints x="0" y="70" width="1020" height="230" layer="0" position="-1"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="namaDepartmentLabel" pref="114" max="32767" attributes="1"/>
-                          <Component id="departmentLabel" max="32767" attributes="1"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="departmentCombo" pref="200" max="32767" attributes="0"/>
-                          <Component id="nilaiNamaDepartment" max="32767" attributes="1"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="457" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="bulanLabel" max="32767" attributes="1"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="monthChooser" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="namaDepartmentLabel" pref="114" max="32767" attributes="1"/>
+                                  <Component id="departmentLabel" max="32767" attributes="1"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="departmentCombo" pref="200" max="32767" attributes="0"/>
+                                  <Component id="nilaiNamaDepartment" max="32767" attributes="1"/>
+                              </Group>
+                              <EmptySpace pref="496" max="32767" attributes="0"/>
+                              <Component id="tahunLabel" max="32767" attributes="1"/>
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                               <Component id="yearChooser" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="prosesButton" min="-2" pref="145" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="namaKaryawanLabel1" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="namaKaryawanLabel" alignment="1" pref="114" max="32767" attributes="1"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="nipLabel" min="-2" pref="110" max="-2" attributes="1"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="departmentCombo1" pref="200" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="686" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="nilaiNamaKaryawan" pref="876" max="32767" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="nilaiGolonganLabel" pref="876" max="32767" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="prosesButton" min="-2" pref="145" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -133,14 +157,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="bulanLabel" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="monthChooser" max="32767" attributes="0"/>
-                              <Component id="yearChooser" min="-2" pref="31" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="yearChooser" min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="departmentLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="departmentCombo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="tahunLabel" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -148,23 +169,38 @@
                           <Component id="namaDepartmentLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="nilaiNamaDepartment" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="35" max="32767" attributes="0"/>
-                      <Component id="prosesButton" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nipLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="departmentCombo1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="namaKaryawanLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="nilaiNamaKaryawan" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="namaKaryawanLabel1" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="nilaiGolonganLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="prosesButton" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="bulanLabel">
+            <Component class="javax.swing.JLabel" name="tahunLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Bulan :"/>
+                <Property name="text" type="java.lang.String" value="Tahun :"/>
               </Properties>
-            </Component>
-            <Component class="com.toedter.calendar.JMonthChooser" name="monthChooser">
             </Component>
             <Component class="com.toedter.calendar.JYearChooser" name="yearChooser">
             </Component>
@@ -215,6 +251,63 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prosesButtonActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JSeparator" name="jSeparator1">
+            </Component>
+            <Component class="javax.swing.JLabel" name="nipLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="NIP"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="departmentCombo1">
+              <Properties>
+                <Property name="editable" type="boolean" value="true"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="11" style="0"/>
+                </Property>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="departmentCombo1ActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="departmentCombo1KeyPressed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="namaKaryawanLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Nama Karyawan"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nilaiNamaKaryawan">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="nilai Nama Karyawan"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="namaKaryawanLabel1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Golongan"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nilaiGolonganLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="nilai Golongan"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="posisiPanel">
@@ -230,21 +323,34 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-              <JLayeredPaneConstraints x="0" y="220" width="1020" height="370" layer="0" position="-1"/>
+              <JLayeredPaneConstraints x="0" y="300" width="1020" height="290" layer="0" position="-1"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="1008" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="1008" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="totalLabel" min="-2" pref="68" max="-2" attributes="1"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="nilaiTotalLabel" min="-2" pref="117" max="-2" attributes="1"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="291" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="52" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="175" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="totalLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="nilaiTotalLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -271,19 +377,61 @@
                       <Font name="Arial" size="11" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="8" rowCount="4">
+                      <Table columnCount="15" rowCount="4">
                         <Column editable="false" title="No" type="java.lang.Object"/>
-                        <Column editable="false" title="NIP" type="java.lang.String"/>
-                        <Column editable="false" title="Nama Karyawan" type="java.lang.String"/>
+                        <Column editable="false" title="Bulan" type="java.lang.String"/>
                         <Column editable="false" title="S" type="java.lang.Object"/>
                         <Column editable="false" title="I" type="java.lang.Object"/>
                         <Column editable="false" title="A" type="java.lang.Object"/>
                         <Column editable="false" title="T" type="java.lang.Object"/>
-                        <Column editable="false" title="M" type="java.lang.Object"/>
+                        <Column editable="false" title="L" type="java.lang.String"/>
+                        <Column editable="false" title="Gaji Pokok" type="java.lang.Object"/>
+                        <Column editable="false" title="Uang Makan" type="java.lang.Object"/>
+                        <Column editable="false" title="Uang Hadir" type="java.lang.Object"/>
+                        <Column editable="false" title="Uang Lembur" type="java.lang.Object"/>
+                        <Column editable="false" title="P. Terlambat" type="java.lang.Object"/>
+                        <Column editable="false" title="P. Lain" type="java.lang.Object"/>
+                        <Column editable="false" title="Lain" type="java.lang.Object"/>
+                        <Column editable="false" title="Total" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -336,107 +484,92 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="totalLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Total"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="nilaiTotalLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="nilai total"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="headPanel9">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-              <JLayeredPaneConstraints x="0" y="0" width="1020" height="70" layer="0" position="-1"/>
+              <JLayeredPaneConstraints x="0" y="0" width="1020" height="-1" layer="0" position="-1"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1020" max="32767" attributes="0"/>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="headPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="logoLabel9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="menuLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="fungsiLabel9" alignment="0" min="-2" pref="437" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace pref="519" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="77" max="32767" attributes="0"/>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="headPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="logoLabel9" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="menuLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="fungsiLabel9" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="headPanel">
+            <Component class="javax.swing.JLabel" name="logoLabel9">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/logosimtel.jpg"/>
                 </Property>
               </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="logoLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="menuLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="fungsiLabel" alignment="0" min="-2" pref="437" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="519" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="logoLabel" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="menuLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="fungsiLabel" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JLabel" name="logoLabel">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/logosimtel.jpg"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="menuLabel">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Dialog" size="18" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Menu Transaksi Gaji Karyawan"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="fungsiLabel">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Dialog" size="12" style="0"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Digunakan menghitung transaksi gaji &amp; rekap karyawan per bulan/per tahun"/>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
+            </Component>
+            <Component class="javax.swing.JLabel" name="menuLabel9">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Menu Transaksi Gaji Karyawan"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fungsiLabel9">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Digunakan menghitung transaksi gaji &amp; rekap karyawan per bulan/per tahun"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
