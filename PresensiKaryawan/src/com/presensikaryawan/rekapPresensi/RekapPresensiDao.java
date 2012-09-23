@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.presensikaryawan.transaksi;
+package com.presensikaryawan.rekapPresensi;
 
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.karyawan.Karyawan;
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Tinus
  */
-public interface TransaksiGajiDao {
+public interface RekapPresensiDao {
     List<Karyawan> getAllKaryawanByDepartmentCode(String code) throws SQLException;
     List<Department> getAllDepartments() throws SQLException;
     Department getNamaDepartmentByCode(String code) throws SQLException;

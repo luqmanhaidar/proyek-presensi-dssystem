@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.presensikaryawan.transaksi;
+package com.presensikaryawan.rekapPresensi;
 
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.karyawan.Karyawan;
@@ -21,7 +21,7 @@ import java.util.ListIterator;
  *
  * @author Tinus
  */
-public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
+public class RekapPresensiDaoImplemen implements RekapPresensiDao {
 
     private final String SQL_GETALLDEPARTMENT = "SELECT * from department_setting order by kode_department asc";
     private final String SQL_GETKARYAWANBYDEPARTMENT = "SELECT nip, nama FROM karyawan WHERE kode_department LIKE ? order by nip asc";
@@ -31,7 +31,7 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
     private final String SQL_UPDATE_GETPRESENSI="UPDATE detail_presensi set keterangan =?";
     private Connection connection;
 
-    public TransaksiGajiDaoImplemen(Connection connection) {
+    public RekapPresensiDaoImplemen(Connection connection) {
         this.connection = connection;
     }
 
