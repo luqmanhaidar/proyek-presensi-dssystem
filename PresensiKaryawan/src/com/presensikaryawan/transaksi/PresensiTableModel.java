@@ -48,6 +48,8 @@ public class PresensiTableModel extends AbstractTableModel {
                 return string[5];
             case 6:
                 return string[6];
+            case 7:
+                return string[7];
             default:
                 return "";
         }
@@ -57,18 +59,20 @@ public class PresensiTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "NIP";
+                return "No.";
             case 1:
-                return "Nama Karyawan";
+                return "NIP";
             case 2:
-                return "S";
+                return "Nama Karyawan";
             case 3:
-                return "I";
+                return "S";
             case 4:
-                return "A";
+                return "I";
             case 5:
-                return "T";
+                return "A";
             case 6:
+                return "T";
+            case 7:
                 return "M";
             default:
                 return "";
