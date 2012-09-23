@@ -20,16 +20,21 @@ import javax.swing.JOptionPane;
  */
 public class DetailPresensiDialog extends javax.swing.JDialog {
 
+    private String bln;
+    private String thn;
+
     /**
      * Creates new form DetailPresensiDialog
      */
-    public DetailPresensiDialog(java.awt.Frame parent, boolean modal, String nip, String nama) throws SQLException {
+    public DetailPresensiDialog(java.awt.Frame parent, boolean modal, String nip, String nama, String bulan, String tahun) throws SQLException {
         super(parent, modal);
         initComponents();
         nilaiNamaLabel.setText(nama);
         nilaiNIPLabel.setText(nip);
-        List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip);
-        DetailPresensiTableModel model=new DetailPresensiTableModel(detailPresensis);
+        bln = bulan;
+        thn = tahun;
+        List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip, bulan, tahun);
+        DetailPresensiTableModel model = new DetailPresensiTableModel(detailPresensis);
         detailPresensiTableModel.setModel(model);
 
     }
@@ -206,19 +211,17 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        if (!nilaiTanggalLabel.getText().matches("-") || keteranganTextField.getText() != null) {
+        if (!nilaiTanggalLabel.getText().matches("-") && keteranganTextField.getText() != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String tanggal = nilaiTanggalLabel.getText();
-            Date date = null;
-            try {
-                date = dateFormat.parse(tanggal);
-            } catch (ParseException ex) {
-                Logger.getLogger(DetailPresensiDialog.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            tanggal = dateFormat.format(date);
+            tanggal = tanggal.substring(6, 10) + "-" + tanggal.substring(3, 5) + "-" + tanggal.substring(0, 2);
+            System.out.println(tanggal);
             String nip = nilaiNIPLabel.getText();
             try {
                 DaoFactory.getPresensiTidakMasukDao().updateDetailPresensi(tanggal, nip, keteranganTextField.getText());
+                List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip, bln, thn);
+                DetailPresensiTableModel model = new DetailPresensiTableModel(detailPresensis);
+                detailPresensiTableModel.setModel(model);
             } catch (SQLException ex) {
                 ex.getMessage();
             }
@@ -254,7 +257,6 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
         }
         nilaiTanggalLabel.setText(sdf.format(tanggal));
     }//GEN-LAST:event_detailPresensiTableModelMouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalButton;
     private javax.swing.JTable detailPresensiTableModel;
