@@ -17,11 +17,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 /*
  * masterInventoryGrup.java
@@ -365,7 +365,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             String reportSource = "./report/rekapReport.jasper";
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("bulan" , bulan);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(presenstiTable.getModel()));
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {
             Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
