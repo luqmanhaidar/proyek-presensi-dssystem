@@ -157,7 +157,7 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
     }
 
     @Override
-    public List<String[]> callGetPresensi(String bulan, String tahun, String kode_department) throws SQLException {
+    public List<DetailPresensi> callGetPresensi(String bulan, String tahun, String kode_department) throws SQLException {
         ResultSet result;
         connection.setAutoCommit(false);
         CallableStatement callableStatement;
@@ -167,27 +167,26 @@ public class TransaksiGajiDaoImplemen implements TransaksiGajiDao {
         callableStatement.setString(3, kode_department);
         result = callableStatement.executeQuery();
 
-        List<String[]> listString = new ArrayList<String[]>();
+        List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
         int counter=0;
         while (result.next()) {
-            String[] string = new String[7];
-            for (int i = 0; i < string.length; i++) {
-                string[i] = new String();
-            }
-            string[0] = String.valueOf(counter+1);
-            string[1] = callableStatement.getString("nip");
-            string[2] = callableStatement.getString("nama");
-            string[3] = callableStatement.getString("S");
-            string[4] = callableStatement.getString("I");
-            string[5] = callableStatement.getString("A");
-            string[6] = callableStatement.getString("T");
-            string[7] = callableStatement.getString("M");
+            DetailPresensi detailPresensi=new DetailPresensi();
+
+            detailPresensi.setNo(counter+1);
+            detailPresensi.setNip(callableStatement.getString("nip"));
+            detailPresensi.setNama_karyawan(callableStatement.getString("nama"));
+            detailPresensi.setJumlah_s(Integer.parseInt(callableStatement.getString("S")));
+            detailPresensi.setJumlah_i(Integer.parseInt(callableStatement.getString("I")));
+            detailPresensi.setJumlah_a(Integer.parseInt(callableStatement.getString("A")));
+            detailPresensi.setJumlah_t(Integer.parseInt(callableStatement.getString("T")));
+            detailPresensi.setJumlah_m(Integer.parseInt(callableStatement.getString("M")));
+
             
-            listString.add(string);
+            detailPresensis.add(detailPresensi);
             counter++;
         }
         connection.commit();
-        return listString;
+        return detailPresensis;
 
     }
 

@@ -238,20 +238,20 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         presenstiTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         presenstiTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "NIP", "Nama Karyawan", "S", "I", "A", "T", "M"
+                "No", "NIP", "Nama Karyawan", "S", "I", "A", "T", "M"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -420,8 +420,8 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                     Karyawan karyawan = karyawans.remove(0);
                     DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
                 }
-                 List<String[]> listStrings = DaoFactory.getTransaksiGajiDao().callGetPresensi(month, year, kode_department);
-                 PresensiTableModel model=new PresensiTableModel(listStrings);
+                 List<DetailPresensi> detailPresensis = DaoFactory.getTransaksiGajiDao().callGetPresensi(month, year, kode_department);
+                 PresensiTableModel model=new PresensiTableModel(detailPresensis);
                  presenstiTable.setModel(model);
                  presenstiTable.setVisible(true);
             } catch (SQLException ex) {
