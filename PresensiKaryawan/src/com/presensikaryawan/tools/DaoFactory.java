@@ -61,7 +61,7 @@ public class DaoFactory {
     private static Properties prop;
     private static KaryawanDao karyawanDao;
     private static TransaksiDepartmentDao transaksiDepartmentDao;
-    private static RekapPresensiDao transaksiGajiDao;
+    private static RekapPresensiDao rekapPresensiDao;
     private static BankDao bankDao;
     private static DetailPresensiDao presensiTidakMasukDao;
 
@@ -172,11 +172,11 @@ public class DaoFactory {
         return bankDao;
     }
     
-     public static RekapPresensiDao getTransaksiGajiDao() throws SQLException{
-         if (transaksiGajiDao == null){
-             transaksiGajiDao = new RekapPresensiDaoImplemen(getConnection());
+     public static RekapPresensiDao getRekapPresensiDao() throws SQLException{
+         if (rekapPresensiDao == null){
+             rekapPresensiDao = new RekapPresensiDaoImplemen(getConnection());
          }
-         return  transaksiGajiDao;
+         return rekapPresensiDao;
      }
      
      public static DetailPresensiDao getPresensiTidakMasukDao() throws SQLException{

@@ -162,7 +162,12 @@ public class RekapPresensiDaoImplemen implements RekapPresensiDao {
         connection.setAutoCommit(false);
         CallableStatement callableStatement;
         callableStatement = connection.prepareCall(SQL_GET_GETPRESENSI_SP);
-        callableStatement.setString(1, bulan);
+        if(bulan.length()<2){
+            callableStatement.setString(1, "0"+bulan);
+        }
+        else{
+            callableStatement.setString(1, bulan);
+        }
         callableStatement.setString(2, tahun);
         callableStatement.setString(3, kode_department);
         result = callableStatement.executeQuery();
@@ -173,13 +178,13 @@ public class RekapPresensiDaoImplemen implements RekapPresensiDao {
             DetailPresensi detailPresensi=new DetailPresensi();
 
             detailPresensi.setNo(counter+1);
-            detailPresensi.setNip(callableStatement.getString("nip"));
-            detailPresensi.setNama_karyawan(callableStatement.getString("nama"));
-            detailPresensi.setJumlah_s(Integer.parseInt(callableStatement.getString("S")));
-            detailPresensi.setJumlah_i(Integer.parseInt(callableStatement.getString("I")));
-            detailPresensi.setJumlah_a(Integer.parseInt(callableStatement.getString("A")));
-            detailPresensi.setJumlah_t(Integer.parseInt(callableStatement.getString("T")));
-            detailPresensi.setJumlah_m(Integer.parseInt(callableStatement.getString("M")));
+            detailPresensi.setNip(result.getString("nip"));
+            detailPresensi.setNama_karyawan(result.getString("nama"));
+            detailPresensi.setJumlah_s(Integer.parseInt(result.getString("S")));
+            detailPresensi.setJumlah_i(Integer.parseInt(result.getString("I")));
+            detailPresensi.setJumlah_a(Integer.parseInt(result.getString("A")));
+            detailPresensi.setJumlah_t(Integer.parseInt(result.getString("T")));
+            detailPresensi.setJumlah_m(Integer.parseInt(result.getString("M")));
 
             
             detailPresensis.add(detailPresensi);

@@ -45,7 +45,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-        List<Department> departments = DaoFactory.getTransaksiGajiDao().getAllDepartments();
+        List<Department> departments = DaoFactory.getRekapPresensiDao().getAllDepartments();
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
@@ -305,16 +305,24 @@ public class RekapPresensiForm extends javax.swing.JFrame {
 
     private void presenstiTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_presenstiTableMouseClicked
         int row = presenstiTable.getSelectedRow();
-        String kodegroup = presenstiTable.getValueAt(row, 0).toString();
-        String namagroup = presenstiTable.getValueAt(row, 1).toString();
+        String kodegroup = presenstiTable.getValueAt(row, 1).toString();
+        String namagroup = presenstiTable.getValueAt(row, 2).toString();
+        String bulan;
+        if (monthChooser.getMonth() + 1 < 10) {
+            bulan = "0" + String.valueOf(monthChooser.getMonth() + 1);
+        } else {
+            bulan = String.valueOf(monthChooser.getMonth() + 1);
+        }
+        String tahun = String.valueOf(yearChooser.getYear());
 
-        DetailPresensiDialog detailDialog=null;
+        DetailPresensiDialog detailDialog = null;
         try {
-            detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup);
+            detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup, bulan, tahun);
         } catch (SQLException ex) {
             Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         detailDialog.setVisible(true);
+
 
     }//GEN-LAST:event_presenstiTableMouseClicked
     private void isitable() {
@@ -364,7 +372,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             bulan = bulan + " " + String.valueOf(yearChooser.getYear());
             String reportSource = "./report/rekapReport.jasper";
             Map<String, Object> params = new HashMap<String, Object>();
-            params.put("bulan" , bulan);
+            params.put("bulan", bulan);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(presenstiTable.getModel()));
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {
@@ -379,7 +387,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             String pilih = String.valueOf(departmentCombo.getSelectedItem());
             if (pilih != null) {
                 try {
-                    activeDepartment = DaoFactory.getTransaksiGajiDao().getNamaDepartmentByCode(pilih);
+                    activeDepartment = DaoFactory.getRekapPresensiDao().getNamaDepartmentByCode(pilih);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -415,18 +423,18 @@ public class RekapPresensiForm extends javax.swing.JFrame {
 
             String kode_department = String.valueOf(departmentCombo.getSelectedItem());
             try {
-                List<Karyawan> karyawans = DaoFactory.getTransaksiGajiDao().getAllKaryawanByDepartmentCode(kode_department);
+                List<Karyawan> karyawans = DaoFactory.getRekapPresensiDao().getAllKaryawanByDepartmentCode(kode_department);
                 while (!karyawans.isEmpty()) {
                     Karyawan karyawan = karyawans.remove(0);
-                    DaoFactory.getTransaksiGajiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
+                    DaoFactory.getRekapPresensiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
                 }
-                 List<DetailPresensi> detailPresensis = DaoFactory.getTransaksiGajiDao().callGetPresensi(month, year, kode_department);
-                 PresensiTableModel model=new PresensiTableModel(detailPresensis);
-                 presenstiTable.setModel(model);
-                 presenstiTable.setVisible(true);
+                List<DetailPresensi> detailPresensis = DaoFactory.getRekapPresensiDao().callGetPresensi(month, year, kode_department);
+                PresensiTableModel model = new PresensiTableModel(detailPresensis);
+                presenstiTable.setModel(model);
+                presenstiTable.setVisible(true);
             } catch (SQLException ex) {
             }
-           
+
         }
     }//GEN-LAST:event_prosesButtonActionPerformed
 
