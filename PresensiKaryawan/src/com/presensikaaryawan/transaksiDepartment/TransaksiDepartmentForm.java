@@ -1,21 +1,12 @@
 package com.presensikaaryawan.transaksiDepartment;
 
-import com.presensikaryawan.karyawan.*;
-import com.presensikaryawan.golongan.*;
 import com.presensikaryawan.tools.DaoFactory;
-import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
-import com.dssystem.umum.DateTool;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
-import com.presensikaryawan.outletSetting.Outlet;
-import com.presensikaryawan.outletSetting.OutletDao;
-import com.presensikaryawan.posisi.Posisi;
-import com.presensikaryawan.posisi.PosisiDao;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
