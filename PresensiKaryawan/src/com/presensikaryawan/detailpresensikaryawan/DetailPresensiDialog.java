@@ -30,7 +30,7 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
         nilaiNIPLabel.setText(nip);
         List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip);
         DetailPresensiTableModel model=new DetailPresensiTableModel(detailPresensis);
-        tableKeterangan.setModel(model);
+        detailPresensiTableModel.setModel(model);
 
     }
 
@@ -52,7 +52,7 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
         keteranganLabel = new javax.swing.JLabel();
         keteranganTextField = new javax.swing.JTextField();
         tablePanel = new javax.swing.JScrollPane();
-        tableKeterangan = new javax.swing.JTable();
+        detailPresensiTableModel = new javax.swing.JTable();
         updateButton = new javax.swing.JButton();
         batalButton = new javax.swing.JButton();
         nilaiTanggalLabel = new javax.swing.JLabel();
@@ -78,7 +78,7 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
         keteranganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         keteranganLabel.setText("Keterangan");
 
-        tableKeterangan.setModel(new javax.swing.table.DefaultTableModel(
+        detailPresensiTableModel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -97,7 +97,12 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tablePanel.setViewportView(tableKeterangan);
+        detailPresensiTableModel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                detailPresensiTableModelMouseClicked(evt);
+            }
+        });
+        tablePanel.setViewportView(detailPresensiTableModel);
 
         updateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Edit.gif"))); // NOI18N
         updateButton.setText("Update");
@@ -232,8 +237,27 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_kembaliButtonActionPerformed
+
+    private void detailPresensiTableModelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detailPresensiTableModelMouseClicked
+        // TODO add your handling code here:
+        int row = detailPresensiTableModel.getSelectedRow();
+        String keterangan = detailPresensiTableModel.getValueAt(row, 1).toString();
+        String tanggalString = detailPresensiTableModel.getValueAt(row, 0).toString();
+        keteranganTextField.setText(keterangan);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date tanggal = null;
+        try {
+            tanggal = sdf.parse(tanggalString);
+        } catch (ParseException ex) {
+            Logger.getLogger(DetailPresensiDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        nilaiTanggalLabel.setText(sdf.format(tanggal));
+    }//GEN-LAST:event_detailPresensiTableModelMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalButton;
+    private javax.swing.JTable detailPresensiTableModel;
     private javax.swing.JButton kembaliButton;
     private javax.swing.JLabel keteranganLabel;
     private javax.swing.JTextField keteranganTextField;
@@ -243,7 +267,6 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
     private javax.swing.JLabel nilaiTanggalLabel;
     private javax.swing.JLabel nipLabel;
     private javax.swing.JPanel panelUtama;
-    private javax.swing.JTable tableKeterangan;
     private javax.swing.JScrollPane tablePanel;
     private javax.swing.JLabel tanggalLabel;
     private javax.swing.JButton updateButton;
