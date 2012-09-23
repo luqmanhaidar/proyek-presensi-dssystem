@@ -27,11 +27,10 @@ import com.presensikaryawan.shiftSetting.ShiftDao;
 import com.presensikaryawan.shiftSetting.ShiftDaoImplemen;
 import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
-import com.presensikaaryawan.transaksiDepartment.TransaksiDepartment;
 import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDao;
 import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
-import com.presensikaryawan.detailpresensikaryawan.PresensiTidakMasukDao;
-import com.presensikaryawan.detailpresensikaryawan.PresensiTidakMasukDaoImplemen;
+import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
+import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDaoImplemen;
 import com.presensikaryawan.transaksi.TransaksiGajiDao;
 import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
 import java.io.FileInputStream;
@@ -64,7 +63,7 @@ public class DaoFactory {
     private static TransaksiDepartmentDao transaksiDepartmentDao;
     private static TransaksiGajiDao transaksiGajiDao;
     private static BankDao bankDao;
-    private static PresensiTidakMasukDao presensiTidakMasukDao;
+    private static DetailPresensiDao presensiTidakMasukDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -180,9 +179,9 @@ public class DaoFactory {
          return  transaksiGajiDao;
      }
      
-     public static PresensiTidakMasukDao getPresensiTidakMasukDao() throws SQLException{
+     public static DetailPresensiDao getPresensiTidakMasukDao() throws SQLException{
          if (presensiTidakMasukDao==null){
-             presensiTidakMasukDao=new PresensiTidakMasukDaoImplemen(getConnection());
+             presensiTidakMasukDao=new DetailPresensiDaoImplemen(getConnection());
          }
          return  presensiTidakMasukDao;
      }

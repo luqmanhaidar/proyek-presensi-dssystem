@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,11 +23,15 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
     /**
      * Creates new form DetailPresensiDialog
      */
-    public DetailPresensiDialog(java.awt.Frame parent, boolean modal, String nip, String nama) {
+    public DetailPresensiDialog(java.awt.Frame parent, boolean modal, String nip, String nama) throws SQLException {
         super(parent, modal);
         initComponents();
         nilaiNamaLabel.setText(nama);
         nilaiNIPLabel.setText(nip);
+        List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip);
+        DetailPresensiTableModel model=new DetailPresensiTableModel(detailPresensis);
+        tableKeterangan.setModel(model);
+
     }
 
     /**
