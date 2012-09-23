@@ -1,5 +1,6 @@
-package com.presensikaryawan.rekapPresensi;
+package com.presensikaryawan.rekapHistoriGaji;
 
+import com.presensikaryawan.rekapPresensi.*;
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDialog;
@@ -32,7 +33,7 @@ import net.sf.jasperreports.engine.data.JRTableModelDataSource;
  *
  * @author Als
  */
-public class RekapPresensiForm extends javax.swing.JFrame {
+public class RekapGajiForm extends javax.swing.JFrame {
 
     private Posisi activePosisi;
     private Department activeDepartment;
@@ -40,16 +41,11 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     /**
      * Creates new form masterInventoryGrup
      */
-    public RekapPresensiForm() throws SQLException {
+    public RekapGajiForm() throws SQLException {
         initComponents();
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-        List<Department> departments = DaoFactory.getRekapPresensiDao().getAllDepartments();
-        for (Department d : departments) {
-            departmentCombo.addItem(d.getKodeDepartment());
-        }
-        presenstiTable.setVisible(false);
 
     }
 
@@ -69,22 +65,29 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         panelStatus1 = new com.sistem.panelstatus.PanelStatus();
         cetakButton = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
-        bulanLabel = new javax.swing.JLabel();
-        monthChooser = new com.toedter.calendar.JMonthChooser();
+        tahunLabel = new javax.swing.JLabel();
         yearChooser = new com.toedter.calendar.JYearChooser();
         departmentLabel = new javax.swing.JLabel();
         departmentCombo = new javax.swing.JComboBox();
         namaDepartmentLabel = new javax.swing.JLabel();
         nilaiNamaDepartment = new javax.swing.JLabel();
         prosesButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        nipLabel = new javax.swing.JLabel();
+        departmentCombo1 = new javax.swing.JComboBox();
+        namaKaryawanLabel = new javax.swing.JLabel();
+        nilaiNamaKaryawan = new javax.swing.JLabel();
+        namaKaryawanLabel1 = new javax.swing.JLabel();
+        nilaiGolonganLabel = new javax.swing.JLabel();
         posisiPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         presenstiTable = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        headPanel = new javax.swing.JPanel();
-        logoLabel = new javax.swing.JLabel();
-        menuLabel = new javax.swing.JLabel();
-        fungsiLabel = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
+        nilaiTotalLabel = new javax.swing.JLabel();
+        headPanel9 = new javax.swing.JPanel();
+        logoLabel9 = new javax.swing.JLabel();
+        menuLabel9 = new javax.swing.JLabel();
+        fungsiLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -108,8 +111,8 @@ public class RekapPresensiForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        bulanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        bulanLabel.setText("Bulan :");
+        tahunLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        tahunLabel.setText("Tahun :");
 
         departmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         departmentLabel.setText("Kode Department");
@@ -140,55 +143,112 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             }
         });
 
+        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nipLabel.setText("NIP");
+
+        departmentCombo1.setEditable(true);
+        departmentCombo1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        departmentCombo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentCombo1ActionPerformed(evt);
+            }
+        });
+        departmentCombo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                departmentCombo1KeyPressed(evt);
+            }
+        });
+
+        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaKaryawanLabel.setText("Nama Karyawan");
+
+        nilaiNamaKaryawan.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaKaryawan.setText("nilai Nama Karyawan");
+
+        namaKaryawanLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaKaryawanLabel1.setText("Golongan");
+
+        nilaiGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiGolonganLabel.setText("nilai Golongan");
+
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jSeparator1)
             .add(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .add(departmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(departmentCombo, 0, 200, Short.MAX_VALUE)
-                    .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .add(457, 457, 457)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(inputPanelLayout.createSequentialGroup()
-                        .add(bulanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(18, 18, 18)
-                        .add(monthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .add(departmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(departmentCombo, 0, 200, Short.MAX_VALUE)
+                            .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 496, Short.MAX_VALUE)
+                        .add(tahunLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(57, 57, 57)
                         .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(45, 45, 45))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(prosesButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(73, 73, 73))))
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(namaKaryawanLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .add(inputPanelLayout.createSequentialGroup()
+                                .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(inputPanelLayout.createSequentialGroup()
+                                .add(departmentCombo1, 0, 200, Short.MAX_VALUE)
+                                .add(686, 686, 686))
+                            .add(inputPanelLayout.createSequentialGroup()
+                                .add(nilaiNamaKaryawan, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+                                .addContainerGap())
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                                .add(nilaiGolonganLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+                                .addContainerGap())))))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(prosesButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(43, 43, 43))
         );
         inputPanelLayout.setVerticalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(bulanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(monthChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(tahunLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(departmentCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(nilaiNamaKaryawan, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(namaKaryawanLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(nilaiGolonganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(prosesButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        inputPanel.setBounds(0, 70, 1020, 150);
+        inputPanel.setBounds(0, 70, 1020, 230);
         jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         posisiPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -200,20 +260,20 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         presenstiTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         presenstiTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "No", "NIP", "Nama Karyawan", "S", "I", "A", "T", "M"
+                "No", "Bulan", "S", "I", "A", "T", "L", "Gaji Pokok", "Uang Makan", "Uang Hadir", "Uang Lembur", "P. Terlambat", "P. Lain", "Lain", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -231,81 +291,77 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(presenstiTable);
 
+        totalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        totalLabel.setText("Total");
+
+        nilaiTotalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiTotalLabel.setText("nilai total");
+
         org.jdesktop.layout.GroupLayout posisiPanelLayout = new org.jdesktop.layout.GroupLayout(posisiPanel);
         posisiPanel.setLayout(posisiPanelLayout);
         posisiPanelLayout.setHorizontalGroup(
             posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, posisiPanelLayout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(totalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 68, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         posisiPanelLayout.setVerticalGroup(
             posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(posisiPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 291, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 52, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, posisiPanelLayout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 175, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(totalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(33, 33, 33))
         );
 
-        posisiPanel.setBounds(0, 220, 1020, 370);
+        posisiPanel.setBounds(0, 300, 1020, 290);
         jDesktopPane1.add(posisiPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        headPanel.setBackground(new java.awt.Color(255, 255, 255));
+        headPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
+        logoLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Transaksi Gaji Karyawan");
+        menuLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        menuLabel9.setText("Menu Transaksi Gaji Karyawan");
 
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        fungsiLabel.setText("Digunakan menghitung transaksi gaji & rekap karyawan per bulan/per tahun");
+        fungsiLabel9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel9.setText("Digunakan menghitung transaksi gaji & rekap karyawan per bulan/per tahun");
 
-        org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
-        headPanel.setLayout(headPanelLayout);
-        headPanelLayout.setHorizontalGroup(
-            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(headPanelLayout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout headPanel9Layout = new org.jdesktop.layout.GroupLayout(headPanel9);
+        headPanel9.setLayout(headPanel9Layout);
+        headPanel9Layout.setHorizontalGroup(
+            headPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(headPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(logoLabel)
+                .add(logoLabel9)
                 .add(4, 4, 4)
-                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(menuLabel)
-                    .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(headPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(menuLabel9)
+                    .add(fungsiLabel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(519, Short.MAX_VALUE))
         );
-        headPanelLayout.setVerticalGroup(
-            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(headPanelLayout.createSequentialGroup()
+        headPanel9Layout.setVerticalGroup(
+            headPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(headPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(logoLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(headPanelLayout.createSequentialGroup()
-                        .add(menuLabel)
+                .add(headPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(logoLabel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(headPanel9Layout.createSequentialGroup()
+                        .add(menuLabel9)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(fungsiLabel)))
+                        .add(fungsiLabel9)))
                 .addContainerGap())
         );
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 1020, Short.MAX_VALUE)
-            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(jPanel1Layout.createSequentialGroup()
-                    .add(0, 0, Short.MAX_VALUE)
-                    .add(headPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 77, Short.MAX_VALUE)
-            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(jPanel1Layout.createSequentialGroup()
-                    .add(0, 0, Short.MAX_VALUE)
-                    .add(headPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(0, 0, Short.MAX_VALUE)))
-        );
-
-        jPanel1.setBounds(0, 0, 1020, 70);
-        jDesktopPane1.add(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        headPanel9.setBounds(0, 0, 1020, 77);
+        jDesktopPane1.add(headPanel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -460,6 +516,14 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_prosesButtonActionPerformed
 
+    private void departmentCombo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentCombo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departmentCombo1ActionPerformed
+
+    private void departmentCombo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentCombo1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departmentCombo1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -469,39 +533,82 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new RekapPresensiForm().setVisible(true);
+                    new RekapGajiForm().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel bulanLabel;
     private javax.swing.JButton cetakButton;
     private javax.swing.JComboBox departmentCombo;
+    private javax.swing.JComboBox departmentCombo1;
     private javax.swing.JLabel departmentLabel;
     private javax.swing.JLabel fungsiLabel;
+    private javax.swing.JLabel fungsiLabel1;
+    private javax.swing.JLabel fungsiLabel2;
+    private javax.swing.JLabel fungsiLabel3;
+    private javax.swing.JLabel fungsiLabel4;
+    private javax.swing.JLabel fungsiLabel5;
+    private javax.swing.JLabel fungsiLabel6;
+    private javax.swing.JLabel fungsiLabel7;
+    private javax.swing.JLabel fungsiLabel8;
+    private javax.swing.JLabel fungsiLabel9;
     private javax.swing.JPanel headPanel;
+    private javax.swing.JPanel headPanel1;
+    private javax.swing.JPanel headPanel2;
+    private javax.swing.JPanel headPanel3;
+    private javax.swing.JPanel headPanel4;
+    private javax.swing.JPanel headPanel5;
+    private javax.swing.JPanel headPanel6;
+    private javax.swing.JPanel headPanel7;
+    private javax.swing.JPanel headPanel8;
+    private javax.swing.JPanel headPanel9;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logoLabel;
+    private javax.swing.JLabel logoLabel1;
+    private javax.swing.JLabel logoLabel2;
+    private javax.swing.JLabel logoLabel3;
+    private javax.swing.JLabel logoLabel4;
+    private javax.swing.JLabel logoLabel5;
+    private javax.swing.JLabel logoLabel6;
+    private javax.swing.JLabel logoLabel7;
+    private javax.swing.JLabel logoLabel8;
+    private javax.swing.JLabel logoLabel9;
     private javax.swing.JLabel menuLabel;
-    private com.toedter.calendar.JMonthChooser monthChooser;
+    private javax.swing.JLabel menuLabel1;
+    private javax.swing.JLabel menuLabel2;
+    private javax.swing.JLabel menuLabel3;
+    private javax.swing.JLabel menuLabel4;
+    private javax.swing.JLabel menuLabel5;
+    private javax.swing.JLabel menuLabel6;
+    private javax.swing.JLabel menuLabel7;
+    private javax.swing.JLabel menuLabel8;
+    private javax.swing.JLabel menuLabel9;
     private javax.swing.JLabel namaDepartmentLabel;
+    private javax.swing.JLabel namaKaryawanLabel;
+    private javax.swing.JLabel namaKaryawanLabel1;
+    private javax.swing.JLabel nilaiGolonganLabel;
     private javax.swing.JLabel nilaiNamaDepartment;
+    private javax.swing.JLabel nilaiNamaKaryawan;
+    private javax.swing.JLabel nilaiTotalLabel;
+    private javax.swing.JLabel nipLabel;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JPanel posisiPanel;
     private javax.swing.JTable presenstiTable;
     private javax.swing.JButton prosesButton;
+    private javax.swing.JLabel tahunLabel;
+    private javax.swing.JLabel totalLabel;
     private com.toedter.calendar.JYearChooser yearChooser;
     // End of variables declaration//GEN-END:variables
 }
