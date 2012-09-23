@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class DetailPresensiDaoImplemen implements DetailPresensiDao {
 
     private final String SQL_UPDATE_GETPRESENSI = "UPDATE detail_presensi set keterangan = ? where nip = ? and tanggal = ?";
-    private final String SQL_GETDETAILPRESENSI_BYNIP="SELECT tanggal, keterangan FROM detail_presensi where nip = ? and keterangan = 'A'";
+    private final String SQL_GETDETAILPRESENSI_BYNIP="SELECT tanggal, keterangan FROM detail_presensi where nip = ? and keterangan = 'A' and tanggal like ?";
     
     private Connection connection;
 
@@ -61,7 +61,7 @@ public class DetailPresensiDaoImplemen implements DetailPresensiDao {
     }
 
     @Override
-    public List<DetailPresensi> getDetailPresensiByNIP(String nip) throws SQLException {
+    public List<DetailPresensi> getDetailPresensiByNIP(String nip, String bulan, String tahun) throws SQLException {
         PreparedStatement statement = null;
         ResultSet result = null;
         try {
@@ -69,6 +69,7 @@ public class DetailPresensiDaoImplemen implements DetailPresensiDao {
 
             statement = connection.prepareStatement(SQL_GETDETAILPRESENSI_BYNIP);
             statement.setString(1, nip);
+            statement.setString(2, tahun+"-"+bulan+"%");
             
             result = statement.executeQuery();
             List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
