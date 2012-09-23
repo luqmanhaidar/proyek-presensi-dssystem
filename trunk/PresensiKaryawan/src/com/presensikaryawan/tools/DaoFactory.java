@@ -31,8 +31,8 @@ import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDao;
 import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDaoImplemen;
-import com.presensikaryawan.transaksi.TransaksiGajiDao;
-import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
+import com.presensikaryawan.rekapPresensi.RekapPresensiDao;
+import com.presensikaryawan.rekapPresensi.RekapPresensiDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -61,7 +61,7 @@ public class DaoFactory {
     private static Properties prop;
     private static KaryawanDao karyawanDao;
     private static TransaksiDepartmentDao transaksiDepartmentDao;
-    private static TransaksiGajiDao transaksiGajiDao;
+    private static RekapPresensiDao transaksiGajiDao;
     private static BankDao bankDao;
     private static DetailPresensiDao presensiTidakMasukDao;
 
@@ -172,9 +172,9 @@ public class DaoFactory {
         return bankDao;
     }
     
-     public static TransaksiGajiDao getTransaksiGajiDao() throws SQLException{
+     public static RekapPresensiDao getTransaksiGajiDao() throws SQLException{
          if (transaksiGajiDao == null){
-             transaksiGajiDao = new TransaksiGajiDaoImplemen(getConnection());
+             transaksiGajiDao = new RekapPresensiDaoImplemen(getConnection());
          }
          return  transaksiGajiDao;
      }
