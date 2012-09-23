@@ -7,8 +7,12 @@ package com.presensikaryawan.tools;
 import com.dssystem.bank.BankDao;
 import com.dssystem.bank.BankDaoImplemen;
 import com.mysql.jdbc.Driver;
+import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDao;
+import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.presensikaryawan.departmentSetting.DepartmentDaoImplemen;
+import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
+import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDaoImplemen;
 import com.presensikaryawan.golongan.GolonganDao;
 import com.presensikaryawan.golongan.GolonganDaoImplemen;
 import com.presensikaryawan.groupShift.GroupShiftDao;
@@ -23,16 +27,14 @@ import com.presensikaryawan.outletSetting.OutletDao;
 import com.presensikaryawan.outletSetting.OutletDaoImplemen;
 import com.presensikaryawan.posisi.PosisiDao;
 import com.presensikaryawan.posisi.PosisiDaoImplemen;
+import com.presensikaryawan.rekapPresensi.RekapPresensiDao;
+import com.presensikaryawan.rekapPresensi.RekapPresensiDaoImplemen;
 import com.presensikaryawan.shiftSetting.ShiftDao;
 import com.presensikaryawan.shiftSetting.ShiftDaoImplemen;
 import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
-import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDao;
-import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
-import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
-import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDaoImplemen;
-import com.presensikaryawan.rekapPresensi.RekapPresensiDao;
-import com.presensikaryawan.rekapPresensi.RekapPresensiDaoImplemen;
+import com.presensikaryawan.rekapHistoriGaji.RekapGajiDao;
+import com.presensikaryawan.rekapHistoriGaji.RekapGajiDaoImpelemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -64,6 +66,7 @@ public class DaoFactory {
     private static RekapPresensiDao rekapPresensiDao;
     private static BankDao bankDao;
     private static DetailPresensiDao presensiTidakMasukDao;
+    private static RekapGajiDao rekapGajiDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -184,5 +187,12 @@ public class DaoFactory {
              presensiTidakMasukDao=new DetailPresensiDaoImplemen(getConnection());
          }
          return  presensiTidakMasukDao;
+     }
+     
+     public static RekapGajiDao getRekapGajiDao() throws SQLException{
+         if (rekapGajiDao==null){
+             rekapGajiDao=new RekapGajiDaoImpelemen(getConnection());
+         }
+         return rekapGajiDao;
      }
 }
