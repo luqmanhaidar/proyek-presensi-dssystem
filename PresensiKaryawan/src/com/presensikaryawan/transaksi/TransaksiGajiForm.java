@@ -48,6 +48,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
+        presenstiTable.setVisible(false);
 
     }
 
@@ -306,7 +307,12 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
         String kodegroup = presenstiTable.getValueAt(row, 0).toString();
         String namagroup = presenstiTable.getValueAt(row, 1).toString();
 
-        DetailPresensiDialog detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup);
+        DetailPresensiDialog detailDialog=null;
+        try {
+            detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup);
+        } catch (SQLException ex) {
+            Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         detailDialog.setVisible(true);
 
     }//GEN-LAST:event_presenstiTableMouseClicked
@@ -416,6 +422,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                  List<String[]> listStrings = DaoFactory.getTransaksiGajiDao().callGetPresensi(month, year, kode_department);
                  PresensiTableModel model=new PresensiTableModel(listStrings);
                  presenstiTable.setModel(model);
+                 presenstiTable.setVisible(true);
             } catch (SQLException ex) {
             }
            
