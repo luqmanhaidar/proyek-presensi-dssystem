@@ -391,7 +391,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
                     break;
             }
             bulan = bulan + " " + String.valueOf(yearChooser.getYear());
-            String reportSource = "./report/rekapReport.jasper";
+            String reportSource = "./report/RekapPresensiReport.jasper";
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("bulan", bulan);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(rekapTable.getModel()));
