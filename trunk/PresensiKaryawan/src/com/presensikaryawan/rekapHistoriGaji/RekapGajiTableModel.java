@@ -68,9 +68,9 @@ public class RekapGajiTableModel extends AbstractTableModel {
             case 8:
                 return rG.getUang_makan();
             case 9:
-                return rG.getUang_lembur();
-            case 10:
                 return rG.getUang_hadir();
+            case 10:
+                return rG.getUang_lembur();
             case 11:
                 return rG.getPotongan_terlambat();
             case 12:
@@ -88,7 +88,7 @@ public class RekapGajiTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
              case 0:
-                return "No.";
+                return "No ";
             case 1:
                 return "Bulan";
             case 2:
