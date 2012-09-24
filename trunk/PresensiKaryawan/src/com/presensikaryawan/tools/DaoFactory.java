@@ -77,7 +77,7 @@ public class DaoFactory {
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
             try {
-                FileInputStream in = new FileInputStream("D:\\Documents\\Project\\progdss\\ipAddressContoh.xml");
+                FileInputStream in = new FileInputStream("./ipAddressDatabasePresensi.xml");
                 prop = new Properties();
                 prop.loadFromXML(in);
 
