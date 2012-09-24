@@ -35,6 +35,8 @@ import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
 import com.presensikaryawan.rekapHistoriGaji.RekapGajiDao;
 import com.presensikaryawan.rekapHistoriGaji.RekapGajiDaoImpelemen;
+import com.presensikaryawan.rekapPresensiPerBulan.RekapPresensiPerBulanDao;
+import com.presensikaryawan.rekapPresensiPerBulan.RekapPresensiPerBulanDaoImplemen;
 import com.presensikaryawan.transaksi.TransaksiGajiDao;
 import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
 import java.io.FileInputStream;
@@ -70,6 +72,7 @@ public class DaoFactory {
     private static DetailPresensiDao presensiTidakMasukDao;
     private static RekapGajiDao rekapGajiDao;
     private static TransaksiGajiDao transaksiGajiDao;
+    private static RekapPresensiPerBulanDao rekapPresensiPerBulanDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -204,5 +207,12 @@ public class DaoFactory {
              transaksiGajiDao=new TransaksiGajiDaoImplemen(getConnection());
          }
          return transaksiGajiDao;
+     }
+       
+       public static RekapPresensiPerBulanDao getRekapPresensiPerBulanDao() throws SQLException{
+         if (rekapPresensiPerBulanDao==null){
+             rekapPresensiPerBulanDao=new RekapPresensiPerBulanDaoImplemen(getConnection());
+         }
+         return rekapPresensiPerBulanDao;
      }
 }
