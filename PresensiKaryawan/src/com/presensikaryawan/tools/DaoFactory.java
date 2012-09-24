@@ -90,7 +90,7 @@ public class DaoFactory {
 
             String url = "jdbc:mysql://" + alamatIp + "/" + namaDB;
             String user = "presensi";
-            String password = "presensi";
+            String password = "adminpresensi";
             connection = DriverManager.getConnection(url, user, password);
         }
         return connection;
