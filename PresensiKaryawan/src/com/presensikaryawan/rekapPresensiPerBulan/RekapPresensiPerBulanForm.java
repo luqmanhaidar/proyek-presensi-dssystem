@@ -346,58 +346,64 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-1036)/2, (screenSize.height-688)/2, 1036, 688);
     }// </editor-fold>//GEN-END:initComponents
+
     private void isitable() {
     }
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        try {
-            String bulan = null;
-            switch (monthChooser.getMonth()) {
-                case 0:
-                    bulan = "JANUARI";
-                    break;
-                case 1:
-                    bulan = "FEBRUARI";
-                    break;
-                case 2:
-                    bulan = "MARET";
-                    break;
-                case 3:
-                    bulan = "APRIL";
-                    break;
-                case 4:
-                    bulan = "MEI";
-                    break;
-                case 5:
-                    bulan = "JUNI";
-                    break;
-                case 6:
-                    bulan = "JULI";
-                    break;
-                case 7:
-                    bulan = "AGUSTUS";
-                    break;
-                case 8:
-                    bulan = "SEPTEMBER";
-                    break;
-                case 9:
-                    bulan = "OKTOBER";
-                    break;
-                case 10:
-                    bulan = "NOVEMBER";
-                    break;
-                case 11:
-                    bulan = "DESEMBER";
-                    break;
+        if (rekapTable.isVisible()) {
+            try {
+                String bulan = null;
+                switch (monthChooser.getMonth()) {
+                    case 0:
+                        bulan = "JANUARI";
+                        break;
+                    case 1:
+                        bulan = "FEBRUARI";
+                        break;
+                    case 2:
+                        bulan = "MARET";
+                        break;
+                    case 3:
+                        bulan = "APRIL";
+                        break;
+                    case 4:
+                        bulan = "MEI";
+                        break;
+                    case 5:
+                        bulan = "JUNI";
+                        break;
+                    case 6:
+                        bulan = "JULI";
+                        break;
+                    case 7:
+                        bulan = "AGUSTUS";
+                        break;
+                    case 8:
+                        bulan = "SEPTEMBER";
+                        break;
+                    case 9:
+                        bulan = "OKTOBER";
+                        break;
+                    case 10:
+                        bulan = "NOVEMBER";
+                        break;
+                    case 11:
+                        bulan = "DESEMBER";
+                        break;
+                }
+                bulan = bulan + " " + String.valueOf(yearChooser.getYear());
+                String reportSource = "./report/RekapPresensiReport.jasper";
+                Map<String, Object> params = new HashMap<String, Object>();
+                params.put("bulan", bulan);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(rekapTable.getModel()));
+                JasperViewer.viewReport(jasperPrint, false);
+            } catch (JRException ex) {
+                Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            bulan = bulan + " " + String.valueOf(yearChooser.getYear());
-            String reportSource = "./report/RekapPresensiReport.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("bulan", bulan);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(rekapTable.getModel()));
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (JRException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+        }else{
+            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menampilkan Hasil Rekap\n"+
+                    "Dengan Menekan Tombol Lihat Dahulu","PEMBERITAHUAN",JOptionPane.INFORMATION_MESSAGE);
         }
 
 }//GEN-LAST:event_cetakButtonActionPerformed
@@ -408,27 +414,26 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
 //        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
 //            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
 //        } else {
-            GregorianCalendar gc = new GregorianCalendar();
-            gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
-            String year = String.valueOf(yearChooser.getYear());
-            String month = String.valueOf(monthChooser.getMonth() + 1);
-            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-            String maxDayOfMonth = year + "-" + month + "-" + day;
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
+        String year = String.valueOf(yearChooser.getYear());
+        String month = String.valueOf(monthChooser.getMonth() + 1);
+        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+        String maxDayOfMonth = year + "-" + month + "-" + day;
 
-            String kode_department = String.valueOf(departmentCombo.getSelectedItem());
-            try {
-                List<Karyawan> karyawans = DaoFactory.getRekapPresensiPerBulanDao().getAllKaryawanByDepartmentCode(kode_department);
-                while (!karyawans.isEmpty()) {
-                    Karyawan karyawan = karyawans.remove(0);
-                    DaoFactory.getRekapPresensiPerBulanDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
-                }
-                List<RekapPresensiPerBulan> rekapPresensiPerBulans = DaoFactory.getRekapPresensiPerBulanDao().callGetPresensi(month, year, kode_department);
-                RekapPresensiPerBulanTableModel model = new RekapPresensiPerBulanTableModel(rekapPresensiPerBulans);
-                rekapTable.setModel(model);
-                rekapTable.setVisible(true);
-            } catch (SQLException ex) {
+        String kode_department = String.valueOf(departmentCombo.getSelectedItem());
+        try {
+            List<Karyawan> karyawans = DaoFactory.getRekapPresensiPerBulanDao().getAllKaryawanByDepartmentCode(kode_department);
+            while (!karyawans.isEmpty()) {
+                Karyawan karyawan = karyawans.remove(0);
+                DaoFactory.getRekapPresensiPerBulanDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
+            }
+            List<RekapPresensiPerBulan> rekapPresensiPerBulans = DaoFactory.getRekapPresensiPerBulanDao().callGetPresensi(month, year, kode_department);
+            RekapPresensiPerBulanTableModel model = new RekapPresensiPerBulanTableModel(rekapPresensiPerBulans);
+            rekapTable.setModel(model);
+            rekapTable.setVisible(true);
+        } catch (SQLException ex) {
 //            }
-
         }
     }//GEN-LAST:event_lihatButtonActionPerformed
 
@@ -436,7 +441,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
         int row = rekapTable.getSelectedRow();
         String kodegroup = rekapTable.getValueAt(row, 1).toString();
         String namagroup = rekapTable.getValueAt(row, 2).toString();
-        String kodedepartment=String.valueOf(departmentCombo.getSelectedItem());
+        String kodedepartment = String.valueOf(departmentCombo.getSelectedItem());
         String bulan;
         if (monthChooser.getMonth() + 1 < 10) {
             bulan = "0" + String.valueOf(monthChooser.getMonth() + 1);
