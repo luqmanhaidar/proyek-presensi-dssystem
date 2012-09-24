@@ -13,6 +13,8 @@ import java.util.List;
  * @author Tinus
  */
 public interface RekapGajiDao {
+    double getTotalGajiSetahun(String nip, String year) throws SQLException;
+    String getGolonganByCode(String kode_golongan) throws SQLException;
     List<RekapGaji> getRekapGajiByNIPAndYear(String nip, String year) throws SQLException;
     List<Karyawan> getNIPByKodeDepartment(String kode_department) throws SQLException;
     Karyawan getKaryawanByNIP(String nip) throws SQLException;
