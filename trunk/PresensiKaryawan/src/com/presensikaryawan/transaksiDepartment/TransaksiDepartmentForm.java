@@ -7,6 +7,7 @@ import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
@@ -407,10 +408,27 @@ private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     String department = departmentCombo.getSelectedItem().toString();
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
+    Date date = new Date();
+//        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
+//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else {
+//            GregorianCalendar gc = new GregorianCalendar();
+    gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+//            String year = String.valueOf(yearChooser.getYear());
+//            String month = String.valueOf(monthChooser.getMonth() + 1);
+    String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+    String maxDayOfMonth;
+    if (bulan < 10) {
+        maxDayOfMonth = tahun + "-0" + bulan + "-" + day;
+    } else {
+        maxDayOfMonth = tahun + "-" + bulan + "-" + day;
+    }
+    System.out.println(maxDayOfMonth);
 //    System.out.println(department+" "+bulan+" "+ tahun);
     try {
         TransaksiDepartmentDao dao = DaoFactory.getTransaksiDepartmentDao();
-        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, bulan, tahun);
+//        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, bulan, tahun);
+        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
         TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
         karyawanTable.setModel(model);
 
