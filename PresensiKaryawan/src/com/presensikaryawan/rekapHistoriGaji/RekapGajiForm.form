@@ -188,6 +188,9 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JYearChooser" name="yearChooser">
+              <Events>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="yearChooserPropertyChange"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="departmentLabel">
               <Properties>
