@@ -83,6 +83,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
 //            System.out.println(tahun+"-0"+bulan+"-%");
             result = statement.executeQuery();
             List<TransaksiDepartment> transaksiDepartments = new ArrayList<TransaksiDepartment>();
+            
             while (result.next()) {
                 TransaksiDepartment transaksiDepartment = new TransaksiDepartment();
                 

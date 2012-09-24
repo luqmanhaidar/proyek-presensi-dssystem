@@ -373,7 +373,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             String reportSource = "./report/rekapReport.jasper";
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("bulan" , bulan);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(presenstiTable.getModel()));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params);
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {
             Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
