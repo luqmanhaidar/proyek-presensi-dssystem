@@ -107,6 +107,12 @@ public class RekapGajiForm extends javax.swing.JFrame {
         tahunLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         tahunLabel.setText("Tahun :");
 
+        yearChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                yearChooserPropertyChange(evt);
+            }
+        });
+
         departmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         departmentLabel.setText("Kode Department");
 
@@ -528,6 +534,11 @@ public class RekapGajiForm extends javax.swing.JFrame {
     private void nipComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipComboKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_nipComboKeyPressed
+
+    private void yearChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_yearChooserPropertyChange
+        // TODO add your handling code here:
+        rekapTable.setVisible(false);
+    }//GEN-LAST:event_yearChooserPropertyChange
 
     /**
      * @param args the command line arguments
