@@ -1,4 +1,4 @@
-package com.presensikaryawan.rekapPresensi;
+package com.presensikaryawan.transaksi;
 
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
@@ -17,11 +17,12 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * masterInventoryGrup.java
@@ -32,7 +33,7 @@ import net.sf.jasperreports.engine.data.JRTableModelDataSource;
  *
  * @author Als
  */
-public class RekapPresensiForm extends javax.swing.JFrame {
+public class TransaksiGajiForm extends javax.swing.JFrame {
 
     private Posisi activePosisi;
     private Department activeDepartment;
@@ -40,12 +41,12 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     /**
      * Creates new form masterInventoryGrup
      */
-    public RekapPresensiForm() throws SQLException {
+    public TransaksiGajiForm() throws SQLException {
         initComponents();
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-        List<Department> departments = DaoFactory.getRekapPresensiDao().getAllDepartments();
+        List<Department> departments = DaoFactory.getTranskasiGajiDao().getAllDepartments();
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
@@ -66,6 +67,10 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        headPanel = new javax.swing.JPanel();
+        logoLabel = new javax.swing.JLabel();
+        menuLabel = new javax.swing.JLabel();
+        fungsiLabel = new javax.swing.JLabel();
         panelStatus1 = new com.sistem.panelstatus.PanelStatus();
         cetakButton = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
@@ -80,11 +85,6 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         posisiPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         presenstiTable = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        headPanel = new javax.swing.JPanel();
-        logoLabel = new javax.swing.JLabel();
-        menuLabel = new javax.swing.JLabel();
-        fungsiLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -92,6 +92,45 @@ public class RekapPresensiForm extends javax.swing.JFrame {
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
         jDesktopPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        headPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
+
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        menuLabel.setText("Menu Transaksi Gaji Karyawan");
+
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel.setText("Digunakan menghitung transaksi gaji & rekap karyawan per bulan/per tahun");
+
+        org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
+        headPanel.setLayout(headPanelLayout);
+        headPanelLayout.setHorizontalGroup(
+            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(headPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(logoLabel)
+                .add(4, 4, 4)
+                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(menuLabel)
+                    .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(519, Short.MAX_VALUE))
+        );
+        headPanelLayout.setVerticalGroup(
+            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(headPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(logoLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(headPanelLayout.createSequentialGroup()
+                        .add(menuLabel)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(fungsiLabel)))
+                .addContainerGap())
+        );
+
+        headPanel.setBounds(0, 0, 1020, 77);
+        jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelStatus1.setBounds(0, 650, 1020, 50);
         jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -247,66 +286,6 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         posisiPanel.setBounds(0, 220, 1020, 370);
         jDesktopPane1.add(posisiPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        headPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
-
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Transaksi Gaji Karyawan");
-
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        fungsiLabel.setText("Digunakan menghitung transaksi gaji & rekap karyawan per bulan/per tahun");
-
-        org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
-        headPanel.setLayout(headPanelLayout);
-        headPanelLayout.setHorizontalGroup(
-            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(headPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(logoLabel)
-                .add(4, 4, 4)
-                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(menuLabel)
-                    .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(519, Short.MAX_VALUE))
-        );
-        headPanelLayout.setVerticalGroup(
-            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(headPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(logoLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(headPanelLayout.createSequentialGroup()
-                        .add(menuLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(fungsiLabel)))
-                .addContainerGap())
-        );
-
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 1020, Short.MAX_VALUE)
-            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(jPanel1Layout.createSequentialGroup()
-                    .add(0, 0, Short.MAX_VALUE)
-                    .add(headPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 77, Short.MAX_VALUE)
-            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(jPanel1Layout.createSequentialGroup()
-                    .add(0, 0, Short.MAX_VALUE)
-                    .add(headPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(0, 0, Short.MAX_VALUE)))
-        );
-
-        jPanel1.setBounds(0, 0, 1020, 70);
-        jDesktopPane1.add(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -331,21 +310,19 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         String namagroup = presenstiTable.getValueAt(row, 2).toString();
         String kodedepartment=String.valueOf(departmentCombo.getSelectedItem());
         String bulan;
-        if (monthChooser.getMonth() + 1 < 10) {
-            bulan = "0" + String.valueOf(monthChooser.getMonth() + 1);
-        } else {
-            bulan = String.valueOf(monthChooser.getMonth() + 1);
-        }
-        String tahun = String.valueOf(yearChooser.getYear());
+        if(monthChooser.getMonth()+1<10)
+            bulan="0"+String.valueOf(monthChooser.getMonth()+1);
+        else
+            bulan=String.valueOf(monthChooser.getMonth()+1);
+        String tahun=String.valueOf(yearChooser.getYear());
 
-        DetailPresensiDialog detailDialog = null;
+        DetailPresensiDialog detailDialog=null;
         try {
             detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup, bulan, tahun, presenstiTable, kodedepartment);
         } catch (SQLException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         detailDialog.setVisible(true);
-
 
     }//GEN-LAST:event_presenstiTableMouseClicked
     private void isitable() {
@@ -395,11 +372,11 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             bulan = bulan + " " + String.valueOf(yearChooser.getYear());
             String reportSource = "./report/rekapReport.jasper";
             Map<String, Object> params = new HashMap<String, Object>();
-            params.put("bulan", bulan);
+            params.put("bulan" , bulan);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(presenstiTable.getModel()));
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 }//GEN-LAST:event_cetakButtonActionPerformed
@@ -410,7 +387,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             String pilih = String.valueOf(departmentCombo.getSelectedItem());
             if (pilih != null) {
                 try {
-                    activeDepartment = DaoFactory.getRekapPresensiDao().getNamaDepartmentByCode(pilih);
+                    activeDepartment = DaoFactory.getTranskasiGajiDao().getNamaDepartmentByCode(pilih);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -446,18 +423,19 @@ public class RekapPresensiForm extends javax.swing.JFrame {
 
             String kode_department = String.valueOf(departmentCombo.getSelectedItem());
             try {
-                List<Karyawan> karyawans = DaoFactory.getRekapPresensiDao().getAllKaryawanByDepartmentCode(kode_department);
+                List<Karyawan> karyawans = DaoFactory.getTranskasiGajiDao().getAllKaryawanByDepartmentCode(kode_department);
                 while (!karyawans.isEmpty()) {
                     Karyawan karyawan = karyawans.remove(0);
-                    DaoFactory.getRekapPresensiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
+                    DaoFactory.getTranskasiGajiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
                 }
-                List<DetailPresensi> detailPresensis = DaoFactory.getRekapPresensiDao().callGetPresensi(month, year, kode_department);
-                PresensiTableModel model = new PresensiTableModel(detailPresensis);
-                presenstiTable.setModel(model);
-                presenstiTable.setVisible(true);
+//                System.out.println(month+" "+year+" "+kode_department);
+                 List<RekapPresensi> detailPresensis = DaoFactory.getTranskasiGajiDao().callGetPresensi(month, year, kode_department);
+                 PresensiTableModel model=new PresensiTableModel(detailPresensis);
+                 presenstiTable.setModel(model);
+                 presenstiTable.setVisible(true);
             } catch (SQLException ex) {
 //            }
-
+           
         }
     }//GEN-LAST:event_prosesButtonActionPerformed
 
@@ -470,15 +448,15 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new RekapPresensiForm().setVisible(true);
+                    new TransaksiGajiForm().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TransaksiGajiForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -492,7 +470,6 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;

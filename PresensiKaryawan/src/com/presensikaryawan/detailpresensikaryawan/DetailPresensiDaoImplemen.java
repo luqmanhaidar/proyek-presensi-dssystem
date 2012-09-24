@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class DetailPresensiDaoImplemen implements DetailPresensiDao {
 
     private final String SQL_UPDATE_GETPRESENSI = "UPDATE detail_presensi set keterangan = ? where nip = ? and tanggal = ?";
-    private final String SQL_GETDETAILPRESENSI_BYNIP="SELECT tanggal, keterangan FROM detail_presensi where nip = ? and keterangan = 'A' and tanggal like ?";
+    private final String SQL_GETDETAILPRESENSI_BYNIP="SELECT tanggal, keterangan FROM detail_presensi where nip = ? and keterangan = 'A' or keterangan = 'T' and tanggal like ?";
     
     private Connection connection;
 
@@ -39,9 +39,9 @@ public class DetailPresensiDaoImplemen implements DetailPresensiDao {
             connection.setAutoCommit(false);
 
             statement = connection.prepareStatement(SQL_UPDATE_GETPRESENSI);
-            statement.setString(1, tanggal);
+            statement.setString(3, tanggal);
             statement.setString(2, nip);
-            statement.setString(3, keterangan);
+            statement.setString(1, keterangan);
             statement.executeUpdate();
 
             connection.commit();

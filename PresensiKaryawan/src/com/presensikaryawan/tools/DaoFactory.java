@@ -7,8 +7,8 @@ package com.presensikaryawan.tools;
 import com.dssystem.bank.BankDao;
 import com.dssystem.bank.BankDaoImplemen;
 import com.mysql.jdbc.Driver;
-import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDao;
-import com.presensikaaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
+import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentDao;
+import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.presensikaryawan.departmentSetting.DepartmentDaoImplemen;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
@@ -35,6 +35,8 @@ import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
 import com.presensikaryawan.rekapHistoriGaji.RekapGajiDao;
 import com.presensikaryawan.rekapHistoriGaji.RekapGajiDaoImpelemen;
+import com.presensikaryawan.transaksi.TransaksiGajiDao;
+import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -67,11 +69,12 @@ public class DaoFactory {
     private static BankDao bankDao;
     private static DetailPresensiDao presensiTidakMasukDao;
     private static RekapGajiDao rekapGajiDao;
+    private static TransaksiGajiDao transaksiGajiDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
             try {
-                FileInputStream in = new FileInputStream("C:/Windows/ipAddressDatabasePresensi.xml");
+                FileInputStream in = new FileInputStream("D:\\Documents\\Project\\progdss\\ipAddressContoh.xml");
                 prop = new Properties();
                 prop.loadFromXML(in);
 
@@ -84,7 +87,7 @@ public class DaoFactory {
 
             String url = "jdbc:mysql://" + alamatIp + "/" + namaDB;
             String user = "presensi";
-            String password = "adminpresensi";
+            String password = "presensi";
             connection = DriverManager.getConnection(url, user, password);
         }
         return connection;
@@ -194,5 +197,12 @@ public class DaoFactory {
              rekapGajiDao=new RekapGajiDaoImpelemen(getConnection());
          }
          return rekapGajiDao;
+     }
+     
+       public static TransaksiGajiDao getTranskasiGajiDao() throws SQLException{
+         if (transaksiGajiDao==null){
+             transaksiGajiDao=new TransaksiGajiDaoImplemen(getConnection());
+         }
+         return transaksiGajiDao;
      }
 }

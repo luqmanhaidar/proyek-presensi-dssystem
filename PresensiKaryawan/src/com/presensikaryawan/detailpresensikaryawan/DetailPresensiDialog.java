@@ -4,7 +4,10 @@
  */
 package com.presensikaryawan.detailpresensikaryawan;
 
+
 import com.presensikaryawan.tools.DaoFactory;
+import com.presensikaryawan.transaksi.PresensiTableModel;
+import com.presensikaryawan.transaksi.RekapPresensi;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,28 +16,34 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
  * @author Tinus
  */
 public class DetailPresensiDialog extends javax.swing.JDialog {
-
-    private String bln;
-    private String thn;
+    
+    String bln;
+    String thn;
+    JTable presensiTable;
+    String kode_department;
 
     /**
      * Creates new form DetailPresensiDialog
      */
-    public DetailPresensiDialog(java.awt.Frame parent, boolean modal, String nip, String nama, String bulan, String tahun) throws SQLException {
+    public DetailPresensiDialog(java.awt.Frame parent, boolean modal, String nip, String nama, String bulan, String tahun, JTable presensiTable,
+            String kode_department) throws SQLException {
         super(parent, modal);
         initComponents();
         nilaiNamaLabel.setText(nama);
         nilaiNIPLabel.setText(nip);
-        bln = bulan;
-        thn = tahun;
+        this.presensiTable=presensiTable;
+        bln=bulan;
+        thn=tahun;
+        this.kode_department=kode_department;
         List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip, bulan, tahun);
-        DetailPresensiTableModel model = new DetailPresensiTableModel(detailPresensis);
+        DetailPresensiTableModel model=new DetailPresensiTableModel(detailPresensis);
         detailPresensiTableModel.setModel(model);
 
     }
@@ -65,22 +74,22 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        namaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         namaLabel.setText("Nama");
 
-        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nipLabel.setText("NIP");
 
-        nilaiNamaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nilaiNamaLabel.setText("nilai Nama");
 
-        nilaiNIPLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNIPLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nilaiNIPLabel.setText("nilai NIP");
 
-        tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         tanggalLabel.setText("Tanggal");
 
-        keteranganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        keteranganLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         keteranganLabel.setText("Keterangan");
 
         detailPresensiTableModel.setModel(new javax.swing.table.DefaultTableModel(
@@ -125,7 +134,7 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
             }
         });
 
-        nilaiTanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiTanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nilaiTanggalLabel.setText("-");
 
         kembaliButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Left.gif"))); // NOI18N
@@ -143,10 +152,10 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tablePanel)
+                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                     .addGroup(panelUtamaLayout.createSequentialGroup()
                         .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nipLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nipLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .addComponent(namaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .addComponent(tanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -161,7 +170,7 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
                         .addComponent(keteranganTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUtamaLayout.createSequentialGroup()
                         .addComponent(kembaliButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
                         .addComponent(batalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(updateButton)))
@@ -181,9 +190,9 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(keteranganTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(keteranganLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nilaiTanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(keteranganLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(tanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(nilaiTanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
                 .addGap(29, 29, 29)
                 .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
@@ -211,17 +220,30 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        if (!nilaiTanggalLabel.getText().matches("-") && keteranganTextField.getText() != null) {
+if (!nilaiTanggalLabel.getText().matches("-") && keteranganTextField.getText() != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String tanggal = nilaiTanggalLabel.getText();
-            tanggal = tanggal.substring(6, 10) + "-" + tanggal.substring(3, 5) + "-" + tanggal.substring(0, 2);
+            tanggal = tanggal.substring(6, 10)+"-"+tanggal.substring(3, 5)+"-"+tanggal.substring(0, 2);
             System.out.println(tanggal);
+//            Date date = null;
+//            try {
+//                date = dateFormat.parse(tanggal);
+//                System.out.println(date);
+//            } catch (ParseException ex) {
+//                Logger.getLogger(DetailPresensiDialog.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            tanggal = dateFormat.format(date);
+//            System.out.println(tanggal);
             String nip = nilaiNIPLabel.getText();
             try {
+//                System.out.println("masuk");
                 DaoFactory.getPresensiTidakMasukDao().updateDetailPresensi(tanggal, nip, keteranganTextField.getText());
                 List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip, bln, thn);
-                DetailPresensiTableModel model = new DetailPresensiTableModel(detailPresensis);
+                DetailPresensiTableModel model=new DetailPresensiTableModel(detailPresensis);
                 detailPresensiTableModel.setModel(model);
+                List<RekapPresensi> detailPresensis2 = DaoFactory.getTranskasiGajiDao().callGetPresensi(bln, thn, kode_department);
+                 PresensiTableModel model2=new PresensiTableModel(detailPresensis2);
+                 presensiTable.setModel(model2);
             } catch (SQLException ex) {
                 ex.getMessage();
             }
@@ -257,6 +279,7 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
         }
         nilaiTanggalLabel.setText(sdf.format(tanggal));
     }//GEN-LAST:event_detailPresensiTableModelMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalButton;
     private javax.swing.JTable detailPresensiTableModel;
