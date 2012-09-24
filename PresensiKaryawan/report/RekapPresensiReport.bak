@@ -25,14 +25,14 @@
 
 	<parameter name="bulan" isForPrompting="false" class="java.lang.String"/>
 
-	<field name="no" class="java.lang.String"/>
-	<field name="kode" class="java.lang.String"/>
-	<field name="nama" class="java.lang.String"/>
-	<field name="jum_s" class="java.lang.String"/>
-	<field name="jum_i" class="java.lang.String"/>
-	<field name="jum_a" class="java.lang.String"/>
-	<field name="jum_t" class="java.lang.String"/>
-	<field name="jum_m" class="java.lang.String"/>
+	<field name="No." class="java.lang.String"/>
+	<field name="NIP" class="java.lang.String"/>
+	<field name="Nama" class="java.lang.String"/>
+	<field name="Jum. S" class="java.lang.String"/>
+	<field name="Jum. I" class="java.lang.String"/>
+	<field name="Jum. A" class="java.lang.String"/>
+	<field name="Jum. T" class="java.lang.String"/>
+	<field name="Jum. M" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -111,7 +111,7 @@
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<text><![CDATA[Kode]]></text>
+				<text><![CDATA[NIP]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -203,10 +203,10 @@
 						height="19"
 						key="textField"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
-					<textElement verticalAlignment="Middle">
+					<textElement>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{no}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{No.}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -216,10 +216,10 @@
 						height="19"
 						key="textField"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
-					<textElement verticalAlignment="Middle">
+					<textElement>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{kode}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{NIP}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -229,10 +229,10 @@
 						height="19"
 						key="textField"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
-					<textElement verticalAlignment="Middle">
+					<textElement>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{nama}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Nama}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -242,10 +242,10 @@
 						height="19"
 						key="textField"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{jum_s}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Jum. S}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -255,10 +255,10 @@
 						height="19"
 						key="textField"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{jum_i}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Jum. I}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -268,10 +268,10 @@
 						height="19"
 						key="textField"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{jum_a}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Jum. A}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -281,10 +281,10 @@
 						height="19"
 						key="textField"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{jum_t}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Jum. T}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -294,10 +294,10 @@
 						height="19"
 						key="textField"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{jum_m}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{Jum. M}]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>
@@ -307,7 +307,7 @@
 					<reportElement
 						x="0"
 						y="0"
-						width="534"
+						width="535"
 						height="17"
 						key="rectangle-1"/>
 					<graphicElement stretchType="NoStretch"/>
