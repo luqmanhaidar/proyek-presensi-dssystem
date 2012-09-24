@@ -457,6 +457,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
 
     private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_keluarButtonActionPerformed
 
     private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
