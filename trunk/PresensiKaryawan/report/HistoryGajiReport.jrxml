@@ -30,6 +30,15 @@
 	<parameter name="total" isForPrompting="false" class="java.lang.String"/>
 	<queryString><![CDATA[select * from karyawan where nip = '' and date like '%-2012']]></queryString>
 
+	<field name="no" class="java.lang.String"/>
+	<field name="bulan" class="java.lang.String"/>
+	<field name="S" class="java.lang.String"/>
+	<field name="I" class="java.lang.String"/>
+	<field name="A" class="java.lang.String"/>
+	<field name="T" class="java.lang.String"/>
+	<field name="Pokok" class="java.lang.String"/>
+	<field name="uang_makan" class="java.lang.String"/>
+
 		<background>
 			<band height="0"  isSplitAllowed="true" >
 			</band>
@@ -343,162 +352,6 @@
 		</columnHeader>
 		<detail>
 			<band height="271"  isSplitAllowed="true" >
-				<staticText>
-					<reportElement
-						x="34"
-						y="0"
-						width="88"
-						height="21"
-						key="staticText-19"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Jan]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="23"
-						width="88"
-						height="21"
-						key="staticText-20"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Feb]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="45"
-						width="88"
-						height="21"
-						key="staticText-21"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Mar]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="68"
-						width="88"
-						height="21"
-						key="staticText-22"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Apr]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="91"
-						width="88"
-						height="21"
-						key="staticText-23"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Mei]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="114"
-						width="88"
-						height="21"
-						key="staticText-24"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Juni]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="137"
-						width="88"
-						height="21"
-						key="staticText-25"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Juli]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="159"
-						width="88"
-						height="21"
-						key="staticText-26"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Agu]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="182"
-						width="88"
-						height="21"
-						key="staticText-27"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Sept]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="205"
-						width="88"
-						height="21"
-						key="staticText-28"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Okt]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="227"
-						width="88"
-						height="21"
-						key="staticText-29"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Nov]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="34"
-						y="249"
-						width="88"
-						height="21"
-						key="staticText-30"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-				<text><![CDATA[Des]]></text>
-				</staticText>
 			</band>
 		</detail>
 		<columnFooter>
