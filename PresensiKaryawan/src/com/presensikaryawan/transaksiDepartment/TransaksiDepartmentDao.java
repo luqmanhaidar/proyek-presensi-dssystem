@@ -16,4 +16,5 @@ import java.util.List;
 public interface TransaksiDepartmentDao {
    
     List<TransaksiDepartment> getAllTransaksiDepartment(String department, int bulan, int tahun) throws SQLException;
+    List<TransaksiDepartment> getAllTransaksiDepartment(String department, String maxdate) throws SQLException;
 }
