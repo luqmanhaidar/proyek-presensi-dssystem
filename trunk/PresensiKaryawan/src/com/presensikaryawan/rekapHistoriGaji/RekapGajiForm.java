@@ -485,9 +485,9 @@ public class RekapGajiForm extends javax.swing.JFrame {
     private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
         // TODO add your handling code here:
         Date date = new Date();
-        if (yearChooser.getYear() >= (date.getYear() + 1900)) {
-            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+//        if (yearChooser.getYear() >= (date.getYear() + 1900)) {
+//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else {
             GregorianCalendar gc = new GregorianCalendar();
             String nip = String.valueOf(nipCombo.getSelectedItem());
             String tahun = String.valueOf(yearChooser.getYear());
@@ -500,7 +500,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 String totalGajiString = ChangeFormatDoubleToString.getToString(totalGaji);
                 nilaiTotalLabel.setText(totalGajiString);
             } catch (SQLException ex) {
-            }
+//            }
 
         }
     }//GEN-LAST:event_lihatButtonActionPerformed
