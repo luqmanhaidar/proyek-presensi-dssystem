@@ -120,7 +120,7 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
             case 12:
                 return "UANG LEMBUR";
             case 13:
-                return "LAIN - LAIN";
+                return "LAIN-LAIN";
             case 14:
                 return "P. TELAT";
             case 15:
