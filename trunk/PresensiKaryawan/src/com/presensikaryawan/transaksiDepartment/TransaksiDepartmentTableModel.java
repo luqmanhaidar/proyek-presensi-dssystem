@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package com.presensikaryawan.transaksiDepartment;
+import com.dssystem.umum.ChangeFormatDoubleToString;
 import com.presensikaryawan.posisi.*;
 
 import com.presensikaryawan.statusSetting.StatusSetting;
@@ -42,7 +43,7 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
 
     @Override
     public int getColumnCount() {
-        return 15;
+        return 16;
     }
 
     @Override
@@ -66,19 +67,21 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
             case 7:
                 return tD.getL();
             case 8:
-                return tD.getPokok();
+                return ChangeFormatDoubleToString.getToString(tD.getPokok());
             case 9:
-                return tD.getUangMakan();
+                return ChangeFormatDoubleToString.getToString(tD.getUangMakan());
             case 10:
-                return tD.getUangHadir();
+                return ChangeFormatDoubleToString.getToString(tD.getUangHadir());
             case 11:
-                return tD.getLain();
+                return ChangeFormatDoubleToString.getToString(tD.getUanglembur());
             case 12:
-                return tD.getPotonganTelat();
+                return ChangeFormatDoubleToString.getToString(tD.getLain());
             case 13:
-                return tD.getPotonganLain();
+                return ChangeFormatDoubleToString.getToString(tD.getPotonganTelat());
             case 14:
-                return tD.getTotal();
+                return ChangeFormatDoubleToString.getToString(tD.getPotonganLain());
+            case 15:
+                return ChangeFormatDoubleToString.getToString(tD.getTotal());
             default:
                 return "";
         }
@@ -110,12 +113,14 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
             case 10:
                 return "HADIR";
             case 11:
-                return "LAIN - LAIN";
+                return "LEMBUR";
             case 12:
-                return "POTONGAN TELAT";
+                return "LAIN - LAIN";
             case 13:
-                return "POTONGAN LAIN";
+                return "POTONGAN TELAT";
             case 14:
+                return "POTONGAN LAIN";
+            case 15:
                 return "TOTAL";
             default:
                 return "";
