@@ -112,19 +112,19 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
             case 8:
                 return "L";
             case 9:
-                return "POKOK";
+                return "GAJI POKOK";
             case 10:
-                return "MAKAN";
+                return "UANG MAKAN";
             case 11:
-                return "HADIR";
+                return "UANG HADIR";
             case 12:
-                return "LEMBUR";
+                return "UANG LEMBUR";
             case 13:
                 return "LAIN - LAIN";
             case 14:
-                return "POTONGAN TELAT";
+                return "P. TELAT";
             case 15:
-                return "POTONGAN LAIN";
+                return "P. LAIN";
             case 16:
                 return "TOTAL";
             default:
