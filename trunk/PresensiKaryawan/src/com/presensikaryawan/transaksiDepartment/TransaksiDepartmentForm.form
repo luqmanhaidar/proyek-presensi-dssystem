@@ -339,25 +339,43 @@
                       <Font name="Arial" size="11" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="14" rowCount="4">
+                      <Table columnCount="17" rowCount="4">
+                        <Column editable="true" title="NO" type="java.lang.Object"/>
                         <Column editable="true" title="NIP" type="java.lang.String"/>
-                        <Column editable="true" title="Nama" type="java.lang.String"/>
+                        <Column editable="true" title="NAMA" type="java.lang.String"/>
                         <Column editable="true" title="M" type="java.lang.Object"/>
                         <Column editable="true" title="S" type="java.lang.Object"/>
                         <Column editable="true" title="I" type="java.lang.Object"/>
                         <Column editable="true" title="A" type="java.lang.Object"/>
                         <Column editable="true" title="T" type="java.lang.Object"/>
-                        <Column editable="true" title="Pokok" type="java.lang.Object"/>
-                        <Column editable="true" title="Uang Makan" type="java.lang.Object"/>
-                        <Column editable="true" title="Uang hadir" type="java.lang.Object"/>
-                        <Column editable="true" title="Lain - lain" type="java.lang.Object"/>
-                        <Column editable="true" title="Potongan Tlt" type="java.lang.Object"/>
-                        <Column editable="true" title="Potongan Lain" type="java.lang.Object"/>
-                        <Column editable="true" title="Total" type="java.lang.Object"/>
+                        <Column editable="true" title="L" type="java.lang.Object"/>
+                        <Column editable="true" title="POKOK" type="java.lang.Object"/>
+                        <Column editable="true" title="MAKAN" type="java.lang.Object"/>
+                        <Column editable="true" title="HADIR" type="java.lang.Object"/>
+                        <Column editable="true" title="LEMBUR" type="java.lang.Object"/>
+                        <Column editable="true" title="LAIN" type="java.lang.Object"/>
+                        <Column editable="true" title="P. TELAT" type="java.lang.Object"/>
+                        <Column editable="true" title="P. LAIN" type="java.lang.Object"/>
+                        <Column editable="true" title="TOTAL" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
