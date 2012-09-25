@@ -50,35 +50,35 @@ public class RekapGajiTableModel extends AbstractTableModel {
         RekapGaji rG = rekapGajis.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return rG.getNo();
+                return String.valueOf(rG.getNo());
             case 1:
                 return rG.getBulan();
             case 2:
-                return rG.getS();
+                return String.valueOf(rG.getS());
             case 3:
-                return rG.getI();
+                return String.valueOf(rG.getI());
             case 4:
-                return rG.getA();
+                return String.valueOf(rG.getA());
             case 5:
-                return rG.getT();
+                return String.valueOf(rG.getT());
             case 6:
-                return rG.getLembur();
+                return String.valueOf(rG.getLembur());
             case 7:
-                return rG.getGaji_pokok();
+                return String.valueOf(rG.getGaji_pokok());
             case 8:
-                return rG.getUang_makan();
+                return String.valueOf(rG.getUang_makan());
             case 9:
-                return rG.getUang_hadir();
+                return String.valueOf(rG.getUang_hadir());
             case 10:
-                return rG.getUang_lembur();
+                return String.valueOf(rG.getUang_lembur());
             case 11:
-                return rG.getPotongan_terlambat();
+                return String.valueOf(rG.getPotongan_terlambat());
             case 12:
-                return rG.getPotongan_lain();
+                return String.valueOf(rG.getPotongan_lain());
             case 13:
-                return rG.getLain_lain();
+                return String.valueOf(rG.getLain_lain());
             case 14:
-                return rG.getTotal();
+                return String.valueOf(rG.getTotal());
             default:
                 return "";
         }
@@ -88,7 +88,7 @@ public class RekapGajiTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
              case 0:
-                return "No ";
+                return "No";
             case 1:
                 return "Bulan";
             case 2:
