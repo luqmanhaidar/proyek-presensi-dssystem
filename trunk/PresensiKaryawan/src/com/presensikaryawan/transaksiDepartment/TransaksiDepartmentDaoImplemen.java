@@ -24,8 +24,9 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
     private double pokok, uangMakan, uangHadir, lain, potonganTelat, potonganLain, total, uanglembur;
     private final String SQL_GETALLGAJI = "call getGaji(?,?,?)";
     private final String SQL_GETALLGAJI2 = "call getGaji2(?,?)";
-    private final String SQL_INSERTTEMP = "insert into temptransaksidepartment values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String SQL_INSERTTEMP = "call inserttemptransaksi(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_SELECTALL = "select * from temptransaksidepartment where department = ? and bulan like ?";
+    private final String SQL_UPDATEPOTONGAN = "call updatePotongan(?,?,?)";
     private Connection connection;
 
     public TransaksiDepartmentDaoImplemen(Connection connection) {
@@ -39,7 +40,8 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
         try {
             connection.setAutoCommit(false);
 
-            statement = connection.prepareStatement(SQL_GETALLGAJI);
+//            statement = connection.prepareStatement(SQL_GETALLGAJI);
+            statement = connection.prepareStatement(SQL_SELECTALL);
             statement.setString(3, department);
             statement.setString(2, "" + tahun);
             if (bulan < 10) {
@@ -61,7 +63,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
                 i = result.getInt("I");
                 a = result.getInt("A");
                 t = result.getInt("T");
-                l = result.getInt("M");
+                l = result.getInt("L");
                 pokok = result.getDouble("gaji_pokok") * m;
                 uangMakan = result.getDouble("uang_makan") * m;
                 uangHadir = result.getDouble("uang_hadir") * m;
@@ -261,5 +263,19 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
 
 
         }
+    }
+
+    @Override
+    public void updatePotongan(String nip, String bulan, double potongan) throws SQLException {
+        PreparedStatement statement = null;
+            connection.setAutoCommit(false);
+
+//            statement = connection.prepareStatement(SQL_GETALLGAJI);
+            statement = connection.prepareStatement(SQL_UPDATEPOTONGAN);
+            statement.setDouble(3, potongan);
+            statement.setString(2, bulan);
+                statement.setString(1, nip);
+//            System.out.println(tahun+"-0"+bulan+"-%");
+            statement.executeUpdate();
     }
 }

@@ -5,6 +5,7 @@ import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
 //import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
+import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -437,16 +438,16 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
 private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_karyawanTableMouseClicked
         int row = karyawanTable.getSelectedRow();
-        String kodegroup = karyawanTable.getValueAt(row, 0).toString();
-        String namagroup = karyawanTable.getValueAt(row, 1).toString();
+        String kodegroup = karyawanTable.getValueAt(row, 1).toString();
+        String namagroup = karyawanTable.getValueAt(row, 2).toString();
         String kodedepartment=String.valueOf(departmentCombo.getSelectedItem());
-        String bulan;
-        if (bulanMonthChooser.getMonth() + 1 < 10) {
-            bulan = "0" + String.valueOf(bulanMonthChooser.getMonth() + 1);
-        } else {
-            bulan = String.valueOf(bulanMonthChooser.getMonth() + 1);
-        }
-        String tahun = String.valueOf(tahunYearChooser1.getYear());
+        int bulan=bulanMonthChooser.getMonth() + 1;
+//        if (bulanMonthChooser.getMonth() + 1 < 10) {
+//            bulan = "0" + String.valueOf(bulanMonthChooser.getMonth() + 1);
+//        } else {
+//            bulan = String.valueOf(bulanMonthChooser.getMonth() + 1);
+//        }
+        int tahun = tahunYearChooser1.getYear();
 
         DetailLainDialog detailDialog = null;
         try {
