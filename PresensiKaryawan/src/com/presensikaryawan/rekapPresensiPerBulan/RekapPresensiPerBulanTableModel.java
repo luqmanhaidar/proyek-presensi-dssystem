@@ -36,21 +36,21 @@ public class RekapPresensiPerBulanTableModel extends AbstractTableModel {
         RekapPresensiPerBulan rP=rekapPresensiPerBulans.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return rP.getNo();
+                return String.valueOf(rP.getNo());
             case 1:
                 return rP.getNip();
             case 2:
                 return rP.getNama_karyawan();
             case 3:
-                return rP.getJumlah_s();
+                return String.valueOf(rP.getJumlah_s());
             case 4:
-                return rP.getJumlah_i();
+                return String.valueOf(rP.getJumlah_i());
             case 5:
-                return rP.getJumlah_a();
+                return String.valueOf(rP.getJumlah_a());
             case 6:
-                return rP.getJumlah_t();
+                return String.valueOf(rP.getJumlah_t());
             case 7:
-                return rP.getJumlah_m();
+                return String.valueOf(rP.getJumlah_m());
             default:
                 return "";
         }

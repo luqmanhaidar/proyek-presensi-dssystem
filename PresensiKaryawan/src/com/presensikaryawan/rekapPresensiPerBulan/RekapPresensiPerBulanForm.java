@@ -351,7 +351,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
     }
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        if (rekapTable.isVisible()) {
+//        if (rekapTable.isVisible()) {
             try {
                 String bulan = null;
                 switch (monthChooser.getMonth()) {
@@ -401,10 +401,10 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
             } catch (JRException ex) {
                 Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menampilkan Hasil Rekap\n"+
-                    "Dengan Menekan Tombol Lihat Dahulu","PEMBERITAHUAN",JOptionPane.INFORMATION_MESSAGE);
-        }
+//        }else{
+//            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menampilkan Hasil Rekap\n"+
+//                    "Dengan Menekan Tombol Lihat Dahulu","PEMBERITAHUAN",JOptionPane.INFORMATION_MESSAGE);
+//        }
 
 }//GEN-LAST:event_cetakButtonActionPerformed
 
