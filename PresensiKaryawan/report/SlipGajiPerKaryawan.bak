@@ -23,6 +23,18 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
+	<parameter name="nama" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="golongan" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="department" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="pokok" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="makan" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="hadir" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="lembur" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="lain" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="totalKotor" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="potonganTelat" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="potonganLain" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="totalBersih" isForPrompting="false" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -46,7 +58,7 @@
 			</band>
 		</title>
 		<pageHeader>
-			<band height="472"  isSplitAllowed="true" >
+			<band height="298"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
 						x="0"
@@ -90,20 +102,20 @@
 					<reportElement
 						x="0"
 						y="69"
-						width="75"
+						width="92"
 						height="19"
 						key="staticText-5"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" pdfFontName="Helvetica" size="10" isBold="false"/>
 					</textElement>
-				<text><![CDATA[Gaji yang diterima]]></text>
+				<text><![CDATA[Gaji yang diterima :]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
 						x="35"
 						y="126"
-						width="66"
+						width="109"
 						height="19"
 						key="staticText-6"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
@@ -116,7 +128,7 @@
 					<reportElement
 						x="35"
 						y="107"
-						width="66"
+						width="109"
 						height="19"
 						key="staticText-7"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
@@ -129,7 +141,7 @@
 					<reportElement
 						x="35"
 						y="88"
-						width="66"
+						width="109"
 						height="19"
 						key="staticText-8"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
@@ -138,6 +150,240 @@
 					</textElement>
 				<text><![CDATA[Pokok]]></text>
 				</staticText>
+				<staticText>
+					<reportElement
+						x="35"
+						y="145"
+						width="109"
+						height="19"
+						key="staticText-9"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" pdfFontName="Helvetica" size="10" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Uang Lembur]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="35"
+						y="164"
+						width="109"
+						height="19"
+						key="staticText-11"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" pdfFontName="Helvetica" size="10" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Lain-lain]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="202"
+						width="66"
+						height="19"
+						key="staticText-12"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" pdfFontName="Helvetica" size="10" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Potongan :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="35"
+						y="240"
+						width="109"
+						height="19"
+						key="staticText-14"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" pdfFontName="Helvetica" size="10" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Potongan Lain]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="35"
+						y="221"
+						width="109"
+						height="19"
+						key="staticText-15"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" pdfFontName="Helvetica" size="10" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Potongan Telat]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="51"
+						y="0"
+						width="285"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{nama}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="51"
+						y="19"
+						width="285"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{golongan}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="51"
+						y="38"
+						width="285"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{department}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="88"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{pokok}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="107"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{makan}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="126"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{hadir}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="145"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{lembur}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="164"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{lain}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="183"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{totalKotor}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="221"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{potonganTelat}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="240"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{potonganLain}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="35"
+						y="278"
+						width="109"
+						height="19"
+						key="staticText-16"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Times New Roman" pdfFontName="Helvetica" size="10" isBold="false"/>
+					</textElement>
+				<text><![CDATA[                        Total Net]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="278"
+						width="192"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{totalBersih}]]></textFieldExpression>
+				</textField>
 			</band>
 		</pageHeader>
 		<columnHeader>
