@@ -179,10 +179,12 @@
 			<band height="25"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="0"
 						y="4"
 						width="22"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-6"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -192,10 +194,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="22"
 						y="4"
 						width="69"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-7"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -205,10 +209,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="91"
 						y="4"
 						width="25"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-8"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -218,10 +224,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="116"
 						y="4"
 						width="24"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-9"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -231,10 +239,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="140"
 						y="4"
 						width="25"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-10"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -244,10 +254,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="165"
 						y="4"
 						width="24"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-11"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -257,10 +269,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="211"
 						y="4"
 						width="84"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-12"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -270,10 +284,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="295"
 						y="4"
 						width="91"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-13"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -283,10 +299,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="386"
 						y="4"
 						width="80"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-14"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -296,10 +314,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="717"
 						y="4"
 						width="80"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-15"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -309,10 +329,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="546"
 						y="4"
 						width="86"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-16"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -322,10 +344,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="632"
 						y="4"
 						width="85"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-17"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -335,10 +359,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="797"
 						y="4"
 						width="98"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-18"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center">
@@ -348,10 +374,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="189"
 						y="4"
 						width="22"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-32"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -361,10 +389,12 @@
 				</staticText>
 				<staticText>
 					<reportElement
+						mode="Opaque"
 						x="466"
 						y="4"
 						width="80"
 						height="21"
+						backcolor="#CCCCCC"
 						key="staticText-33"/>
 					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -563,11 +593,11 @@
 						x="0"
 						y="0"
 						width="22"
-						height="21"
+						height="22"
 						key="textField"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement>
-						<font/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{No}]]></textFieldExpression>
 				</textField>
