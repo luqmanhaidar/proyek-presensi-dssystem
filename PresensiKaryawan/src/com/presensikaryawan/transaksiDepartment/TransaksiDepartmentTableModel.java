@@ -58,17 +58,17 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
             case 2:
                 return tD.getNama();
             case 3:
-                return tD.getM();
+                return String.valueOf(tD.getM());
             case 4:
-                return tD.getS();
+                return String.valueOf(tD.getS());
             case 5:
-                return tD.getI();
+                return String.valueOf(tD.getI());
             case 6:
-                return tD.getA();
+                return String.valueOf(tD.getA());
             case 7:
-                return tD.getT();
+                return String.valueOf(tD.getT());
             case 8:
-                return tD.getL();
+                return String.valueOf(tD.getL());
             case 9:
                 return ChangeFormatDoubleToString.getToString(tD.getPokok());
             case 10:
