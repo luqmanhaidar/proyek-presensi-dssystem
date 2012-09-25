@@ -4,7 +4,7 @@ import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
-import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
+//import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -278,17 +278,17 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         karyawanTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         karyawanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "NIP", "Nama", "M", "S", "I", "A", "T", "Pokok", "Uang Makan", "Uang hadir", "Lain - lain", "Potongan Tlt", "Potongan Lain", "Total"
+                "NO", "NIP", "NAMA", "M", "S", "I", "A", "T", "L", "POKOK", "MAKAN", "HADIR", "LEMBUR", "LAIN", "P. TELAT", "P. LAIN", "TOTAL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
