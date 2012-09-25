@@ -16,7 +16,7 @@ public class TransaksiDepartment {
     private String department;
     private String nip, nama;
     private int s, i, a, t, m, l;
-    private double pokok, uangMakan, uangHadir, lain, potonganTelat, potonganLain, total;
+    private double pokok, uangMakan, uangHadir, lain, potonganTelat, potonganLain, total, uanglembur;
     
 
     public TransaksiDepartment() {
@@ -258,6 +258,20 @@ public class TransaksiDepartment {
      */
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    /**
+     * @return the uanglembur
+     */
+    public double getUanglembur() {
+        return uanglembur;
+    }
+
+    /**
+     * @param uanglembur the uanglembur to set
+     */
+    public void setUanglembur(double uanglembur) {
+        this.uanglembur = uanglembur;
     }
 
     
