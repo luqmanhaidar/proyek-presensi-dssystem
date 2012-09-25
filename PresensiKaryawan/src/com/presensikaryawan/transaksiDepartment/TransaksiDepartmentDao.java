@@ -18,4 +18,5 @@ public interface TransaksiDepartmentDao {
     List<TransaksiDepartment> getAllTransaksiDepartment(String department, int bulan, int tahun) throws SQLException;
     List<TransaksiDepartment> getAllTransaksiDepartment(String department, String maxdate) throws SQLException;
     void insertTemp(List<TransaksiDepartment> list, String department, String bulantahun) throws SQLException;
+    void updatePotongan(String nip, String bulan, double potongan) throws SQLException;
 }

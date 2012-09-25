@@ -43,7 +43,7 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
 
     @Override
     public int getColumnCount() {
-        return 16;
+        return 17;
     }
 
     @Override
