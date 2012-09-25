@@ -49,38 +49,41 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         TransaksiDepartment tD=transaksiDepartments.get(rowIndex);
+        int counter=1;
         switch (columnIndex) {
             case 0:
-                return tD.getNip();
+                return String.valueOf(counter);
             case 1:
-                return tD.getNama();
+                return tD.getNip();
             case 2:
-                return tD.getM();
+                return tD.getNama();
             case 3:
-                return tD.getS();
+                return tD.getM();
             case 4:
-                return tD.getI();
+                return tD.getS();
             case 5:
-                return tD.getA();
+                return tD.getI();
             case 6:
-                return tD.getT();
+                return tD.getA();
             case 7:
-                return tD.getL();
+                return tD.getT();
             case 8:
-                return ChangeFormatDoubleToString.getToString(tD.getPokok());
+                return tD.getL();
             case 9:
-                return ChangeFormatDoubleToString.getToString(tD.getUangMakan());
+                return ChangeFormatDoubleToString.getToString(tD.getPokok());
             case 10:
-                return ChangeFormatDoubleToString.getToString(tD.getUangHadir());
+                return ChangeFormatDoubleToString.getToString(tD.getUangMakan());
             case 11:
-                return ChangeFormatDoubleToString.getToString(tD.getUanglembur());
+                return ChangeFormatDoubleToString.getToString(tD.getUangHadir());
             case 12:
-                return ChangeFormatDoubleToString.getToString(tD.getLain());
+                return ChangeFormatDoubleToString.getToString(tD.getUanglembur());
             case 13:
-                return ChangeFormatDoubleToString.getToString(tD.getPotonganTelat());
+                return ChangeFormatDoubleToString.getToString(tD.getLain());
             case 14:
-                return ChangeFormatDoubleToString.getToString(tD.getPotonganLain());
+                return ChangeFormatDoubleToString.getToString(tD.getPotonganTelat());
             case 15:
+                return ChangeFormatDoubleToString.getToString(tD.getPotonganLain());
+            case 16:
                 return ChangeFormatDoubleToString.getToString(tD.getTotal());
             default:
                 return "";
@@ -91,36 +94,38 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "NIP";
+                return "NO";
             case 1:
-                return "NAMA";
+                return "NIP";
             case 2:
-                return "M";
+                return "NAMA";
             case 3:
-                return "S";
+                return "M";
             case 4:
-                return "I";
+                return "S";
             case 5:
-                return "A";
+                return "I";
             case 6:
-                return "T";
+                return "A";
             case 7:
-                return "L";
+                return "T";
             case 8:
-                return "POKOK";
+                return "L";
             case 9:
-                return "MAKAN";
+                return "POKOK";
             case 10:
-                return "HADIR";
+                return "MAKAN";
             case 11:
-                return "LEMBUR";
+                return "HADIR";
             case 12:
-                return "LAIN - LAIN";
+                return "LEMBUR";
             case 13:
-                return "POTONGAN TELAT";
+                return "LAIN - LAIN";
             case 14:
-                return "POTONGAN LAIN";
+                return "POTONGAN TELAT";
             case 15:
+                return "POTONGAN LAIN";
+            case 16:
                 return "TOTAL";
             default:
                 return "";
