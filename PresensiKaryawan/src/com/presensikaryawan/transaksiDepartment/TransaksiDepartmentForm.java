@@ -4,6 +4,7 @@ import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
+import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -403,41 +404,26 @@ private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_simpanButtonActionPerformed
 
 private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_karyawanTableMouseClicked
-//        try {
-//            int row = karyawanTable.getSelectedRow();
-//            String nip = karyawanTable.getValueAt(row, 0).toString();
-//            String nama = karyawanTable.getValueAt(row, 1).toString();
-//            String alamat = karyawanTable.getValueAt(row, 2).toString();
-//            String tanggal = karyawanTable.getValueAt(row, 3).toString();
-//            String golongan = karyawanTable.getValueAt(row, 4).toString();
-//    //        String kodeGolongan = golongan.substring(0, golongan.indexOf("-"));
-//            String posisi = karyawanTable.getValueAt(row, 5).toString();
-//    //        String kodePosisi = golongan.substring(0, posisi.indexOf("-"));
-//            String outlet = karyawanTable.getValueAt(row, 6).toString();
-//    //        String kodeOutlet = golongan.substring(0, outlet.indexOf("-"));
-//            String department = karyawanTable.getValueAt(row, 7).toString();
-//    //        String kodeDepartment = golongan.substring(0, department.indexOf("-"));
-//            int year = Integer.parseInt(tanggal.substring(0, 4));
-//            year=year-1900;
-//            int month = Integer.parseInt(tanggal.substring(5, 7));
-//            month=month-1;
-//            int day = Integer.parseInt(tanggal.substring(8, 10));
-////            System.out.println(tanggal+"   "+year+"   "+month+"   "+day);
-//            Date date = new Date(year, month, day);
-//            String kode = karyawanTable.getValueAt(row, 4).toString();
-//            namaKaryawanTextField.setText(nama);
-//            departmentCombo.setSelectedItem(nip);
-//            alamatKaryawanTextField.setText(alamat);
-//            tanggalMasukDateChooser.setDate(date);
-//            golonganCombo.setSelectedItem(golongan+"-"+DaoFactory.getGolonganDao().getByKodeGolongan(golongan).getNamaGolongan());
-//            posisiCombo.setSelectedItem(posisi+"-"+DaoFactory.getPosisiDao().getByKode(posisi).getNama_posisi());
-//            outletCombo.setSelectedItem(outlet+"-"+DaoFactory.getOutletDao().getByKodeOutlet(outlet).getNamaOutlet());
-//            departmentCombo.setSelectedItem(department+"-"+DaoFactory.getDepartmentDao().getByKode(department).getNamaDepartment());
-//
-//            // TODO add your handling code here:
-//        } catch (SQLException ex) {
-//            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        int row = karyawanTable.getSelectedRow();
+        String kodegroup = karyawanTable.getValueAt(row, 0).toString();
+        String namagroup = karyawanTable.getValueAt(row, 1).toString();
+        String kodedepartment=String.valueOf(departmentCombo.getSelectedItem());
+        String bulan;
+        if (bulanMonthChooser.getMonth() + 1 < 10) {
+            bulan = "0" + String.valueOf(bulanMonthChooser.getMonth() + 1);
+        } else {
+            bulan = String.valueOf(bulanMonthChooser.getMonth() + 1);
+        }
+        String tahun = String.valueOf(tahunYearChooser1.getYear());
+
+        DetailLainDialog detailDialog = null;
+        try {
+            detailDialog = new DetailLainDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup, bulan, tahun, karyawanTable, kodedepartment);
+        } catch (SQLException ex) {
+            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        detailDialog.setVisible(true);
+
 }//GEN-LAST:event_karyawanTableMouseClicked
     private void isitable() {
     }
