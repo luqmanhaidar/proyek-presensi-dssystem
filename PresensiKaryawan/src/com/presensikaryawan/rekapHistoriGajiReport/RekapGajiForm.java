@@ -1,4 +1,4 @@
-package com.presensikaryawan.rekapHistoriGaji;
+package com.presensikaryawan.rekapHistoriGajiReport;
 
 import com.dssystem.umum.ChangeFormatDoubleToString;
 import com.dssystem.umum.ComponentFocus;
@@ -396,7 +396,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        headPanel9.setBounds(0, 0, 1020, 77);
+        headPanel9.setBounds(0, 0, 1020, 0);
         jDesktopPane1.add(headPanel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         keluarButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
