@@ -29,7 +29,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
     private final String SQL_SELECTALL = "select * from temptransaksidepartment where department = ? and bulan like ?";
     private final String SQL_UPDATEPOTONGAN = "call updatePotongan(?,?,?)";
     private final String SQL_GETGAJIKOTORKARYAWAN="select pokok+hadir+lembur+makan from temptransaksidepartment where nip = ? and bulan like ?";
-    private final String SQL_GETGOLONGANBYNIP="SELECT g.nama_golongan FROM karyawan k, golongan g WHERE k.kode_golongan=g.kode golongan AND k.nip = ?";
+    private final String SQL_GETGOLONGANBYNIP="SELECT g.nama_golongan FROM karyawan k, golongan g WHERE k.kode_golongan=g.kode_golongan AND k.nip = ?";
     private Connection connection;
 
     public TransaksiDepartmentDaoImplemen(Connection connection) {
@@ -45,14 +45,14 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
 
 //            statement = connection.prepareStatement(SQL_GETALLGAJI);
             statement = connection.prepareStatement(SQL_SELECTALL);
-            statement.setString(3, department);
-            statement.setString(2, "" + tahun);
+            statement.setString(1, department);
+//            statement.setString(2, "" + tahun);
             if (bulan < 10) {
-                statement.setString(1, "0" + bulan);
+                statement.setString(2, tahun+"-0" + bulan);
             } else {
-                statement.setString(1, "" + bulan);
+                statement.setString(2, tahun+"-" + bulan);
             }
-//            System.out.println(tahun+"-0"+bulan+"-%");
+            System.out.println(statement);
             result = statement.executeQuery();
             List<TransaksiDepartment> transaksiDepartments = new ArrayList<TransaksiDepartment>();
 
@@ -67,13 +67,15 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
                 a = result.getInt("A");
                 t = result.getInt("T");
                 l = result.getInt("L");
-                pokok = result.getDouble("gaji_pokok") * m;
-                uangMakan = result.getDouble("uang_makan") * m;
-                uangHadir = result.getDouble("uang_hadir") * m;
-//                lain=result.getDouble("gaji_pokok");
-                potonganTelat = result.getDouble("potongan_telat") * t;
-//                potonganLain=result.getDouble("gaji_pokok");
-                total = pokok + uangMakan + uangHadir + lain - potonganTelat - potonganLain;
+                pokok = result.getDouble("pokok");
+                uangMakan = result.getDouble("makan");
+                uangHadir = result.getDouble("hadir");
+                uanglembur = result.getDouble("lembur");
+                lain=result.getDouble("lain_lain");
+                potonganTelat = result.getDouble("potongan_telat");
+                potonganLain=result.getDouble("potongan_lain");
+                total = result.getDouble("total");
+
                 transaksiDepartment.setNip(nip);
                 transaksiDepartment.setNama(nama);
                 transaksiDepartment.setM(m);
@@ -86,6 +88,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
                 transaksiDepartment.setUangMakan(uangMakan);
                 transaksiDepartment.setUangHadir(uangHadir);
                 transaksiDepartment.setLain(lain);
+                transaksiDepartment.setUanglembur(uanglembur);
                 transaksiDepartment.setPotonganTelat(potonganTelat);
                 transaksiDepartment.setPotonganLain(potonganLain);
                 transaksiDepartment.setTotal(total);
@@ -325,7 +328,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
         try {
             connection.setAutoCommit(false);
 
-            statement = connection.prepareStatement(SQL_GETGAJIKOTORKARYAWAN);
+            statement = connection.prepareStatement(SQL_GETGOLONGANBYNIP);
             statement.setString(1, nip);
 
             result = statement.executeQuery();
