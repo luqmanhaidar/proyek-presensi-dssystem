@@ -340,9 +340,6 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rekapTableMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -434,7 +431,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="18" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Menu Rekap Presensi Karyawan per Bulan"/>
+                    <Property name="text" type="java.lang.String" value="Menu Cetak Rekap Presensi Karyawan per Bulan"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="fungsiLabel">
