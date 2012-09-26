@@ -4,6 +4,7 @@
  */
 package com.presensikaryawan.transaksiDepartment;
 
+import com.presensikaryawan.golongan.Golongan;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +28,8 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
     private final String SQL_INSERTTEMP = "call inserttemptransaksi(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_SELECTALL = "select * from temptransaksidepartment where department = ? and bulan like ?";
     private final String SQL_UPDATEPOTONGAN = "call updatePotongan(?,?,?)";
+    private final String SQL_GETGAJIKOTORKARYAWAN="select pokok+hadir+lembur+makan from temptransaksidepartment where nip = ? and bulan like ?";
+    private final String SQL_GETGOLONGANBYNIP="SELECT g.nama_golongan FROM karyawan k, golongan g WHERE k.kode_golongan=g.kode golongan AND k.nip = ?";
     private Connection connection;
 
     public TransaksiDepartmentDaoImplemen(Connection connection) {
@@ -277,5 +280,76 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
                 statement.setString(1, nip);
 //            System.out.println(tahun+"-0"+bulan+"-%");
             statement.executeUpdate();
+    }
+
+    @Override
+    public double getGajiKotor(String nip, String bulan) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        try {
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(SQL_GETGAJIKOTORKARYAWAN);
+            statement.setString(1, nip);
+            statement.setString(2, bulan);
+
+            result = statement.executeQuery();
+            double gajiKotor=0;
+            if (result.next()) {
+                gajiKotor= result.getDouble(1);
+            }
+
+            connection.commit();
+            return gajiKotor;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
+    }
+
+    @Override
+    public Golongan getGolonganByNIP(String nip) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        try {
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(SQL_GETGAJIKOTORKARYAWAN);
+            statement.setString(1, nip);
+
+            result = statement.executeQuery();
+            Golongan golongan=new Golongan();
+            if (result.next()) {
+                golongan.setNamaGolongan(result.getString(1));
+            }
+
+            connection.commit();
+            return golongan;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
     }
 }
