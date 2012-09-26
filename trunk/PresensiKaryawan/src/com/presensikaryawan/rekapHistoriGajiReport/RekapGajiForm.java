@@ -273,10 +273,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
         rekapTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         rekapTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "No", "Bulan", "S", "I", "A", "T", "L", "Gaji Pokok", "Uang Makan", "Uang Hadir", "Uang Lembur", "P. Terlambat", "P. Lain", "Lain", "Total"
@@ -396,7 +393,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        headPanel9.setBounds(0, 0, 1020, 0);
+        headPanel9.setBounds(0, 0, 1020, 77);
         jDesktopPane1.add(headPanel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         keluarButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
