@@ -488,9 +488,10 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
         } catch (SQLException ex) {
             Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        while (!transaksiDepartments.isEmpty()) {
+        while (!transaksiDepartments.isEmpty()) {
             TransaksiDepartment transaksiDepartment = new TransaksiDepartment();
             transaksiDepartment = transaksiDepartments.remove(0);
+            System.out.println(transaksiDepartment.getPokok());
             Golongan golongan = null;
             double totalKotor=0;
             try {
@@ -524,7 +525,7 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
                 Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             JasperViewer.viewReport(jasperPrint, false);
-//        }
+        }
     }//GEN-LAST:event_cetakPerKaryawanButtonActionPerformed
 
     private void cetakPerDepartmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakPerDepartmentButtonActionPerformed

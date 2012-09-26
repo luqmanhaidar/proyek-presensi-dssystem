@@ -49,10 +49,10 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         TransaksiDepartment tD=transaksiDepartments.get(rowIndex);
-        int counter=1;
+        int counter=0;
         switch (columnIndex) {
             case 0:
-                return String.valueOf(counter);
+                return String.valueOf(rowIndex+1);
             case 1:
                 return tD.getNip();
             case 2:
@@ -88,6 +88,7 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
             default:
                 return "";
         }
+        
     }
 
     @Override
