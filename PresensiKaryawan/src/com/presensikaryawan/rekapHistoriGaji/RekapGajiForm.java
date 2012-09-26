@@ -92,6 +92,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
         logoLabel9 = new javax.swing.JLabel();
         menuLabel9 = new javax.swing.JLabel();
         fungsiLabel9 = new javax.swing.JLabel();
+        keluarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -184,7 +185,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jSeparator1)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
             .add(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -219,7 +220,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
                                     .add(nilaiGolonganLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE))
                                 .add(159, 159, 159))))))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(780, Short.MAX_VALUE)
                 .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -339,7 +340,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
             posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, posisiPanelLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(807, Short.MAX_VALUE)
                 .add(totalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 68, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -397,6 +398,17 @@ public class RekapGajiForm extends javax.swing.JFrame {
 
         headPanel9.setBounds(0, 0, 1020, 77);
         jDesktopPane1.add(headPanel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        keluarButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        keluarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
+        keluarButton.setText("Keluar");
+        keluarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keluarButtonActionPerformed(evt);
+            }
+        });
+        keluarButton.setBounds(900, 560, 110, 40);
+        jDesktopPane1.add(keluarButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -540,6 +552,11 @@ public class RekapGajiForm extends javax.swing.JFrame {
         rekapTable.setVisible(false);
     }//GEN-LAST:event_yearChooserPropertyChange
 
+    private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_keluarButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -572,6 +589,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton keluarButton;
     private javax.swing.JButton lihatButton;
     private javax.swing.JLabel logoLabel9;
     private javax.swing.JLabel menuLabel9;
