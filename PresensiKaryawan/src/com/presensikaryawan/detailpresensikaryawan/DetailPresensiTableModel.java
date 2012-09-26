@@ -19,20 +19,6 @@ private List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
         this.detailPresensis = detailPresensis;
     }
 
-    public void deleteLiburPerusahaan(int row){
-        detailPresensis.remove(row);
-        fireTableRowsDeleted(row, row);
-    }
-
-    public void updateLiburPerusahaan(int row, DetailPresensi detailPresensi){
-        detailPresensis.set(row,detailPresensi);
-        fireTableRowsUpdated(row, row);
-    }
-
-    public void addLiburPerusahaan(DetailPresensi detailPresensi) {
-        detailPresensis.add(detailPresensi);
-        fireTableRowsInserted(getRowCount() - 1, getColumnCount() - 1);
-    }
     @Override
     public int getRowCount() {
         return detailPresensis.size();
