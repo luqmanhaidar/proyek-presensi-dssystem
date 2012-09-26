@@ -13,6 +13,8 @@ import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.presensikaryawan.departmentSetting.DepartmentDaoImplemen;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDaoImplemen;
+import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportDao;
+import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportDaoImplemen;
 import com.presensikaryawan.golongan.GolonganDao;
 import com.presensikaryawan.golongan.GolonganDaoImplemen;
 import com.presensikaryawan.groupShift.GroupShiftDao;
@@ -33,10 +35,10 @@ import com.presensikaryawan.shiftSetting.ShiftDao;
 import com.presensikaryawan.shiftSetting.ShiftDaoImplemen;
 import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
-import com.presensikaryawan.rekapHistoriGaji.RekapGajiDao;
-import com.presensikaryawan.rekapHistoriGaji.RekapGajiDaoImpelemen;
-import com.presensikaryawan.rekapPresensiPerBulan.RekapPresensiPerBulanDao;
-import com.presensikaryawan.rekapPresensiPerBulan.RekapPresensiPerBulanDaoImplemen;
+import com.presensikaryawan.rekapHistoriGajiReport.RekapGajiDao;
+import com.presensikaryawan.rekapHistoriGajiReport.RekapGajiDaoImpelemen;
+import com.presensikaryawan.rekapPresensiPerBulanReport.RekapPresensiPerBulanDao;
+import com.presensikaryawan.rekapPresensiPerBulanReport.RekapPresensiPerBulanDaoImplemen;
 import com.presensikaryawan.transaksi.TransaksiGajiDao;
 import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
 import java.io.FileInputStream;
@@ -73,6 +75,7 @@ public class DaoFactory {
     private static RekapGajiDao rekapGajiDao;
     private static TransaksiGajiDao transaksiGajiDao;
     private static RekapPresensiPerBulanDao rekapPresensiPerBulanDao;
+    private static GajiPerKaryawanReportDao gajiPerKaryawanReportDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -138,81 +141,88 @@ public class DaoFactory {
         }
         return posisiDao;
     }
-    
+
     public static ShiftDao getShiftDao() throws SQLException {
         if (shiftDao == null) {
             shiftDao = new ShiftDaoImplemen(getConnection());
         }
         return shiftDao;
     }
-    
+
     public static OutletDao getOutletDao() throws SQLException {
         if (outletDao == null) {
             outletDao = new OutletDaoImplemen(getConnection());
         }
         return outletDao;
     }
-    
-     public static GroupShiftDao getGroupShiftDao() throws SQLException {
+
+    public static GroupShiftDao getGroupShiftDao() throws SQLException {
         if (groupShiftDao == null) {
             groupShiftDao = new GroupShiftDaoImplemen(getConnection());
         }
         return groupShiftDao;
     }
-     
-     public static DepartmentDao getDepartmentDao() throws SQLException {
+
+    public static DepartmentDao getDepartmentDao() throws SQLException {
         if (departmentDao == null) {
             departmentDao = new DepartmentDaoImplemen(getConnection());
         }
         return departmentDao;
     }
-     
-     public static TransaksiDepartmentDao getTransaksiDepartmentDao() throws SQLException {
+
+    public static TransaksiDepartmentDao getTransaksiDepartmentDao() throws SQLException {
         if (transaksiDepartmentDao == null) {
             transaksiDepartmentDao = new TransaksiDepartmentDaoImplemen(getConnection());
         }
         return transaksiDepartmentDao;
     }
-     
-     public static BankDao getBankDao() throws SQLException {
+
+    public static BankDao getBankDao() throws SQLException {
         if (bankDao == null) {
             bankDao = new BankDaoImplemen(getConnection());
         }
         return bankDao;
     }
-    
-     public static RekapPresensiDao getRekapPresensiDao() throws SQLException{
-         if (rekapPresensiDao == null){
-             rekapPresensiDao = new RekapPresensiDaoImplemen(getConnection());
-         }
-         return rekapPresensiDao;
-     }
-     
-     public static DetailPresensiDao getPresensiTidakMasukDao() throws SQLException{
-         if (presensiTidakMasukDao==null){
-             presensiTidakMasukDao=new DetailPresensiDaoImplemen(getConnection());
-         }
-         return  presensiTidakMasukDao;
-     }
-     
-     public static RekapGajiDao getRekapGajiDao() throws SQLException{
-         if (rekapGajiDao==null){
-             rekapGajiDao=new RekapGajiDaoImpelemen(getConnection());
-         }
-         return rekapGajiDao;
-     }
-     
-       public static TransaksiGajiDao getTranskasiGajiDao() throws SQLException{
-         if (transaksiGajiDao==null){
-             transaksiGajiDao=new TransaksiGajiDaoImplemen(getConnection());
-         }
-         return transaksiGajiDao;
-     }
-       
-       public static RekapPresensiPerBulanDao getRekapPresensiPerBulanDao() throws SQLException{
-         if (rekapPresensiPerBulanDao==null){
-             rekapPresensiPerBulanDao=new RekapPresensiPerBulanDaoImplemen(getConnection());
-         }
-         return rekapPresensiPerBulanDao;
-     }
+
+    public static RekapPresensiDao getRekapPresensiDao() throws SQLException {
+        if (rekapPresensiDao == null) {
+            rekapPresensiDao = new RekapPresensiDaoImplemen(getConnection());
+        }
+        return rekapPresensiDao;
+    }
+
+    public static DetailPresensiDao getPresensiTidakMasukDao() throws SQLException {
+        if (presensiTidakMasukDao == null) {
+            presensiTidakMasukDao = new DetailPresensiDaoImplemen(getConnection());
+        }
+        return presensiTidakMasukDao;
+    }
+
+    public static RekapGajiDao getRekapGajiDao() throws SQLException {
+        if (rekapGajiDao == null) {
+            rekapGajiDao = new RekapGajiDaoImpelemen(getConnection());
+        }
+        return rekapGajiDao;
+    }
+
+    public static TransaksiGajiDao getTranskasiGajiDao() throws SQLException {
+        if (transaksiGajiDao == null) {
+            transaksiGajiDao = new TransaksiGajiDaoImplemen(getConnection());
+        }
+        return transaksiGajiDao;
+    }
+
+    public static RekapPresensiPerBulanDao getRekapPresensiPerBulanDao() throws SQLException {
+        if (rekapPresensiPerBulanDao == null) {
+            rekapPresensiPerBulanDao = new RekapPresensiPerBulanDaoImplemen(getConnection());
+        }
+        return rekapPresensiPerBulanDao;
+    }
+
+    public static GajiPerKaryawanReportDao getGajiPerKaryawanReportDao() throws SQLException {
+        if (gajiPerKaryawanReportDao == null) {
+            gajiPerKaryawanReportDao = new GajiPerKaryawanReportDaoImplemen(getConnection());
+        }
+        return gajiPerKaryawanReportDao;
+    }
 }
