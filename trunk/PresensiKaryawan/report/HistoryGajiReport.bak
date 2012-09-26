@@ -125,7 +125,7 @@
 					<reportElement
 						x="79"
 						y="1"
-						width="333"
+						width="422"
 						height="25"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
@@ -138,7 +138,7 @@
 					<reportElement
 						x="79"
 						y="26"
-						width="133"
+						width="422"
 						height="24"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
@@ -151,7 +151,7 @@
 					<reportElement
 						x="79"
 						y="50"
-						width="191"
+						width="422"
 						height="24"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
