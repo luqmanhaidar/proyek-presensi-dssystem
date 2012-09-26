@@ -120,8 +120,6 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
-        cetakPerKaryawanButton = new javax.swing.JButton();
-        cetakPerDepartmentButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
@@ -227,27 +225,28 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(inputPanelLayout.createSequentialGroup()
-                        .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(28, 28, 28))
-                    .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(273, 273, 273)
-                        .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(inputPanelLayout.createSequentialGroup()
+                                .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(28, 28, 28))
+                            .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(bulanMonthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(18, 18, 18)
-                        .add(tahunYearChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                        .add(25, 25, 25))
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(30, 30, 30))
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(inputPanelLayout.createSequentialGroup()
+                                .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(273, 273, 273)
+                                .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(bulanMonthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(18, 18, 18)
+                                .add(tahunYearChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                                .add(25, 25, 25))
+                            .add(inputPanelLayout.createSequentialGroup()
+                                .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
+                                .addContainerGap())))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                        .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(30, 30, 30))))
         );
         inputPanelLayout.setVerticalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -324,32 +323,6 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
 
         daftarKaryawanPanel.setBounds(0, 240, 920, 240);
         jDesktopPane1.add(daftarKaryawanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        cetakPerKaryawanButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cetakPerKaryawanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
-        cetakPerKaryawanButton.setMnemonic('S');
-        cetakPerKaryawanButton.setText("Cetak Per Karyawan");
-        cetakPerKaryawanButton.setToolTipText("Klik Untuk Simpan");
-        cetakPerKaryawanButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cetakPerKaryawanButtonActionPerformed(evt);
-            }
-        });
-        cetakPerKaryawanButton.setBounds(580, 510, 200, 40);
-        jDesktopPane1.add(cetakPerKaryawanButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        cetakPerDepartmentButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cetakPerDepartmentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
-        cetakPerDepartmentButton.setMnemonic('S');
-        cetakPerDepartmentButton.setText("Cetak Per Department");
-        cetakPerDepartmentButton.setToolTipText("Klik Untuk Simpan");
-        cetakPerDepartmentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cetakPerDepartmentButtonActionPerformed(evt);
-            }
-        });
-        cetakPerDepartmentButton.setBounds(370, 510, 200, 40);
-        jDesktopPane1.add(cetakPerDepartmentButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -461,126 +434,6 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     detailDialog.setVisible(true);
 
 }//GEN-LAST:event_karyawanTableMouseClicked
-
-    private void cetakPerKaryawanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakPerKaryawanButtonActionPerformed
-        // TODO add your handling code here:
-        String department = departmentCombo.getSelectedItem().toString();
-        int bulan = bulanMonthChooser.getMonth() + 1;
-        int tahun = tahunYearChooser1.getYear();
-        String bulantahun;
-        Date date = new Date();
-        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-        String maxDayOfMonth;
-        if (bulan < 10) {
-            bulantahun=tahun + "-0" + bulan ;
-            maxDayOfMonth = tahun + "-0" + bulan + "-" + day;
-        } else {
-            bulantahun=tahun + "-" + bulan ;
-            maxDayOfMonth = tahun + "-" + bulan + "-" + day;
-        }
-        System.out.println(maxDayOfMonth);
-        List<TransaksiDepartment> transaksiDepartments = null;
-        try {
-            TransaksiDepartmentDao dao = DaoFactory.getTransaksiDepartmentDao();
-            transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        while (!transaksiDepartments.isEmpty()) {
-            TransaksiDepartment transaksiDepartment = new TransaksiDepartment();
-            transaksiDepartment = transaksiDepartments.remove(0);
-            System.out.println(transaksiDepartment.getPokok());
-            Golongan golongan = null;
-            double totalKotor=0;
-            try {
-                golongan = DaoFactory.getTransaksiDepartmentDao().getGolonganByNIP(transaksiDepartment.getNip());
-                totalKotor=DaoFactory.getTransaksiDepartmentDao().getGajiKotor(transaksiDepartment.getNip(), bulantahun);
-            } catch (SQLException ex) {
-                Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-
-            
-            String reportSource = "./report/SlipGajiPerKaryawan.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("nama", transaksiDepartment.getNama());
-            params.put("department", nilaiNamaDepartment.getText());
-            params.put("golongan", golongan.getNamaGolongan());
-            params.put("pokok", String.valueOf(transaksiDepartment.getPokok()));
-            params.put("makan", String.valueOf(transaksiDepartment.getUangMakan()));
-            params.put("hadir", String.valueOf(transaksiDepartment.getUangHadir()));
-            params.put("lembur", String.valueOf(transaksiDepartment.getUanglembur()));
-            params.put("lain", String.valueOf(transaksiDepartment.getLain()));
-            params.put("totalKotor", String.valueOf(totalKotor));
-            params.put("potonganTelat", String.valueOf(transaksiDepartment.getPotonganTelat()));
-            params.put("potonganLain", String.valueOf(transaksiDepartment.getPotonganLain()));
-            params.put("totalBersih", String.valueOf(transaksiDepartment.getTotal()));
-            
-            JasperPrint jasperPrint = null;
-            try {
-                jasperPrint = JasperFillManager.fillReport(reportSource, params);
-            } catch (JRException ex) {
-                Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            JasperViewer.viewReport(jasperPrint, false);
-        }
-    }//GEN-LAST:event_cetakPerKaryawanButtonActionPerformed
-
-    private void cetakPerDepartmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakPerDepartmentButtonActionPerformed
-        try {
-            // TODO add your handling code here:
-            String bulan = null;
-            switch (bulanMonthChooser.getMonth()) {
-                case 0:
-                    bulan = "JANUARI";
-                    break;
-                case 1:
-                    bulan = "FEBRUARI";
-                    break;
-                case 2:
-                    bulan = "MARET";
-                    break;
-                case 3:
-                    bulan = "APRIL";
-                    break;
-                case 4:
-                    bulan = "MEI";
-                    break;
-                case 5:
-                    bulan = "JUNI";
-                    break;
-                case 6:
-                    bulan = "JULI";
-                    break;
-                case 7:
-                    bulan = "AGUSTUS";
-                    break;
-                case 8:
-                    bulan = "SEPTEMBER";
-                    break;
-                case 9:
-                    bulan = "OKTOBER";
-                    break;
-                case 10:
-                    bulan = "NOVEMBER";
-                    break;
-                case 11:
-                    bulan = "DESEMBER";
-                    break;
-            }
-            bulan = bulan + " " + String.valueOf(tahunYearChooser1.getYear());
-            String reportSource = "./report/LaporanGajiTotalPerDepartment.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("bulan", bulan);
-            params.put("department", nilaiNamaDepartment.getText());
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(karyawanTable.getModel()));
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (JRException ex) {
-            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_cetakPerDepartmentButtonActionPerformed
     private void isitable() {
     }
 
@@ -608,8 +461,6 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JMonthChooser bulanMonthChooser;
-    private javax.swing.JButton cetakPerDepartmentButton;
-    private javax.swing.JButton cetakPerKaryawanButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JPanel daftarKaryawanPanel;
     private javax.swing.JComboBox departmentCombo;
