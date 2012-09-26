@@ -11,9 +11,6 @@ package com.presensikaryawan.detailpresensikaryawan;
 public class DetailPresensi {
     private String nip, tanggal, keterangan;
 
-    public DetailPresensi() {
-    }
-
     /**
      * @return the nip
      */

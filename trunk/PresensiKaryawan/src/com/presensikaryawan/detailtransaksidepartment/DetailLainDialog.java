@@ -6,17 +6,10 @@ package com.presensikaryawan.detailtransaksidepartment;
 
 
 import com.presensikaryawan.tools.DaoFactory;
-import com.presensikaryawan.transaksi.PresensiTableModel;
-import com.presensikaryawan.transaksi.RekapPresensi;
 import com.presensikaryawan.transaksiDepartment.TransaksiDepartment;
 import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentTableModel;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -44,6 +37,7 @@ public class DetailLainDialog extends javax.swing.JDialog {
         else
             nilaiTanggalLabel.setText(tahun+"-"+bulan);
         this.presensiTable=presensiTable;
+        this.kode_department=kodeDepartment;
         bln=bulan;
         thn=tahun;
 //        this.kode_department=kode_department;
@@ -221,7 +215,14 @@ if (!nilaiTanggalLabel.getText().matches("-") && potonganTextField.getText() != 
 //                detailPresensiTableModel.setModel(model);
                 List<TransaksiDepartment> transaksi = DaoFactory.getTransaksiDepartmentDao().getAllTransaksiDepartment(kode_department, bln, thn);
                  TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksi);
-                presensiTable.setModel(model);
+                 presensiTable.setModel(model);
+                 
+//        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
+//        
+//        TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
+//        karyawanTable1.setModel(model);
+
+
             } catch (SQLException ex) {
                 ex.getMessage();
             }
