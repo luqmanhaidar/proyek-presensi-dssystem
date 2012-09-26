@@ -1,4 +1,4 @@
-package com.presensikaryawan.rekapPresensiPerBulan;
+package com.presensikaryawan.rekapPresensiPerBulanReport;
 
 import com.presensikaryawan.rekapPresensi.*;
 import com.dssystem.umum.ComponentFocus;
@@ -235,11 +235,6 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        rekapTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rekapTableMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(rekapTable);
 
         org.jdesktop.layout.GroupLayout posisiPanelLayout = new org.jdesktop.layout.GroupLayout(posisiPanel);
@@ -263,7 +258,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
         menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Rekap Presensi Karyawan per Bulan");
+        menuLabel.setText("Menu Cetak Rekap Presensi Karyawan per Bulan");
 
         fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         fungsiLabel.setText("Digunakan mencetak rekap presensi karyawan per bulan");
@@ -436,29 +431,6 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
 //            }
         }
     }//GEN-LAST:event_lihatButtonActionPerformed
-
-    private void rekapTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rekapTableMouseClicked
-        int row = rekapTable.getSelectedRow();
-        String kodegroup = rekapTable.getValueAt(row, 1).toString();
-        String namagroup = rekapTable.getValueAt(row, 2).toString();
-        String kodedepartment = String.valueOf(departmentCombo.getSelectedItem());
-        String bulan;
-        if (monthChooser.getMonth() + 1 < 10) {
-            bulan = "0" + String.valueOf(monthChooser.getMonth() + 1);
-        } else {
-            bulan = String.valueOf(monthChooser.getMonth() + 1);
-        }
-        String tahun = String.valueOf(yearChooser.getYear());
-
-        DetailPresensiDialog detailDialog = null;
-        try {
-            detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup, bulan, tahun, rekapTable, kodedepartment);
-        } catch (SQLException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        detailDialog.setVisible(true);
-
-    }//GEN-LAST:event_rekapTableMouseClicked
 
     private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
         // TODO add your handling code here:
