@@ -67,7 +67,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         panelStatus1 = new com.sistem.panelstatus.PanelStatus();
-        cetakButton = new javax.swing.JButton();
+        keluarButton = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
         bulanLabel = new javax.swing.JLabel();
         monthChooser = new com.toedter.calendar.JMonthChooser();
@@ -95,16 +95,16 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         panelStatus1.setBounds(0, 650, 1020, 50);
         jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
-        cetakButton.setText("Cetak");
-        cetakButton.addActionListener(new java.awt.event.ActionListener() {
+        keluarButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        keluarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
+        keluarButton.setText("Keluar");
+        keluarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cetakButtonActionPerformed(evt);
+                keluarButtonActionPerformed(evt);
             }
         });
-        cetakButton.setBounds(900, 600, 110, 40);
-        jDesktopPane1.add(cetakButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        keluarButton.setBounds(900, 600, 110, 40);
+        jDesktopPane1.add(keluarButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -252,10 +252,10 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
         menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Transaksi Gaji Karyawan");
+        menuLabel.setText("Menu Cek Presensi Karyawan");
 
         fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        fungsiLabel.setText("Digunakan menghitung transaksi gaji & rekap karyawan per bulan/per tahun");
+        fungsiLabel.setText("Digunakan untuk melihat dan mengedit presensi karyawan per bulan");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
         headPanel.setLayout(headPanelLayout);
@@ -351,58 +351,59 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     private void isitable() {
     }
 
-    private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        try {
-            String bulan = null;
-            switch (monthChooser.getMonth()) {
-                case 0:
-                    bulan = "JANUARI";
-                    break;
-                case 1:
-                    bulan = "FEBRUARI";
-                    break;
-                case 2:
-                    bulan = "MARET";
-                    break;
-                case 3:
-                    bulan = "APRIL";
-                    break;
-                case 4:
-                    bulan = "MEI";
-                    break;
-                case 5:
-                    bulan = "JUNI";
-                    break;
-                case 6:
-                    bulan = "JULI";
-                    break;
-                case 7:
-                    bulan = "AGUSTUS";
-                    break;
-                case 8:
-                    bulan = "SEPTEMBER";
-                    break;
-                case 9:
-                    bulan = "OKTOBER";
-                    break;
-                case 10:
-                    bulan = "NOVEMBER";
-                    break;
-                case 11:
-                    bulan = "DESEMBER";
-                    break;
-            }
-            bulan = bulan + " " + String.valueOf(yearChooser.getYear());
-            String reportSource = "./report/rekapReport.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("bulan", bulan);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(presenstiTable.getModel()));
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (JRException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
+        this.dispose();
+        //        try {
+//            String bulan = null;
+//            switch (monthChooser.getMonth()) {
+//                case 0:
+//                    bulan = "JANUARI";
+//                    break;
+//                case 1:
+//                    bulan = "FEBRUARI";
+//                    break;
+//                case 2:
+//                    bulan = "MARET";
+//                    break;
+//                case 3:
+//                    bulan = "APRIL";
+//                    break;
+//                case 4:
+//                    bulan = "MEI";
+//                    break;
+//                case 5:
+//                    bulan = "JUNI";
+//                    break;
+//                case 6:
+//                    bulan = "JULI";
+//                    break;
+//                case 7:
+//                    bulan = "AGUSTUS";
+//                    break;
+//                case 8:
+//                    bulan = "SEPTEMBER";
+//                    break;
+//                case 9:
+//                    bulan = "OKTOBER";
+//                    break;
+//                case 10:
+//                    bulan = "NOVEMBER";
+//                    break;
+//                case 11:
+//                    bulan = "DESEMBER";
+//                    break;
+//            }
+//            bulan = bulan + " " + String.valueOf(yearChooser.getYear());
+//            String reportSource = "./report/rekapReport.jasper";
+//            Map<String, Object> params = new HashMap<String, Object>();
+//            params.put("bulan", bulan);
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(presenstiTable.getModel()));
+//            JasperViewer.viewReport(jasperPrint, false);
+//        } catch (JRException ex) {
+//            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
-}//GEN-LAST:event_cetakButtonActionPerformed
+}//GEN-LAST:event_keluarButtonActionPerformed
 
     private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
         // TODO add your handling code here:
@@ -485,7 +486,6 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bulanLabel;
-    private javax.swing.JButton cetakButton;
     private javax.swing.JComboBox departmentCombo;
     private javax.swing.JLabel departmentLabel;
     private javax.swing.JLabel fungsiLabel;
@@ -494,6 +494,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton keluarButton;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel menuLabel;
     private com.toedter.calendar.JMonthChooser monthChooser;
