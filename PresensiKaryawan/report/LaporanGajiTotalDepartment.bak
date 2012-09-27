@@ -58,7 +58,7 @@ and t.bulan like $P{tahun};]]></queryString>
 	<field name="department" class="java.lang.String"/>
 	<field name="nama_department" class="java.lang.String"/>
 
-	<variable name="total" class="java.lang.String" resetType="Report" calculation="Sum">
+	<variable name="total" class="java.lang.Double" resetType="Report" calculation="Sum">
 		<variableExpression><![CDATA[$F{total}]]></variableExpression>
 	</variable>
 
