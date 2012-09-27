@@ -4,7 +4,6 @@
  */
 package com.presensikaryawan.detailtransaksidepartment;
 
-
 import com.presensikaryawan.tools.DaoFactory;
 import com.presensikaryawan.transaksiDepartment.TransaksiDepartment;
 import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentTableModel;
@@ -18,7 +17,7 @@ import javax.swing.JTable;
  * @author Tinus
  */
 public class DetailLainDialog extends javax.swing.JDialog {
-    
+
     int bln;
     int thn;
     JTable presensiTable;
@@ -32,14 +31,15 @@ public class DetailLainDialog extends javax.swing.JDialog {
         initComponents();
         nilaiNamaLabel.setText(nama);
         nilaiNIPLabel.setText(nip);
-        if(bulan<10)
-        nilaiTanggalLabel.setText(tahun+"-0"+bulan);
-        else
-            nilaiTanggalLabel.setText(tahun+"-"+bulan);
-        this.presensiTable=presensiTable;
-        this.kode_department=kodeDepartment;
-        bln=bulan;
-        thn=tahun;
+        if (bulan < 10) {
+            nilaiTanggalLabel.setText(tahun + "-0" + bulan);
+        } else {
+            nilaiTanggalLabel.setText(tahun + "-" + bulan);
+        }
+        this.presensiTable = presensiTable;
+        this.kode_department = kodeDepartment;
+        bln = bulan;
+        thn = tahun;
 //        this.kode_department=kode_department;
 //        List<DetailLain> detailLains = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip, bulan, tahun);
 //        DetailLainTableModel model=new DetailLainTableModel(detailPresensis);
@@ -64,11 +64,13 @@ public class DetailLainDialog extends javax.swing.JDialog {
         tanggalLabel = new javax.swing.JLabel();
         Potongan = new javax.swing.JLabel();
         potonganTextField = new javax.swing.JTextField();
-        tablePanel = new javax.swing.JScrollPane();
         updateButton = new javax.swing.JButton();
         batalButton = new javax.swing.JButton();
         nilaiTanggalLabel = new javax.swing.JLabel();
         kembaliButton = new javax.swing.JButton();
+        Potongan1 = new javax.swing.JLabel();
+        prestasiTextField = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,7 +90,13 @@ public class DetailLainDialog extends javax.swing.JDialog {
         tanggalLabel.setText("Bulan");
 
         Potongan.setFont(new java.awt.Font("Dialog", 0, 12));
-        Potongan.setText("Potongan");
+        Potongan.setText("Potongan Lain");
+
+        potonganTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                potonganTextFieldActionPerformed(evt);
+            }
+        });
 
         updateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Edit.gif"))); // NOI18N
         updateButton.setText("Update");
@@ -117,6 +125,15 @@ public class DetailLainDialog extends javax.swing.JDialog {
             }
         });
 
+        Potongan1.setFont(new java.awt.Font("Dialog", 0, 12));
+        Potongan1.setText("Lain - lain / Prestasi");
+
+        prestasiTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prestasiTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelUtamaLayout = new javax.swing.GroupLayout(panelUtama);
         panelUtama.setLayout(panelUtamaLayout);
         panelUtamaLayout.setHorizontalGroup(
@@ -124,29 +141,37 @@ public class DetailLainDialog extends javax.swing.JDialog {
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                     .addGroup(panelUtamaLayout.createSequentialGroup()
                         .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nipLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(namaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(tanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                            .addComponent(nipLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(namaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(tanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nilaiNamaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nilaiNIPLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelUtamaLayout.createSequentialGroup()
-                                .addComponent(nilaiTanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                .addGap(239, 239, 239)
-                                .addComponent(Potongan, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(potonganTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUtamaLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUtamaLayout.createSequentialGroup()
+                                .addComponent(nilaiTanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                .addGap(340, 340, 340)))
+                        .addGap(137, 137, 137))
+                    .addGroup(panelUtamaLayout.createSequentialGroup()
                         .addComponent(kembaliButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
                         .addComponent(batalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updateButton)))
+                        .addComponent(updateButton))
+                    .addGroup(panelUtamaLayout.createSequentialGroup()
+                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Potongan1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUtamaLayout.createSequentialGroup()
+                                .addComponent(Potongan, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(prestasiTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(potonganTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
         );
         panelUtamaLayout.setVerticalGroup(
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,18 +186,24 @@ public class DetailLainDialog extends javax.swing.JDialog {
                     .addComponent(nilaiNIPLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(nilaiTanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(potonganTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(Potongan, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(tanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(nilaiTanggalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
-                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                    .addComponent(Potongan, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(prestasiTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(Potongan1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(batalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(kembaliButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(67, 67, 67))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,16 +214,18 @@ public class DetailLainDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelUtama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelUtama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-749)/2, (screenSize.height-533)/2, 749, 533);
+        setBounds((screenSize.width-749)/2, (screenSize.height-336)/2, 749, 336);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-if (!nilaiTanggalLabel.getText().matches("-") && potonganTextField.getText() != null) {
+        if (!nilaiTanggalLabel.getText().matches("-") && potonganTextField.getText() != null) {
 //            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String tanggal = nilaiTanggalLabel.getText();
 //            tanggal = tanggal.substring(6, 10)+"-"+tanggal.substring(3, 5)+"%";
@@ -209,14 +242,23 @@ if (!nilaiTanggalLabel.getText().matches("-") && potonganTextField.getText() != 
             String nip = nilaiNIPLabel.getText();
             try {
                 System.out.println("masuk");
-                DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, Double.parseDouble(potonganTextField.getText()));
+
+                if (!potonganTextField.getText().matches("") || !prestasiTextField.getText().matches("")) {
+                    if (potonganTextField.getText().matches("")) {
+                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, 0, Double.parseDouble(prestasiTextField.getText()));
+                    } else if (prestasiTextField.getText().matches("")) {
+                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, Double.parseDouble(potonganTextField.getText()), 0);
+                    } else {
+                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, Double.parseDouble(potonganTextField.getText()), Double.parseDouble(prestasiTextField.getText()));
+                    }
+                }
 //                List<DetailLain> detailPresensis = DaoFactory.getDetailLainDao().getDetailPresensiByNIP(nip, bln, thn);
 //                DetailLainTableModel model=new DetailLainTableModel(detailPresensis);
 //                detailPresensiTableModel.setModel(model);
                 List<TransaksiDepartment> transaksi = DaoFactory.getTransaksiDepartmentDao().getAllTransaksiDepartment(kode_department, bln, thn);
-                 TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksi);
-                 presensiTable.setModel(model);
-                 
+                TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksi);
+                presensiTable.setModel(model);
+
 //        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
 //        
 //        TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
@@ -242,9 +284,18 @@ if (!nilaiTanggalLabel.getText().matches("-") && potonganTextField.getText() != 
         this.setVisible(false);
     }//GEN-LAST:event_kembaliButtonActionPerformed
 
+private void potonganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potonganTextFieldActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_potonganTextFieldActionPerformed
+
+private void prestasiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prestasiTextFieldActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_prestasiTextFieldActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Potongan;
+    private javax.swing.JLabel Potongan1;
     private javax.swing.JButton batalButton;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton kembaliButton;
     private javax.swing.JLabel namaLabel;
     private javax.swing.JLabel nilaiNIPLabel;
@@ -253,7 +304,7 @@ if (!nilaiTanggalLabel.getText().matches("-") && potonganTextField.getText() != 
     private javax.swing.JLabel nipLabel;
     private javax.swing.JPanel panelUtama;
     private javax.swing.JTextField potonganTextField;
-    private javax.swing.JScrollPane tablePanel;
+    private javax.swing.JTextField prestasiTextField;
     private javax.swing.JLabel tanggalLabel;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
