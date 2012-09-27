@@ -453,6 +453,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
                     DaoFactory.getRekapPresensiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
                 }
                 List<DetailPresensi> detailPresensis = DaoFactory.getRekapPresensiDao().callGetPresensi(month, year, kode_department);
+                System.out.println(detailPresensis.size());
                 PresensiTableModel model = new PresensiTableModel(detailPresensis);
                 presenstiTable.setModel(model);
                 presenstiTable.setVisible(true);
