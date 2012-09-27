@@ -51,7 +51,6 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
             departmentCombo.addItem(d.getKodeDepartment());
         }
         rekapTable.setVisible(false);
-        rekapTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     private void initComponentFocus() {

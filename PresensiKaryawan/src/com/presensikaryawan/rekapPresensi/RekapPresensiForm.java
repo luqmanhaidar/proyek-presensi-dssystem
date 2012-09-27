@@ -49,7 +49,6 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
-        presenstiTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         presenstiTable.setVisible(false);
 
     }

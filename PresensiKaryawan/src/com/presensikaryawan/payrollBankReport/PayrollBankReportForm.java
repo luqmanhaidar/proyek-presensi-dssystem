@@ -46,7 +46,6 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
             nipCombo1.addItem(k.getNip());
             nipCombo2.addItem(k.getNip());
         }
-        transferTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
     }
 
