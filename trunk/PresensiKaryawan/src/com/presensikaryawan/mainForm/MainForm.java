@@ -287,6 +287,8 @@ public class MainForm extends javax.swing.JFrame {
             // TODO add your handling code here:
             RekapPresensiForm rekapPresensiForm=new RekapPresensiForm();
             rekapPresensiForm.setVisible(true);
+            rekapPresensiForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
