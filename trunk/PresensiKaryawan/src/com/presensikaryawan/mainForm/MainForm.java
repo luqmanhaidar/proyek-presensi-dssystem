@@ -4,7 +4,23 @@
  */
 package com.presensikaryawan.mainForm;
 
+import com.presensikaryawan.departmentSetting.DepartmentForm;
+import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportForm;
+import com.presensikaryawan.golongan.GolonganForm;
+import com.presensikaryawan.groupShift.GroupShiftForm;
+import com.presensikaryawan.karyawan.KaryawanForm;
+import com.presensikaryawan.liburNasional.LiburNasionalForm;
+import com.presensikaryawan.liburPerusahaan.LiburPerusahaanForm;
+import com.presensikaryawan.outletSetting.OutletForm;
+import com.presensikaryawan.payrollBankReport.PayrollBankReportForm;
+import com.presensikaryawan.posisi.PosisiForm;
+import com.presensikaryawan.rekapHistoriGajiReport.RekapGajiForm;
+import com.presensikaryawan.rekapPresensi.RekapPresensiForm;
+import com.presensikaryawan.rekapPresensiPerBulanReport.RekapPresensiPerBulanForm;
+import com.presensikaryawan.shiftSetting.ShiftForm;
+import com.presensikaryawan.statusSetting.StatusSettingForm;
 import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentForm;
+import com.presensikaryawan.transaksiGajiDepartmentTotalReport.TransaksiGajiDepartmentReportForm;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,37 +48,45 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         pictureLabe = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuBar = new javax.swing.JMenu();
+        transaksiMenu = new javax.swing.JMenu();
         menuItemTransaksiPresensi = new javax.swing.JMenuItem();
         menuItemTransaksiGaji = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        reportMenu = new javax.swing.JMenu();
         meuItemSlipGajiReport = new javax.swing.JMenuItem();
-        menuItemPayrollBank = new javax.swing.JMenuItem();
-        menuItemRekapPresensi = new javax.swing.JMenuItem();
-        menuItemHistoryGajiReport = new javax.swing.JMenuItem();
         menuItemLaporanGajiTotalReport = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        menuItemRekapPresensi = new javax.swing.JMenuItem();
+        menuItemPayrollBank = new javax.swing.JMenuItem();
+        menuItemHistoryGajiReport = new javax.swing.JMenuItem();
+        masterMenu = new javax.swing.JMenu();
         menuItemMasterDepartment = new javax.swing.JMenuItem();
         menuItemMasterGolongan = new javax.swing.JMenuItem();
-        menuItemMasterPosisi = new javax.swing.JMenuItem();
         menuItemMasterOutlet = new javax.swing.JMenuItem();
+        menuItemMasterPosisi = new javax.swing.JMenuItem();
         menuItemMasterShift = new javax.swing.JMenuItem();
         menuItemMasterGroupShift = new javax.swing.JMenuItem();
-        menuItemMasterKaryawan = new javax.swing.JMenuItem();
         menuItemMasterStatus = new javax.swing.JMenuItem();
+        menuItemMasterKaryawan = new javax.swing.JMenuItem();
         menuItemMasterLiburNasional = new javax.swing.JMenuItem();
         menuItemMasterLiburPerusahaan = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pictureLabe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dssbackground1024.jpg"))); // NOI18N
         pictureLabe.setText("jLabel1");
 
-        menuBar.setText("Transaksi");
+        menuBar.setText("File");
+
+        transaksiMenu.setText("Transaksi");
 
         menuItemTransaksiPresensi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
         menuItemTransaksiPresensi.setText("Transaksi Presensi Karyawan");
@@ -71,7 +95,7 @@ public class MainForm extends javax.swing.JFrame {
                 menuItemTransaksiPresensiActionPerformed(evt);
             }
         });
-        menuBar.add(menuItemTransaksiPresensi);
+        transaksiMenu.add(menuItemTransaksiPresensi);
 
         menuItemTransaksiGaji.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.SHIFT_MASK));
         menuItemTransaksiGaji.setText("Transaksi Gaji Karyawan");
@@ -80,32 +104,20 @@ public class MainForm extends javax.swing.JFrame {
                 menuItemTransaksiGajiActionPerformed(evt);
             }
         });
-        menuBar.add(menuItemTransaksiGaji);
+        transaksiMenu.add(menuItemTransaksiGaji);
 
-        jMenuBar1.add(menuBar);
+        menuBar.add(transaksiMenu);
 
-        jMenu2.setText("Report");
+        reportMenu.setText("Report");
 
         meuItemSlipGajiReport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK));
         meuItemSlipGajiReport.setText("Report Slip Gaji");
-        jMenu2.add(meuItemSlipGajiReport);
-
-        menuItemPayrollBank.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_MASK));
-        menuItemPayrollBank.setText("Report Payroll Bank");
-        menuItemPayrollBank.addActionListener(new java.awt.event.ActionListener() {
+        meuItemSlipGajiReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemPayrollBankActionPerformed(evt);
+                meuItemSlipGajiReportActionPerformed(evt);
             }
         });
-        jMenu2.add(menuItemPayrollBank);
-
-        menuItemRekapPresensi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK));
-        menuItemRekapPresensi.setText("Report Rekap Presensi");
-        jMenu2.add(menuItemRekapPresensi);
-
-        menuItemHistoryGajiReport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.SHIFT_MASK));
-        menuItemHistoryGajiReport.setText("Report History Gaji");
-        jMenu2.add(menuItemHistoryGajiReport);
+        reportMenu.add(meuItemSlipGajiReport);
 
         menuItemLaporanGajiTotalReport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
         menuItemLaporanGajiTotalReport.setText("Report Laporan Gaji Total");
@@ -114,15 +126,47 @@ public class MainForm extends javax.swing.JFrame {
                 menuItemLaporanGajiTotalReportActionPerformed(evt);
             }
         });
-        jMenu2.add(menuItemLaporanGajiTotalReport);
+        reportMenu.add(menuItemLaporanGajiTotalReport);
 
-        jMenuBar1.add(jMenu2);
+        menuItemRekapPresensi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK));
+        menuItemRekapPresensi.setText("Report Rekap Presensi");
+        menuItemRekapPresensi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRekapPresensiActionPerformed(evt);
+            }
+        });
+        reportMenu.add(menuItemRekapPresensi);
 
-        jMenu1.setText("Master");
+        menuItemPayrollBank.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_MASK));
+        menuItemPayrollBank.setText("Report Payroll Bank");
+        menuItemPayrollBank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemPayrollBankActionPerformed(evt);
+            }
+        });
+        reportMenu.add(menuItemPayrollBank);
+
+        menuItemHistoryGajiReport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.SHIFT_MASK));
+        menuItemHistoryGajiReport.setText("Report History Gaji");
+        menuItemHistoryGajiReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemHistoryGajiReportActionPerformed(evt);
+            }
+        });
+        reportMenu.add(menuItemHistoryGajiReport);
+
+        menuBar.add(reportMenu);
+
+        masterMenu.setText("Master");
 
         menuItemMasterDepartment.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuItemMasterDepartment.setText("Master Department");
-        jMenu1.add(menuItemMasterDepartment);
+        menuItemMasterDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMasterDepartmentActionPerformed(evt);
+            }
+        });
+        masterMenu.add(menuItemMasterDepartment);
 
         menuItemMasterGolongan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuItemMasterGolongan.setText("Master Golongan");
@@ -131,15 +175,25 @@ public class MainForm extends javax.swing.JFrame {
                 menuItemMasterGolonganActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemMasterGolongan);
-
-        menuItemMasterPosisi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        menuItemMasterPosisi.setText("Master Posisi");
-        jMenu1.add(menuItemMasterPosisi);
+        masterMenu.add(menuItemMasterGolongan);
 
         menuItemMasterOutlet.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuItemMasterOutlet.setText("Master Outlet");
-        jMenu1.add(menuItemMasterOutlet);
+        menuItemMasterOutlet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMasterOutletActionPerformed(evt);
+            }
+        });
+        masterMenu.add(menuItemMasterOutlet);
+
+        menuItemMasterPosisi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        menuItemMasterPosisi.setText("Master Posisi");
+        menuItemMasterPosisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMasterPosisiActionPerformed(evt);
+            }
+        });
+        masterMenu.add(menuItemMasterPosisi);
 
         menuItemMasterShift.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuItemMasterShift.setText("Master Shift");
@@ -148,29 +202,66 @@ public class MainForm extends javax.swing.JFrame {
                 menuItemMasterShiftActionPerformed(evt);
             }
         });
-        jMenu1.add(menuItemMasterShift);
+        masterMenu.add(menuItemMasterShift);
 
         menuItemMasterGroupShift.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuItemMasterGroupShift.setText("Master Group Shift");
-        jMenu1.add(menuItemMasterGroupShift);
-
-        menuItemMasterKaryawan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        menuItemMasterKaryawan.setText("Master Karyawan");
-        jMenu1.add(menuItemMasterKaryawan);
+        menuItemMasterGroupShift.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMasterGroupShiftActionPerformed(evt);
+            }
+        });
+        masterMenu.add(menuItemMasterGroupShift);
 
         menuItemMasterStatus.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuItemMasterStatus.setText("Master Status");
-        jMenu1.add(menuItemMasterStatus);
+        menuItemMasterStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMasterStatusActionPerformed(evt);
+            }
+        });
+        masterMenu.add(menuItemMasterStatus);
+
+        menuItemMasterKaryawan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        menuItemMasterKaryawan.setText("Master Karyawan");
+        menuItemMasterKaryawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMasterKaryawanActionPerformed(evt);
+            }
+        });
+        masterMenu.add(menuItemMasterKaryawan);
 
         menuItemMasterLiburNasional.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuItemMasterLiburNasional.setText("Master Libur Nasional");
-        jMenu1.add(menuItemMasterLiburNasional);
+        menuItemMasterLiburNasional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMasterLiburNasionalActionPerformed(evt);
+            }
+        });
+        masterMenu.add(menuItemMasterLiburNasional);
 
         menuItemMasterLiburPerusahaan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuItemMasterLiburPerusahaan.setText("Master Libur Perusahaan");
-        jMenu1.add(menuItemMasterLiburPerusahaan);
+        menuItemMasterLiburPerusahaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMasterLiburPerusahaanActionPerformed(evt);
+            }
+        });
+        masterMenu.add(menuItemMasterLiburPerusahaan);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(masterMenu);
+        menuBar.add(jSeparator1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menuBar.add(jMenuItem2);
+
+        jMenuBar1.add(menuBar);
 
         setJMenuBar(jMenuBar1);
 
@@ -192,30 +283,180 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemTransaksiPresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaksiPresensiActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            RekapPresensiForm rekapPresensiForm=new RekapPresensiForm();
+            rekapPresensiForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuItemTransaksiPresensiActionPerformed
 
     private void menuItemTransaksiGajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaksiGajiActionPerformed
-
+        try {
             // TODO add your handling code here:
-        System.out.println("hahahahah");
+        TransaksiDepartmentForm transaksiDepartmentForm=new TransaksiDepartmentForm();
+        transaksiDepartmentForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_menuItemTransaksiGajiActionPerformed
 
     private void menuItemPayrollBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPayrollBankActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            PayrollBankReportForm payrollBankReportForm=new PayrollBankReportForm();
+            payrollBankReportForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuItemPayrollBankActionPerformed
 
     private void menuItemLaporanGajiTotalReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemLaporanGajiTotalReportActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            TransaksiGajiDepartmentReportForm transaksiGajiDepartmentReportForm= new TransaksiGajiDepartmentReportForm();
+            transaksiGajiDepartmentReportForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuItemLaporanGajiTotalReportActionPerformed
 
     private void menuItemMasterGolonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterGolonganActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            GolonganForm golonganForm=new GolonganForm();
+            golonganForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuItemMasterGolonganActionPerformed
 
     private void menuItemMasterShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterShiftActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            ShiftForm shiftForm=new ShiftForm();
+            shiftForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuItemMasterShiftActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void meuItemSlipGajiReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meuItemSlipGajiReportActionPerformed
+        try {
+            // TODO add your handling code here:
+            GajiPerKaryawanReportForm gajiPerKaryawanReportForm=new GajiPerKaryawanReportForm();
+            gajiPerKaryawanReportForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_meuItemSlipGajiReportActionPerformed
+
+    private void menuItemRekapPresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRekapPresensiActionPerformed
+        try {
+            // TODO add your handling code here:
+            RekapPresensiPerBulanForm rekapPresensiPerBulanForm=new RekapPresensiPerBulanForm();
+            rekapPresensiPerBulanForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemRekapPresensiActionPerformed
+
+    private void menuItemHistoryGajiReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemHistoryGajiReportActionPerformed
+        try {
+            // TODO add your handling code here:
+            RekapGajiForm rekapGajiForm=new RekapGajiForm();
+            rekapGajiForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemHistoryGajiReportActionPerformed
+
+    private void menuItemMasterDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterDepartmentActionPerformed
+        try {
+            // TODO add your handling code here:
+            DepartmentForm departmentForm= new DepartmentForm();
+            departmentForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemMasterDepartmentActionPerformed
+
+    private void menuItemMasterOutletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterOutletActionPerformed
+        try {
+            // TODO add your handling code here:
+            OutletForm outletForm=new OutletForm();
+            outletForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemMasterOutletActionPerformed
+
+    private void menuItemMasterPosisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterPosisiActionPerformed
+        try {
+            // TODO add your handling code here:
+            PosisiForm posisiForm=new PosisiForm();
+            posisiForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemMasterPosisiActionPerformed
+
+    private void menuItemMasterGroupShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterGroupShiftActionPerformed
+        try {
+            // TODO add your handling code here:
+            GroupShiftForm groupShiftForm=new GroupShiftForm();
+            groupShiftForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemMasterGroupShiftActionPerformed
+
+    private void menuItemMasterStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterStatusActionPerformed
+        try {
+            // TODO add your handling code here:
+            StatusSettingForm statusSettingForm=new StatusSettingForm();
+            statusSettingForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemMasterStatusActionPerformed
+
+    private void menuItemMasterKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterKaryawanActionPerformed
+        try {
+            // TODO add your handling code here:
+            KaryawanForm karyawanForm= new KaryawanForm();
+            karyawanForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemMasterKaryawanActionPerformed
+
+    private void menuItemMasterLiburNasionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterLiburNasionalActionPerformed
+        try {
+            // TODO add your handling code here:
+            LiburNasionalForm liburNasionalForm=new LiburNasionalForm();
+            liburNasionalForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemMasterLiburNasionalActionPerformed
+
+    private void menuItemMasterLiburPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterLiburPerusahaanActionPerformed
+        try {
+            // TODO add your handling code here:
+            LiburPerusahaanForm liburPerusahaanForm=new LiburPerusahaanForm();
+            liburPerusahaanForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemMasterLiburPerusahaanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,10 +493,12 @@ public class MainForm extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu masterMenu;
     private javax.swing.JMenu menuBar;
     private javax.swing.JMenuItem menuItemHistoryGajiReport;
     private javax.swing.JMenuItem menuItemLaporanGajiTotalReport;
@@ -275,5 +518,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemTransaksiPresensi;
     private javax.swing.JMenuItem meuItemSlipGajiReport;
     private javax.swing.JLabel pictureLabe;
+    private javax.swing.JMenu reportMenu;
+    private javax.swing.JMenu transaksiMenu;
     // End of variables declaration//GEN-END:variables
 }
