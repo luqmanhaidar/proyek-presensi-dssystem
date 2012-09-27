@@ -97,10 +97,6 @@ public class KaryawanForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        headPanel = new javax.swing.JPanel();
-        logoLabel = new javax.swing.JLabel();
-        menuLabel = new javax.swing.JLabel();
-        fungsiLabel = new javax.swing.JLabel();
         cmdKeluar = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
         namaKaryawanLabel = new javax.swing.JLabel();
@@ -129,50 +125,18 @@ public class KaryawanForm extends javax.swing.JFrame {
         daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
+        headPanel = new javax.swing.JPanel();
+        logoLabel = new javax.swing.JLabel();
+        menuLabel = new javax.swing.JLabel();
+        fungsiLabel = new javax.swing.JLabel();
+        panelStatus1 = new com.sistem.panelstatus.PanelStatus();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
 
-        headPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18));
-        menuLabel.setText("Menu Data Karyawan");
-
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
-        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data  karyawan");
-
-        org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
-        headPanel.setLayout(headPanelLayout);
-        headPanelLayout.setHorizontalGroup(
-            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(headPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(logoLabel)
-                .add(4, 4, 4)
-                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(menuLabel)
-                    .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(289, Short.MAX_VALUE))
-        );
-        headPanelLayout.setVerticalGroup(
-            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(headPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(logoLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .add(headPanelLayout.createSequentialGroup()
-                        .add(menuLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(fungsiLabel)))
-                .addContainerGap())
-        );
-
-        headPanel.setBounds(0, 0, 740, 68);
-        jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
+        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -185,13 +149,13 @@ public class KaryawanForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaKaryawanLabel.setText("Nama Karyawan");
 
-        nipKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nipKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nipKaryawanLabel.setText("NIP Karyawan");
 
-        namaKaryawanTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        namaKaryawanTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         namaKaryawanTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         namaKaryawanTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +163,7 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
-        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         simpanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Save.gif"))); // NOI18N
         simpanButton.setMnemonic('S');
         simpanButton.setText("Simpan");
@@ -217,7 +181,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         });
 
         nipKaryawanCombo.setEditable(true);
-        nipKaryawanCombo.setFont(new java.awt.Font("Arial", 0, 11));
+        nipKaryawanCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         nipKaryawanCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nipKaryawanComboActionPerformed(evt);
@@ -229,7 +193,7 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
-        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         hapusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Delete.gif"))); // NOI18N
         hapusButton.setMnemonic('H');
         hapusButton.setText("Hapus");
@@ -240,7 +204,7 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
-        batalButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        batalButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         batalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Undo.gif"))); // NOI18N
         batalButton.setText("Batal");
         batalButton.addActionListener(new java.awt.event.ActionListener() {
@@ -249,19 +213,19 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
-        alamatKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        alamatKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         alamatKaryawanLabel.setText("Alamat");
 
-        tanggalMasukKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        tanggalMasukKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         tanggalMasukKaryawanLabel.setText("Tanggal Masuk");
 
-        golonganKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        golonganKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         golonganKaryawanLabel.setText("Golongan");
 
-        posisiKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        posisiKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         posisiKaryawanLabel.setText("Posisi");
 
-        alamatKaryawanTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        alamatKaryawanTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         alamatKaryawanTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         alamatKaryawanTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,16 +240,16 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
-        kodeOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        kodeOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         kodeOutletLabel.setText("Outlet");
 
-        kodeDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        kodeDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         kodeDepartmentLabel.setText("Department");
 
-        noRekeningLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        noRekeningLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         noRekeningLabel.setText("No REK");
 
-        noRekeningTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        noRekeningTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         noRekeningTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         noRekeningTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,7 +257,7 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
-        bankLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        bankLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         bankLabel.setText("BANK");
 
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
@@ -411,7 +375,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         karyawanTable.setAutoCreateRowSorter(true);
-        karyawanTable.setFont(new java.awt.Font("Arial", 0, 11));
+        karyawanTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         karyawanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -453,11 +417,52 @@ public class KaryawanForm extends javax.swing.JFrame {
         );
         daftarKaryawanPanelLayout.setVerticalGroup(
             daftarKaryawanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
         );
 
         daftarKaryawanPanel.setBounds(0, 390, 740, 210);
         jDesktopPane1.add(daftarKaryawanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        headPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
+
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        menuLabel.setText("Menu Data Karyawan");
+
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data karyawan");
+
+        org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
+        headPanel.setLayout(headPanelLayout);
+        headPanelLayout.setHorizontalGroup(
+            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(headPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(logoLabel)
+                .add(4, 4, 4)
+                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(menuLabel)
+                    .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 472, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(204, Short.MAX_VALUE))
+        );
+        headPanelLayout.setVerticalGroup(
+            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(headPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(logoLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(headPanelLayout.createSequentialGroup()
+                        .add(menuLabel)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(fungsiLabel)))
+                .addContainerGap())
+        );
+
+        headPanel.setBounds(0, 0, 740, 77);
+        jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelStatus1.setBounds(0, 660, 740, 50);
+        jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -468,12 +473,12 @@ public class KaryawanForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-756)/2, (screenSize.height-708)/2, 756, 708);
+        setBounds((screenSize.width-756)/2, (screenSize.height-749)/2, 756, 749);
     }// </editor-fold>//GEN-END:initComponents
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
@@ -745,6 +750,7 @@ private void noRekeningTextFieldActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JLabel noRekeningLabel;
     private javax.swing.JTextField noRekeningTextField;
     private javax.swing.JComboBox outletCombo;
+    private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JComboBox posisiCombo;
     private javax.swing.JLabel posisiKaryawanLabel;
     private javax.swing.JButton simpanButton;

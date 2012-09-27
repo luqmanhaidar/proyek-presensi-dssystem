@@ -103,10 +103,6 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        headPanel = new javax.swing.JPanel();
-        logoLabel = new javax.swing.JLabel();
-        menuLabel = new javax.swing.JLabel();
-        fungsiLabel = new javax.swing.JLabel();
         cmdKeluar = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
         namaKaryawanLabel = new javax.swing.JLabel();
@@ -120,48 +116,16 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
+        headPanel = new javax.swing.JPanel();
+        logoLabel = new javax.swing.JLabel();
+        menuLabel = new javax.swing.JLabel();
+        fungsiLabel = new javax.swing.JLabel();
+        panelStatus1 = new com.sistem.panelstatus.PanelStatus();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
-
-        headPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Transaksi Gaji Karyawan");
-
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        fungsiLabel.setText("Digunakan untuk melihat dan mencetak gaji karyawan");
-
-        org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
-        headPanel.setLayout(headPanelLayout);
-        headPanelLayout.setHorizontalGroup(
-            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(headPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(logoLabel)
-                .add(4, 4, 4)
-                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(menuLabel)
-                    .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(469, Short.MAX_VALUE))
-        );
-        headPanelLayout.setVerticalGroup(
-            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(headPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(logoLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(headPanelLayout.createSequentialGroup()
-                        .add(menuLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(fungsiLabel)))
-                .addContainerGap())
-        );
-
-        headPanel.setBounds(0, 0, 920, 68);
-        jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
@@ -324,6 +288,47 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         daftarKaryawanPanel.setBounds(0, 240, 920, 240);
         jDesktopPane1.add(daftarKaryawanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        headPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
+
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        menuLabel.setText("Menu Transaksi Gaji Per Department");
+
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel.setText("Digunakan untuk melihat dan mengedit data presensi dan gaji karyawan per department");
+
+        org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
+        headPanel.setLayout(headPanelLayout);
+        headPanelLayout.setHorizontalGroup(
+            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(headPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(logoLabel)
+                .add(4, 4, 4)
+                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(menuLabel)
+                    .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(419, Short.MAX_VALUE))
+        );
+        headPanelLayout.setVerticalGroup(
+            headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(headPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(logoLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(headPanelLayout.createSequentialGroup()
+                        .add(menuLabel)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(fungsiLabel)))
+                .addContainerGap())
+        );
+
+        headPanel.setBounds(0, 0, 920, 77);
+        jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelStatus1.setBounds(0, 570, 920, 50);
+        jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -333,12 +338,12 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-935)/2, (screenSize.height-626)/2, 935, 626);
+        setBounds((screenSize.width-935)/2, (screenSize.height-655)/2, 935, 655);
     }// </editor-fold>//GEN-END:initComponents
 
 private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
@@ -477,6 +482,7 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     private javax.swing.JLabel namaDepartmentLabel;
     private javax.swing.JLabel namaKaryawanLabel;
     private javax.swing.JLabel nilaiNamaDepartment;
+    private com.sistem.panelstatus.PanelStatus panelStatus1;
     private com.toedter.calendar.JYearChooser tahunYearChooser1;
     // End of variables declaration//GEN-END:variables
 }

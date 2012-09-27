@@ -92,10 +92,10 @@ public class OutletForm extends javax.swing.JFrame {
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
         menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Golongan Karyawan");
+        menuLabel.setText("Menu Outlet");
 
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
-        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data golongan karyawan");
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data outlet");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
         headPanel.setLayout(headPanelLayout);
@@ -128,7 +128,7 @@ public class OutletForm extends javax.swing.JFrame {
         panelStatus1.setBounds(0, 570, 560, 50);
         jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
+        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,13 +141,13 @@ public class OutletForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        namaOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        namaOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaOutletLabel.setText("Nama Outlet");
 
-        kodeOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        kodeOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         kodeOutletLabel.setText("Kode Outlet");
 
-        namaOutletTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        namaOutletTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         namaOutletTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         namaOutletTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +155,7 @@ public class OutletForm extends javax.swing.JFrame {
             }
         });
 
-        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        simpanButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         simpanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Save.gif"))); // NOI18N
         simpanButton.setMnemonic('S');
         simpanButton.setText("Simpan");
@@ -173,7 +173,7 @@ public class OutletForm extends javax.swing.JFrame {
         });
 
         kodeOutletCombo.setEditable(true);
-        kodeOutletCombo.setFont(new java.awt.Font("Arial", 0, 11));
+        kodeOutletCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         kodeOutletCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kodeOutletComboActionPerformed(evt);
@@ -185,7 +185,7 @@ public class OutletForm extends javax.swing.JFrame {
             }
         });
 
-        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         hapusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Delete.gif"))); // NOI18N
         hapusButton.setMnemonic('H');
         hapusButton.setText("Hapus");
@@ -196,7 +196,7 @@ public class OutletForm extends javax.swing.JFrame {
             }
         });
 
-        batalButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        batalButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         batalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Undo.gif"))); // NOI18N
         batalButton.setText("Batal");
         batalButton.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +205,7 @@ public class OutletForm extends javax.swing.JFrame {
             }
         });
 
-        alamatOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        alamatOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         alamatOutletLabel.setText("Alamat Outlet");
 
         alamatOutletTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -277,7 +277,7 @@ public class OutletForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         outletTable.setAutoCreateRowSorter(true);
-        outletTable.setFont(new java.awt.Font("Arial", 0, 11));
+        outletTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         outletTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -323,7 +323,7 @@ public class OutletForm extends javax.swing.JFrame {
             outletPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(outletPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         outletPanel.setBounds(0, 250, 550, 250);
