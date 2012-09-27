@@ -4,10 +4,13 @@
  */
 package com.presensikaryawan.payrollBankReport;
 
+import java.sql.SQLException;
+import java.util.List;
+
 /**
  *
  * @author Tinus
  */
 public interface PayrollBankDao {
-    
+    List<PayrollBankReport> getPayrollBank(String nip1, String nip2, String bulan) throws SQLException;
 }
