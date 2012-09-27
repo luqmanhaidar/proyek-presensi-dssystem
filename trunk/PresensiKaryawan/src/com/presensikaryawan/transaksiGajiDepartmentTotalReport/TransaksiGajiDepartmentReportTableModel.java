@@ -2,7 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.presensikaryawan.transaksiDepartment;
+package com.presensikaryawan.transaksiGajiDepartmentTotalReport;
+
 import com.dssystem.umum.ChangeFormatDoubleToString;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,30 +13,15 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Tinus
  */
-public class TransaksiDepartmentTableModel extends AbstractTableModel{
-private List<TransaksiDepartment> transaksiDepartments = new ArrayList<TransaksiDepartment>();
+public class TransaksiGajiDepartmentReportTableModel extends AbstractTableModel{
+    private List<TransaksiGajiDepartmentReport> transaksiGajiDepartmentReports = new ArrayList<TransaksiGajiDepartmentReport>();
 
-    public TransaksiDepartmentTableModel(List<TransaksiDepartment> transaksiDepartments) {
-        this.transaksiDepartments = transaksiDepartments;
-    }
-
-    public void deleteStatusSetting(int row){
-        transaksiDepartments.remove(row);
-        fireTableRowsDeleted(row, row);
-    }
-
-    public void updateStatusSetting(int row, TransaksiDepartment transaksiDepartment){
-        transaksiDepartments.set(row,transaksiDepartment);
-        fireTableRowsUpdated(row, row);
-    }
-
-    public void addLiburPerusahaan(TransaksiDepartment transaksiDepartment) {
-        transaksiDepartments.add(transaksiDepartment);
-        fireTableRowsInserted(getRowCount() - 1, getColumnCount() - 1);
+    public TransaksiGajiDepartmentReportTableModel(List<TransaksiGajiDepartmentReport> transaksiGajiDepartmentReports) {
+        this.transaksiGajiDepartmentReports = transaksiGajiDepartmentReports;
     }
     @Override
     public int getRowCount() {
-        return transaksiDepartments.size();
+        return transaksiGajiDepartmentReports.size();
     }
 
     @Override
@@ -45,7 +31,7 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        TransaksiDepartment tD=transaksiDepartments.get(rowIndex);
+        TransaksiGajiDepartmentReport tD=transaksiGajiDepartmentReports.get(rowIndex);
         int counter=0;
         switch (columnIndex) {
             case 0:
@@ -129,5 +115,4 @@ private List<TransaksiDepartment> transaksiDepartments = new ArrayList<Transaksi
                 return "";
         }
     }
-    
 }

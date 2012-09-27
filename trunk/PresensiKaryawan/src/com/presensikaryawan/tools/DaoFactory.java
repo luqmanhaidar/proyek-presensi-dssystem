@@ -7,8 +7,6 @@ package com.presensikaryawan.tools;
 import com.dssystem.bank.BankDao;
 import com.dssystem.bank.BankDaoImplemen;
 import com.mysql.jdbc.Driver;
-import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentDao;
-import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.presensikaryawan.departmentSetting.DepartmentDaoImplemen;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
@@ -31,18 +29,22 @@ import com.presensikaryawan.payrollBankReport.PayrollBankDao;
 import com.presensikaryawan.payrollBankReport.PayrollBankDaoImplemen;
 import com.presensikaryawan.posisi.PosisiDao;
 import com.presensikaryawan.posisi.PosisiDaoImplemen;
+import com.presensikaryawan.rekapHistoriGajiReport.RekapGajiDao;
+import com.presensikaryawan.rekapHistoriGajiReport.RekapGajiDaoImpelemen;
 import com.presensikaryawan.rekapPresensi.RekapPresensiDao;
 import com.presensikaryawan.rekapPresensi.RekapPresensiDaoImplemen;
+import com.presensikaryawan.rekapPresensiPerBulanReport.RekapPresensiPerBulanDao;
+import com.presensikaryawan.rekapPresensiPerBulanReport.RekapPresensiPerBulanDaoImplemen;
 import com.presensikaryawan.shiftSetting.ShiftDao;
 import com.presensikaryawan.shiftSetting.ShiftDaoImplemen;
 import com.presensikaryawan.statusSetting.StatusSettingDao;
 import com.presensikaryawan.statusSetting.StatusSettingDaoImplemen;
-import com.presensikaryawan.rekapHistoriGajiReport.RekapGajiDao;
-import com.presensikaryawan.rekapHistoriGajiReport.RekapGajiDaoImpelemen;
-import com.presensikaryawan.rekapPresensiPerBulanReport.RekapPresensiPerBulanDao;
-import com.presensikaryawan.rekapPresensiPerBulanReport.RekapPresensiPerBulanDaoImplemen;
 import com.presensikaryawan.transaksi.TransaksiGajiDao;
 import com.presensikaryawan.transaksi.TransaksiGajiDaoImplemen;
+import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentDao;
+import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentDaoImplemen;
+import com.presensikaryawan.transaksiGajiDepartmentTotalReport.TransaksiGajiDepartmentReportDao;
+import com.presensikaryawan.transaksiGajiDepartmentTotalReport.TransaksiGajiDepartmentReportDaoImplemen;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -79,6 +81,7 @@ public class DaoFactory {
     private static RekapPresensiPerBulanDao rekapPresensiPerBulanDao;
     private static GajiPerKaryawanReportDao gajiPerKaryawanReportDao;
     private static PayrollBankDao payrollBankDao;
+    private static TransaksiGajiDepartmentReportDao transaksiGajiDepartmentReportDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -233,5 +236,12 @@ public class DaoFactory {
             payrollBankDao = new PayrollBankDaoImplemen(getConnection());
         }
         return payrollBankDao;
+    }
+    
+    public static TransaksiGajiDepartmentReportDao getTransaksiGajiDepartmentReportDao() throws SQLException {
+        if (transaksiGajiDepartmentReportDao == null) {
+            transaksiGajiDepartmentReportDao = new TransaksiGajiDepartmentReportDaoImplemen(getConnection());
+        }
+        return transaksiGajiDepartmentReportDao;
     }
 }
