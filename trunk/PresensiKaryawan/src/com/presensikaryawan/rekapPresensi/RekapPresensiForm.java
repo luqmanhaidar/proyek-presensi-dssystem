@@ -49,6 +49,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
+        presenstiTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         presenstiTable.setVisible(false);
 
     }
@@ -200,10 +201,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         presenstiTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         presenstiTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "No", "NIP", "Nama Karyawan", "S", "I", "A", "T", "M"
@@ -230,6 +228,22 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(presenstiTable);
+        presenstiTable.getColumnModel().getColumn(0).setResizable(false);
+        presenstiTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+        presenstiTable.getColumnModel().getColumn(1).setResizable(false);
+        presenstiTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+        presenstiTable.getColumnModel().getColumn(2).setResizable(false);
+        presenstiTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+        presenstiTable.getColumnModel().getColumn(3).setResizable(false);
+        presenstiTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+        presenstiTable.getColumnModel().getColumn(4).setResizable(false);
+        presenstiTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+        presenstiTable.getColumnModel().getColumn(5).setResizable(false);
+        presenstiTable.getColumnModel().getColumn(5).setPreferredWidth(100);
+        presenstiTable.getColumnModel().getColumn(6).setResizable(false);
+        presenstiTable.getColumnModel().getColumn(6).setPreferredWidth(100);
+        presenstiTable.getColumnModel().getColumn(7).setResizable(false);
+        presenstiTable.getColumnModel().getColumn(7).setPreferredWidth(100);
 
         org.jdesktop.layout.GroupLayout posisiPanelLayout = new org.jdesktop.layout.GroupLayout(posisiPanel);
         posisiPanel.setLayout(posisiPanelLayout);
