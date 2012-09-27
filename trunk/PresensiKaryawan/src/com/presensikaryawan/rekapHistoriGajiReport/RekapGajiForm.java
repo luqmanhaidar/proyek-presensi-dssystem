@@ -44,17 +44,11 @@ public class RekapGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
-        List<Department> departments = DaoFactory.getDepartmentDao().getAllDepartment();
-        for (Department d : departments) {
-            departmentCombo.addItem(d.getKodeDepartment());
-        }
-        String kode_department = String.valueOf(departmentCombo.getSelectedItem());
         rekapTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         rekapTable.setVisible(false);
     }
 
     private void initComponentFocus() {
-        departmentCombo.addFocusListener(new ComponentFocus(departmentCombo));
     }
 
     /**
@@ -70,19 +64,12 @@ public class RekapGajiForm extends javax.swing.JFrame {
         inputPanel = new javax.swing.JPanel();
         tahunLabel = new javax.swing.JLabel();
         yearChooser = new com.toedter.calendar.JYearChooser();
-        departmentLabel = new javax.swing.JLabel();
-        departmentCombo = new javax.swing.JComboBox();
-        namaDepartmentLabel = new javax.swing.JLabel();
-        nilaiNamaDepartment = new javax.swing.JLabel();
         lihatButton = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         nipLabel = new javax.swing.JLabel();
         nipCombo = new javax.swing.JComboBox();
-        namaKaryawanLabel = new javax.swing.JLabel();
-        nilaiNamaKaryawan = new javax.swing.JLabel();
-        namaKaryawanLabel1 = new javax.swing.JLabel();
-        nilaiGolonganLabel = new javax.swing.JLabel();
         cetakButton = new javax.swing.JButton();
+        sampaiLabel = new javax.swing.JLabel();
+        nipCombo2 = new javax.swing.JComboBox();
         posisiPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         rekapTable = new javax.swing.JTable();
@@ -114,28 +101,6 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
-        departmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        departmentLabel.setText("Kode Department");
-
-        departmentCombo.setEditable(true);
-        departmentCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        departmentCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                departmentComboActionPerformed(evt);
-            }
-        });
-        departmentCombo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                departmentComboKeyPressed(evt);
-            }
-        });
-
-        namaDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        namaDepartmentLabel.setText("Nama Department");
-
-        nilaiNamaDepartment.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiNamaDepartment.setText("Nilai Nama Department");
-
         lihatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Search.gif"))); // NOI18N
         lihatButton.setText("Lihat");
         lihatButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,18 +125,6 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
-        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        namaKaryawanLabel.setText("Nama Karyawan");
-
-        nilaiNamaKaryawan.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiNamaKaryawan.setText("nilai Nama Karyawan");
-
-        namaKaryawanLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        namaKaryawanLabel1.setText("Golongan");
-
-        nilaiGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiGolonganLabel.setText("nilai Golongan");
-
         cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
         cetakButton.setText("Cetak");
@@ -181,49 +134,46 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
+        sampaiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        sampaiLabel.setText("sampai");
+
+        nipCombo2.setEditable(true);
+        nipCombo2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        nipCombo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nipCombo2ActionPerformed(evt);
+            }
+        });
+        nipCombo2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nipCombo2KeyPressed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
             .add(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(inputPanelLayout.createSequentialGroup()
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .add(departmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 5, Short.MAX_VALUE)
+                        .add(nipCombo, 0, 205, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(sampaiLabel)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(nipCombo2, 0, 205, Short.MAX_VALUE)
+                        .add(250, 250, 250)
+                        .add(tahunLabel)
+                        .add(18, 18, 18)
+                        .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                        .add(0, 770, Short.MAX_VALUE)
+                        .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(departmentCombo, 0, 200, Short.MAX_VALUE)
-                            .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 496, Short.MAX_VALUE)
-                        .add(tahunLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(45, 45, 45))
-                    .add(inputPanelLayout.createSequentialGroup()
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(namaKaryawanLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(inputPanelLayout.createSequentialGroup()
-                                .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(inputPanelLayout.createSequentialGroup()
-                                .add(nipCombo, 0, 204, Short.MAX_VALUE)
-                                .add(686, 686, 686))
-                            .add(inputPanelLayout.createSequentialGroup()
-                                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(nilaiNamaKaryawan, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
-                                    .add(nilaiGolonganLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE))
-                                .add(159, 159, 159))))))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
-                .addContainerGap(780, Short.MAX_VALUE)
-                .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         inputPanelLayout.setVerticalGroup(
@@ -233,28 +183,13 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(yearChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(tahunLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nipCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nilaiNamaKaryawan, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(namaKaryawanLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nilaiGolonganLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(tahunLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(nipCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(sampaiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(nipCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .add(135, 135, 135)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(cetakButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .add(lihatButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -441,12 +376,8 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 String reportSource = "./report/HistoryGajiKaryawan.jasper";
                 Map<String, Object> params = new HashMap<String, Object>();
                 params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
-            params.put("nip2", String.valueOf(nipCombo.getSelectedItem()));
-                params.put("tahun", year+"%");
-
-//                String totalGaji = String.valueOf(DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip, year));
-
-//                params.put("total", totalGaji);
+                params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
+                params.put("tahun", year + "%");
 
                 JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
                 JasperViewer.viewReport(jasperPrint, false);
@@ -458,58 +389,25 @@ public class RekapGajiForm extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_cetakButtonActionPerformed
 
-    private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
-        // TODO add your handling code here:
-        nipCombo.removeAllItems();
-        if (departmentCombo.getSelectedItem() != null) {
-            String pilih = String.valueOf(departmentCombo.getSelectedItem());
-            if (pilih != null) {
-                try {
-                    activeDepartment = DaoFactory.getDepartmentDao().getByKode(pilih);
-                    List<Karyawan> karyawans = DaoFactory.getRekapGajiDao().getNIPByKodeDepartment(pilih);
-                    for (Karyawan k : karyawans) {
-                        nipCombo.addItem(k.getNip());
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-            //jika ditemukan
-            if (activeDepartment != null) {
-                nilaiNamaDepartment.setText(activeDepartment.getNamaDepartment());
-                nipCombo.requestFocus();
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Tidak Ada Department Dengan Code Tersebut", "Error", JOptionPane.ERROR_MESSAGE);
-                departmentCombo.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_departmentComboActionPerformed
-
-    private void departmentComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentComboKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_departmentComboKeyPressed
-
     private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
         // TODO add your handling code here:
         Date date = new Date();
 //        if (yearChooser.getYear() >= (date.getYear() + 1900)) {
 //            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
 //        } else {
-            GregorianCalendar gc = new GregorianCalendar();
-            String nip = String.valueOf(nipCombo.getSelectedItem());
-            String tahun = String.valueOf(yearChooser.getYear());
-            try {
-                List<RekapGaji> rekapGajis = DaoFactory.getRekapGajiDao().getRekapGajiByNIPAndYear(nip, tahun);
-                RekapGajiTableModel model = new RekapGajiTableModel(rekapGajis);
-                rekapTable.setModel(model);
-                rekapTable.setVisible(true);
-                double totalGaji = DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip, tahun);
-                String totalGajiString = ChangeFormatDoubleToString.getToString(totalGaji);
-                nilaiTotalLabel.setText(totalGajiString);
-            } catch (SQLException ex) {
+        GregorianCalendar gc = new GregorianCalendar();
+        String nip = String.valueOf(nipCombo.getSelectedItem());
+        String tahun = String.valueOf(yearChooser.getYear());
+        try {
+            List<RekapGaji> rekapGajis = DaoFactory.getRekapGajiDao().getRekapGajiByNIPAndYear(nip, tahun);
+            RekapGajiTableModel model = new RekapGajiTableModel(rekapGajis);
+            rekapTable.setModel(model);
+            rekapTable.setVisible(true);
+            double totalGaji = DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip, tahun);
+            String totalGajiString = ChangeFormatDoubleToString.getToString(totalGaji);
+            nilaiTotalLabel.setText(totalGajiString);
+        } catch (SQLException ex) {
 //            }
-
         }
     }//GEN-LAST:event_lihatButtonActionPerformed
 
@@ -517,25 +415,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String golongan = null;
         if (nipCombo.getSelectedItem() != null) {
-            String pilih = String.valueOf(nipCombo.getSelectedItem());
-            if (pilih != null) {
-                try {
-                    activeKaryawan = DaoFactory.getRekapGajiDao().getKaryawanByNIP(pilih);
-                    golongan = DaoFactory.getRekapGajiDao().getGolonganByCode(activeKaryawan.getKodeGolongan());
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-            //jika ditemukan
-            if (activeKaryawan != null) {
-                nilaiNamaKaryawan.setText(activeKaryawan.getNama());
-                nilaiGolonganLabel.setText(golongan);
-                lihatButton.requestFocus();
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Tidak Ada Karyawan Dengan NIP Tersebut", "Error", JOptionPane.ERROR_MESSAGE);
-                departmentCombo.requestFocus();
-            }
+           
         }
     }//GEN-LAST:event_nipComboActionPerformed
 
@@ -552,6 +432,14 @@ public class RekapGajiForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_keluarButtonActionPerformed
+
+    private void nipCombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipCombo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nipCombo2ActionPerformed
+
+    private void nipCombo2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipCombo2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nipCombo2KeyPressed
 
     /**
      * @param args the command line arguments
@@ -577,30 +465,23 @@ public class RekapGajiForm extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cetakButton;
-    private javax.swing.JComboBox departmentCombo;
-    private javax.swing.JLabel departmentLabel;
     private javax.swing.JLabel fungsiLabel9;
     private javax.swing.JPanel headPanel9;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton keluarButton;
     private javax.swing.JButton lihatButton;
     private javax.swing.JLabel logoLabel9;
     private javax.swing.JLabel menuLabel9;
-    private javax.swing.JLabel namaDepartmentLabel;
-    private javax.swing.JLabel namaKaryawanLabel;
-    private javax.swing.JLabel namaKaryawanLabel1;
-    private javax.swing.JLabel nilaiGolonganLabel;
-    private javax.swing.JLabel nilaiNamaDepartment;
-    private javax.swing.JLabel nilaiNamaKaryawan;
     private javax.swing.JLabel nilaiTotalLabel;
     private javax.swing.JComboBox nipCombo;
+    private javax.swing.JComboBox nipCombo2;
     private javax.swing.JLabel nipLabel;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
     private javax.swing.JPanel posisiPanel;
     private javax.swing.JTable rekapTable;
+    private javax.swing.JLabel sampaiLabel;
     private javax.swing.JLabel tahunLabel;
     private javax.swing.JLabel totalLabel;
     private com.toedter.calendar.JYearChooser yearChooser;
