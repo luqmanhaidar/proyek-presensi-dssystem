@@ -112,14 +112,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="yearChooser" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tahunLabel" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="nipLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="nipCombo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="sampaiLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="nipCombo2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="tahunLabel" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>

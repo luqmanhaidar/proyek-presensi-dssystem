@@ -51,6 +51,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
 //        Tampilan();
         // isitable();
         initComponentFocus();
+        karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //        tanggalMasukDateChooser.setDate(gc.getTime());
 //        namaKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
 //        alamatKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
@@ -245,10 +246,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         karyawanTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         karyawanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "NO", "NIP", "NAMA", "M", "S", "I", "A", "T", "L", "POKOK", "MAKAN", "HADIR", "LEMBUR", "LAIN", "P. TELAT", "P. LAIN", "TOTAL"
@@ -257,9 +255,16 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         karyawanTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -268,6 +273,40 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(karyawanTable);
+        karyawanTable.getColumnModel().getColumn(0).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+        karyawanTable.getColumnModel().getColumn(1).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(2).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(3).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+        karyawanTable.getColumnModel().getColumn(4).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+        karyawanTable.getColumnModel().getColumn(5).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(50);
+        karyawanTable.getColumnModel().getColumn(6).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(50);
+        karyawanTable.getColumnModel().getColumn(7).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(50);
+        karyawanTable.getColumnModel().getColumn(8).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(50);
+        karyawanTable.getColumnModel().getColumn(9).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(10).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(11).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(12).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(13).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(14).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(15).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(16).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(200);
 
         org.jdesktop.layout.GroupLayout daftarKaryawanPanelLayout = new org.jdesktop.layout.GroupLayout(daftarKaryawanPanel);
         daftarKaryawanPanel.setLayout(daftarKaryawanPanelLayout);

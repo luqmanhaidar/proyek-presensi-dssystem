@@ -51,7 +51,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
             departmentCombo.addItem(d.getKodeDepartment());
         }
         rekapTable.setVisible(false);
-
+        rekapTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     private void initComponentFocus() {
@@ -151,7 +151,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(inputPanelLayout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
+                        .add(0, 742, Short.MAX_VALUE)
                         .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(18, 18, 18)
                         .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -185,8 +185,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 92, Short.MAX_VALUE)
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
+                            .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(inputPanelLayout.createSequentialGroup()
                         .add(1, 1, 1)
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -195,8 +194,8 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         inputPanel.setBounds(0, 70, 1020, 190);
@@ -211,10 +210,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
         rekapTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         rekapTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "No.", "NIP", "Nama", "Jum. S", "Jum. I", "Jum. A", "Jum. T", "Jum. M"
@@ -236,6 +232,22 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(rekapTable);
+        rekapTable.getColumnModel().getColumn(0).setResizable(false);
+        rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+        rekapTable.getColumnModel().getColumn(1).setResizable(false);
+        rekapTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+        rekapTable.getColumnModel().getColumn(2).setResizable(false);
+        rekapTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+        rekapTable.getColumnModel().getColumn(3).setResizable(false);
+        rekapTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+        rekapTable.getColumnModel().getColumn(4).setResizable(false);
+        rekapTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+        rekapTable.getColumnModel().getColumn(5).setResizable(false);
+        rekapTable.getColumnModel().getColumn(5).setPreferredWidth(100);
+        rekapTable.getColumnModel().getColumn(6).setResizable(false);
+        rekapTable.getColumnModel().getColumn(6).setPreferredWidth(100);
+        rekapTable.getColumnModel().getColumn(7).setResizable(false);
+        rekapTable.getColumnModel().getColumn(7).setPreferredWidth(100);
 
         org.jdesktop.layout.GroupLayout posisiPanelLayout = new org.jdesktop.layout.GroupLayout(posisiPanel);
         posisiPanel.setLayout(posisiPanelLayout);
