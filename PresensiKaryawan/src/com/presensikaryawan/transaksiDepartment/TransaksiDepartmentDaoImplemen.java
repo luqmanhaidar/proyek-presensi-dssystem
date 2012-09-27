@@ -27,7 +27,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
     private final String SQL_GETALLGAJI2 = "call getGaji2(?,?)";
     private final String SQL_INSERTTEMP = "call inserttemptransaksi(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_SELECTALL = "select * from temptransaksidepartment where department = ? and bulan like ?";
-    private final String SQL_UPDATEPOTONGAN = "call updatePotongan(?,?,?)";
+    private final String SQL_UPDATEPOTONGAN = "call updatePotongan(?,?,?,?)";
     private final String SQL_GETGAJIKOTORKARYAWAN="select pokok+hadir+lembur+makan from temptransaksidepartment where nip = ? and bulan like ?";
     private final String SQL_GETGOLONGANBYNIP="SELECT g.nama_golongan FROM karyawan k, golongan g WHERE k.kode_golongan=g.kode_golongan AND k.nip = ?";
     private Connection connection;
@@ -272,12 +272,13 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
     }
 
     @Override
-    public void updatePotongan(String nip, String bulan, double potongan) throws SQLException {
+    public void updatePotongan(String nip, String bulan, double potongan, double prestasi) throws SQLException {
         PreparedStatement statement = null;
             connection.setAutoCommit(false);
 
 //            statement = connection.prepareStatement(SQL_GETALLGAJI);
             statement = connection.prepareStatement(SQL_UPDATEPOTONGAN);
+            statement.setDouble(3, prestasi);
             statement.setDouble(3, potongan);
             statement.setString(2, bulan);
                 statement.setString(1, nip);
