@@ -41,6 +41,10 @@ public class OutletForm extends javax.swing.JFrame {
         List<Outlet> outlets = dao.getAllOutlet();
         OutletTableModel model = new OutletTableModel(outlets);
         outletTable.setModel(model);
+        outletTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+        outletTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        outletTable.getColumnModel().getColumn(2).setPreferredWidth(300);
+        outletTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for(Outlet o :outlets){
             kodeOutletCombo.addItem(o.getKodeOutlet());
         }
@@ -293,7 +297,7 @@ public class OutletForm extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -310,6 +314,12 @@ public class OutletForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(outletTable);
+        outletTable.getColumnModel().getColumn(0).setResizable(false);
+        outletTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+        outletTable.getColumnModel().getColumn(1).setResizable(false);
+        outletTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        outletTable.getColumnModel().getColumn(2).setResizable(false);
+        outletTable.getColumnModel().getColumn(2).setPreferredWidth(300);
 
         org.jdesktop.layout.GroupLayout outletPanelLayout = new org.jdesktop.layout.GroupLayout(outletPanel);
         outletPanel.setLayout(outletPanelLayout);

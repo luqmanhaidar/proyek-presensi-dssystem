@@ -54,6 +54,11 @@ public class DepartmentForm extends javax.swing.JFrame {
         if (departments.isEmpty()) {
             hapusButton.setEnabled(false);
         }
+        departmentTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+        departmentTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        departmentTable.getColumnModel().getColumn(2).setPreferredWidth(500);
+        departmentTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+        departmentTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     private void initComponentFocus() {
@@ -391,6 +396,14 @@ public class DepartmentForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(departmentTable);
+        departmentTable.getColumnModel().getColumn(0).setResizable(false);
+        departmentTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+        departmentTable.getColumnModel().getColumn(1).setResizable(false);
+        departmentTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        departmentTable.getColumnModel().getColumn(2).setResizable(false);
+        departmentTable.getColumnModel().getColumn(2).setPreferredWidth(500);
+        departmentTable.getColumnModel().getColumn(3).setResizable(false);
+        departmentTable.getColumnModel().getColumn(3).setPreferredWidth(150);
 
         org.jdesktop.layout.GroupLayout departmentPanelLayout = new org.jdesktop.layout.GroupLayout(departmentPanel);
         departmentPanel.setLayout(departmentPanelLayout);
@@ -458,7 +471,7 @@ public class DepartmentForm extends javax.swing.JFrame {
         hapusButton.setEnabled(true);
         kodeDepartmentCombo.removeAllItems();
         kodeDepartmentCombo.requestFocus();
-        
+
         List<Department> departments = null;
         List<GroupShift> groupShifts = null;
         try {
@@ -472,8 +485,8 @@ public class DepartmentForm extends javax.swing.JFrame {
         for (Department d : departments) {
             kodeDepartmentCombo.addItem(d.getKodeDepartment());
         }
-        
-        
+
+
         if (departments.isEmpty()) {
             hapusButton.setEnabled(false);
         } else {
@@ -626,7 +639,7 @@ public class DepartmentForm extends javax.swing.JFrame {
                 simpanButton.setMnemonic('S');
                 simpanButton.setEnabled(true);
             }
-        }else {
+        } else {
             simpanButton.setEnabled(false);
             hapusButton.setEnabled(false);
         }
