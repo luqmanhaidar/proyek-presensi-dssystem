@@ -22,7 +22,7 @@ public class PresensiTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return 1;
+        return detailPresensis.size();
     }
 
     @Override

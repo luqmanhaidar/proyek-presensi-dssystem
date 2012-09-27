@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
@@ -118,7 +118,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Menu Golongan Karyawan"/>
+                <Property name="text" type="java.lang.String" value="Menu Outlet"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="fungsiLabel">
@@ -126,7 +126,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Digunakan untuk menambah, edit dan menghapus data golongan karyawan"/>
+                <Property name="text" type="java.lang.String" value="Digunakan untuk menambah, edit dan menghapus data outlet"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -386,7 +386,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
