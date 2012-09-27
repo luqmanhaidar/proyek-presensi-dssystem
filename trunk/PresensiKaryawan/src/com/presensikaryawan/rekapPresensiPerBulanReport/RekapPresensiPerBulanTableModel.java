@@ -23,7 +23,7 @@ public class RekapPresensiPerBulanTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return 1;
+        return rekapPresensiPerBulans.size();
     }
 
     @Override

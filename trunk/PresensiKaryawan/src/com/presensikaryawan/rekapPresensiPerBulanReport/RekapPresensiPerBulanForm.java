@@ -348,51 +348,62 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
         if (rekapTable.isVisible()) {
             try {
+                String bulanS = null;
                 String bulan = null;
                 switch (monthChooser.getMonth()) {
                     case 0:
-                        bulan = "JANUARI";
+                        bulanS = "JANUARI";
                         break;
                     case 1:
-                        bulan = "FEBRUARI";
+                        bulanS = "FEBRUARI";
                         break;
                     case 2:
-                        bulan = "MARET";
+                        bulanS = "MARET";
                         break;
                     case 3:
-                        bulan = "APRIL";
+                        bulanS = "APRIL";
                         break;
                     case 4:
-                        bulan = "MEI";
+                        bulanS = "MEI";
                         break;
                     case 5:
-                        bulan = "JUNI";
+                        bulanS = "JUNI";
                         break;
                     case 6:
-                        bulan = "JULI";
+                        bulanS = "JULI";
                         break;
                     case 7:
-                        bulan = "AGUSTUS";
+                        bulanS = "AGUSTUS";
                         break;
                     case 8:
-                        bulan = "SEPTEMBER";
+                        bulanS = "SEPTEMBER";
                         break;
                     case 9:
-                        bulan = "OKTOBER";
+                        bulanS = "OKTOBER";
                         break;
                     case 10:
-                        bulan = "NOVEMBER";
+                        bulanS = "NOVEMBER";
                         break;
                     case 11:
-                        bulan = "DESEMBER";
+                        bulanS = "DESEMBER";
                         break;
                 }
-                bulan = bulan + " " + String.valueOf(yearChooser.getYear());
-                String reportSource = "./report/RekapPresensiReport.jasper";
+                bulanS = bulanS + " " + String.valueOf(yearChooser.getYear());
+                if(monthChooser.getMonth()+1<10)
+                bulan = yearChooser.getYear()+"-0"+(monthChooser.getMonth()+1);
+                else
+                  bulan = yearChooser.getYear()+"-"+(monthChooser.getMonth()+1);  
+                String reportSource = "./report/RekapPresensiKaryawan.jasper";
                 Map<String, Object> params = new HashMap<String, Object>();
+                params.put("bulanString", bulanS);
                 params.put("bulan", bulan);
-                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(rekapTable.getModel()));
+                params.put("department", String.valueOf(departmentCombo.getSelectedItem()));
+                params.put("nip1", bulan);
+                params.put("nip2", bulan);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
                 JasperViewer.viewReport(jasperPrint, false);
+            } catch (SQLException ex) {
+                Logger.getLogger(RekapPresensiPerBulanForm.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException ex) {
                 Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
             }

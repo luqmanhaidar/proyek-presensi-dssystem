@@ -174,6 +174,7 @@ public class RekapPresensiDaoImplemen implements RekapPresensiDao {
 
         List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
         int counter=0;
+        
         while (result.next()) {
             DetailPresensi detailPresensi=new DetailPresensi();
 
