@@ -14,10 +14,10 @@
 		 rightMargin="30"
 		 topMargin="20"
 		 bottomMargin="20"
-		 whenNoDataType="NoPages"
+		 whenNoDataType="AllSectionsNoDetail"
 		 isTitleNewPage="false"
 		 isSummaryNewPage="false">
-	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.scriptlethandling" value="0" />
 	<property name="ireport.encoding" value="UTF-8" />
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
@@ -108,7 +108,7 @@ and temptransaksidepartment.bulan like $P{bulan};]]></queryString>
 		</title>
 		<pageHeader>
 			<band height="415"  isSplitAllowed="true" >
-				<elementGroup><!--  Start: 5 !-->
+				<elementGroup><!--  Start: 1 !-->
 				<staticText>
 					<reportElement
 						x="3"
@@ -122,7 +122,7 @@ and temptransaksidepartment.bulan like $P{bulan};]]></queryString>
 					</textElement>
 				<text><![CDATA[Slip Gaji Karyawan]]></text>
 				</staticText>
-				</elementGroup><!-- End 5 !-->
+				</elementGroup><!-- End 1 !-->
 				<staticText>
 					<reportElement
 						x="7"
@@ -162,8 +162,8 @@ and temptransaksidepartment.bulan like $P{bulan};]]></queryString>
 					</textElement>
 				<text><![CDATA[Department	]]></text>
 				</staticText>
-				<elementGroup><!--  Start: 4 !-->
-				<elementGroup><!--  Start: 4.1 !-->
+				<elementGroup><!--  Start: 2 !-->
+				<elementGroup><!--  Start: 2.3 !-->
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Group" evaluationGroup="nama"  hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="83"
@@ -178,9 +178,9 @@ and temptransaksidepartment.bulan like $P{bulan};]]></queryString>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{nama}]]></textFieldExpression>
 				</textField>
-				</elementGroup><!-- End 4.1 !-->
-				</elementGroup><!-- End 4 !-->
-				<elementGroup><!--  Start: 3 !-->
+				</elementGroup><!-- End 2.3 !-->
+				</elementGroup><!-- End 2 !-->
+				<elementGroup><!--  Start: 4 !-->
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="84"
@@ -194,7 +194,7 @@ and temptransaksidepartment.bulan like $P{bulan};]]></queryString>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{nama_golongan}]]></textFieldExpression>
 				</textField>
-				</elementGroup><!-- End 3 !-->
+				</elementGroup><!-- End 4 !-->
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="84"
