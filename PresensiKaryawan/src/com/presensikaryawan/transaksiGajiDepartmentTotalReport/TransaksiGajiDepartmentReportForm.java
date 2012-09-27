@@ -1,10 +1,11 @@
-package com.presensikaryawan.transaksiDepartment;
+package com.presensikaryawan.transaksiGajiDepartmentTotalReport;
 
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
 import com.presensikaryawan.tools.DaoFactory;
+import com.presensikaryawan.transaksiDepartment.*;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ import javax.swing.*;
  *
  * @author Als
  */
-public class TransaksiDepartmentForm extends javax.swing.JFrame {
+public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
 
     private DaoFactory service;
     private TransaksiDepartment activeTransaksiDepartment;
@@ -34,7 +35,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
     /**
      * Creates new form masterInventoryGrup
      */
-    public TransaksiDepartmentForm() throws SQLException {
+    public TransaksiGajiDepartmentReportForm() throws SQLException {
         initComponents();
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        UIManager.put("nimbusControl",new Color(153,255,153));
@@ -43,46 +44,20 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         // isitable();
         initComponentFocus();
         karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        tanggalMasukDateChooser.setDate(gc.getTime());
-//        namaKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
-//        alamatKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
-//        KaryawanDao dao = DaoFactory.getKaryawanDao();
-//        List<Karyawan> karyawans = dao.getAllKaryawan();
-//        KaryawanTableModel model = new KaryawanTableModel(karyawans);
-//        karyawanTable.setModel(model);
-//        for (Karyawan k : karyawans) {
-//            departmentCombo.addItem(k.getNip());
-//        }
-//        GolonganDao dao1 = DaoFactory.getGolonganDao();
-//        List<Golongan> golongans = dao1.getAllGolongan();
-//        KaryawanTableModel model = new KaryawanTableModel(karyawans);
-//        karyawanTable.setModel(model);
-//        for (Golongan g : golongans) {
-//            golonganCombo.addItem(g.getKodeGolongan() + "-" + g.getNamaGolongan());
-//        }
-//        PosisiDao dao2 = DaoFactory.getPosisiDao();
-//        List<Posisi> posisis = dao2.getAllPosisi();
-//        for (Posisi p : posisis) {
-//            posisiCombo.addItem(p.getKode_posisi() + "-" + p.getNama_posisi());
-//            
-//        }
-//        OutletDao dao3 = DaoFactory.getOutletDao();
-//        List<Outlet> outlets = dao3.getAllOutlet();
-//        for (Outlet o : outlets) {
-//            outletCombo.addItem(o.getKodeOutlet() + "-" + o.getNamaOutlet());
-//        }
         DepartmentDao dao4 = DaoFactory.getDepartmentDao();
         List<Department> departments = dao4.getAllDepartment();
         for (Department d : departments) {
-            departmentCombo.addItem(d.getKodeDepartment());
+            departmentCombo1.addItem(d.getKodeDepartment());
+            departmentCombo2.addItem(d.getKodeDepartment());
         }
+
 
     }
 
     private void initComponentFocus() {
 //        namaKaryawanTextField.addFocusListener(new ComponentFocus(namaKaryawanTextField));
 //        alamatKaryawanTextField.addFocusListener(new ComponentFocus(alamatKaryawanTextField));
-        departmentCombo.addFocusListener(new ComponentFocus(departmentCombo));
+        departmentCombo1.addFocusListener(new ComponentFocus(departmentCombo1));
         lihatButton.addFocusListener(new ComponentFocus(lihatButton));
     }
 
@@ -100,11 +75,16 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         namaKaryawanLabel = new javax.swing.JLabel();
         departmentLabel = new javax.swing.JLabel();
         lihatButton = new javax.swing.JButton();
-        departmentCombo = new javax.swing.JComboBox();
+        departmentCombo1 = new javax.swing.JComboBox();
         bulanMonthChooser = new com.toedter.calendar.JMonthChooser();
         tahunYearChooser1 = new com.toedter.calendar.JYearChooser();
         namaDepartmentLabel = new javax.swing.JLabel();
-        nilaiNamaDepartment = new javax.swing.JLabel();
+        nilaiNamaDepartment1 = new javax.swing.JLabel();
+        sampaiLabel1 = new javax.swing.JLabel();
+        sampaiLabel2 = new javax.swing.JLabel();
+        departmentCombo2 = new javax.swing.JComboBox();
+        nilaiNamaDepartment2 = new javax.swing.JLabel();
+        cetakButton = new javax.swing.JButton();
         daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
@@ -127,7 +107,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
                 cmdKeluarActionPerformed(evt);
             }
         });
-        cmdKeluar.setBounds(790, 510, 110, 40);
+        cmdKeluar.setBounds(890, 510, 110, 40);
         desktopPaneTransaksiDepartment.add(cmdKeluar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -154,24 +134,62 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
             }
         });
 
-        departmentCombo.setEditable(true);
-        departmentCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        departmentCombo.addActionListener(new java.awt.event.ActionListener() {
+        departmentCombo1.setEditable(true);
+        departmentCombo1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        departmentCombo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                departmentComboActionPerformed(evt);
+                departmentCombo1ActionPerformed(evt);
             }
         });
-        departmentCombo.addKeyListener(new java.awt.event.KeyAdapter() {
+        departmentCombo1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                departmentComboKeyPressed(evt);
+                departmentCombo1KeyPressed(evt);
             }
         });
 
         namaDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaDepartmentLabel.setText("Nama Department");
 
-        nilaiNamaDepartment.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nilaiNamaDepartment.setText("Nilai Nama Department");
+        nilaiNamaDepartment1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaDepartment1.setText("Nilai Nama Department");
+
+        sampaiLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        sampaiLabel1.setText("sampai");
+
+        sampaiLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        sampaiLabel2.setText("      -");
+
+        departmentCombo2.setEditable(true);
+        departmentCombo2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        departmentCombo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentCombo2ActionPerformed(evt);
+            }
+        });
+        departmentCombo2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                departmentCombo2KeyPressed(evt);
+            }
+        });
+
+        nilaiNamaDepartment2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaDepartment2.setText("Nilai Nama Department");
+
+        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
+        cetakButton.setMnemonic('S');
+        cetakButton.setText("Cetak");
+        cetakButton.setToolTipText("Klik Untuk Simpan");
+        cetakButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cetakButtonActionPerformed(evt);
+            }
+        });
+        cetakButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cetakButtonKeyPressed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
@@ -179,53 +197,72 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .add(departmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(departmentCombo1, 0, 200, Short.MAX_VALUE)
+                    .add(nilaiNamaDepartment1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(sampaiLabel1)
+                    .add(sampaiLabel2))
+                .add(18, 18, 18)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(inputPanelLayout.createSequentialGroup()
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(inputPanelLayout.createSequentialGroup()
-                                .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(28, 28, 28))
-                            .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(inputPanelLayout.createSequentialGroup()
-                                .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(273, 273, 273)
-                                .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(bulanMonthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(18, 18, 18)
-                                .add(tahunYearChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                                .add(25, 25, 25))
-                            .add(inputPanelLayout.createSequentialGroup()
-                                .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
-                                .addContainerGap())))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
+                        .add(departmentCombo2, 0, 200, Short.MAX_VALUE)
+                        .add(163, 163, 163))
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(nilaiNamaDepartment2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
                         .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(30, 30, 30))))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 46, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(bulanMonthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(tahunYearChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         inputPanelLayout.setVerticalGroup(
             inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(departmentCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, tahunYearChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, bulanMonthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(nilaiNamaDepartment, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 30, Short.MAX_VALUE)
-                .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(22, 22, 22))
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(departmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(departmentCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(namaKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(sampaiLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                .add(org.jdesktop.layout.GroupLayout.LEADING, tahunYearChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(org.jdesktop.layout.GroupLayout.LEADING, bulanMonthChooser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(namaDepartmentLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(nilaiNamaDepartment1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(sampaiLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(nilaiNamaDepartment2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 31, Short.MAX_VALUE)
+                        .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .add(inputPanelLayout.createSequentialGroup()
+                        .add(1, 1, 1)
+                        .add(departmentCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        inputPanel.setBounds(0, 70, 920, 170);
+        inputPanel.setBounds(0, 70, 1020, 170);
         desktopPaneTransaksiDepartment.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         daftarKaryawanPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -305,7 +342,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
             daftarKaryawanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, daftarKaryawanPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
                 .addContainerGap())
         );
         daftarKaryawanPanelLayout.setVerticalGroup(
@@ -315,7 +352,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        daftarKaryawanPanel.setBounds(0, 240, 920, 240);
+        daftarKaryawanPanel.setBounds(0, 240, 1020, 240);
         desktopPaneTransaksiDepartment.add(daftarKaryawanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         headPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -339,7 +376,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
                 .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(menuLabel)
                     .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(419, Short.MAX_VALUE))
+                .addContainerGap(519, Short.MAX_VALUE))
         );
         headPanelLayout.setVerticalGroup(
             headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -354,16 +391,16 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        headPanel.setBounds(0, 0, 920, 77);
+        headPanel.setBounds(0, 0, 1020, 77);
         desktopPaneTransaksiDepartment.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panelStatus1.setBounds(0, 570, 920, 50);
+        panelStatus1.setBounds(0, 570, 1020, 50);
         desktopPaneTransaksiDepartment.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPaneTransaksiDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
+            .add(desktopPaneTransaksiDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -373,7 +410,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-935)/2, (screenSize.height-655)/2, 935, 655);
+        setBounds((screenSize.width-1036)/2, (screenSize.height-655)/2, 1036, 655);
     }// </editor-fold>//GEN-END:initComponents
 
 private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
@@ -381,14 +418,14 @@ private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
-private void departmentComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentComboKeyPressed
+private void departmentCombo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentCombo1KeyPressed
     if (evt.getKeyCode() == 10) {
     }
-}//GEN-LAST:event_departmentComboKeyPressed
+}//GEN-LAST:event_departmentCombo1KeyPressed
 
-private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
-    if (departmentCombo.getSelectedItem() != null) {
-        String pilih = String.valueOf(departmentCombo.getSelectedItem());
+private void departmentCombo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentCombo1ActionPerformed
+    if (departmentCombo1.getSelectedItem() != null) {
+        String pilih = String.valueOf(departmentCombo1.getSelectedItem());
         if (pilih != null) {
             try {
                 activeDepartment = DaoFactory.getTranskasiGajiDao().getNamaDepartmentByCode(pilih);
@@ -398,22 +435,22 @@ private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
         //jika ditemukan
         if (activeDepartment != null) {
-            nilaiNamaDepartment.setText(activeDepartment.getNamaDepartment());
-            departmentCombo.requestFocus();
+            nilaiNamaDepartment1.setText(activeDepartment.getNamaDepartment());
+            departmentCombo1.requestFocus();
 
         } else {
             JOptionPane.showMessageDialog(this, "Tidak Ada Department Dengan Code Tersebut", "Error", JOptionPane.ERROR_MESSAGE);
-            departmentCombo.requestFocus();
+            departmentCombo1.requestFocus();
         }
     }
-}//GEN-LAST:event_departmentComboActionPerformed
+}//GEN-LAST:event_departmentCombo1ActionPerformed
 
 private void lihatButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lihatButtonKeyPressed
     lihatButton.doClick();// TODO add your handling code here:
 }//GEN-LAST:event_lihatButtonKeyPressed
 
 private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
-    String department = departmentCombo.getSelectedItem().toString();
+    String department = departmentCombo1.getSelectedItem().toString();
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
@@ -451,7 +488,7 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     int row = karyawanTable.getSelectedRow();
     String kodegroup = karyawanTable.getValueAt(row, 1).toString();
     String namagroup = karyawanTable.getValueAt(row, 2).toString();
-    String kodedepartment = String.valueOf(departmentCombo.getSelectedItem());
+    String kodedepartment = String.valueOf(departmentCombo1.getSelectedItem());
     int bulan = bulanMonthChooser.getMonth() + 1;
 //        if (bulanMonthChooser.getMonth() + 1 < 10) {
 //            bulan = "0" + String.valueOf(bulanMonthChooser.getMonth() + 1);
@@ -469,6 +506,41 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     detailDialog.setVisible(true);
 
 }//GEN-LAST:event_karyawanTableMouseClicked
+
+    private void departmentCombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentCombo2ActionPerformed
+        // TODO add your handling code here:
+        if (departmentCombo2.getSelectedItem() != null) {
+            String pilih = String.valueOf(departmentCombo1.getSelectedItem());
+            if (pilih != null) {
+                try {
+                    activeDepartment = DaoFactory.getTranskasiGajiDao().getNamaDepartmentByCode(pilih);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            //jika ditemukan
+            if (activeDepartment != null) {
+                nilaiNamaDepartment2.setText(activeDepartment.getNamaDepartment());
+                departmentCombo2.requestFocus();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Tidak Ada Department Dengan Code Tersebut", "Error", JOptionPane.ERROR_MESSAGE);
+                departmentCombo2.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_departmentCombo2ActionPerformed
+
+    private void departmentCombo2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentCombo2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departmentCombo2KeyPressed
+
+    private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cetakButtonActionPerformed
+
+    private void cetakButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cetakButtonKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cetakButtonKeyPressed
     private void isitable() {
     }
 
@@ -481,24 +553,26 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
             //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new TransaksiDepartmentForm().setVisible(true);
+                    new TransaksiGajiDepartmentReportForm().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JMonthChooser bulanMonthChooser;
+    private javax.swing.JButton cetakButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JPanel daftarKaryawanPanel;
-    private javax.swing.JComboBox departmentCombo;
+    private javax.swing.JComboBox departmentCombo1;
+    private javax.swing.JComboBox departmentCombo2;
     private javax.swing.JLabel departmentLabel;
     public javax.swing.JDesktopPane desktopPaneTransaksiDepartment;
     private javax.swing.JLabel fungsiLabel;
@@ -511,8 +585,11 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     private javax.swing.JLabel menuLabel;
     private javax.swing.JLabel namaDepartmentLabel;
     private javax.swing.JLabel namaKaryawanLabel;
-    private javax.swing.JLabel nilaiNamaDepartment;
+    private javax.swing.JLabel nilaiNamaDepartment1;
+    private javax.swing.JLabel nilaiNamaDepartment2;
     private com.sistem.panelstatus.PanelStatus panelStatus1;
+    private javax.swing.JLabel sampaiLabel1;
+    private javax.swing.JLabel sampaiLabel2;
     private com.toedter.calendar.JYearChooser tahunYearChooser1;
     // End of variables declaration//GEN-END:variables
 }

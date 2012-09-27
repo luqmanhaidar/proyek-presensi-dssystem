@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.presensikaryawan.transaksiDepartment;
-
+package com.presensikaryawan.transaksiGajiDepartmentTotalReport;
 
 import com.presensikaryawan.golongan.Golongan;
+import com.presensikaryawan.transaksiDepartment.TransaksiDepartment;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,11 +13,17 @@ import java.util.List;
  *
  * @author Tinus
  */
-public interface TransaksiDepartmentDao {
+public interface TransaksiGajiDepartmentReportDao {
+
     Golongan getGolonganByNIP(String nip) throws SQLException;
-    double getGajiKotor(String nip, String bulan) throws SQLException; 
+
+    double getGajiKotor(String nip, String bulan) throws SQLException;
+
     List<TransaksiDepartment> getAllTransaksiDepartment(String department, int bulan, int tahun) throws SQLException;
-    List<TransaksiDepartment> getAllTransaksiDepartment(String department, String maxdate) throws SQLException;
+
+    List<TransaksiDepartment> getAllTransaksiDepartment(String kode_department1, String kode_department2, String maxdate) throws SQLException;
+
     void insertTemp(List<TransaksiDepartment> list, String department, String bulantahun) throws SQLException;
+
     void updatePotongan(String nip, String bulan, double potongan, double prestasi) throws SQLException;
 }
