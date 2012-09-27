@@ -32,6 +32,7 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        pictureLabe = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuBar = new javax.swing.JMenu();
         menuItemTransaksiPresensi = new javax.swing.JMenuItem();
@@ -57,6 +58,9 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pictureLabe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dssbackground1024.jpg"))); // NOI18N
+        pictureLabe.setText("jLabel1");
 
         menuBar.setText("Transaksi");
 
@@ -174,11 +178,13 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1020, Short.MAX_VALUE)
+            .addComponent(pictureLabe, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 659, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pictureLabe, javax.swing.GroupLayout.PREFERRED_SIZE, 660, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -268,5 +274,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemTransaksiGaji;
     private javax.swing.JMenuItem menuItemTransaksiPresensi;
     private javax.swing.JMenuItem meuItemSlipGajiReport;
+    private javax.swing.JLabel pictureLabe;
     // End of variables declaration//GEN-END:variables
 }
