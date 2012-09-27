@@ -181,7 +181,8 @@ public class MainForm extends javax.swing.JFrame {
             .addGap(0, 659, Short.MAX_VALUE)
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-1036)/2, (screenSize.height-718)/2, 1036, 718);
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemTransaksiPresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaksiPresensiActionPerformed
@@ -191,16 +192,7 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemTransaksiGajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaksiGajiActionPerformed
 
             // TODO add your handling code here:
-            TransaksiDepartmentForm transaksiDepartmentForm = null;
-        try {
-            transaksiDepartmentForm = new TransaksiDepartmentForm();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            this.add(transaksiDepartmentForm.getRootPane());
-        
-
-        
+        System.out.println("hahahahah");
     }//GEN-LAST:event_menuItemTransaksiGajiActionPerformed
 
     private void menuItemPayrollBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPayrollBankActionPerformed
