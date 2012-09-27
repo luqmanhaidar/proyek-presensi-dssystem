@@ -42,35 +42,25 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
 //        Tampilan();
         // isitable();
         initComponentFocus();
+        karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
         karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        tanggalMasukDateChooser.setDate(gc.getTime());
-//        namaKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
-//        alamatKaryawanTextField.setDocument(new ChangeCase().getToUpperCase());
-//        KaryawanDao dao = DaoFactory.getKaryawanDao();
-//        List<Karyawan> karyawans = dao.getAllKaryawan();
-//        KaryawanTableModel model = new KaryawanTableModel(karyawans);
-//        karyawanTable.setModel(model);
-//        for (Karyawan k : karyawans) {
-//            departmentCombo.addItem(k.getNip());
-//        }
-//        GolonganDao dao1 = DaoFactory.getGolonganDao();
-//        List<Golongan> golongans = dao1.getAllGolongan();
-//        KaryawanTableModel model = new KaryawanTableModel(karyawans);
-//        karyawanTable.setModel(model);
-//        for (Golongan g : golongans) {
-//            golonganCombo.addItem(g.getKodeGolongan() + "-" + g.getNamaGolongan());
-//        }
-//        PosisiDao dao2 = DaoFactory.getPosisiDao();
-//        List<Posisi> posisis = dao2.getAllPosisi();
-//        for (Posisi p : posisis) {
-//            posisiCombo.addItem(p.getKode_posisi() + "-" + p.getNama_posisi());
-//            
-//        }
-//        OutletDao dao3 = DaoFactory.getOutletDao();
-//        List<Outlet> outlets = dao3.getAllOutlet();
-//        for (Outlet o : outlets) {
-//            outletCombo.addItem(o.getKodeOutlet() + "-" + o.getNamaOutlet());
-//        }
+
         DepartmentDao dao4 = DaoFactory.getDepartmentDao();
         List<Department> departments = dao4.getAllDepartment();
         for (Department d : departments) {
@@ -440,7 +430,24 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
         TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
         karyawanTable.setModel(model);
-
+        karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
+        karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
     } catch (SQLException ex) {
         Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);

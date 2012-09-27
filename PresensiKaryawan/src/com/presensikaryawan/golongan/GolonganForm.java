@@ -40,6 +40,14 @@ public class GolonganForm extends javax.swing.JFrame {
         List<Golongan> golongans = dao.getAllGolongan();
         GolonganTableModel model = new GolonganTableModel(golongans);
         golonganTable.setModel(model);
+        golonganTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        golonganTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(4).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(5).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(6).setPreferredWidth(150);
+        golonganTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (Golongan g : golongans) {
             kodeGolonganCombo.addItem(g.getKodeGolongan());
         }
@@ -99,10 +107,10 @@ public class GolonganForm extends javax.swing.JFrame {
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18));
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         menuLabel.setText("Menu Golongan Karyawan");
 
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         fungsiLabel.setText("Digunakan untuk menambah, edit dan menghapus data golongan karyawan");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
@@ -136,7 +144,7 @@ public class GolonganForm extends javax.swing.JFrame {
         panelStatus1.setBounds(0, 600, 560, 50);
         jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
+        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,13 +157,13 @@ public class GolonganForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        namaGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        namaGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaGolonganLabel.setText("Nama Golongan");
 
-        kodeGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        kodeGolonganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         kodeGolonganLabel.setText("Kode Golongan");
 
-        namaGolonganTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        namaGolonganTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         namaGolonganTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         namaGolonganTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +189,7 @@ public class GolonganForm extends javax.swing.JFrame {
         });
 
         kodeGolonganCombo.setEditable(true);
-        kodeGolonganCombo.setFont(new java.awt.Font("Arial", 0, 11));
+        kodeGolonganCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         kodeGolonganCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kodeGolonganComboActionPerformed(evt);
@@ -193,7 +201,7 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        hapusButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         hapusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Delete.gif"))); // NOI18N
         hapusButton.setMnemonic('H');
         hapusButton.setText("Hapus");
@@ -204,7 +212,7 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        batalButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        batalButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         batalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Undo.gif"))); // NOI18N
         batalButton.setText("Batal");
         batalButton.addActionListener(new java.awt.event.ActionListener() {
@@ -213,10 +221,10 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        gajiPokokLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        gajiPokokLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         gajiPokokLabel.setText("Gaji Pokok");
 
-        gajiPokokTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        gajiPokokTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         gajiPokokTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         gajiPokokTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,10 +243,10 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        uangMakanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        uangMakanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         uangMakanLabel.setText("Uang Makan");
 
-        uangMakanTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        uangMakanTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         uangMakanTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         uangMakanTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,10 +259,10 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        uangLemburLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        uangLemburLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         uangLemburLabel.setText("Uang Lembur");
 
-        uangLemburTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        uangLemburTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         uangLemburTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         uangLemburTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,10 +275,10 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        uangHadirLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        uangHadirLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         uangHadirLabel.setText("Uang Hadir");
 
-        uangHadirTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        uangHadirTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         uangHadirTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         uangHadirTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,10 +291,10 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
 
-        potonganTelatLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        potonganTelatLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         potonganTelatLabel.setText("Potongan Telat");
 
-        potonganTelatTextField.setFont(new java.awt.Font("Arial", 0, 11));
+        potonganTelatTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         potonganTelatTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         potonganTelatTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,9 +419,16 @@ public class GolonganForm extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         golonganTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -422,6 +437,20 @@ public class GolonganForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(golonganTable);
+        golonganTable.getColumnModel().getColumn(0).setResizable(false);
+        golonganTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(1).setResizable(false);
+        golonganTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        golonganTable.getColumnModel().getColumn(2).setResizable(false);
+        golonganTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(3).setResizable(false);
+        golonganTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(4).setResizable(false);
+        golonganTable.getColumnModel().getColumn(4).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(5).setResizable(false);
+        golonganTable.getColumnModel().getColumn(5).setPreferredWidth(150);
+        golonganTable.getColumnModel().getColumn(6).setResizable(false);
+        golonganTable.getColumnModel().getColumn(6).setPreferredWidth(150);
 
         org.jdesktop.layout.GroupLayout golonganPanelLayout = new org.jdesktop.layout.GroupLayout(golonganPanel);
         golonganPanel.setLayout(golonganPanelLayout);

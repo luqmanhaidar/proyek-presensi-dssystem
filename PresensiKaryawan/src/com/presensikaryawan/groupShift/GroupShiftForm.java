@@ -43,7 +43,19 @@ public class GroupShiftForm extends javax.swing.JFrame {
         GroupShiftDao dao = DaoFactory.getGroupShiftDao();
         List<GroupShift> groupShifts = dao.getAllGroupShift();
         GroupShiftTableModel model = new GroupShiftTableModel(groupShifts);
+        
         groupShiftTable.setModel(model);
+        groupShiftTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+        groupShiftTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        groupShiftTable.getColumnModel().getColumn(2).setPreferredWidth(300);
+        groupShiftTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+        groupShiftTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+        groupShiftTable.getColumnModel().getColumn(5).setPreferredWidth(100);
+        groupShiftTable.getColumnModel().getColumn(6).setPreferredWidth(100);
+        groupShiftTable.getColumnModel().getColumn(7).setPreferredWidth(100);
+        groupShiftTable.getColumnModel().getColumn(8).setPreferredWidth(100);
+        groupShiftTable.getColumnModel().getColumn(9).setPreferredWidth(100);
+        groupShiftTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (GroupShift gs : groupShifts) {
             kodeGroupShiftCombo.addItem(gs.getKodeGroupShift());
         }
@@ -489,7 +501,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
                                 .add(56, 56, 56)
                                 .add(jamLabel))
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 46, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 113, Short.MAX_VALUE)
                                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(waktuShiftSelasaTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(waktuShiftSeninTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -592,7 +604,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true, true, true, true
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -609,13 +621,26 @@ public class GroupShiftForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(groupShiftTable);
+        groupShiftTable.getColumnModel().getColumn(0).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+        groupShiftTable.getColumnModel().getColumn(1).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+        groupShiftTable.getColumnModel().getColumn(2).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(2).setPreferredWidth(300);
         groupShiftTable.getColumnModel().getColumn(3).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         groupShiftTable.getColumnModel().getColumn(4).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(4).setPreferredWidth(100);
         groupShiftTable.getColumnModel().getColumn(5).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(5).setPreferredWidth(100);
         groupShiftTable.getColumnModel().getColumn(6).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(6).setPreferredWidth(100);
         groupShiftTable.getColumnModel().getColumn(7).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(7).setPreferredWidth(100);
         groupShiftTable.getColumnModel().getColumn(8).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(8).setPreferredWidth(100);
         groupShiftTable.getColumnModel().getColumn(9).setResizable(false);
+        groupShiftTable.getColumnModel().getColumn(9).setPreferredWidth(100);
 
         org.jdesktop.layout.GroupLayout shiftPanelLayout = new org.jdesktop.layout.GroupLayout(shiftPanel);
         shiftPanel.setLayout(shiftPanelLayout);
