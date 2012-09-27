@@ -403,8 +403,8 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
     String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
     String bulanTahun;
-    String nip1=String.valueOf(nipCombo.getSelectedItem());
-    String nip2=String.valueOf(nipCombo2.getSelectedItem());
+    String nip1 = String.valueOf(nipCombo.getSelectedItem());
+    String nip2 = String.valueOf(nipCombo2.getSelectedItem());
     if (bulan < 10) {
         bulanTahun = tahun + "-0" + bulan;
     } else {
@@ -430,7 +430,28 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_nipCombo2KeyPressed
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            String bulanTahun;
+            int bulan = bulanMonthChooser.getMonth() + 1;
+            int tahun = tahunYearChooser1.getYear();
+            if (bulan < 10) {
+                bulanTahun = tahun + "-0" + bulan;
+            } else {
+                bulanTahun = tahun + "-" + bulan;
+            }
+            String reportSource = "./report/SlipGajiKaryawan.jasper";
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("bulan", bulanTahun);
+            params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
+            params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (SQLException ex) {
+            Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cetakButtonActionPerformed
     private void isitable() {
     }
@@ -447,6 +468,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 try {
