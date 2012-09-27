@@ -102,7 +102,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        desktopPaneTransaksiDepartment = new javax.swing.JDesktopPane();
         cmdKeluar = new javax.swing.JButton();
         inputPanel = new javax.swing.JPanel();
         namaKaryawanLabel = new javax.swing.JLabel();
@@ -125,7 +125,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data Kategori");
 
-        jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
+        desktopPaneTransaksiDepartment.setBackground(new java.awt.Color(153, 255, 153));
 
         cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
@@ -136,7 +136,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
             }
         });
         cmdKeluar.setBounds(790, 510, 110, 40);
-        jDesktopPane1.add(cmdKeluar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPaneTransaksiDepartment.add(cmdKeluar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -234,7 +234,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         );
 
         inputPanel.setBounds(0, 70, 920, 170);
-        jDesktopPane1.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPaneTransaksiDepartment.add(inputPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         daftarKaryawanPanel.setBackground(new java.awt.Color(204, 204, 204));
         daftarKaryawanPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Daftar Karyawan"));
@@ -286,7 +286,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         );
 
         daftarKaryawanPanel.setBounds(0, 240, 920, 240);
-        jDesktopPane1.add(daftarKaryawanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPaneTransaksiDepartment.add(daftarKaryawanPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         headPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -325,20 +325,20 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         );
 
         headPanel.setBounds(0, 0, 920, 77);
-        jDesktopPane1.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPaneTransaksiDepartment.add(headPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelStatus1.setBounds(0, 570, 920, 50);
-        jDesktopPane1.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPaneTransaksiDepartment.add(panelStatus1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
+            .add(desktopPaneTransaksiDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jDesktopPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                .add(desktopPaneTransaksiDepartment, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -470,10 +470,10 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     private javax.swing.JPanel daftarKaryawanPanel;
     private javax.swing.JComboBox departmentCombo;
     private javax.swing.JLabel departmentLabel;
+    public javax.swing.JDesktopPane desktopPaneTransaksiDepartment;
     private javax.swing.JLabel fungsiLabel;
     private javax.swing.JPanel headPanel;
     private javax.swing.JPanel inputPanel;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable karyawanTable;
     private javax.swing.JButton lihatButton;
