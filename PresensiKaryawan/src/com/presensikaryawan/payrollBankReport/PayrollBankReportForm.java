@@ -3,6 +3,7 @@ package com.presensikaryawan.payrollBankReport;
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
+import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.tools.DaoFactory;
 import com.presensikaryawan.transaksiDepartment.*;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
@@ -40,7 +41,11 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
 //        Tampilan();
         // isitable();
         initComponentFocus();
-        transferTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        List<Karyawan> karyawans = DaoFactory.getGajiPerKaryawanReportDao().getAllNip();
+        for (Karyawan k : karyawans) {
+            nipCombo1.addItem(k.getNip());
+            nipCombo2.addItem(k.getNip());
+        }
 
     }
 
@@ -425,7 +430,7 @@ private void lihatButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_lihatButtonKeyPressed
 
 private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
-    String department = bankCombo.getSelectedItem().toString();
+//    String department = bankCombo.getSelectedItem().toString();
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
@@ -442,12 +447,12 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         maxDayOfMonth = tahun + "-" + bulan;
     }
     System.out.println(maxDayOfMonth);
-    String nip1=String.valueOf(nipCombo1.getSelectedItem());
-    String nip2=String.valueOf(nipCombo2.getSelectedItem());
+    String nip1 = String.valueOf(nipCombo1.getSelectedItem());
+    String nip2 = String.valueOf(nipCombo2.getSelectedItem());
     try {
         List<PayrollBankReport> payrollBankReports = DaoFactory.getPayrollBankDao().getPayrollBank(nip1, nip2, maxDayOfMonth);
 
-        PayrollBankReportTableModel model=new PayrollBankReportTableModel(payrollBankReports);
+        PayrollBankReportTableModel model = new PayrollBankReportTableModel(payrollBankReports);
         transferTable.setModel(model);
 
 
@@ -486,6 +491,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 try {

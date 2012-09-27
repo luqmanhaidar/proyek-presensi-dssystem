@@ -45,7 +45,7 @@ private List<PayrollBankReport> payrollBankReports = new ArrayList<PayrollBankRe
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        PayrollBankReport pB=new PayrollBankReport();
+        PayrollBankReport pB=payrollBankReports.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return pB.getNo();
