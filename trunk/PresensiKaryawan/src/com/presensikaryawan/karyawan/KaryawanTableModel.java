@@ -41,7 +41,7 @@ public class KaryawanTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 8;
+        return 9;
     }
 
     @Override
@@ -64,6 +64,8 @@ public class KaryawanTableModel extends AbstractTableModel {
                 return k.getKodeOutlet();
             case 7:
                 return k.getKodeDepartment();
+            case 8:
+                return k.getNo_rekening();
             default:
                 return "";
         }
@@ -88,6 +90,8 @@ public class KaryawanTableModel extends AbstractTableModel {
                 return "OUTLET";
             case 7:
                 return "DEPARTMENT";
+            case 8:
+                return "NO. REKENING";
             default:
                 return "";
         }

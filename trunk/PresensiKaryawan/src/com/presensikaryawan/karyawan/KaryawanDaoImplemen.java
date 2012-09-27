@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class KaryawanDaoImplemen implements KaryawanDao {
 
-    private final String SQL_INSERT = "insert into karyawan(nip, nama, alamat, tanggal_masuk, kode_golongan, kode_posisi, kode_outlet, kode_department) values (?,?,?,?,?,?,?,?)";
-    private final String SQL_UPDATE = "update karyawan set nama = ? , alamat = ? , tanggal_masuk = ? , kode_golongan = ? , kode_posisi = ? , kode_outlet = ? , kode_department = ?  where nip = ?";
+    private final String SQL_INSERT = "insert into karyawan(nip, nama, alamat, tanggal_masuk, kode_golongan, kode_posisi, kode_outlet, kode_department, no_rekening) values (?,?,?,?,?,?,?,?,?)";
+    private final String SQL_UPDATE = "update karyawan set nama = ? , alamat = ? , tanggal_masuk = ? , kode_golongan = ? , kode_posisi = ? , kode_outlet = ? , kode_department = ?, no_rekening=?  where nip = ?";
     private final String SQL_DELETE = "delete from karyawan where nip like ?";
     private final String SQL_GETBYNIP = "select * from karyawan where nip like ?";
     private final String SQL_GETBYGOLONGAN = "select * from karyawan where kode_golongan like ?";
@@ -47,6 +47,7 @@ public class KaryawanDaoImplemen implements KaryawanDao {
             statement.setString(6, karyawan.getKodePosisi());
             statement.setString(7, karyawan.getKodeOutlet());
             statement.setString(8, karyawan.getKodeDepartment());
+            statement.setString(9, karyawan.getNo_rekening());
             statement.executeUpdate();
 
             connection.commit();
@@ -82,7 +83,8 @@ public class KaryawanDaoImplemen implements KaryawanDao {
             statement.setString(5, karyawan.getKodePosisi());
             statement.setString(6, karyawan.getKodeOutlet());
             statement.setString(7, karyawan.getKodeDepartment());
-            statement.setString(8, karyawan.getNip());
+            statement.setString(8, karyawan.getNo_rekening());
+            statement.setString(9, karyawan.getNip());
             statement.executeUpdate();
 
             connection.commit();
@@ -148,6 +150,7 @@ public class KaryawanDaoImplemen implements KaryawanDao {
                 karyawan.setKodePosisi(result.getString("kode_posisi"));
                 karyawan.setKodeOutlet(result.getString("kode_outlet"));
                 karyawan.setKodeDepartment(result.getString("kode_department"));
+                karyawan.setNo_rekening(result.getString("no_rekening"));
             }
 
             connection.commit();
@@ -192,6 +195,7 @@ public class KaryawanDaoImplemen implements KaryawanDao {
                 karyawan.setKodePosisi(result.getString("kode_posisi"));
                 karyawan.setKodeOutlet(result.getString("kode_outlet"));
                 karyawan.setKodeDepartment(result.getString("kode_department"));
+                karyawan.setNo_rekening(result.getString("no_rekening"));
             }
 
             connection.commit();
@@ -235,6 +239,7 @@ public class KaryawanDaoImplemen implements KaryawanDao {
                 karyawan.setKodePosisi(result.getString("kode_posisi"));
                 karyawan.setKodeOutlet(result.getString("kode_outlet"));
                 karyawan.setKodeDepartment(result.getString("kode_department"));
+                karyawan.setNo_rekening(result.getString("no_rekening"));
                 karyawans.add(karyawan);
             }
 
@@ -279,6 +284,7 @@ public class KaryawanDaoImplemen implements KaryawanDao {
                 karyawan.setKodePosisi(result.getString("kode_posisi"));
                 karyawan.setKodeOutlet(result.getString("kode_outlet"));
                 karyawan.setKodeDepartment(result.getString("kode_department"));
+                karyawan.setNo_rekening(result.getString("no_rekening"));
                 karyawans.add(karyawan);
             }
 
