@@ -24,6 +24,7 @@ public class Karyawan {
     private String kodePosisi;
     private String kodeOutlet;
     private String kodeDepartment;
+    private String no_rekening;
 
     public Karyawan() {
     }
@@ -138,6 +139,20 @@ public class Karyawan {
      */
     public void setKodeDepartment(String kodeDepartment) {
         this.kodeDepartment = kodeDepartment;
+    }
+
+    /**
+     * @return the no_rekening
+     */
+    public String getNo_rekening() {
+        return no_rekening;
+    }
+
+    /**
+     * @param no_rekening the no_rekening to set
+     */
+    public void setNo_rekening(String no_rekening) {
+        this.no_rekening = no_rekening;
     }
 
     /**
