@@ -17,15 +17,21 @@
 		 whenNoDataType="NoPages"
 		 isTitleNewPage="false"
 		 isSummaryNewPage="false">
-	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.scriptlethandling" value="0" />
 	<property name="ireport.encoding" value="UTF-8" />
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<parameter name="tahun" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="nip1" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="nip2" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="tahun" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["2012%"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nip1" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nip2" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["05"]]></defaultValueExpression>
+	</parameter>
 	<queryString><![CDATA[select k.nama, g.nama_golongan, d.nama_department, t.*, concat(left(t.bulan, 4))tahun,concat(right(t.bulan, 2))bln  
 from temptransaksidepartment t, karyawan k, golongan g, department_setting d 
 where k.kode_golongan=g.kode_golongan and k.kode_department = d.kode_department and k.nip=t.nip
