@@ -438,18 +438,17 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 String nip = String.valueOf(nipCombo.getSelectedItem());
                 String year = String.valueOf(yearChooser.getYear());
 
-                String reportSource = "./report/HistoryGajiReport.jasper";
+                String reportSource = "./report/HistoryGajiKaryawan.jasper";
                 Map<String, Object> params = new HashMap<String, Object>();
-                params.put("nama_karyawan", nilaiNamaKaryawan.getText());
-                params.put("golongan_karyawan", nilaiGolonganLabel.getText());
-                params.put("nama_department", nilaiNamaDepartment.getText());
-                params.put("tahun", year);
+                params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
+            params.put("nip2", String.valueOf(nipCombo.getSelectedItem()));
+                params.put("tahun", year+"%");
 
-                String totalGaji = String.valueOf(DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip, year));
+//                String totalGaji = String.valueOf(DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip, year));
 
 //                params.put("total", totalGaji);
 
-                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(rekapTable.getModel()));
+                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
                 JasperViewer.viewReport(jasperPrint, false);
             } catch (JRException ex) {
                 Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
