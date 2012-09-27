@@ -27,6 +27,8 @@ import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDao;
 import com.presensikaryawan.liburPerusahaan.LiburPerusahaanDaoImplemen;
 import com.presensikaryawan.outletSetting.OutletDao;
 import com.presensikaryawan.outletSetting.OutletDaoImplemen;
+import com.presensikaryawan.payrollBankReport.PayrollBankDao;
+import com.presensikaryawan.payrollBankReport.PayrollBankDaoImplemen;
 import com.presensikaryawan.posisi.PosisiDao;
 import com.presensikaryawan.posisi.PosisiDaoImplemen;
 import com.presensikaryawan.rekapPresensi.RekapPresensiDao;
@@ -76,6 +78,7 @@ public class DaoFactory {
     private static TransaksiGajiDao transaksiGajiDao;
     private static RekapPresensiPerBulanDao rekapPresensiPerBulanDao;
     private static GajiPerKaryawanReportDao gajiPerKaryawanReportDao;
+    private static PayrollBankDao payrollBankDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -224,5 +227,11 @@ public class DaoFactory {
             gajiPerKaryawanReportDao = new GajiPerKaryawanReportDaoImplemen(getConnection());
         }
         return gajiPerKaryawanReportDao;
+    }
+    public static PayrollBankDao getPayrollBankDao() throws SQLException {
+        if (payrollBankDao == null) {
+            payrollBankDao = new PayrollBankDaoImplemen(getConnection());
+        }
+        return payrollBankDao;
     }
 }
