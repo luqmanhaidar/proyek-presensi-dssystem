@@ -20,13 +20,13 @@ import java.util.List;
 public class GajiPerKaryawanReportDaoImplemen implements GajiPerKaryawanReportDao {
 
     private final String SQL_SELECTALL = "SELECT karyawan.*, temptransaksidepartment.*,"
-            + "(temptransaksidepartment.pokok+temptransaksidepartment.makan+temptransaksidepartment.hadir+temptransaksidepartment.lembur+temptransaksidepartment.lain_lain)totalkotor, golongan.nama_golongan, department_setting.nama_department"
-            + "FROM karyawan, temptransaksidepartment, golongan, department_setting"
-            + "WHERE karyawan.nip = temptransaksidepartment.nip"
-            + "and karyawan.kode_golongan = golongan.kode_golongan"
-            + "and karyawan.kode_department = department_setting.kode_department"
-            + "AND karyawan.nip BETWEEN ? AND ?"
-            + "and temptransaksidepartment.bulan like ?;";
+            + "(temptransaksidepartment.pokok+temptransaksidepartment.makan+temptransaksidepartment.hadir+temptransaksidepartment.lembur+temptransaksidepartment.lain_lain)totalkotor, golongan.nama_golongan, department_setting.nama_department "
+            + "FROM karyawan, temptransaksidepartment, golongan, department_setting "
+            + "WHERE karyawan.nip = temptransaksidepartment.nip "
+            + "and karyawan.kode_golongan = golongan.kode_golongan "
+            + "and karyawan.kode_department = department_setting.kode_department "
+            + "AND karyawan.nip BETWEEN ? AND ? "
+            + "and temptransaksidepartment.bulan like ?";
     private final String SQL_GET_ALLNIP = "SELECT nip FROM karyawan";
     private Connection connection;
 
