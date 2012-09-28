@@ -52,10 +52,6 @@ public class OutletForm extends javax.swing.JFrame {
         List<Outlet> outlets = dao.getAllOutlet();
         OutletTableModel model = new OutletTableModel(outlets);
         outletTable.setModel(model);
-        outletTable.getColumnModel().getColumn(0).setPreferredWidth(100);
-        outletTable.getColumnModel().getColumn(1).setPreferredWidth(200);
-        outletTable.getColumnModel().getColumn(2).setPreferredWidth(300);
-        outletTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (Outlet o : outlets) {
             kodeOutletCombo.addItem(o.getKodeOutlet());
         }
@@ -216,6 +212,7 @@ public class OutletForm extends javax.swing.JFrame {
         batalButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         batalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Undo.gif"))); // NOI18N
         batalButton.setText("Batal");
+        batalButton.setToolTipText("Klik untuk batal");
         batalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batalButtonActionPerformed(evt);
@@ -381,12 +378,12 @@ public class OutletForm extends javax.swing.JFrame {
         activeOutlet.setKodeOutlet(kodeOutlet);
         activeOutlet.setNamaOutlet(namaOutlet);
         activeOutlet.setAlamatOutlet(alamatOutlet);
-        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Nama = " + namaOutlet + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Kode = " + kodeOutlet + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
                 DaoFactory.getOutletDao().delete(activeOutlet);
-                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n"
-                        + "<html><font color=#FF0000>" + namaOutlet + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan kode\n"
+                        + "<html><font color=#FF0000>" + kodeOutlet + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n"
@@ -423,29 +420,37 @@ public class OutletForm extends javax.swing.JFrame {
         outletBaru.setNamaOutlet(namaOutlet);
         outletBaru.setAlamatOutlet(alamatOutlet);
         if ("Simpan".equals(simpanButton.getText())) {
-            try {
-                DaoFactory.getOutletDao().insert(outletBaru);
+            if (namaOutlet.matches("") || alamatOutlet.matches("")) {
+                JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\nNama dan Alamat Harus Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    DaoFactory.getOutletDao().insert(outletBaru);
 
-                JOptionPane.showMessageDialog(this, "Data dengan Nama \n"
-                        + "<html><font color=#FF0000>" + namaOutlet + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Data dengan KOde \n"
+                            + "<html><font color=#FF0000>" + kodeOutlet + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         } else {
-            try {
-                Outlet outletLama = DaoFactory.getOutletDao().getByKodeOutlet(kodeOutlet);
-                outletLama.setKodeOutlet(kodeOutlet);
-                outletLama.setNamaOutlet(namaOutlet);
-                outletLama.setAlamatOutlet(alamatOutlet);
-                DaoFactory.getOutletDao().update(outletLama);
-                JOptionPane.showMessageDialog(this, "Data dengan nama\n"
-                        + "<html><font color=#FF0000>" + namaOutlet + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            if (namaOutlet.matches("") || alamatOutlet.matches("")) {
+                JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\nNama dan Alamat Harus Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    Outlet outletLama = DaoFactory.getOutletDao().getByKodeOutlet(kodeOutlet);
+                    outletLama.setKodeOutlet(kodeOutlet);
+                    outletLama.setNamaOutlet(namaOutlet);
+                    outletLama.setAlamatOutlet(alamatOutlet);
+                    DaoFactory.getOutletDao().update(outletLama);
+                    JOptionPane.showMessageDialog(this, "Data dengan kode\n"
+                            + "<html><font color=#FF0000>" + kodeOutlet + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
