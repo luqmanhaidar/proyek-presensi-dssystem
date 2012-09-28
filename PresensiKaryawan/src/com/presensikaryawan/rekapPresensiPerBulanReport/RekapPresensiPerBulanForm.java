@@ -1,11 +1,10 @@
 package com.presensikaryawan.rekapPresensiPerBulanReport;
 
-import com.presensikaryawan.rekapPresensi.*;
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
-import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDialog;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.posisi.*;
+import com.presensikaryawan.rekapPresensi.*;
 import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
@@ -24,7 +23,6 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 /*
  * masterInventoryGrup.java
@@ -46,13 +44,13 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
      */
     public RekapPresensiPerBulanForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -412,10 +410,11 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
                         break;
                 }
                 bulanS = bulanS + " " + String.valueOf(yearChooser.getYear());
-                if(monthChooser.getMonth()+1<10)
-                bulan = yearChooser.getYear()+"-0"+(monthChooser.getMonth()+1);
-                else
-                  bulan = yearChooser.getYear()+"-"+(monthChooser.getMonth()+1);  
+                if (monthChooser.getMonth() + 1 < 10) {
+                    bulan = yearChooser.getYear() + "-0" + (monthChooser.getMonth() + 1);
+                } else {
+                    bulan = yearChooser.getYear() + "-" + (monthChooser.getMonth() + 1);
+                }
                 String reportSource = "./report/RekapPresensiKaryawan.jasper";
                 Map<String, Object> params = new HashMap<String, Object>();
                 params.put("bulanString", bulanS);
@@ -430,9 +429,9 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
             } catch (JRException ex) {
                 Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menampilkan Hasil Rekap\n"+
-                    "Dengan Menekan Tombol Lihat Dahulu","PEMBERITAHUAN",JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menampilkan Hasil Rekap\n"
+                    + "Dengan Menekan Tombol Lihat Dahulu", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
         }
 
 }//GEN-LAST:event_cetakButtonActionPerformed
@@ -440,29 +439,29 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
     private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
         // TODO add your handling code here:
         Date date = new Date();
-//        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
-//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
-        String year = String.valueOf(yearChooser.getYear());
-        String month = String.valueOf(monthChooser.getMonth() + 1);
-        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-        String maxDayOfMonth = year + "-" + month + "-" + day;
+        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
+            String year = String.valueOf(yearChooser.getYear());
+            String month = String.valueOf(monthChooser.getMonth() + 1);
+            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+            String maxDayOfMonth = year + "-" + month + "-" + day;
 
-        String kode_department = String.valueOf(departmentCombo.getSelectedItem());
-        try {
-            List<Karyawan> karyawans = DaoFactory.getRekapPresensiPerBulanDao().getAllKaryawanByDepartmentCode(kode_department);
-            while (!karyawans.isEmpty()) {
-                Karyawan karyawan = karyawans.remove(0);
-                DaoFactory.getRekapPresensiPerBulanDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
+            String kode_department = String.valueOf(departmentCombo.getSelectedItem());
+            try {
+                List<Karyawan> karyawans = DaoFactory.getRekapPresensiPerBulanDao().getAllKaryawanByDepartmentCode(kode_department);
+                while (!karyawans.isEmpty()) {
+                    Karyawan karyawan = karyawans.remove(0);
+                    DaoFactory.getRekapPresensiPerBulanDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
+                }
+                List<RekapPresensiPerBulan> rekapPresensiPerBulans = DaoFactory.getRekapPresensiPerBulanDao().callGetPresensi(month, year, kode_department);
+                RekapPresensiPerBulanTableModel model = new RekapPresensiPerBulanTableModel(rekapPresensiPerBulans);
+                rekapTable.setModel(model);
+                rekapTable.setVisible(true);
+            } catch (SQLException ex) {
             }
-            List<RekapPresensiPerBulan> rekapPresensiPerBulans = DaoFactory.getRekapPresensiPerBulanDao().callGetPresensi(month, year, kode_department);
-            RekapPresensiPerBulanTableModel model = new RekapPresensiPerBulanTableModel(rekapPresensiPerBulans);
-            rekapTable.setModel(model);
-            rekapTable.setVisible(true);
-        } catch (SQLException ex) {
-//            }
         }
     }//GEN-LAST:event_lihatButtonActionPerformed
 
@@ -505,7 +504,6 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(RekapPresensiPerBulanForm.class.getName()).log(Level.SEVERE, null, ex);

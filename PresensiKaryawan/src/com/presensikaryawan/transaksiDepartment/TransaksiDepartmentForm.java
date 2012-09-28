@@ -33,18 +33,19 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
     private Department activeDepartment;
     GregorianCalendar gc = new GregorianCalendar();
     private JFrame frame;
+
     /**
      * Creates new form masterInventoryGrup
      */
     public TransaksiDepartmentForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -81,8 +82,6 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
     }
 
     private void initComponentFocus() {
-//        namaKaryawanTextField.addFocusListener(new ComponentFocus(namaKaryawanTextField));
-//        alamatKaryawanTextField.addFocusListener(new ComponentFocus(alamatKaryawanTextField));
         departmentCombo.addFocusListener(new ComponentFocus(departmentCombo));
         lihatButton.addFocusListener(new ComponentFocus(lihatButton));
     }
@@ -418,50 +417,46 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
-//        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
-//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            GregorianCalendar gc = new GregorianCalendar();
-    gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-//            String year = String.valueOf(yearChooser.getYear());
-//            String month = String.valueOf(monthChooser.getMonth() + 1);
-    String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-    String maxDayOfMonth;
-    if (bulan < 10) {
-        maxDayOfMonth = tahun + "-0" + bulan + "-" + day;
+    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        maxDayOfMonth = tahun + "-" + bulan + "-" + day;
-    }
-    System.out.println(maxDayOfMonth);
-//    System.out.println(department+" "+bulan+" "+ tahun);
-    try {
-        TransaksiDepartmentDao dao = DaoFactory.getTransaksiDepartmentDao();
-//        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, bulan, tahun);
-        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
+        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+        String maxDayOfMonth;
+        if (bulan < 10) {
+            maxDayOfMonth = tahun + "-0" + bulan + "-" + day;
+        } else {
+            maxDayOfMonth = tahun + "-" + bulan + "-" + day;
+        }
+        System.out.println(maxDayOfMonth);
+        try {
+            TransaksiDepartmentDao dao = DaoFactory.getTransaksiDepartmentDao();
+            List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
 
-        TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
-        karyawanTable.setModel(model);
-        karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
-        karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
+            karyawanTable.setModel(model);
+            karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+            karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
+            karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-    } catch (SQLException ex) {
-        Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
 
@@ -471,11 +466,6 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     String namagroup = karyawanTable.getValueAt(row, 2).toString();
     String kodedepartment = String.valueOf(departmentCombo.getSelectedItem());
     int bulan = bulanMonthChooser.getMonth() + 1;
-//        if (bulanMonthChooser.getMonth() + 1 < 10) {
-//            bulan = "0" + String.valueOf(bulanMonthChooser.getMonth() + 1);
-//        } else {
-//            bulan = String.valueOf(bulanMonthChooser.getMonth() + 1);
-//        }
     int tahun = tahunYearChooser1.getYear();
 
     DetailLainDialog detailDialog = null;
@@ -496,7 +486,6 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);

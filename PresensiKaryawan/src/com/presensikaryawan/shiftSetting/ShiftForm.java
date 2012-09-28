@@ -28,23 +28,22 @@ public class ShiftForm extends javax.swing.JFrame {
     private DaoFactory service;
     private Shift activeShift;
     private JFrame frame;
+
     /**
      * Creates new form masterInventoryGrup
      */
     public ShiftForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
-//        UIManager.put("nimbusControl",new Color(153,255,153));
-//        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
 //        Tampilan();
         // isitable();
         initComponentFocus();
@@ -688,7 +687,6 @@ public class ShiftForm extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ShiftForm.class.getName()).log(Level.SEVERE, null, ex);

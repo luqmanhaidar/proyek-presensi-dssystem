@@ -33,13 +33,13 @@ public class StatusSettingForm extends javax.swing.JFrame {
      */
     public StatusSettingForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -491,7 +491,7 @@ public class StatusSettingForm extends javax.swing.JFrame {
                 simpanButton.setMnemonic('S');
                 simpanButton.setEnabled(true);
             }
-        }else{
+        } else {
             simpanButton.setEnabled(false);
             hapusButton.setEnabled(false);
         }
@@ -513,9 +513,9 @@ public class StatusSettingForm extends javax.swing.JFrame {
         StatusSettingTableModel model = new StatusSettingTableModel(statusSettings);
         statusTable.setModel(model);
 
-        if (statusSettings.isEmpty()){
+        if (statusSettings.isEmpty()) {
             hapusButton.setEnabled(false);
-        }else{
+        } else {
             hapusButton.setEnabled(true);
         }
         for (StatusSetting s : statusSettings) {
@@ -563,10 +563,6 @@ public class StatusSettingForm extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
-
-
-
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(StatusSettingForm.class
                     .getName()).log(Level.SEVERE, null, ex);

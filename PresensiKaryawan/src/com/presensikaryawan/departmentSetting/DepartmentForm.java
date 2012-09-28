@@ -31,22 +31,20 @@ public class DepartmentForm extends javax.swing.JFrame {
     private Department activeDepartment;
     private JFrame frame;
 
-
-    
     /**
      * Creates new form masterInventoryGrup
      */
     public DepartmentForm(final JFrame frame) throws SQLException {
-        this.frame=frame;
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         initComponents();
+        this.setLocationRelativeTo(null);
         UIManager.put("nimbusBase", new Color(204, 204, 255));
         initComponentFocus();
         namaGroupShiftTextField.setDocument(new ChangeCase().getToUpperCase());
@@ -476,7 +474,7 @@ public class DepartmentForm extends javax.swing.JFrame {
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
         frame.setEnabled(true);
         this.dispose();
-        
+
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed

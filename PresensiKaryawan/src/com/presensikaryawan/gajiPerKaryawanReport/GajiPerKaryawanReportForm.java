@@ -1,14 +1,10 @@
 package com.presensikaryawan.gajiPerKaryawanReport;
 
-import com.presensikaryawan.transaksiDepartment.*;
-import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
-import com.presensikaryawan.departmentSetting.DepartmentDao;
-//import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
-import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
-import com.presensikaryawan.golongan.Golongan;
 import com.presensikaryawan.karyawan.Karyawan;
+import com.presensikaryawan.tools.DaoFactory;
+import com.presensikaryawan.transaksiDepartment.*;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
@@ -25,7 +21,6 @@ import javax.swing.*;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 /*
@@ -50,13 +45,13 @@ public class GajiPerKaryawanReportForm extends javax.swing.JFrame {
      */
     public GajiPerKaryawanReportForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -80,7 +75,7 @@ public class GajiPerKaryawanReportForm extends javax.swing.JFrame {
         gajiKaryawanTable.getColumnModel().getColumn(14).setPreferredWidth(200);
         gajiKaryawanTable.getColumnModel().getColumn(15).setPreferredWidth(200);
         gajiKaryawanTable.getColumnModel().getColumn(16).setPreferredWidth(200);
-        
+
         gajiKaryawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         List<Karyawan> karyawans = DaoFactory.getGajiPerKaryawanReportDao().getAllNip();
@@ -405,7 +400,7 @@ public class GajiPerKaryawanReportForm extends javax.swing.JFrame {
 private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
     frame.setEnabled(true);
     this.dispose();
-    
+
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
 private void nipComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipComboKeyPressed
@@ -428,27 +423,28 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
-//        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
-//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-    gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-    String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-    String bulanTahun;
-    String nip1 = String.valueOf(nipCombo.getSelectedItem());
-    String nip2 = String.valueOf(nipCombo2.getSelectedItem());
-    if (bulan < 10) {
-        bulanTahun = tahun + "-0" + bulan;
+    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        bulanTahun = tahun + "-" + bulan;
-    }
-    try {
-        List<TransaksiDepartment> transaksiDepartments = DaoFactory.getGajiPerKaryawanReportDao().getAllTransaksiDepartment(nip1, nip2, bulanTahun);
-        TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
-        gajiKaryawanTable.setModel(model);
+        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+        String bulanTahun;
+        String nip1 = String.valueOf(nipCombo.getSelectedItem());
+        String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+        if (bulan < 10) {
+            bulanTahun = tahun + "-0" + bulan;
+        } else {
+            bulanTahun = tahun + "-" + bulan;
+        }
+        try {
+            List<TransaksiDepartment> transaksiDepartments = DaoFactory.getGajiPerKaryawanReportDao().getAllTransaksiDepartment(nip1, nip2, bulanTahun);
+            TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
+            gajiKaryawanTable.setModel(model);
 
 
-    } catch (SQLException ex) {
-        Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
 
@@ -499,7 +495,6 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 try {

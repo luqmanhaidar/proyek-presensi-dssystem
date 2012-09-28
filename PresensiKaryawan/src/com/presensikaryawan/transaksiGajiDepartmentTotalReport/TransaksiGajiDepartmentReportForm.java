@@ -40,23 +40,22 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
     private Department activeDepartment;
     GregorianCalendar gc = new GregorianCalendar();
     private JFrame frame;
+
     /**
      * Creates new form masterInventoryGrup
      */
     public TransaksiGajiDepartmentReportForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
-//        UIManager.put("nimbusControl",new Color(153,255,153));
-//        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
 //        Tampilan();
         // isitable();
         initComponentFocus();
@@ -84,13 +83,11 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
             departmentCombo1.addItem(d.getKodeDepartment());
             departmentCombo2.addItem(d.getKodeDepartment());
         }
-        
+
 
     }
 
     private void initComponentFocus() {
-//        namaKaryawanTextField.addFocusListener(new ComponentFocus(namaKaryawanTextField));
-//        alamatKaryawanTextField.addFocusListener(new ComponentFocus(alamatKaryawanTextField));
         departmentCombo1.addFocusListener(new ComponentFocus(departmentCombo1));
         lihatButton.addFocusListener(new ComponentFocus(lihatButton));
     }
@@ -484,56 +481,53 @@ private void lihatButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_lihatButtonKeyPressed
 
 private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
-    String department = departmentCombo1.getSelectedItem().toString();                                          
+    String department = departmentCombo1.getSelectedItem().toString();
     String department2 = departmentCombo2.getSelectedItem().toString();
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
-//        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
-//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            GregorianCalendar gc = new GregorianCalendar();
-    gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-//            String year = String.valueOf(yearChooser.getYear());
-//            String month = String.valueOf(monthChooser.getMonth() + 1);
-    String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-    String maxDayOfMonth;
-    if (bulan < 10) {
-        maxDayOfMonth = tahun + "-0" + bulan;
+    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        maxDayOfMonth = tahun + "-" + bulan;
-    }
-    System.out.println(maxDayOfMonth);
-//    System.out.println(department+" "+bulan+" "+ tahun);
-    try {
-        TransaksiGajiDepartmentReportDao dao = DaoFactory.getTransaksiGajiDepartmentReportDao();
-//        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, bulan, tahun);
-        List<TransaksiGajiDepartmentReport> transaksiDepartments = dao.getAllTransaksiDepartment(department, department2, maxDayOfMonth);
+        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
 
-        TransaksiGajiDepartmentReportTableModel model = new TransaksiGajiDepartmentReportTableModel(transaksiDepartments);
-        karyawanTable.setModel(model);
-        karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
-        karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
-        karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+        String maxDayOfMonth;
+        if (bulan < 10) {
+            maxDayOfMonth = tahun + "-0" + bulan;
+        } else {
+            maxDayOfMonth = tahun + "-" + bulan;
+        }
+        System.out.println(maxDayOfMonth);
+        try {
+            TransaksiGajiDepartmentReportDao dao = DaoFactory.getTransaksiGajiDepartmentReportDao();
+            List<TransaksiGajiDepartmentReport> transaksiDepartments = dao.getAllTransaksiDepartment(department, department2, maxDayOfMonth);
+
+            TransaksiGajiDepartmentReportTableModel model = new TransaksiGajiDepartmentReportTableModel(transaksiDepartments);
+            karyawanTable.setModel(model);
+            karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+            karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
+            karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+            karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
+            karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
 
-    } catch (SQLException ex) {
-        Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
 
@@ -543,11 +537,6 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     String namagroup = karyawanTable.getValueAt(row, 2).toString();
     String kodedepartment = String.valueOf(departmentCombo1.getSelectedItem());
     int bulan = bulanMonthChooser.getMonth() + 1;
-//        if (bulanMonthChooser.getMonth() + 1 < 10) {
-//            bulan = "0" + String.valueOf(bulanMonthChooser.getMonth() + 1);
-//        } else {
-//            bulan = String.valueOf(bulanMonthChooser.getMonth() + 1);
-//        }
     int tahun = tahunYearChooser1.getYear();
 
     DetailLainDialog detailDialog = null;
@@ -589,7 +578,7 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
         // TODO add your handling code here:
-                if (!karyawanTable.isVisible()) {
+        if (!karyawanTable.isVisible()) {
             JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menekan Tombol Lihat Terlebih Dahulu\n"
                     + "Untuk Melihat Hasil Rekap", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -598,10 +587,11 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
                 String dep1 = String.valueOf(departmentCombo1.getSelectedItem());
                 String dep2 = String.valueOf(departmentCombo2.getSelectedItem());
                 String bln;
-                if(bulanMonthChooser.getMonth()+1<10)
-                    bln=tahunYearChooser1.getYear()+"-0"+(bulanMonthChooser.getMonth()+1);
-                else
-                    bln=tahunYearChooser1.getYear()+"-"+(bulanMonthChooser.getMonth()+1);
+                if (bulanMonthChooser.getMonth() + 1 < 10) {
+                    bln = tahunYearChooser1.getYear() + "-0" + (bulanMonthChooser.getMonth() + 1);
+                } else {
+                    bln = tahunYearChooser1.getYear() + "-" + (bulanMonthChooser.getMonth() + 1);
+                }
                 System.out.println(bln);
                 String reportSource = "./report/LaporanGajiTotalDepartment.jasper";
                 Map<String, Object> params = new HashMap<String, Object>();
@@ -631,8 +621,6 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
-
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
         }
