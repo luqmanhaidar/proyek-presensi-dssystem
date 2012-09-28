@@ -50,7 +50,7 @@ where k.nip = t.nip and t.bulan = $P{bulan};]]></queryString>
 			</band>
 			</groupHeader>
 			<groupFooter>
-			<band height="50"  isSplitAllowed="true" >
+			<band height="44"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
 						x="19"
@@ -278,17 +278,13 @@ where k.nip = t.nip and t.bulan = $P{bulan};]]></queryString>
 			</band>
 		</detail>
 		<columnFooter>
-			<band height="47"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</columnFooter>
 		<pageFooter>
-			<band height="24"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</pageFooter>
-		<lastPageFooter>
-			<band height="50"  isSplitAllowed="true" >
-			</band>
-		</lastPageFooter>
 		<summary>
 			<band height="50"  isSplitAllowed="true" >
 			</band>
