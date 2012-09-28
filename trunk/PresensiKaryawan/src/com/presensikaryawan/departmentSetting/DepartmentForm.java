@@ -66,11 +66,6 @@ public class DepartmentForm extends javax.swing.JFrame {
         if (departments.isEmpty()) {
             hapusButton.setEnabled(false);
         }
-        departmentTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-        departmentTable.getColumnModel().getColumn(1).setPreferredWidth(200);
-        departmentTable.getColumnModel().getColumn(2).setPreferredWidth(500);
-        departmentTable.getColumnModel().getColumn(3).setPreferredWidth(150);
-        departmentTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     private void initComponentFocus() {
@@ -560,45 +555,53 @@ public class DepartmentForm extends javax.swing.JFrame {
         groupShift.setKodeGroupShift(kodeShift);
         departmentBaru.setGroupShift(groupShift);
         Shift shiftBaru = new Shift();
-
-        if (!namaDepartmentTextField.getText().matches("") && !deskripsiDepartmentTextArea.getText().matches("") && !String.valueOf(kodeDepartmentCombo.getSelectedItem()).matches("")) {
-
-            if ("Simpan".equals(simpanButton.getText())) {
-                try {
-                    DaoFactory.getDepartmentDao().insert(departmentBaru);
-                    JOptionPane.showMessageDialog(this, "Data Department Dengan Kode \n"
-                            + "<html><font color=#FF0000>" + kodeDepartment + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                    batalButton.doClick();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        char[] charArray = kodeDepartment.toCharArray();
+        if (!namaDepartmentTextField.getText().matches("") && !deskripsiDepartmentTextArea.getText().matches("") && !String.valueOf(kodeDepartmentCombo.getSelectedItem()).matches("")
+                && kodeDepartmentCombo.getSelectedItem() != null && namaGroupShiftTextField.getText() != null && !namaGroupShiftTextField.getText().matches("")
+                && namaDepartmentTextField.getText() != null && deskripsiDepartmentTextArea.getText() != null) {
+            if (charArray.length > 5) {
+                JOptionPane.showMessageDialog(this, "Kode Department Tidak Boleh \nLebih Dari 5 Karakter", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                try {
-                    Department departmentLama = DaoFactory.getDepartmentDao().getByKode(kodeDepartment);
-                    departmentLama.setKodeDepartment(kodeDepartment);
-                    departmentLama.setNamaDepartment(namaDepartment);
-                    departmentLama.setDeskripsi(deskripsi);
-                    departmentLama.setGroupShift(groupShift);
+                if ("Simpan".equals(simpanButton.getText())) {
+                    try {
+                        DaoFactory.getDepartmentDao().insert(departmentBaru);
+                        JOptionPane.showMessageDialog(this, "Data Department Dengan Kode \n"
+                                + "<html><font color=#FF0000>" + kodeDepartment + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                    DaoFactory.getDepartmentDao().update(departmentLama);
-                    JOptionPane.showMessageDialog(this, "Data Department Dengan Kode\n"
-                            + "<html><font color=#FF0000>" + kodeDepartment + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                        batalButton.doClick();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    try {
+                        Department departmentLama = DaoFactory.getDepartmentDao().getByKode(kodeDepartment);
+                        departmentLama.setKodeDepartment(kodeDepartment);
+                        departmentLama.setNamaDepartment(namaDepartment);
+                        departmentLama.setDeskripsi(deskripsi);
+                        departmentLama.setGroupShift(groupShift);
 
-                    batalButton.doClick();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                        DaoFactory.getDepartmentDao().update(departmentLama);
+                        JOptionPane.showMessageDialog(this, "Data Department Dengan Kode\n"
+                                + "<html><font color=#FF0000>" + kodeDepartment + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                        batalButton.doClick();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
-        } else if (String.valueOf(kodeDepartmentCombo.getSelectedItem()).matches("")) {
-            JOptionPane.showMessageDialog(this, "Kode Department Belum Diisi");
+        } else if (String.valueOf(kodeDepartmentCombo.getSelectedItem()).matches("") || kodeDepartmentCombo.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Kode Department Belum Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
             kodeGroupShiftCombo.requestFocus();
-        } else if (namaDepartmentTextField.getText().matches("")) {
-            JOptionPane.showMessageDialog(this, "Nama Department Belum Disii");
+        } else if (namaDepartmentTextField.getText().matches("") || namaDepartmentTextField.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Nama Department Belum Disii", "ERROR", JOptionPane.ERROR_MESSAGE);
             namaDepartmentTextField.requestFocus();
-        } else {
-            JOptionPane.showMessageDialog(this, "Keterangan Department Belum Disii");
+        } else if (deskripsiDepartmentTextArea.getText().matches("") || deskripsiDepartmentTextArea.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Keterangan Department Belum Disii", "ERROR", JOptionPane.ERROR_MESSAGE);
             deskripsiDepartmentTextArea.requestFocus();
+        } else {
+            JOptionPane.showMessageDialog(this, "Kode Group Shift Belum Dipilih", "ERROR", JOptionPane.ERROR_MESSAGE);
+            kodeGroupShiftCombo.requestFocus();
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
