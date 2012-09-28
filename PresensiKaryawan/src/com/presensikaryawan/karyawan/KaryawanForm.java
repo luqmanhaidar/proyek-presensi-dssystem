@@ -13,6 +13,8 @@ import com.presensikaryawan.posisi.Posisi;
 import com.presensikaryawan.posisi.PosisiDao;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -35,10 +37,20 @@ public class KaryawanForm extends javax.swing.JFrame {
     private DaoFactory service;
     private Karyawan activeKaryawan;
     GregorianCalendar gc = new GregorianCalendar();
+    private JFrame frame;
 
     /** Creates new form masterInventoryGrup */
-    public KaryawanForm() throws SQLException {
+    public KaryawanForm(final JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            frame.setEnabled(true);
+            
+            }
+        });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        Tampilan();
         // isitable();
@@ -624,7 +636,7 @@ public class KaryawanForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-
+        frame.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -735,7 +747,7 @@ private void noRekeningTextFieldActionPerformed(java.awt.event.ActionEvent evt) 
             @Override
             public void run() {
                 try {
-                    new KaryawanForm().setVisible(true);
+                    new KaryawanForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

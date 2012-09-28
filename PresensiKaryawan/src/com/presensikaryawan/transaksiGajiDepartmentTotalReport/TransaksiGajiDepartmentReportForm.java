@@ -8,6 +8,8 @@ import com.presensikaryawan.tools.DaoFactory;
 import com.presensikaryawan.transaksiDepartment.*;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -37,12 +39,21 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
     private TransaksiDepartment activeTransaksiDepartment;
     private Department activeDepartment;
     GregorianCalendar gc = new GregorianCalendar();
-
+    private JFrame frame;
     /**
      * Creates new form masterInventoryGrup
      */
-    public TransaksiGajiDepartmentReportForm() throws SQLException {
+    public TransaksiGajiDepartmentReportForm(final JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            frame.setEnabled(true);
+            
+            }
+        });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        UIManager.put("nimbusControl",new Color(153,255,153));
 //        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
@@ -437,7 +448,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-
+    frame.setEnabled(true);
     this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -629,7 +640,7 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
             @Override
             public void run() {
                 try {
-                    new TransaksiGajiDepartmentReportForm().setVisible(true);
+                    new TransaksiGajiDepartmentReportForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

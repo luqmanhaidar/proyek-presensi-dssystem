@@ -6,6 +6,8 @@ import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,9 +28,19 @@ public class OutletForm extends javax.swing.JFrame {
     
     private DaoFactory service;
     private Outlet activeOutlet;
+    private JFrame frame;
     /** Creates new form masterInventoryGrup */
-    public OutletForm() throws SQLException {
+    public OutletForm(final JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            frame.setEnabled(true);
+            
+            }
+        });
         UIManager.put("nimbusBase", new Color(204,204,255));
 //        UIManager.put("nimbusControl",new Color(153,255,153));
 //        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
@@ -439,7 +451,7 @@ public class OutletForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonActionPerformed
     
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-       
+       frame.setEnabled(true);
       this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
     
@@ -530,7 +542,7 @@ private void alamatOutletTextFieldActionPerformed(java.awt.event.ActionEvent evt
             @Override
             public void run() {
                 try {
-                    new OutletForm().setVisible(true);
+                    new OutletForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(OutletForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

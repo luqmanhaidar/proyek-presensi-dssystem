@@ -5,6 +5,8 @@ import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,12 +26,22 @@ public class PosisiForm extends javax.swing.JFrame {
 
     private DaoFactory service;
     private Posisi activePosisi;
+    private JFrame frame;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public PosisiForm() throws SQLException {
+    public PosisiForm(final JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            frame.setEnabled(true);
+            
+            }
+        });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
@@ -406,7 +418,7 @@ public class PosisiForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-
+        frame.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -498,7 +510,7 @@ public class PosisiForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new PosisiForm().setVisible(true);
+                    new PosisiForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(PosisiForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

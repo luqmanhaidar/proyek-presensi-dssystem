@@ -7,6 +7,8 @@ import com.dssystem.umum.ComponentFocus;
 import com.dssystem.umum.DateTool;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,12 +33,21 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     private DaoFactory service;
     private LiburPerusahaan activeLiburPerusahaan;
     private GregorianCalendar gc = new GregorianCalendar();
-
+    private JFrame frame;
     /**
      * Creates new form masterInventoryGrup
      */
-    public LiburPerusahaanForm() throws SQLException {
+    public LiburPerusahaanForm(final JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            frame.setEnabled(true);
+            
+            }
+        });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
         initComponentFocus();
         tanggalDateChooser.setDate(gc.getTime());
@@ -478,7 +489,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     }
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-
+        frame.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -588,7 +599,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new LiburPerusahaanForm().setVisible(true);
+                    new LiburPerusahaanForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
