@@ -4,6 +4,7 @@
  */
 package com.presensikaryawan.payrollBankReport;
 
+import com.dssystem.umum.ChangeFormatDoubleToString;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -54,7 +55,7 @@ private List<PayrollBankReport> payrollBankReports = new ArrayList<PayrollBankRe
             case 2:
                 return pB.getNama();
             case 3:
-                return pB.getJumlahGaji();
+                return ChangeFormatDoubleToString.getToString(pB.getJumlahGaji());
             default:
                 return "";
         }

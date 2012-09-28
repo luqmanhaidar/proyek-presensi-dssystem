@@ -1,6 +1,9 @@
 package com.presensikaryawan.payrollBankReport;
 
+import com.dssystem.umum.ChangeFormatDoubleToString;
 import com.dssystem.umum.ComponentFocus;
+import com.dssystem.umum.FormatTerbilang;
+import com.dssystem.umum.FormatTerbilangQuantity;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
 import com.presensikaryawan.karyawan.Karyawan;
@@ -11,10 +14,16 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * masterInventoryGrup.java
@@ -79,6 +88,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
         nipCombo1 = new javax.swing.JComboBox();
         nipCombo2 = new javax.swing.JComboBox();
         nipLabel1 = new javax.swing.JLabel();
+        cetakButton = new javax.swing.JButton();
         daftarPermintaanTransferPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         transferTable = new javax.swing.JTable();
@@ -96,7 +106,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
 
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -109,13 +119,13 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        bulanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        bulanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         bulanLabel.setText("Bulan");
 
-        kodeBankLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        kodeBankLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         kodeBankLabel.setText("Bank");
 
-        lihatButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lihatButton.setFont(new java.awt.Font("Dialog", 0, 12));
         lihatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Search.gif"))); // NOI18N
         lihatButton.setMnemonic('S');
         lihatButton.setText("Lihat");
@@ -132,7 +142,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
         });
 
         bankCombo.setEditable(true);
-        bankCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        bankCombo.setFont(new java.awt.Font("Arial", 0, 11));
         bankCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bankComboActionPerformed(evt);
@@ -144,17 +154,17 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
             }
         });
 
-        namaBankLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaBankLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         namaBankLabel.setText("Nama Bank");
 
-        nilaiNamaBankLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaBankLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nilaiNamaBankLabel.setText("Nilai Nama Department");
 
-        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nipLabel.setText("NIP");
 
         nipCombo1.setEditable(true);
-        nipCombo1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        nipCombo1.setFont(new java.awt.Font("Arial", 0, 11));
         nipCombo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nipCombo1ActionPerformed(evt);
@@ -167,7 +177,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
         });
 
         nipCombo2.setEditable(true);
-        nipCombo2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        nipCombo2.setFont(new java.awt.Font("Arial", 0, 11));
         nipCombo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nipCombo2ActionPerformed(evt);
@@ -179,8 +189,17 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
             }
         });
 
-        nipLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nipLabel1.setFont(new java.awt.Font("Dialog", 0, 12));
         nipLabel1.setText("sampai");
+
+        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
+        cetakButton.setText("Cetak");
+        cetakButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cetakButtonActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
@@ -194,7 +213,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
                             .add(inputPanelLayout.createSequentialGroup()
                                 .add(kodeBankLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(28, 28, 28))
-                            .add(namaBankLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(namaBankLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(inputPanelLayout.createSequentialGroup()
@@ -207,8 +226,10 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
                                 .add(tahunYearChooser1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
                             .add(nilaiNamaBankLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(24, 24, 24))
                     .add(inputPanelLayout.createSequentialGroup()
                         .add(nipLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(34, 34, 34)
@@ -217,7 +238,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
                         .add(nipLabel1)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(nipCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(0, 0, Short.MAX_VALUE)))
+                        .add(0, 301, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         inputPanelLayout.setVerticalGroup(
@@ -243,7 +264,9 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
                     .add(nipCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(nipLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(cetakButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -256,7 +279,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         transferTable.setAutoCreateRowSorter(true);
-        transferTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        transferTable.setFont(new java.awt.Font("Arial", 0, 11));
         transferTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -290,13 +313,13 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
         transferTable.getColumnModel().getColumn(3).setResizable(false);
         transferTable.getColumnModel().getColumn(3).setPreferredWidth(200);
 
-        totalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        totalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         totalLabel.setText("Total");
 
-        nilaiTotalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiTotalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nilaiTotalLabel.setText("nilai total");
 
-        nilaiTotaTerbilangLabel.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        nilaiTotaTerbilangLabel.setFont(new java.awt.Font("Dialog", 2, 12));
         nilaiTotaTerbilangLabel.setText("nilai total terbilang");
 
         org.jdesktop.layout.GroupLayout daftarPermintaanTransferPanelLayout = new org.jdesktop.layout.GroupLayout(daftarPermintaanTransferPanel);
@@ -304,19 +327,18 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
         daftarPermintaanTransferPanelLayout.setHorizontalGroup(
             daftarPermintaanTransferPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(daftarPermintaanTransferPanelLayout.createSequentialGroup()
-                .add(360, 360, 360)
-                .add(totalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 263, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 263, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(daftarPermintaanTransferPanelLayout.createSequentialGroup()
                 .add(daftarPermintaanTransferPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(daftarPermintaanTransferPanelLayout.createSequentialGroup()
+                        .add(360, 360, 360)
+                        .add(totalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 263, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 263, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(daftarPermintaanTransferPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE))
                     .add(daftarPermintaanTransferPanelLayout.createSequentialGroup()
                         .add(360, 360, 360)
-                        .add(nilaiTotaTerbilangLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .add(nilaiTotaTerbilangLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         daftarPermintaanTransferPanelLayout.setVerticalGroup(
@@ -329,7 +351,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
                     .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(nilaiTotaTerbilangLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 19, Short.MAX_VALUE))
+                .add(0, 23, Short.MAX_VALUE))
         );
 
         daftarPermintaanTransferPanel.setBounds(0, 250, 920, 270);
@@ -339,10 +361,10 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18));
         menuLabel.setText("Menu Laporan Payroll Bank");
 
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         fungsiLabel.setText("Digunakan untuk melihat dan mencetak laporan payroll bank");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
@@ -433,6 +455,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 //    String department = bankCombo.getSelectedItem().toString();
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
+    double jumlah = 0;
     Date date = new Date();
 //        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
 //            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
@@ -451,9 +474,15 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     String nip2 = String.valueOf(nipCombo2.getSelectedItem());
     try {
         List<PayrollBankReport> payrollBankReports = DaoFactory.getPayrollBankDao().getPayrollBank(nip1, nip2, maxDayOfMonth);
-
+        for (int i = 0; i < payrollBankReports.size(); i++) {
+            jumlah = jumlah+payrollBankReports.get(i).getJumlahGaji();
+        }
+        
         PayrollBankReportTableModel model = new PayrollBankReportTableModel(payrollBankReports);
         transferTable.setModel(model);
+        nilaiTotalLabel.setText(ChangeFormatDoubleToString.getToString(jumlah));
+        FormatTerbilang ft=new FormatTerbilang();
+        nilaiTotaTerbilangLabel.setText(ft.FormatTerbilang(String.valueOf(jumlah)));
 
 
     } catch (SQLException ex) {
@@ -476,6 +505,83 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void nipCombo2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipCombo2KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_nipCombo2KeyPressed
+
+private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
+        if (!transferTable.isVisible()) {
+            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menekan Tombol Lihat Terlebih Dahulu\n"
+                    + "Untuk Melihat Hasil Rekap", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            try {
+                
+                String bulanS = null;
+//                String bulan = null;
+                switch (bulanMonthChooser.getMonth()) {
+                    case 0:
+                        bulanS = "Januari";
+                        break;
+                    case 1:
+                        bulanS = "Februari";
+                        break;
+                    case 2:
+                        bulanS = "Maret";
+                        break;
+                    case 3:
+                        bulanS = "April";
+                        break;
+                    case 4:
+                        bulanS = "Mei";
+                        break;
+                    case 5:
+                        bulanS = "Juni";
+                        break;
+                    case 6:
+                        bulanS = "Juli";
+                        break;
+                    case 7:
+                        bulanS = "Agustus";
+                        break;
+                    case 8:
+                        bulanS = "September";
+                        break;
+                    case 9:
+                        bulanS = "Oktober";
+                        break;
+                    case 10:
+                        bulanS = "November";
+                        break;
+                    case 11:
+                        bulanS = "Desember";
+                        break;
+                }
+                bulanS = bulanS+" "+tahunYearChooser1.getYear();
+                String nip1 = String.valueOf(nipCombo1.getSelectedItem());
+                String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+                String bank = String.valueOf(bankCombo.getSelectedItem());
+                String bln;
+                if(bulanMonthChooser.getMonth()+1<10)
+                    bln=tahunYearChooser1.getYear()+"-0"+(bulanMonthChooser.getMonth()+1);
+                else
+                    bln=tahunYearChooser1.getYear()+"-"+(bulanMonthChooser.getMonth()+1);
+                String terbilang = nilaiTotaTerbilangLabel.getText();
+
+                String reportSource = "./report/PayrollBank.jasper";
+                Map<String, Object> params = new HashMap<String, Object>();
+                params.put("nip1", nip1);
+                params.put("nip2", nip2);
+                params.put("bank", bank);
+                params.put("bulanString", bulanS);
+                params.put("bulan", bln);
+                params.put("terbilang", terbilang);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+                JasperViewer.viewReport(jasperPrint, false);
+            } catch (JRException ex) {
+                Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException SQLex) {
+                Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
+            }
+        }
+}//GEN-LAST:event_cetakButtonActionPerformed
     private void isitable() {
     }
 
@@ -506,6 +612,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JComboBox bankCombo;
     private javax.swing.JLabel bulanLabel;
     private com.toedter.calendar.JMonthChooser bulanMonthChooser;
+    private javax.swing.JButton cetakButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JPanel daftarPermintaanTransferPanel;
     private javax.swing.JLabel fungsiLabel;
