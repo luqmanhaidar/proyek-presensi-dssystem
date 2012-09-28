@@ -515,34 +515,42 @@ public class ShiftForm extends javax.swing.JFrame {
         shiftBaru.setNamaShift(namaShift);
         shiftBaru.setWaktuMulai(waktuMulai);
         shiftBaru.setWaktuSelesai(waktuSelesai);
-        if (!namaShiftTextField.getText().matches("") && !String.valueOf(kodeShiftCombo.getSelectedItem()).matches("")) {
-            if ("Simpan".equals(simpanButton.getText())) {
-                try {
-                    DaoFactory.getShiftDao().insert(shiftBaru);
-                    JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode \n"
-                            + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                    batalButton.doClick();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        char[] charArray = kodeShift.toCharArray();
+        if (!namaShiftTextField.getText().matches("") && !String.valueOf(kodeShiftCombo.getSelectedItem()).matches("") && kodeShiftCombo.getSelectedItem() != null) {
+            if (charArray.length > 5) {
+                JOptionPane.showMessageDialog(this, "Kode Shift Tidak Boleh \nLebih Dari 5 Karakter", "ERROR", JOptionPane.ERROR_MESSAGE);
+                kodeShiftCombo.requestFocus();
             } else {
-                try {
-                    Shift shiftLama = DaoFactory.getShiftDao().getByKode(kodeShift);
-                    shiftLama.setKodeShift(kodeShift);
-                    shiftLama.setNamaShift(namaShift);
-                    shiftLama.setWaktuMulai(waktuMulai);
-                    shiftLama.setWaktuSelesai(waktuSelesai);
-                    DaoFactory.getShiftDao().update(shiftLama);
-                    JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode\n"
-                            + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                if ("Simpan".equals(simpanButton.getText())) {
 
-                    batalButton.doClick();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                    try {
+                        DaoFactory.getShiftDao().insert(shiftBaru);
+                        JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode \n"
+                                + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                        batalButton.doClick();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                } else {
+                    try {
+                        Shift shiftLama = DaoFactory.getShiftDao().getByKode(kodeShift);
+                        shiftLama.setKodeShift(kodeShift);
+                        shiftLama.setNamaShift(namaShift);
+                        shiftLama.setWaktuMulai(waktuMulai);
+                        shiftLama.setWaktuSelesai(waktuSelesai);
+                        DaoFactory.getShiftDao().update(shiftLama);
+                        JOptionPane.showMessageDialog(this, "Data Shift Kerja Dengan Kode\n"
+                                + "<html><font color=#FF0000>" + kodeShift + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                        batalButton.doClick();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
-        } else if (String.valueOf(kodeShiftCombo.getSelectedItem()).matches("")) {
+        } else if (String.valueOf(kodeShiftCombo.getSelectedItem()).matches("") || kodeShiftCombo.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Kode Shift Belum Diisi");
             kodeShiftCombo.requestFocus();
         } else {

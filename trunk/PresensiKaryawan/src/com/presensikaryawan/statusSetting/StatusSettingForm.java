@@ -386,7 +386,8 @@ public class StatusSettingForm extends javax.swing.JFrame {
         StatusSetting statusSettingBaru = new StatusSetting();
         statusSettingBaru.setKodeStatus(kodeStatus);
         statusSettingBaru.setKeteranganStatus(keteranganStatus);
-        if (!keteranganStatusTextField.getText().matches("") && !String.valueOf(kodeStatusCombo.getSelectedItem()).matches("")) {
+        if (!keteranganStatusTextField.getText().matches("") && !String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") && kodeStatusCombo.getSelectedItem()!=null) {
+            System.out.println("jamban");
             if ("Simpan".equals(simpanButton.getText())) {
                 try {
                     DaoFactory.getStatusSettingDao().insert(statusSettingBaru);
@@ -411,7 +412,7 @@ public class StatusSettingForm extends javax.swing.JFrame {
                     ex.printStackTrace();
                 }
             }
-        } else if (String.valueOf(kodeStatusCombo.getSelectedItem()).matches("")) {
+        } else if (String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") || kodeStatusCombo.getSelectedItem()==null) {
             JOptionPane.showMessageDialog(this, "Kode Status Belum Diisi");
             kodeStatusCombo.requestFocus();
         } else {

@@ -384,35 +384,42 @@ public class PosisiForm extends javax.swing.JFrame {
         Posisi posisiBaru = new Posisi();
         posisiBaru.setKode_posisi(kodePosisi);
         posisiBaru.setNama_posisi(namaPosisi);
-        if (!namaPosisiTextField.getText().matches("") && !String.valueOf(kodePosisiCombo.getSelectedItem()).matches("")) {
-            if ("Simpan".equals(simpanButton.getText())) {
-                try {
-                    DaoFactory.getPosisiDao().insert(posisiBaru);
-                    JOptionPane.showMessageDialog(this, "Data Posisi Karyawan Dengan Kode \n"
-                            + "<html><font color=#FF0000>" + kodePosisi + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                    batalButton.doClick();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        char[] charArray = kodePosisi.toCharArray();
+        if (!namaPosisiTextField.getText().matches("") && !String.valueOf(kodePosisiCombo.getSelectedItem()).matches("")
+                && kodePosisiCombo.getSelectedItem() != null) {
+            if (charArray.length > 5) {
+                JOptionPane.showMessageDialog(this, "Kode Posisi Tidak Boleh \nLebih Dari 5 Karakter", "ERROR", JOptionPane.ERROR_MESSAGE);
+                kodePosisiCombo.requestFocus();
             } else {
-                try {
-                    Posisi posisiLama = DaoFactory.getPosisiDao().getByKode(kodePosisi);
-                    posisiLama.setKode_posisi(kodePosisi);
-                    posisiLama.setNama_posisi(namaPosisi);
-                    DaoFactory.getPosisiDao().update(posisiLama);
-                    JOptionPane.showMessageDialog(this, "Data Posisi Karyawan Dengan Kode\n"
-                            + "<html><font color=#FF0000>" + kodePosisi + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                if ("Simpan".equals(simpanButton.getText())) {
+                    try {
+                        DaoFactory.getPosisiDao().insert(posisiBaru);
+                        JOptionPane.showMessageDialog(this, "Data Posisi Karyawan Dengan Kode \n"
+                                + "<html><font color=#FF0000>" + kodePosisi + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
-                    batalButton.doClick();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                        batalButton.doClick();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    try {
+                        Posisi posisiLama = DaoFactory.getPosisiDao().getByKode(kodePosisi);
+                        posisiLama.setKode_posisi(kodePosisi);
+                        posisiLama.setNama_posisi(namaPosisi);
+                        DaoFactory.getPosisiDao().update(posisiLama);
+                        JOptionPane.showMessageDialog(this, "Data Posisi Karyawan Dengan Kode\n"
+                                + "<html><font color=#FF0000>" + kodePosisi + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                        batalButton.doClick();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
-        } else if (String.valueOf(kodePosisiCombo.getSelectedItem()).matches("")) {
-            JOptionPane.showMessageDialog(this, "Kode Posisi Belum Diisi");
+        } else if (String.valueOf(kodePosisiCombo.getSelectedItem()).matches("") || kodePosisiCombo.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Kode Posisi Belum Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
             kodePosisiCombo.requestFocus();
-        } else {
+        } else if (String.valueOf(namaPosisiTextField.getText()).matches("")||namaPosisiTextField.getText()==null){
             JOptionPane.showMessageDialog(this, "Nama Posisi Belum Disii");
             namaPosisiTextField.requestFocus();
         }
