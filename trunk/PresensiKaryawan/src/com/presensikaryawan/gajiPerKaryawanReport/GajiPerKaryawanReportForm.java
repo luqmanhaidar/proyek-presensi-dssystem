@@ -11,6 +11,8 @@ import com.presensikaryawan.golongan.Golongan;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -41,12 +43,22 @@ public class GajiPerKaryawanReportForm extends javax.swing.JFrame {
     private TransaksiDepartment activeTransaksiDepartment;
     private Department activeDepartment;
     GregorianCalendar gc = new GregorianCalendar();
+    private JFrame frame;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public GajiPerKaryawanReportForm() throws SQLException {
+    public GajiPerKaryawanReportForm(final JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            frame.setEnabled(true);
+            
+            }
+        });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //         Tampilan();
 //         isitable();
@@ -391,8 +403,9 @@ public class GajiPerKaryawanReportForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-
+    frame.setEnabled(true);
     this.dispose();
+    
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
 private void nipComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipComboKeyPressed
@@ -490,7 +503,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             @Override
             public void run() {
                 try {
-                    new GajiPerKaryawanReportForm().setVisible(true);
+                    new GajiPerKaryawanReportForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

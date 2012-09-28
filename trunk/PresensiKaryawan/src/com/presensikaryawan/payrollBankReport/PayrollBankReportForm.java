@@ -40,12 +40,14 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
     private TransaksiDepartment activeTransaksiDepartment;
     private Department activeDepartment;
     GregorianCalendar gc = new GregorianCalendar();
+    private JFrame frame;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public PayrollBankReportForm() throws SQLException {
+    public PayrollBankReportForm(JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        Tampilan();
         // isitable();
@@ -416,7 +418,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-
+    frame.setEnabled(true);
     this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -601,7 +603,7 @@ private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             @Override
             public void run() {
                 try {
-                    new PayrollBankReportForm().setVisible(true);
+                    new PayrollBankReportForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

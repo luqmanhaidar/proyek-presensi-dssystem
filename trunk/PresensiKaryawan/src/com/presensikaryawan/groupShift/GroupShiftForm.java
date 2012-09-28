@@ -7,6 +7,8 @@ import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,12 +28,21 @@ public class GroupShiftForm extends javax.swing.JFrame {
 
     private DaoFactory service;
     private GroupShift activeGroupShift;
-
+    private JFrame frame;
     /**
      * Creates new form masterInventoryGrup
      */
-    public GroupShiftForm() throws SQLException {
+    public GroupShiftForm(final JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            frame.setEnabled(true);
+            
+            }
+        });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        UIManager.put("nimbusControl",new Color(153,255,153));
 //        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
@@ -830,7 +841,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-
+        frame.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -1107,7 +1118,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new GroupShiftForm().setVisible(true);
+                    new GroupShiftForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -285,7 +285,7 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemTransaksiPresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaksiPresensiActionPerformed
         try {
             // TODO add your handling code here:
-            RekapPresensiForm rekapPresensiForm=new RekapPresensiForm();
+            RekapPresensiForm rekapPresensiForm=new RekapPresensiForm(this);
             rekapPresensiForm.setVisible(true);
             rekapPresensiForm.setAlwaysOnTop(true);
             this.setEnabled(false);
@@ -297,8 +297,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemTransaksiGajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaksiGajiActionPerformed
         try {
             // TODO add your handling code here:
-        TransaksiDepartmentForm transaksiDepartmentForm=new TransaksiDepartmentForm();
+        TransaksiDepartmentForm transaksiDepartmentForm=new TransaksiDepartmentForm(this);
         transaksiDepartmentForm.setVisible(true);
+        transaksiDepartmentForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -308,8 +310,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemPayrollBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPayrollBankActionPerformed
         try {
             // TODO add your handling code here:
-            PayrollBankReportForm payrollBankReportForm=new PayrollBankReportForm();
+            PayrollBankReportForm payrollBankReportForm=new PayrollBankReportForm(this);
             payrollBankReportForm.setVisible(true);
+            payrollBankReportForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -318,8 +322,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemLaporanGajiTotalReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemLaporanGajiTotalReportActionPerformed
         try {
             // TODO add your handling code here:
-            TransaksiGajiDepartmentReportForm transaksiGajiDepartmentReportForm= new TransaksiGajiDepartmentReportForm();
+            TransaksiGajiDepartmentReportForm transaksiGajiDepartmentReportForm= new TransaksiGajiDepartmentReportForm(this);
             transaksiGajiDepartmentReportForm.setVisible(true);
+            transaksiGajiDepartmentReportForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,8 +334,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterGolonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterGolonganActionPerformed
         try {
             // TODO add your handling code here:
-            GolonganForm golonganForm=new GolonganForm();
+            GolonganForm golonganForm=new GolonganForm(this);
             golonganForm.setVisible(true);
+            golonganForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -338,8 +346,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterShiftActionPerformed
         try {
             // TODO add your handling code here:
-            ShiftForm shiftForm=new ShiftForm();
+            ShiftForm shiftForm=new ShiftForm(this);
             shiftForm.setVisible(true);
+            shiftForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -353,8 +363,10 @@ public class MainForm extends javax.swing.JFrame {
     private void meuItemSlipGajiReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meuItemSlipGajiReportActionPerformed
         try {
             // TODO add your handling code here:
-            GajiPerKaryawanReportForm gajiPerKaryawanReportForm=new GajiPerKaryawanReportForm();
+            GajiPerKaryawanReportForm gajiPerKaryawanReportForm=new GajiPerKaryawanReportForm(this);
             gajiPerKaryawanReportForm.setVisible(true);
+            gajiPerKaryawanReportForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -363,8 +375,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemRekapPresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRekapPresensiActionPerformed
         try {
             // TODO add your handling code here:
-            RekapPresensiPerBulanForm rekapPresensiPerBulanForm=new RekapPresensiPerBulanForm();
+            RekapPresensiPerBulanForm rekapPresensiPerBulanForm=new RekapPresensiPerBulanForm(this);
             rekapPresensiPerBulanForm.setVisible(true);
+            rekapPresensiPerBulanForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -373,8 +387,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemHistoryGajiReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemHistoryGajiReportActionPerformed
         try {
             // TODO add your handling code here:
-            RekapGajiForm rekapGajiForm=new RekapGajiForm();
+            RekapGajiForm rekapGajiForm=new RekapGajiForm(this);
             rekapGajiForm.setVisible(true);
+            rekapGajiForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -383,8 +399,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterDepartmentActionPerformed
         try {
             // TODO add your handling code here:
-            DepartmentForm departmentForm= new DepartmentForm();
+            DepartmentForm departmentForm= new DepartmentForm(this);
             departmentForm.setVisible(true);
+            departmentForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -393,8 +411,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterOutletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterOutletActionPerformed
         try {
             // TODO add your handling code here:
-            OutletForm outletForm=new OutletForm();
+            OutletForm outletForm=new OutletForm(this);
             outletForm.setVisible(true);
+            outletForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -403,8 +423,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterPosisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterPosisiActionPerformed
         try {
             // TODO add your handling code here:
-            PosisiForm posisiForm=new PosisiForm();
+            PosisiForm posisiForm=new PosisiForm(this);
             posisiForm.setVisible(true);
+            posisiForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -413,8 +435,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterGroupShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterGroupShiftActionPerformed
         try {
             // TODO add your handling code here:
-            GroupShiftForm groupShiftForm=new GroupShiftForm();
+            GroupShiftForm groupShiftForm=new GroupShiftForm(this);
             groupShiftForm.setVisible(true);
+            groupShiftForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -423,8 +447,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterStatusActionPerformed
         try {
             // TODO add your handling code here:
-            StatusSettingForm statusSettingForm=new StatusSettingForm();
+            StatusSettingForm statusSettingForm=new StatusSettingForm(this);
             statusSettingForm.setVisible(true);
+            statusSettingForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -433,8 +459,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterKaryawanActionPerformed
         try {
             // TODO add your handling code here:
-            KaryawanForm karyawanForm= new KaryawanForm();
+            KaryawanForm karyawanForm= new KaryawanForm(this);
             karyawanForm.setVisible(true);
+            karyawanForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -443,8 +471,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterLiburNasionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterLiburNasionalActionPerformed
         try {
             // TODO add your handling code here:
-            LiburNasionalForm liburNasionalForm=new LiburNasionalForm();
+            LiburNasionalForm liburNasionalForm=new LiburNasionalForm(this);
             liburNasionalForm.setVisible(true);
+            liburNasionalForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -453,8 +483,10 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemMasterLiburPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterLiburPerusahaanActionPerformed
         try {
             // TODO add your handling code here:
-            LiburPerusahaanForm liburPerusahaanForm=new LiburPerusahaanForm();
+            LiburPerusahaanForm liburPerusahaanForm=new LiburPerusahaanForm(this);
             liburPerusahaanForm.setVisible(true);
+            liburPerusahaanForm.setAlwaysOnTop(true);
+            this.setEnabled(false);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -9,6 +9,8 @@ import com.presensikaryawan.posisi.*;
 import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -37,12 +39,22 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
 
     private Posisi activePosisi;
     private Department activeDepartment;
+    private JFrame frame;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public RekapPresensiPerBulanForm() throws SQLException {
+    public RekapPresensiPerBulanForm(final JFrame frame) throws SQLException {
         initComponents();
+        this.frame=frame;
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            frame.setEnabled(true);
+            
+            }
+        });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
@@ -456,6 +468,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
 
     private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
         // TODO add your handling code here:
+        frame.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_keluarButtonActionPerformed
 
@@ -501,7 +514,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new RekapPresensiPerBulanForm().setVisible(true);
+                    new RekapPresensiPerBulanForm(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(RekapPresensiPerBulanForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
