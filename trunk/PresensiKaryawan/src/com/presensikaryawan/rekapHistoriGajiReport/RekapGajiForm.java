@@ -1,7 +1,6 @@
 package com.presensikaryawan.rekapHistoriGajiReport;
 
 import com.dssystem.umum.ChangeFormatDoubleToString;
-import com.dssystem.umum.ComponentFocus;
 import com.presensikaryawan.departmentSetting.Department;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.tools.DaoFactory;
@@ -21,7 +20,6 @@ import javax.swing.*;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 /*
@@ -38,18 +36,19 @@ public class RekapGajiForm extends javax.swing.JFrame {
     private Karyawan activeKaryawan;
     private Department activeDepartment;
     private JFrame frame;
+
     /**
      * Creates new form masterInventoryGrup
      */
     public RekapGajiForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -404,9 +403,9 @@ public class RekapGajiForm extends javax.swing.JFrame {
     private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
         // TODO add your handling code here:
         Date date = new Date();
-//        if (yearChooser.getYear() >= (date.getYear() + 1900)) {
-//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
+        if (yearChooser.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
         GregorianCalendar gc = new GregorianCalendar();
         String nip = String.valueOf(nipCombo.getSelectedItem());
         String tahun = String.valueOf(yearChooser.getYear());
@@ -435,7 +434,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
             String totalGajiString = ChangeFormatDoubleToString.getToString(totalGaji);
             nilaiTotalLabel.setText(totalGajiString);
         } catch (SQLException ex) {
-//            }
+            }
         }
     }//GEN-LAST:event_lihatButtonActionPerformed
 
@@ -443,7 +442,6 @@ public class RekapGajiForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String golongan = null;
         if (nipCombo.getSelectedItem() != null) {
-           
         }
     }//GEN-LAST:event_nipComboActionPerformed
 
@@ -476,7 +474,6 @@ public class RekapGajiForm extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);

@@ -40,13 +40,13 @@ public class LiburNasionalForm extends javax.swing.JFrame {
      */
     public LiburNasionalForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -347,7 +347,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         String keterangan = keteranganTextField.getText();
         activeLiburNasional.setTanggal(tanggal);
         activeLiburNasional.setKeterangan(keterangan);
-        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Tanggal : \n"+"<html><font color=#FF0000>" + sdf.format(tanggalDateChooser.getDate()) + "</font></html>", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Tanggal : \n" + "<html><font color=#FF0000>" + sdf.format(tanggalDateChooser.getDate()) + "</font></html>", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
                 DaoFactory.getLiburNasionalDao().delete(activeLiburNasional);
@@ -407,10 +407,10 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 }
             } else {
                 try {
-                    LiburNasional liburNasionalLama = service.getLiburNasionalDao().getByTanggalLibur(tanggal);
+                    LiburNasional liburNasionalLama = DaoFactory.getLiburNasionalDao().getByTanggalLibur(tanggal);
                     liburNasionalLama.setTanggal(tanggal);
                     liburNasionalLama.setKeterangan(keterangan);
-                    service.getLiburNasionalDao().update(liburNasionalLama);
+                    DaoFactory.getLiburNasionalDao().update(liburNasionalLama);
                     JOptionPane.showMessageDialog(this, "Data Dengan Tanggal\n"
                             + "<html><font color=#FF0000>" + sdf.format(tanggalDateChooser.getDate()) + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
@@ -444,7 +444,7 @@ public class LiburNasionalForm extends javax.swing.JFrame {
         keteranganTextField.setText(liburNasional.getKeterangan());
         String pilih = DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
         try {
-            activeLiburNasional = service.getLiburNasionalDao().getByTanggalLibur(pilih);
+            activeLiburNasional = DaoFactory.getLiburNasionalDao().getByTanggalLibur(pilih);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -494,14 +494,14 @@ public class LiburNasionalForm extends javax.swing.JFrame {
                 hapusButton.setEnabled(false);
                 simpanButton.setText("Simpan");
                 simpanButton.setMnemonic('S');
-            }else{
+            } else {
                 simpanButton.setEnabled(true);
                 keteranganTextField.setText(liburNasional.getKeterangan());
-                
+
             }
             List<LiburNasional> liburNasionals = null;
             try {
-                liburNasionals = service.getLiburNasionalDao().getAllLiburNasional();
+                liburNasionals = DaoFactory.getLiburNasionalDao().getAllLiburNasional();
             } catch (SQLException ex) {
                 Logger.getLogger(LiburNasionalForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -518,7 +518,7 @@ private void tanggalDateChooserPropertyChange(java.beans.PropertyChangeEvent evt
 // TODO add your handling code here:
     String pilih = DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
     try {
-        activeLiburNasional = service.getLiburNasionalDao().getByTanggalLibur(pilih);
+        activeLiburNasional = DaoFactory.getLiburNasionalDao().getByTanggalLibur(pilih);
     } catch (Exception ex) {
         ex.printStackTrace();
     }

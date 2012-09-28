@@ -1,10 +1,9 @@
 package com.presensikaryawan.groupShift;
 
-import com.presensikaryawan.shiftSetting.*;
-import com.presensikaryawan.posisi.*;
-import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
+import com.presensikaryawan.shiftSetting.*;
+import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
@@ -29,23 +28,22 @@ public class GroupShiftForm extends javax.swing.JFrame {
     private DaoFactory service;
     private GroupShift activeGroupShift;
     private JFrame frame;
+
     /**
      * Creates new form masterInventoryGrup
      */
     public GroupShiftForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
-//        UIManager.put("nimbusControl",new Color(153,255,153));
-//        UIManager.put("nimbusBlueGrey", new Color(204,204,255));
 //        Tampilan();
         // isitable();
         initComponentFocus();
@@ -54,7 +52,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
         GroupShiftDao dao = DaoFactory.getGroupShiftDao();
         List<GroupShift> groupShifts = dao.getAllGroupShift();
         GroupShiftTableModel model = new GroupShiftTableModel(groupShifts);
-        
+
         groupShiftTable.setModel(model);
         groupShiftTable.getColumnModel().getColumn(0).setPreferredWidth(100);
         groupShiftTable.getColumnModel().getColumn(1).setPreferredWidth(200);

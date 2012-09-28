@@ -13,17 +13,10 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 /*
  * masterInventoryGrup.java
@@ -45,13 +38,13 @@ public class RekapPresensiForm extends javax.swing.JFrame {
      */
     public RekapPresensiForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -355,7 +348,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
         int row = presenstiTable.getSelectedRow();
         String kodegroup = presenstiTable.getValueAt(row, 1).toString();
         String namagroup = presenstiTable.getValueAt(row, 2).toString();
-        String kodedepartment=String.valueOf(departmentCombo.getSelectedItem());
+        String kodedepartment = String.valueOf(departmentCombo.getSelectedItem());
         String bulan;
         if (monthChooser.getMonth() + 1 < 10) {
             bulan = "0" + String.valueOf(monthChooser.getMonth() + 1);
@@ -380,56 +373,6 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
         frame.setEnabled(true);
         this.dispose();
-        //        try {
-//            String bulan = null;
-//            switch (monthChooser.getMonth()) {
-//                case 0:
-//                    bulan = "JANUARI";
-//                    break;
-//                case 1:
-//                    bulan = "FEBRUARI";
-//                    break;
-//                case 2:
-//                    bulan = "MARET";
-//                    break;
-//                case 3:
-//                    bulan = "APRIL";
-//                    break;
-//                case 4:
-//                    bulan = "MEI";
-//                    break;
-//                case 5:
-//                    bulan = "JUNI";
-//                    break;
-//                case 6:
-//                    bulan = "JULI";
-//                    break;
-//                case 7:
-//                    bulan = "AGUSTUS";
-//                    break;
-//                case 8:
-//                    bulan = "SEPTEMBER";
-//                    break;
-//                case 9:
-//                    bulan = "OKTOBER";
-//                    break;
-//                case 10:
-//                    bulan = "NOVEMBER";
-//                    break;
-//                case 11:
-//                    bulan = "DESEMBER";
-//                    break;
-//            }
-//            bulan = bulan + " " + String.valueOf(yearChooser.getYear());
-//            String reportSource = "./report/rekapReport.jasper";
-//            Map<String, Object> params = new HashMap<String, Object>();
-//            params.put("bulan", bulan);
-//            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, new JRTableModelDataSource(presenstiTable.getModel()));
-//            JasperViewer.viewReport(jasperPrint, false);
-//        } catch (JRException ex) {
-//            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
 }//GEN-LAST:event_keluarButtonActionPerformed
 
     private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
@@ -462,9 +405,9 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     private void prosesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prosesButtonActionPerformed
         // TODO add your handling code here:
         Date date = new Date();
-//        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
-//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
+        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
             GregorianCalendar gc = new GregorianCalendar();
             gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
             String year = String.valueOf(yearChooser.getYear());
@@ -485,7 +428,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
                 presenstiTable.setModel(model);
                 presenstiTable.setVisible(true);
             } catch (SQLException ex) {
-//            }
+            }
 
         }
     }//GEN-LAST:event_prosesButtonActionPerformed
@@ -496,7 +439,6 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);

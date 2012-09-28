@@ -1,10 +1,10 @@
 package com.presensikaryawan.liburPerusahaan;
 
-import com.presensikaryawan.karyawan.*;
-import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
 import com.dssystem.umum.DateTool;
+import com.presensikaryawan.karyawan.*;
+import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
@@ -34,18 +34,19 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     private LiburPerusahaan activeLiburPerusahaan;
     private GregorianCalendar gc = new GregorianCalendar();
     private JFrame frame;
+
     /**
      * Creates new form masterInventoryGrup
      */
     public LiburPerusahaanForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-            frame.setEnabled(true);
-            
+                frame.setEnabled(true);
+
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -375,29 +376,6 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
             Logger.getLogger(LiburPerusahaanForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         tanggalDateChooser.setDate(tanggal);
-//        System.out.println(tanggal.getDay());
-//        switch (tanggal.getDay()){
-//            case 0:
-//                System.out.println("Sunday");
-//                break;
-//            case 1:
-//                System.out.println("Monday");
-//                break;
-//            case 2:
-//                System.out.println("Tuesday");
-//                break;
-//            case 3:
-//                System.out.println("Wednesday");
-//                break;
-//            case 4:
-//                System.out.println("Thursday");
-//                break;
-//            case 5:
-//                System.out.println("Friday");
-//            case 6:
-//                System.out.println("Saturday");
-//                break;
-//        }
     }//GEN-LAST:event_liburPerusahaanTableMouseClicked
     private void isitable() {
     }
@@ -411,7 +389,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String keterangan = keteranganTextField.getText();
         LiburPerusahaan liburPerusahaanBaru = new LiburPerusahaan();
-       
+
         if (tanggalDateChooser.getDate() != null && !keterangan.matches("")) {
             liburPerusahaanBaru.setKeterangan(keterangan);
             String tanggal = sdf.format(tanggalDateChooser.getDate());
@@ -467,7 +445,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
         keteranganTextField.setText(liburPerusahaan.getKeterangan());
         String pilih = DateTool.dateToString(tanggalDateChooser.getDate(), "yyyy-MM-dd");
         try {
-            activeLiburPerusahaan = service.getLiburPerusahaanDao().getByTanggal(pilih);
+            activeLiburPerusahaan = DaoFactory.getLiburPerusahaanDao().getByTanggal(pilih);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -524,7 +502,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
             }
             List<LiburPerusahaan> liburPerusahaans = null;
             try {
-                liburPerusahaans = service.getLiburPerusahaanDao().getAllLiburPerusahaan();
+                liburPerusahaans = DaoFactory.getLiburPerusahaanDao().getAllLiburPerusahaan();
             } catch (SQLException ex) {
                 Logger.getLogger(LiburPerusahaanForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -544,7 +522,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
             String tanggal = sdf.format(tanggalDateChooser.getDate());
 
             try {
-                activeLiburPerusahaan = service.getLiburPerusahaanDao().getByTanggal(tanggal);
+                activeLiburPerusahaan = DaoFactory.getLiburPerusahaanDao().getByTanggal(tanggal);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

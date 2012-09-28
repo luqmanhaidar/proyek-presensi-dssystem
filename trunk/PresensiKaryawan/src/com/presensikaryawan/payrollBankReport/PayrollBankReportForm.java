@@ -3,9 +3,7 @@ package com.presensikaryawan.payrollBankReport;
 import com.dssystem.umum.ChangeFormatDoubleToString;
 import com.dssystem.umum.ComponentFocus;
 import com.dssystem.umum.FormatTerbilang;
-import com.dssystem.umum.FormatTerbilangQuantity;
 import com.presensikaryawan.departmentSetting.Department;
-import com.presensikaryawan.detailtransaksidepartment.DetailLainDialog;
 import com.presensikaryawan.karyawan.Karyawan;
 import com.presensikaryawan.tools.DaoFactory;
 import com.presensikaryawan.transaksiDepartment.*;
@@ -45,9 +43,10 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
     /**
      * Creates new form masterInventoryGrup
      */
-    public PayrollBankReportForm(JFrame frame) throws SQLException {
+    public PayrollBankReportForm(final JFrame frame) throws SQLException {
         initComponents();
-        this.frame=frame;
+        this.setLocationRelativeTo(null);
+        this.frame = frame;
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        Tampilan();
         // isitable();
@@ -454,41 +453,41 @@ private void lihatButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_lihatButtonKeyPressed
 
 private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
-//    String department = bankCombo.getSelectedItem().toString();
+
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     double jumlah = 0;
     Date date = new Date();
-//        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
-//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            GregorianCalendar gc = new GregorianCalendar();
-    gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-    String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-    String maxDayOfMonth;
-    if (bulan < 10) {
-        maxDayOfMonth = tahun + "-0" + bulan;
+    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        maxDayOfMonth = tahun + "-" + bulan;
-    }
-    System.out.println(maxDayOfMonth);
-    String nip1 = String.valueOf(nipCombo1.getSelectedItem());
-    String nip2 = String.valueOf(nipCombo2.getSelectedItem());
-    try {
-        List<PayrollBankReport> payrollBankReports = DaoFactory.getPayrollBankDao().getPayrollBank(nip1, nip2, maxDayOfMonth);
-        for (int i = 0; i < payrollBankReports.size(); i++) {
-            jumlah = jumlah+payrollBankReports.get(i).getJumlahGaji();
+        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+        String maxDayOfMonth;
+        if (bulan < 10) {
+            maxDayOfMonth = tahun + "-0" + bulan;
+        } else {
+            maxDayOfMonth = tahun + "-" + bulan;
         }
-        
-        PayrollBankReportTableModel model = new PayrollBankReportTableModel(payrollBankReports);
-        transferTable.setModel(model);
-        nilaiTotalLabel.setText(ChangeFormatDoubleToString.getToString(jumlah));
-        FormatTerbilang ft=new FormatTerbilang();
-        nilaiTotaTerbilangLabel.setText(ft.FormatTerbilang(String.valueOf(jumlah)));
+        System.out.println(maxDayOfMonth);
+        String nip1 = String.valueOf(nipCombo1.getSelectedItem());
+        String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+        try {
+            List<PayrollBankReport> payrollBankReports = DaoFactory.getPayrollBankDao().getPayrollBank(nip1, nip2, maxDayOfMonth);
+            for (int i = 0; i < payrollBankReports.size(); i++) {
+                jumlah = jumlah + payrollBankReports.get(i).getJumlahGaji();
+            }
+
+            PayrollBankReportTableModel model = new PayrollBankReportTableModel(payrollBankReports);
+            transferTable.setModel(model);
+            nilaiTotalLabel.setText(ChangeFormatDoubleToString.getToString(jumlah));
+            FormatTerbilang ft = new FormatTerbilang();
+            nilaiTotaTerbilangLabel.setText(ft.FormatTerbilang(String.valueOf(jumlah)));
 
 
-    } catch (SQLException ex) {
-        Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
 
@@ -509,80 +508,80 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_nipCombo2KeyPressed
 
 private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        if (!transferTable.isVisible()) {
-            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menekan Tombol Lihat Terlebih Dahulu\n"
-                    + "Untuk Melihat Hasil Rekap", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            try {
-                
-                String bulanS = null;
-//                String bulan = null;
-                switch (bulanMonthChooser.getMonth()) {
-                    case 0:
-                        bulanS = "Januari";
-                        break;
-                    case 1:
-                        bulanS = "Februari";
-                        break;
-                    case 2:
-                        bulanS = "Maret";
-                        break;
-                    case 3:
-                        bulanS = "April";
-                        break;
-                    case 4:
-                        bulanS = "Mei";
-                        break;
-                    case 5:
-                        bulanS = "Juni";
-                        break;
-                    case 6:
-                        bulanS = "Juli";
-                        break;
-                    case 7:
-                        bulanS = "Agustus";
-                        break;
-                    case 8:
-                        bulanS = "September";
-                        break;
-                    case 9:
-                        bulanS = "Oktober";
-                        break;
-                    case 10:
-                        bulanS = "November";
-                        break;
-                    case 11:
-                        bulanS = "Desember";
-                        break;
-                }
-                bulanS = bulanS+" "+tahunYearChooser1.getYear();
-                String nip1 = String.valueOf(nipCombo1.getSelectedItem());
-                String nip2 = String.valueOf(nipCombo2.getSelectedItem());
-                String bank = String.valueOf(bankCombo.getSelectedItem());
-                String bln;
-                if(bulanMonthChooser.getMonth()+1<10)
-                    bln=tahunYearChooser1.getYear()+"-0"+(bulanMonthChooser.getMonth()+1);
-                else
-                    bln=tahunYearChooser1.getYear()+"-"+(bulanMonthChooser.getMonth()+1);
-                String terbilang = nilaiTotaTerbilangLabel.getText();
+    if (!transferTable.isVisible()) {
+        JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menekan Tombol Lihat Terlebih Dahulu\n"
+                + "Untuk Melihat Hasil Rekap", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        try {
 
-                String reportSource = "./report/PayrollBank.jasper";
-                Map<String, Object> params = new HashMap<String, Object>();
-                params.put("nip1", nip1);
-                params.put("nip2", nip2);
-                params.put("bank", bank);
-                params.put("bulanString", bulanS);
-                params.put("bulan", bln);
-                params.put("terbilang", terbilang);
-
-                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
-                JasperViewer.viewReport(jasperPrint, false);
-            } catch (JRException ex) {
-                Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException SQLex) {
-                Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
+            String bulanS = null;
+            switch (bulanMonthChooser.getMonth()) {
+                case 0:
+                    bulanS = "Januari";
+                    break;
+                case 1:
+                    bulanS = "Februari";
+                    break;
+                case 2:
+                    bulanS = "Maret";
+                    break;
+                case 3:
+                    bulanS = "April";
+                    break;
+                case 4:
+                    bulanS = "Mei";
+                    break;
+                case 5:
+                    bulanS = "Juni";
+                    break;
+                case 6:
+                    bulanS = "Juli";
+                    break;
+                case 7:
+                    bulanS = "Agustus";
+                    break;
+                case 8:
+                    bulanS = "September";
+                    break;
+                case 9:
+                    bulanS = "Oktober";
+                    break;
+                case 10:
+                    bulanS = "November";
+                    break;
+                case 11:
+                    bulanS = "Desember";
+                    break;
             }
+            bulanS = bulanS + " " + tahunYearChooser1.getYear();
+            String nip1 = String.valueOf(nipCombo1.getSelectedItem());
+            String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+            String bank = String.valueOf(bankCombo.getSelectedItem());
+            String bln;
+            if (bulanMonthChooser.getMonth() + 1 < 10) {
+                bln = tahunYearChooser1.getYear() + "-0" + (bulanMonthChooser.getMonth() + 1);
+            } else {
+                bln = tahunYearChooser1.getYear() + "-" + (bulanMonthChooser.getMonth() + 1);
+            }
+            String terbilang = nilaiTotaTerbilangLabel.getText();
+
+            String reportSource = "./report/PayrollBank.jasper";
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("nip1", nip1);
+            params.put("nip2", nip2);
+            params.put("bank", bank);
+            params.put("bulanString", bulanS);
+            params.put("bulan", bln);
+            params.put("terbilang", terbilang);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException ex) {
+            Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException SQLex) {
+            Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
         }
+    }
 }//GEN-LAST:event_cetakButtonActionPerformed
     private void isitable() {
     }
@@ -593,13 +592,11 @@ private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
-            //UIManager.setLookAndFeel(new smooth.windows.SmoothLookAndFeel());
 
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 try {
