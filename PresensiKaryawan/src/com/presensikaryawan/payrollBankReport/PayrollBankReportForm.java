@@ -9,6 +9,8 @@ import com.presensikaryawan.tools.DaoFactory;
 import com.presensikaryawan.transaksiDepartment.*;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -47,6 +49,13 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                frame.setEnabled(true);
+
+            }
+        });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        Tampilan();
         // isitable();
