@@ -35,6 +35,9 @@
 	<parameter name="department" isForPrompting="false" class="java.lang.String">
 		<defaultValueExpression ><![CDATA["001"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="bulanString" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["Januari 2012"]]></defaultValueExpression>
+	</parameter>
 	<queryString><![CDATA[select k.nip, k.nama, t.M, t.S, t.I, t.A, t.T, t.L from karyawan k, temptransaksidepartment t
 where k.nip = t.nip and k.kode_department = $P{department} 
 and t.bulan like $P{bulan};]]></queryString>
@@ -86,16 +89,16 @@ and t.bulan like $P{bulan};]]></queryString>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="88"
+						x="86"
 						y="38"
 						width="100"
 						height="18"
-						key="textField-1"/>
+						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{bulan}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{bulanString}]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageHeader>
