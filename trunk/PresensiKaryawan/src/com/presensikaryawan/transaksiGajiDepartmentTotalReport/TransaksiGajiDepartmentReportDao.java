@@ -15,15 +15,9 @@ import java.util.List;
  */
 public interface TransaksiGajiDepartmentReportDao {
 
-    Golongan getGolonganByNIP(String nip) throws SQLException;
+   
 
-    double getGajiKotor(String nip, String bulan) throws SQLException;
+    List<TransaksiGajiDepartmentReport> getAllTransaksiDepartment(String kode_department1, String kode_department2, String maxdate) throws SQLException;
 
-    List<TransaksiDepartment> getAllTransaksiDepartment(String department, int bulan, int tahun) throws SQLException;
 
-    List<TransaksiDepartment> getAllTransaksiDepartment(String kode_department1, String kode_department2, String maxdate) throws SQLException;
-
-    void insertTemp(List<TransaksiDepartment> list, String department, String bulantahun) throws SQLException;
-
-    void updatePotongan(String nip, String bulan, double potongan, double prestasi) throws SQLException;
 }

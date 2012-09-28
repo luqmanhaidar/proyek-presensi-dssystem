@@ -11,10 +11,16 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * masterInventoryGrup.java
@@ -116,7 +122,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
 
         desktopPaneTransaksiDepartment.setBackground(new java.awt.Color(153, 255, 153));
 
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,13 +135,13 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         namaKaryawanLabel.setText("Bulan");
 
-        departmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        departmentLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         departmentLabel.setText("Department");
 
-        lihatButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lihatButton.setFont(new java.awt.Font("Dialog", 0, 12));
         lihatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Search.gif"))); // NOI18N
         lihatButton.setMnemonic('S');
         lihatButton.setText("Lihat");
@@ -152,7 +158,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
         });
 
         departmentCombo1.setEditable(true);
-        departmentCombo1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        departmentCombo1.setFont(new java.awt.Font("Arial", 0, 11));
         departmentCombo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 departmentCombo1ActionPerformed(evt);
@@ -164,20 +170,20 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
             }
         });
 
-        namaDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        namaDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         namaDepartmentLabel.setText("Nama Department");
 
-        nilaiNamaDepartment1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaDepartment1.setFont(new java.awt.Font("Dialog", 0, 12));
         nilaiNamaDepartment1.setText("Nilai Nama Department");
 
-        sampaiLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        sampaiLabel1.setFont(new java.awt.Font("Dialog", 0, 12));
         sampaiLabel1.setText("sampai");
 
-        sampaiLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        sampaiLabel2.setFont(new java.awt.Font("Dialog", 0, 12));
         sampaiLabel2.setText("      -");
 
         departmentCombo2.setEditable(true);
-        departmentCombo2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        departmentCombo2.setFont(new java.awt.Font("Arial", 0, 11));
         departmentCombo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 departmentCombo2ActionPerformed(evt);
@@ -189,10 +195,10 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
             }
         });
 
-        nilaiNamaDepartment2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiNamaDepartment2.setFont(new java.awt.Font("Dialog", 0, 12));
         nilaiNamaDepartment2.setText("Nilai Nama Department");
 
-        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12));
         cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
         cetakButton.setMnemonic('S');
         cetakButton.setText("Cetak");
@@ -235,7 +241,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(inputPanelLayout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
+                        .add(0, 25, Short.MAX_VALUE)
                         .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -271,12 +277,11 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 31, Short.MAX_VALUE)
                         .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
+                            .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(inputPanelLayout.createSequentialGroup()
                         .add(1, 1, 1)
-                        .add(departmentCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .add(departmentCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         inputPanel.setBounds(0, 70, 1020, 170);
@@ -288,20 +293,20 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         karyawanTable.setAutoCreateRowSorter(true);
-        karyawanTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        karyawanTable.setFont(new java.awt.Font("Arial", 0, 11));
         karyawanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "NO", "NIP", "NAMA", "M", "S", "I", "A", "T", "L", "POKOK", "MAKAN", "HADIR", "LEMBUR", "LAIN", "P. TELAT", "P. LAIN", "TOTAL"
+                "NO", "NAMA DEPARTMENT", "NIP", "NAMA", "M", "S", "I", "A", "T", "L", "POKOK", "MAKAN", "HADIR", "LEMBUR", "LAIN", "P. TELAT", "P. LAIN", "TOTAL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -321,11 +326,10 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
         karyawanTable.getColumnModel().getColumn(0).setResizable(false);
         karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
         karyawanTable.getColumnModel().getColumn(1).setResizable(false);
-        karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         karyawanTable.getColumnModel().getColumn(2).setResizable(false);
-        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(150);
         karyawanTable.getColumnModel().getColumn(3).setResizable(false);
-        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(200);
         karyawanTable.getColumnModel().getColumn(4).setResizable(false);
         karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
         karyawanTable.getColumnModel().getColumn(5).setResizable(false);
@@ -337,7 +341,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
         karyawanTable.getColumnModel().getColumn(8).setResizable(false);
         karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
         karyawanTable.getColumnModel().getColumn(9).setResizable(false);
-        karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(70);
         karyawanTable.getColumnModel().getColumn(10).setResizable(false);
         karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
         karyawanTable.getColumnModel().getColumn(11).setResizable(false);
@@ -352,6 +356,8 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
         karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
         karyawanTable.getColumnModel().getColumn(16).setResizable(false);
         karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(17).setResizable(false);
+        karyawanTable.getColumnModel().getColumn(17).setPreferredWidth(150);
 
         org.jdesktop.layout.GroupLayout daftarKaryawanPanelLayout = new org.jdesktop.layout.GroupLayout(daftarKaryawanPanel);
         daftarKaryawanPanel.setLayout(daftarKaryawanPanelLayout);
@@ -366,7 +372,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
             daftarKaryawanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(daftarKaryawanPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         daftarKaryawanPanel.setBounds(0, 240, 1020, 240);
@@ -376,10 +382,10 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18));
         menuLabel.setText("Menu Transaksi Gaji Per Department");
 
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         fungsiLabel.setText("Digunakan untuk melihat dan mengedit data presensi dan gaji karyawan per department");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
@@ -467,7 +473,8 @@ private void lihatButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_lihatButtonKeyPressed
 
 private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
-    String department = departmentCombo1.getSelectedItem().toString();
+    String department = departmentCombo1.getSelectedItem().toString();                                          
+    String department2 = departmentCombo2.getSelectedItem().toString();
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
@@ -481,18 +488,18 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
     String maxDayOfMonth;
     if (bulan < 10) {
-        maxDayOfMonth = tahun + "-0" + bulan + "-" + day;
+        maxDayOfMonth = tahun + "-0" + bulan;
     } else {
-        maxDayOfMonth = tahun + "-" + bulan + "-" + day;
+        maxDayOfMonth = tahun + "-" + bulan;
     }
     System.out.println(maxDayOfMonth);
 //    System.out.println(department+" "+bulan+" "+ tahun);
     try {
-        TransaksiDepartmentDao dao = DaoFactory.getTransaksiDepartmentDao();
+        TransaksiGajiDepartmentReportDao dao = DaoFactory.getTransaksiGajiDepartmentReportDao();
 //        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, bulan, tahun);
-        List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
+        List<TransaksiGajiDepartmentReport> transaksiDepartments = dao.getAllTransaksiDepartment(department, department2, maxDayOfMonth);
 
-        TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
+        TransaksiGajiDepartmentReportTableModel model = new TransaksiGajiDepartmentReportTableModel(transaksiDepartments);
         karyawanTable.setModel(model);
         karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
         karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
@@ -571,6 +578,34 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
         // TODO add your handling code here:
+                if (!karyawanTable.isVisible()) {
+            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menekan Tombol Lihat Terlebih Dahulu\n"
+                    + "Untuk Melihat Hasil Rekap", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            try {
+
+                String dep1 = String.valueOf(departmentCombo1.getSelectedItem());
+                String dep2 = String.valueOf(departmentCombo2.getSelectedItem());
+                String bln;
+                if(bulanMonthChooser.getMonth()+1<10)
+                    bln=tahunYearChooser1.getYear()+"-0"+(bulanMonthChooser.getMonth()+1);
+                else
+                    bln=tahunYearChooser1.getYear()+"-"+(bulanMonthChooser.getMonth()+1);
+                System.out.println(bln);
+                String reportSource = "./report/LaporanGajiTotalDepartment.jasper";
+                Map<String, Object> params = new HashMap<String, Object>();
+                params.put("kode1", dep1);
+                params.put("kode2", dep2);
+                params.put("tahun", bln);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+                JasperViewer.viewReport(jasperPrint, false);
+            } catch (JRException ex) {
+                Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException SQLex) {
+                Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
+            }
+        }
     }//GEN-LAST:event_cetakButtonActionPerformed
 
     private void cetakButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cetakButtonKeyPressed

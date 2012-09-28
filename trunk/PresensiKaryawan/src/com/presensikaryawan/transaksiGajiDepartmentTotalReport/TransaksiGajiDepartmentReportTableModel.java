@@ -26,7 +26,7 @@ public class TransaksiGajiDepartmentReportTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 17;
+        return 18;
     }
 
     @Override
@@ -37,36 +37,38 @@ public class TransaksiGajiDepartmentReportTableModel extends AbstractTableModel{
             case 0:
                 return String.valueOf(rowIndex+1);
             case 1:
-                return tD.getNip();
+                return tD.getDepartment();
             case 2:
-                return tD.getNama();
+                return tD.getNip();
             case 3:
-                return String.valueOf(tD.getM());
+                return tD.getNama();
             case 4:
-                return String.valueOf(tD.getS());
+                return String.valueOf(tD.getM());
             case 5:
-                return String.valueOf(tD.getI());
+                return String.valueOf(tD.getS());
             case 6:
-                return String.valueOf(tD.getA());
+                return String.valueOf(tD.getI());
             case 7:
-                return String.valueOf(tD.getT());
+                return String.valueOf(tD.getA());
             case 8:
-                return String.valueOf(tD.getL());
+                return String.valueOf(tD.getT());
             case 9:
-                return ChangeFormatDoubleToString.getToString(tD.getPokok());
+                return String.valueOf(tD.getL());
             case 10:
-                return ChangeFormatDoubleToString.getToString(tD.getUangMakan());
+                return ChangeFormatDoubleToString.getToString(tD.getPokok());
             case 11:
-                return ChangeFormatDoubleToString.getToString(tD.getUangHadir());
+                return ChangeFormatDoubleToString.getToString(tD.getUangMakan());
             case 12:
-                return ChangeFormatDoubleToString.getToString(tD.getUanglembur());
+                return ChangeFormatDoubleToString.getToString(tD.getUangHadir());
             case 13:
-                return ChangeFormatDoubleToString.getToString(tD.getLain());
+                return ChangeFormatDoubleToString.getToString(tD.getUanglembur());
             case 14:
-                return ChangeFormatDoubleToString.getToString(tD.getPotonganTelat());
+                return ChangeFormatDoubleToString.getToString(tD.getLain());
             case 15:
-                return ChangeFormatDoubleToString.getToString(tD.getPotonganLain());
+                return ChangeFormatDoubleToString.getToString(tD.getPotonganTelat());
             case 16:
+                return ChangeFormatDoubleToString.getToString(tD.getPotonganLain());
+            case 17:
                 return ChangeFormatDoubleToString.getToString(tD.getTotal());
             default:
                 return "";
@@ -80,36 +82,38 @@ public class TransaksiGajiDepartmentReportTableModel extends AbstractTableModel{
             case 0:
                 return "NO";
             case 1:
-                return "NIP";
+                return "NAMA DEPARTMENT";
             case 2:
-                return "NAMA";
+                return "NIP";
             case 3:
-                return "M";
+                return "NAMA";
             case 4:
-                return "S";
+                return "M";
             case 5:
-                return "I";
+                return "S";
             case 6:
-                return "A";
+                return "I";
             case 7:
-                return "T";
+                return "A";
             case 8:
-                return "L";
+                return "T";
             case 9:
-                return "POKOK";
+                return "L";
             case 10:
-                return "MAKAN";
+                return "POKOK";
             case 11:
-                return "HADIR";
+                return "MAKAN";
             case 12:
-                return "LEMBUR";
+                return "HADIR";
             case 13:
-                return "LAIN";
+                return "LEMBUR";
             case 14:
-                return "P. TELAT";
+                return "LAIN";
             case 15:
-                return "P. LAIN";
+                return "P. TELAT";
             case 16:
+                return "P. LAIN";
+            case 17:
                 return "TOTAL";
             default:
                 return "";
