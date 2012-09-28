@@ -420,9 +420,12 @@ public class OutletForm extends javax.swing.JFrame {
         outletBaru.setKodeOutlet(kodeOutlet);
         outletBaru.setNamaOutlet(namaOutlet);
         outletBaru.setAlamatOutlet(alamatOutlet);
+        char[] charArray = String.valueOf(kodeOutletCombo.getSelectedItem()).toCharArray();
         if ("Simpan".equals(simpanButton.getText())) {
-            if (namaOutlet.matches("") || alamatOutlet.matches("")) {
-                JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\nNama dan Alamat Harus Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
+            if (namaOutlet.matches("") || alamatOutlet.matches("") || kodeOutletCombo.getSelectedItem() == null || String.valueOf(kodeOutletCombo.getSelectedItem()).matches("")) {
+                JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\nSemua Field Harus Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (charArray.length > 5) {
+                JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\nKode Outlet Tidak Boleh Lebih Dari 5 Karakter", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 try {
                     DaoFactory.getOutletDao().insert(outletBaru);
@@ -436,7 +439,7 @@ public class OutletForm extends javax.swing.JFrame {
                 }
             }
         } else {
-            if (namaOutlet.matches("") || alamatOutlet.matches("")) {
+            if (namaOutlet.matches("") || alamatOutlet.matches("") || kodeOutletCombo.getSelectedItem() == null || String.valueOf(kodeOutletCombo.getSelectedItem()).matches("")) {
                 JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\nNama dan Alamat Harus Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 try {
@@ -493,8 +496,7 @@ public class OutletForm extends javax.swing.JFrame {
     }//GEN-LAST:event_kodeOutletComboActionPerformed
 
     private void namaOutletTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaOutletTextFieldActionPerformed
-        simpanButton.setEnabled(true);
-        simpanButton.requestFocus();
+        alamatOutletTextField.requestFocus();
 // TODO add your handling code here:
     }//GEN-LAST:event_namaOutletTextFieldActionPerformed
 
@@ -528,6 +530,8 @@ public class OutletForm extends javax.swing.JFrame {
 
 private void alamatOutletTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alamatOutletTextFieldActionPerformed
 // TODO add your handling code here:
+    simpanButton.setEnabled(true);
+    simpanButton.requestFocus();
 }//GEN-LAST:event_alamatOutletTextFieldActionPerformed
 
     /**
