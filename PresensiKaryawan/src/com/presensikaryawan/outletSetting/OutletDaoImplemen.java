@@ -70,8 +70,8 @@ public class OutletDaoImplemen implements OutletDao{
 
              statement = connection.prepareStatement(SQL_UPDATE);
              statement.setString(1,outlet.getNamaOutlet());
-             statement.setString(2,outlet.getKodeOutlet());
-             statement.setString(3,outlet.getAlamatOutlet());
+             statement.setString(3,outlet.getKodeOutlet());
+             statement.setString(2,outlet.getAlamatOutlet());
              statement.executeUpdate();
 
              connection.commit();
