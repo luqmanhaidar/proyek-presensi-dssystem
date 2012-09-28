@@ -55,6 +55,9 @@ public class OutletForm extends javax.swing.JFrame {
         for (Outlet o : outlets) {
             kodeOutletCombo.addItem(o.getKodeOutlet());
         }
+        if (outlets.isEmpty()){
+            hapusButton.setEnabled(false);
+        }
     }
 
     private void initComponentFocus() {
@@ -466,32 +469,36 @@ public class OutletForm extends javax.swing.JFrame {
 
     private void kodeOutletComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeOutletComboActionPerformed
         String pilih = String.valueOf(kodeOutletCombo.getSelectedItem());
+        if (pilih.matches("") || kodeOutletCombo.getSelectedItem() != null) {
+            try {
+                activeOutlet = DaoFactory.getOutletDao().getByKodeOutlet(pilih);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            //jika ditemukan
+            if (activeOutlet != null) {
+                namaOutletTextField.setText(activeOutlet.getNamaOutlet());
+                alamatOutletTextField.setText(activeOutlet.getAlamatOutlet());
+                simpanButton.setText("Update");
+                simpanButton.setMnemonic('U');
+                simpanButton.setEnabled(true);
+                hapusButton.setEnabled(true);
+                kodeOutletCombo.requestFocus();
 
-        try {
-            activeOutlet = DaoFactory.getOutletDao().getByKodeOutlet(pilih);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        //jika ditemukan
-        if (activeOutlet != null) {
-            namaOutletTextField.setText(activeOutlet.getNamaOutlet());
-            alamatOutletTextField.setText(activeOutlet.getAlamatOutlet());
-            simpanButton.setText("Update");
-            simpanButton.setMnemonic('U');
-            simpanButton.setEnabled(true);
-            hapusButton.setEnabled(true);
-            kodeOutletCombo.requestFocus();
-
-        } else {
-            namaOutletTextField.setText(null);
-            alamatOutletTextField.setText(null);
-            namaOutletTextField.requestFocus();
+            } else {
+                namaOutletTextField.setText(null);
+                alamatOutletTextField.setText(null);
+                namaOutletTextField.requestFocus();
+                hapusButton.setEnabled(false);
+                simpanButton.setText("Simpan");
+                simpanButton.setMnemonic('S');
+                simpanButton.setEnabled(true);
+            }
+        }else{
+            System.out.println("jamban");
             hapusButton.setEnabled(false);
-            simpanButton.setText("Simpan");
-            simpanButton.setMnemonic('S');
-            simpanButton.setEnabled(true);
+            simpanButton.setEnabled(false);
         }
-
 // TODO add your handling code here:
     }//GEN-LAST:event_kodeOutletComboActionPerformed
 
