@@ -154,7 +154,8 @@ public class StatusSettingDaoImplemen implements StatusSettingDao {
     public StatusSetting getByKode(String kode) throws SQLException {
         PreparedStatement statement = null;
         ResultSet result = null;
-        if (kode != null) {
+        String pattern="[0-9]*";
+        if (kode != null && kode.matches(pattern)) {
             try {
                 connection.setAutoCommit(false);
                 statement = connection.prepareStatement(SQL_GETBYKODE);
