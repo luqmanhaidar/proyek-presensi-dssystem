@@ -20,7 +20,7 @@ public class PayrollBankDaoImplemen implements PayrollBankDao{
     private final String SQL_GET_PAYROLL="select k.nama, k.no_rekening, t.total "
             + "from karyawan k, temptransaksidepartment t "
             + "where k.nip = t.nip and k.nip between ? and ? "
-            + "and t.bulan like ?";
+            + "and t.bulan like ? group by k.nip";
     private final String SQL_GET_ALLNIP = "SELECT nip FROM karyawan";
     private Connection connection;
 
