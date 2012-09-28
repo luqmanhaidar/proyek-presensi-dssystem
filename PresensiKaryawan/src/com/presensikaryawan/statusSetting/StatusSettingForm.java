@@ -386,8 +386,9 @@ public class StatusSettingForm extends javax.swing.JFrame {
         StatusSetting statusSettingBaru = new StatusSetting();
         statusSettingBaru.setKodeStatus(kodeStatus);
         statusSettingBaru.setKeteranganStatus(keteranganStatus);
-        if (!keteranganStatusTextField.getText().matches("") && !String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") && kodeStatusCombo.getSelectedItem()!=null) {
-            System.out.println("jamban");
+        String pattern="[0-9]*";
+        if (!keteranganStatusTextField.getText().matches("") && !String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") && kodeStatusCombo.getSelectedItem()!=null
+                && String.valueOf(kodeStatusCombo.getSelectedItem()).matches(pattern)) {
             if ("Simpan".equals(simpanButton.getText())) {
                 try {
                     DaoFactory.getStatusSettingDao().insert(statusSettingBaru);
@@ -415,7 +416,11 @@ public class StatusSettingForm extends javax.swing.JFrame {
         } else if (String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") || kodeStatusCombo.getSelectedItem()==null) {
             JOptionPane.showMessageDialog(this, "Kode Status Belum Diisi");
             kodeStatusCombo.requestFocus();
-        } else {
+        }  else if (!String.valueOf(kodeStatusCombo.getSelectedItem()).matches(pattern)) {
+            JOptionPane.showMessageDialog(this, "Kode Status Harus Berupa Angka");
+            kodeStatusCombo.requestFocus();
+        }
+        else {
             JOptionPane.showMessageDialog(this, "Keterangan Status Belum Disii");
             keteranganStatusTextField.requestFocus();
         }
