@@ -4,6 +4,7 @@
  */
 package com.presensikaryawan.golongan;
 
+import com.dssystem.umum.ChangeFormatDoubleToString;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -53,15 +54,15 @@ public class GolonganTableModel extends AbstractTableModel {
             case 1:
                 return g.getNamaGolongan();
             case 2:
-                return g.getGajiPokok();
+                return ChangeFormatDoubleToString.getToString(g.getGajiPokok());
             case 3:
-                return g.getUangMakan();
+                return ChangeFormatDoubleToString.getToString(g.getUangMakan());
             case 4:
-                return g.getUangLembur();
+                return ChangeFormatDoubleToString.getToString(g.getUangLembur());
             case 5:
-                return g.getUangHadir();
+                return ChangeFormatDoubleToString.getToString(g.getUangHadir());
             case 6:
-                return g.getPotonganTelat();
+                return ChangeFormatDoubleToString.getToString(g.getPotonganTelat());
             default:
                 return "";
         }
