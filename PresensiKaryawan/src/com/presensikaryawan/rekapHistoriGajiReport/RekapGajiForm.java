@@ -405,39 +405,58 @@ public class RekapGajiForm extends javax.swing.JFrame {
         Date date = new Date();
         if (yearChooser.getYear() >= (date.getYear() + 1900)) {
             JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if ((nipCombo.getSelectedItem() == null || nipCombo2.getSelectedItem() == null
+                || String.valueOf(nipCombo.getSelectedItem()).matches("") || String.valueOf(nipCombo2.getSelectedItem()).matches(""))) {
+            JOptionPane.showMessageDialog(this, "Kotak kode department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-        GregorianCalendar gc = new GregorianCalendar();
-        String nip = String.valueOf(nipCombo.getSelectedItem());
-        String tahun = String.valueOf(yearChooser.getYear());
-        try {
-            List<RekapGaji> rekapGajis = DaoFactory.getRekapGajiDao().getRekapGajiByNIPAndYear(nip, tahun);
-            RekapGajiTableModel model = new RekapGajiTableModel(rekapGajis);
-            rekapTable.setModel(model);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(200);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            rekapTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            rekapTable.setVisible(true);
-            double totalGaji = DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip, tahun);
-            String totalGajiString = ChangeFormatDoubleToString.getToString(totalGaji);
-            nilaiTotalLabel.setText(totalGajiString);
-        } catch (SQLException ex) {
+            String nip1 = String.valueOf(nipCombo.getSelectedItem());
+            String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+            Karyawan karyawan1 = new Karyawan();
+            Karyawan karyawan2 = new Karyawan();
+            try {
+                karyawan1 = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip1);
+                karyawan2 = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip2);
+            } catch (SQLException ex) {
+                Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (karyawan1 == null) {
+                JOptionPane.showMessageDialog(this, "Nip I tidak ditemukan dalam database","ERROR",JOptionPane.ERROR_MESSAGE);
+            } else if (karyawan2 == null) {
+                JOptionPane.showMessageDialog(this, "Nip II tidak ditemukan dalam database","ERROR",JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                GregorianCalendar gc = new GregorianCalendar();
+                String nip = String.valueOf(nipCombo.getSelectedItem());
+                String tahun = String.valueOf(yearChooser.getYear());
+                try {
+                    List<RekapGaji> rekapGajis = DaoFactory.getRekapGajiDao().getRekapGajiByNIPAndYear(nip, tahun);
+                    RekapGajiTableModel model = new RekapGajiTableModel(rekapGajis);
+                    rekapTable.setModel(model);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    rekapTable.setVisible(true);
+                    double totalGaji = DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip, tahun);
+                    String totalGajiString = ChangeFormatDoubleToString.getToString(totalGaji);
+                    nilaiTotalLabel.setText(totalGajiString);
+                } catch (SQLException ex) {
+                }
             }
         }
     }//GEN-LAST:event_lihatButtonActionPerformed
-
     private void nipComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipComboActionPerformed
         // TODO add your handling code here:
         String golongan = null;
@@ -475,16 +494,22 @@ public class RekapGajiForm extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
 
+
+
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RekapGajiForm.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
                     new RekapGajiForm(null).setVisible(true);
+
+
                 } catch (SQLException ex) {
-                    Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RekapGajiForm.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
