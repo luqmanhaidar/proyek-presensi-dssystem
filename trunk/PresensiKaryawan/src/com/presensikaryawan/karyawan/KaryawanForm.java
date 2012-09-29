@@ -98,6 +98,9 @@ public class KaryawanForm extends javax.swing.JFrame {
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment() + "-" + d.getNamaDepartment());
         }
+        if (karyawans.isEmpty()){
+            hapusButton.setEnabled(false);
+        }
     }
 
     private void initComponentFocus() {
