@@ -60,7 +60,6 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
-        rekapTable.setVisible(false);
     }
 
     private void initComponentFocus() {
@@ -370,71 +369,84 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
     }
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        if (rekapTable.isVisible()) {
+        Date date = new Date();
+        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if ((departmentCombo.getSelectedItem() == null
+                || String.valueOf(departmentCombo.getSelectedItem()).matches(""))) {
+            JOptionPane.showMessageDialog(this, "Kotak kode department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Department dept = new Department();
             try {
-                String bulanS = null;
-                String bulan = null;
-                switch (monthChooser.getMonth()) {
-                    case 0:
-                        bulanS = "JANUARI";
-                        break;
-                    case 1:
-                        bulanS = "FEBRUARI";
-                        break;
-                    case 2:
-                        bulanS = "MARET";
-                        break;
-                    case 3:
-                        bulanS = "APRIL";
-                        break;
-                    case 4:
-                        bulanS = "MEI";
-                        break;
-                    case 5:
-                        bulanS = "JUNI";
-                        break;
-                    case 6:
-                        bulanS = "JULI";
-                        break;
-                    case 7:
-                        bulanS = "AGUSTUS";
-                        break;
-                    case 8:
-                        bulanS = "SEPTEMBER";
-                        break;
-                    case 9:
-                        bulanS = "OKTOBER";
-                        break;
-                    case 10:
-                        bulanS = "NOVEMBER";
-                        break;
-                    case 11:
-                        bulanS = "DESEMBER";
-                        break;
-                }
-                bulanS = bulanS + " " + String.valueOf(yearChooser.getYear());
-                if (monthChooser.getMonth() + 1 < 10) {
-                    bulan = yearChooser.getYear() + "-0" + (monthChooser.getMonth() + 1);
-                } else {
-                    bulan = yearChooser.getYear() + "-" + (monthChooser.getMonth() + 1);
-                }
-                String reportSource = "./report/RekapPresensiKaryawan.jasper";
-                Map<String, Object> params = new HashMap<String, Object>();
-                params.put("bulanString", bulanS);
-                params.put("bulan", bulan);
-                params.put("department", String.valueOf(departmentCombo.getSelectedItem()));
-                params.put("nip1", bulan);
-                params.put("nip2", bulan);
-                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
-                JasperViewer.viewReport(jasperPrint, false);
+                dept = DaoFactory.getDepartmentDao().getByKode(String.valueOf(departmentCombo.getSelectedItem()));
             } catch (SQLException ex) {
                 Logger.getLogger(RekapPresensiPerBulanForm.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JRException ex) {
-                Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menampilkan Hasil Rekap\n"
-                    + "Dengan Menekan Tombol Lihat Dahulu", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
+            if (dept == null) {
+                JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    String bulanS = null;
+                    String bulan = null;
+                    switch (monthChooser.getMonth()) {
+                        case 0:
+                            bulanS = "JANUARI";
+                            break;
+                        case 1:
+                            bulanS = "FEBRUARI";
+                            break;
+                        case 2:
+                            bulanS = "MARET";
+                            break;
+                        case 3:
+                            bulanS = "APRIL";
+                            break;
+                        case 4:
+                            bulanS = "MEI";
+                            break;
+                        case 5:
+                            bulanS = "JUNI";
+                            break;
+                        case 6:
+                            bulanS = "JULI";
+                            break;
+                        case 7:
+                            bulanS = "AGUSTUS";
+                            break;
+                        case 8:
+                            bulanS = "SEPTEMBER";
+                            break;
+                        case 9:
+                            bulanS = "OKTOBER";
+                            break;
+                        case 10:
+                            bulanS = "NOVEMBER";
+                            break;
+                        case 11:
+                            bulanS = "DESEMBER";
+                            break;
+                    }
+                    bulanS = bulanS + " " + String.valueOf(yearChooser.getYear());
+                    if (monthChooser.getMonth() + 1 < 10) {
+                        bulan = yearChooser.getYear() + "-0" + (monthChooser.getMonth() + 1);
+                    } else {
+                        bulan = yearChooser.getYear() + "-" + (monthChooser.getMonth() + 1);
+                    }
+                    String reportSource = "./report/RekapPresensiKaryawan.jasper";
+                    Map<String, Object> params = new HashMap<String, Object>();
+                    params.put("bulanString", bulanS);
+                    params.put("bulan", bulan);
+                    params.put("department", String.valueOf(departmentCombo.getSelectedItem()));
+                    params.put("nip1", bulan);
+                    params.put("nip2", bulan);
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+                    JasperViewer.viewReport(jasperPrint, false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RekapPresensiPerBulanForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (JRException ex) {
+                    Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
 }//GEN-LAST:event_cetakButtonActionPerformed
@@ -444,7 +456,11 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
         Date date = new Date();
         if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
             JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if ((departmentCombo.getSelectedItem() == null
+                || String.valueOf(departmentCombo.getSelectedItem()).matches(""))) {
+            JOptionPane.showMessageDialog(this, "Kotak kode department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
+
             GregorianCalendar gc = new GregorianCalendar();
             gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
             String year = String.valueOf(yearChooser.getYear());
