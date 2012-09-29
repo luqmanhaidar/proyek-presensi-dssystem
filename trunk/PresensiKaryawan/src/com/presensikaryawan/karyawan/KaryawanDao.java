@@ -22,6 +22,8 @@ public interface KaryawanDao {
     Karyawan getByNIPKaryawan(String nipKaryawan) throws SQLException;
 
     Karyawan getByNamaKaryawan(String namaKaryawan) throws SQLException;
+    
+    String getgroupShiftByDepartment(String kodeDepartment) throws SQLException;
 
     List<Karyawan> getAllKaryawan() throws SQLException;
     
