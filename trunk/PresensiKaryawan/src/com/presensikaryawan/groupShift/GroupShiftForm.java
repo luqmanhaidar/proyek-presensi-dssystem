@@ -266,6 +266,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
         batalButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         batalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Undo.gif"))); // NOI18N
         batalButton.setText("Batal");
+        batalButton.setToolTipText("Klik untuk batal");
         batalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batalButtonActionPerformed(evt);
@@ -776,39 +777,49 @@ public class GroupShiftForm extends javax.swing.JFrame {
         shift[4].setKodeShift(jumat_code);
         shift[5].setKodeShift(sabtu_code);
         shift[6].setKodeShift(minggu_code);
-
+        char[] charArray = kodeGroupShift.toCharArray();
         groupShiftBaru.setShift(shift);
         if (!namaGroupShiftTextField.getText().matches("") && !keteranganTextField.getText().matches("") && !String.valueOf(kodeGroupShiftCombo.getSelectedItem()).matches("")
                 && namaGroupShiftTextField.getText() != null && keteranganTextField.getText() != null && kodeGroupShiftCombo.getSelectedItem() != null) {
-            if ("Simpan".equals(simpanButton.getText())) {
-                try {
-                    GroupShift gShift = DaoFactory.getGroupShiftDao().getByDayShiftKode(senin_code, selasa_code, rabu_code, kamis_code, jumat_code, sabtu_code, minggu_code);
-                    if (gShift != null) {
-                        JOptionPane.showMessageDialog(this, "Data Gagal Disimpan Data Dengan Property Tersebut Telah Ada\n"
-                                + "<html><font color=#FF0000>Data Dengan Property Tersebut Telah Ada</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        DaoFactory.getGroupShiftDao().insert(groupShiftBaru);
-                        JOptionPane.showMessageDialog(this, "Data Group Shift Kerja Dengan Kode \n"
-                                + "<html><font color=#FF0000>" + kodeGroupShift + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                        batalButton.doClick();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+            if (charArray.length > 5) {
+                JOptionPane.showMessageDialog(this, "Kode Group Shift Tidak Boleh\nMelebihi 5 Karakter", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                try {
-                    GroupShift groupShiftLama = DaoFactory.getGroupShiftDao().getByKode(kodeGroupShift);
-                    groupShiftLama.setKodeGroupShift(kodeGroupShift);
-                    groupShiftLama.setNamaGroupShift(namaGroupShift);
-                    groupShiftLama.setKeterangan(keteranganGroupShift);
-                    groupShiftLama.setShift(shift);
-
-                    GroupShift gShift = DaoFactory.getGroupShiftDao().getByDayShiftKode(senin_code, selasa_code, rabu_code, kamis_code, jumat_code, sabtu_code, minggu_code);
-                    if (gShift != null) {
-                        if (!gShift.getKodeGroupShift().equalsIgnoreCase(String.valueOf(kodeGroupShiftCombo.getSelectedItem())) && !gShift.getNamaGroupShift().equalsIgnoreCase(namaGroupShiftTextField.getText()) && !gShift.getKeterangan().equalsIgnoreCase(keteranganTextField.getText())) {
-                            JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\n"
+                if ("Simpan".equals(simpanButton.getText())) {
+                    try {
+                        GroupShift gShift = DaoFactory.getGroupShiftDao().getByDayShiftKode(senin_code, selasa_code, rabu_code, kamis_code, jumat_code, sabtu_code, minggu_code);
+                        if (gShift != null) {
+                            JOptionPane.showMessageDialog(this, "Data Gagal Disimpan Data Dengan Property Tersebut Telah Ada\n"
                                     + "<html><font color=#FF0000>Data Dengan Property Tersebut Telah Ada</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            DaoFactory.getGroupShiftDao().insert(groupShiftBaru);
+                            JOptionPane.showMessageDialog(this, "Data Group Shift Kerja Dengan Kode \n"
+                                    + "<html><font color=#FF0000>" + kodeGroupShift + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                            batalButton.doClick();
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    try {
+                        GroupShift groupShiftLama = DaoFactory.getGroupShiftDao().getByKode(kodeGroupShift);
+                        groupShiftLama.setKodeGroupShift(kodeGroupShift);
+                        groupShiftLama.setNamaGroupShift(namaGroupShift);
+                        groupShiftLama.setKeterangan(keteranganGroupShift);
+                        groupShiftLama.setShift(shift);
+
+                        GroupShift gShift = DaoFactory.getGroupShiftDao().getByDayShiftKode(senin_code, selasa_code, rabu_code, kamis_code, jumat_code, sabtu_code, minggu_code);
+                        if (gShift != null) {
+                            if (!gShift.getKodeGroupShift().equalsIgnoreCase(String.valueOf(kodeGroupShiftCombo.getSelectedItem())) && !gShift.getNamaGroupShift().equalsIgnoreCase(namaGroupShiftTextField.getText()) && !gShift.getKeterangan().equalsIgnoreCase(keteranganTextField.getText())) {
+                                JOptionPane.showMessageDialog(this, "Data Gagal Disimpan\n"
+                                        + "<html><font color=#FF0000>Data Dengan Property Tersebut Telah Ada</font></html>", "Error", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                DaoFactory.getGroupShiftDao().update(groupShiftLama);
+                                JOptionPane.showMessageDialog(this, "Data Group Shift Kerja Dengan Kode\n"
+                                        + "<html><font color=#FF0000>" + kodeGroupShift + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                                batalButton.doClick();
+                            }
                         } else {
                             DaoFactory.getGroupShiftDao().update(groupShiftLama);
                             JOptionPane.showMessageDialog(this, "Data Group Shift Kerja Dengan Kode\n"
@@ -816,15 +827,9 @@ public class GroupShiftForm extends javax.swing.JFrame {
 
                             batalButton.doClick();
                         }
-                    } else {
-                        DaoFactory.getGroupShiftDao().update(groupShiftLama);
-                        JOptionPane.showMessageDialog(this, "Data Group Shift Kerja Dengan Kode\n"
-                                + "<html><font color=#FF0000>" + kodeGroupShift + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                        batalButton.doClick();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
                 }
             }
         } else if (String.valueOf(kodeGroupShiftCombo.getSelectedItem()).matches("") || kodeGroupShiftCombo.getSelectedItem() == null) {
