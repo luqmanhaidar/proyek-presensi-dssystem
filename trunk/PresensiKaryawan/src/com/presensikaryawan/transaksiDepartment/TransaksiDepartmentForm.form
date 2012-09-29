@@ -60,6 +60,7 @@
               <Image iconType="3" name="/icon/24/Exit.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Keluar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Klik Untuk Kembali Ke Window Utama"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdKeluarActionPerformed"/>
@@ -178,7 +179,7 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="83"/>
                 <Property name="text" type="java.lang.String" value="Lihat"/>
-                <Property name="toolTipText" type="java.lang.String" value="Klik Untuk Simpan"/>
+                <Property name="toolTipText" type="java.lang.String" value="Klik Untuk Lihat Rekap"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lihatButtonActionPerformed"/>

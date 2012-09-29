@@ -166,6 +166,7 @@
                   <Image iconType="3" name="/icon/24/Search.gif"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lihat"/>
+                <Property name="toolTipText" type="java.lang.String" value="Klik Untuk Lihat Rekap"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lihatButtonActionPerformed"/>
@@ -180,6 +181,7 @@
                   <Image iconType="3" name="/icon/24/Printer.gif"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cetak"/>
+                <Property name="toolTipText" type="java.lang.String" value="Klik Untuk Cetak Print Out"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cetakButtonActionPerformed"/>
@@ -454,6 +456,7 @@
               <Image iconType="3" name="/icon/24/Exit.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Keluar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Klik Untuk Kembali Ke Window Utama"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keluarButtonActionPerformed"/>

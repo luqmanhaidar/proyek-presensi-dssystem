@@ -115,6 +115,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
 
         lihatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Search.gif"))); // NOI18N
         lihatButton.setText("Lihat");
+        lihatButton.setToolTipText("Klik Untuk Lihat Rekap");
         lihatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lihatButtonActionPerformed(evt);
@@ -124,6 +125,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
         cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
         cetakButton.setText("Cetak");
+        cetakButton.setToolTipText("Klik Untuk Cetak Print Out");
         cetakButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cetakButtonActionPerformed(evt);
@@ -337,6 +339,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
         keluarButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         keluarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         keluarButton.setText("Keluar");
+        keluarButton.setToolTipText("Klik Untuk Kembali Ke Window Utama");
         keluarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 keluarButtonActionPerformed(evt);

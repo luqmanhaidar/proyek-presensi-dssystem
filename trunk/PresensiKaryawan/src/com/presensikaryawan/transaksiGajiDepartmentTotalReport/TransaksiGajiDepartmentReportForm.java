@@ -130,9 +130,10 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
 
         desktopPaneTransaksiDepartment.setBackground(new java.awt.Color(153, 255, 153));
 
-        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12));
+        cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
+        cmdKeluar.setToolTipText("Klik Untuk Kembali Ke Window Utama");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdKeluarActionPerformed(evt);
@@ -143,17 +144,17 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        namaKaryawanLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaKaryawanLabel.setText("Bulan");
 
-        departmentLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        departmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         departmentLabel.setText("Department");
 
-        lihatButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        lihatButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lihatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Search.gif"))); // NOI18N
         lihatButton.setMnemonic('S');
         lihatButton.setText("Lihat");
-        lihatButton.setToolTipText("Klik Untuk Simpan");
+        lihatButton.setToolTipText("Klik Untuk Lihat Rekap");
         lihatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lihatButtonActionPerformed(evt);
@@ -166,7 +167,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
         });
 
         departmentCombo1.setEditable(true);
-        departmentCombo1.setFont(new java.awt.Font("Arial", 0, 11));
+        departmentCombo1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         departmentCombo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 departmentCombo1ActionPerformed(evt);
@@ -178,20 +179,20 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
             }
         });
 
-        namaDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        namaDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaDepartmentLabel.setText("Nama Department");
 
-        nilaiNamaDepartment1.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiNamaDepartment1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiNamaDepartment1.setText("Nilai Nama Department");
 
-        sampaiLabel1.setFont(new java.awt.Font("Dialog", 0, 12));
+        sampaiLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         sampaiLabel1.setText("sampai");
 
-        sampaiLabel2.setFont(new java.awt.Font("Dialog", 0, 12));
+        sampaiLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         sampaiLabel2.setText("      -");
 
         departmentCombo2.setEditable(true);
-        departmentCombo2.setFont(new java.awt.Font("Arial", 0, 11));
+        departmentCombo2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         departmentCombo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 departmentCombo2ActionPerformed(evt);
@@ -203,14 +204,14 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
             }
         });
 
-        nilaiNamaDepartment2.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiNamaDepartment2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiNamaDepartment2.setText("Nilai Nama Department");
 
-        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
         cetakButton.setMnemonic('S');
         cetakButton.setText("Cetak");
-        cetakButton.setToolTipText("Klik Untuk Simpan");
+        cetakButton.setToolTipText("Klik Untuk Cetak Print Out");
         cetakButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cetakButtonActionPerformed(evt);
@@ -301,7 +302,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         karyawanTable.setAutoCreateRowSorter(true);
-        karyawanTable.setFont(new java.awt.Font("Arial", 0, 11));
+        karyawanTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         karyawanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -380,7 +381,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
             daftarKaryawanPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(daftarKaryawanPanelLayout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 200, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         daftarKaryawanPanel.setBounds(0, 240, 1020, 240);
@@ -390,10 +391,10 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
-        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18));
+        menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         menuLabel.setText("Menu Transaksi Gaji Per Department");
 
-        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         fungsiLabel.setText("Digunakan untuk melihat dan mengedit data presensi dan gaji karyawan per department");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
@@ -488,45 +489,62 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     Date date = new Date();
     if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
         JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
+            || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
+        JOptionPane.showMessageDialog(this, "Kotak department salah satu harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-
-        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-        String maxDayOfMonth;
-        if (bulan < 10) {
-            maxDayOfMonth = tahun + "-0" + bulan;
-        } else {
-            maxDayOfMonth = tahun + "-" + bulan;
-        }
-        System.out.println(maxDayOfMonth);
+        Department dept = new Department();
+        Department dept2 = new Department();
         try {
-            TransaksiGajiDepartmentReportDao dao = DaoFactory.getTransaksiGajiDepartmentReportDao();
-            List<TransaksiGajiDepartmentReport> transaksiDepartments = dao.getAllTransaksiDepartment(department, department2, maxDayOfMonth);
-
-            TransaksiGajiDepartmentReportTableModel model = new TransaksiGajiDepartmentReportTableModel(transaksiDepartments);
-            karyawanTable.setModel(model);
-            karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-            karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
-            karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-
+            dept = DaoFactory.getDepartmentDao().getByKode(department);
+            dept2 = DaoFactory.getDepartmentDao().getByKode(department2);
         } catch (SQLException ex) {
-            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (dept == null) {
+            JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (dept2 == null) {
+            JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+
+            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+            String maxDayOfMonth;
+            if (bulan < 10) {
+                maxDayOfMonth = tahun + "-0" + bulan;
+            } else {
+                maxDayOfMonth = tahun + "-" + bulan;
+            }
+            System.out.println(maxDayOfMonth);
+            try {
+                TransaksiGajiDepartmentReportDao dao = DaoFactory.getTransaksiGajiDepartmentReportDao();
+                List<TransaksiGajiDepartmentReport> transaksiDepartments = dao.getAllTransaksiDepartment(department, department2, maxDayOfMonth);
+
+                TransaksiGajiDepartmentReportTableModel model = new TransaksiGajiDepartmentReportTableModel(transaksiDepartments);
+                karyawanTable.setModel(model);
+                karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+                karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
+                karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
@@ -578,9 +596,12 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
         // TODO add your handling code here:
-        if (!karyawanTable.isVisible()) {
-            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menekan Tombol Lihat Terlebih Dahulu\n"
-                    + "Untuk Melihat Hasil Rekap", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
+        Date date = new Date();
+        if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
+                || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
+            JOptionPane.showMessageDialog(this, "Kotak department salah satu harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
 
