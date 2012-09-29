@@ -531,9 +531,9 @@ public class GroupShiftForm extends javax.swing.JFrame {
                     .add(kodeGroupShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(kodeGroupShiftCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(namaGroupShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(namaGroupShiftTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(namaGroupShiftTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(namaGroupShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(keteranganGroupShiftLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -778,7 +778,8 @@ public class GroupShiftForm extends javax.swing.JFrame {
         shift[6].setKodeShift(minggu_code);
 
         groupShiftBaru.setShift(shift);
-        if (!namaGroupShiftTextField.getText().matches("") && !keteranganTextField.getText().matches("") && !String.valueOf(kodeGroupShiftCombo.getSelectedItem()).matches("")) {
+        if (!namaGroupShiftTextField.getText().matches("") && !keteranganTextField.getText().matches("") && !String.valueOf(kodeGroupShiftCombo.getSelectedItem()).matches("")
+                && namaGroupShiftTextField.getText() != null && keteranganTextField.getText() != null && kodeGroupShiftCombo.getSelectedItem() != null) {
             if ("Simpan".equals(simpanButton.getText())) {
                 try {
                     GroupShift gShift = DaoFactory.getGroupShiftDao().getByDayShiftKode(senin_code, selasa_code, rabu_code, kamis_code, jumat_code, sabtu_code, minggu_code);
@@ -826,14 +827,19 @@ public class GroupShiftForm extends javax.swing.JFrame {
                     ex.printStackTrace();
                 }
             }
-        } else if (String.valueOf(kodeGroupShiftCombo.getSelectedItem()).matches("")) {
-            JOptionPane.showMessageDialog(this, "Kode Group Shift Belum Diisi");
+        } else if (String.valueOf(kodeGroupShiftCombo.getSelectedItem()).matches("") || kodeGroupShiftCombo.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Kode Group Shift Belum Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
             kodeGroupShiftCombo.requestFocus();
-        } else if (namaGroupShiftTextField.getText().matches("")) {
-            JOptionPane.showMessageDialog(this, "Nama Group Shift Belum Disii");
+        } else if (namaGroupShiftTextField.getText().matches("") || namaGroupShiftTextField.getText() != null) {
+            JOptionPane.showMessageDialog(this, "Nama Group Shift Belum Disii", "ERROR", JOptionPane.ERROR_MESSAGE);
             namaGroupShiftTextField.requestFocus();
+        } else if (waktuShiftSeninTextField.getText().matches("") || waktuShiftSelasaTextField.getText().matches("") || waktuShiftRabuTextField.getText().matches("")
+                || waktuShiftKamisTextField.getText().matches("") || waktuShiftJumatTextField.getText().matches("") || waktuShiftSabtuTextField.getText().matches("")
+                || waktuShiftMingguTextField.getText().matches("")) {
+            JOptionPane.showMessageDialog(this, "Waktu Shift Senin - Jumat\nHarus Diisi/Dipilih", "ERROR", JOptionPane.ERROR_MESSAGE);
+
         } else {
-            JOptionPane.showMessageDialog(this, "Keterangan Group Shift Belum Disii");
+            JOptionPane.showMessageDialog(this, "Keterangan Group Shift Belum Disii", "ERROR", JOptionPane.ERROR_MESSAGE);
             keteranganTextField.requestFocus();
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
