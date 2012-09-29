@@ -141,7 +141,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
                 a = result.getInt("A");
                 t = result.getInt("T");
                 l = result.getInt("L");
-                pokok = result.getDouble("gaji_pokok") * m;
+                pokok = result.getDouble("gaji_pokok");
                 uangMakan = result.getDouble("uang_makan") * m;
                 uangHadir = result.getDouble("uang_hadir") * m;
                 uanglembur = result.getDouble("uang_lembur") * l;

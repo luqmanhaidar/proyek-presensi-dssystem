@@ -16,6 +16,8 @@ import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -64,15 +66,11 @@ public class KaryawanForm extends javax.swing.JFrame {
         List<Karyawan> karyawans = dao.getAllKaryawan();
         KaryawanTableModel model = new KaryawanTableModel(karyawans);
         karyawanTable.setModel(model);
-        karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(100);
-        karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(200);
-        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(150);
-        karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-        karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(100);
-        karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(100);
-        karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(100);
-        karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(100);
+        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(250);
+        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(200);
         karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (Karyawan k : karyawans) {
             nipKaryawanCombo.addItem(k.getNip());
@@ -98,9 +96,10 @@ public class KaryawanForm extends javax.swing.JFrame {
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment() + "-" + d.getNamaDepartment());
         }
-        if (karyawans.isEmpty()){
+        if (karyawans.isEmpty()) {
             hapusButton.setEnabled(false);
         }
+        nipKaryawanCombo.requestFocus();
     }
 
     private void initComponentFocus() {
@@ -142,8 +141,6 @@ public class KaryawanForm extends javax.swing.JFrame {
         departmentCombo = new javax.swing.JComboBox();
         noRekeningLabel = new javax.swing.JLabel();
         noRekeningTextField = new javax.swing.JTextField();
-        bankLabel = new javax.swing.JLabel();
-        bankCombo = new javax.swing.JComboBox();
         daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
@@ -262,14 +259,38 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
+        golonganCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                golonganComboActionPerformed(evt);
+            }
+        });
+
         kodeOutletLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         kodeOutletLabel.setText("Outlet");
 
         kodeDepartmentLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         kodeDepartmentLabel.setText("Department");
 
+        posisiCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                posisiComboActionPerformed(evt);
+            }
+        });
+
+        outletCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outletComboActionPerformed(evt);
+            }
+        });
+
+        departmentCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentComboActionPerformed(evt);
+            }
+        });
+
         noRekeningLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        noRekeningLabel.setText("No REK");
+        noRekeningLabel.setText("No Rek");
 
         noRekeningTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         noRekeningTextField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -278,9 +299,6 @@ public class KaryawanForm extends javax.swing.JFrame {
                 noRekeningTextFieldActionPerformed(evt);
             }
         });
-
-        bankLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        bankLabel.setText("BANK");
 
         org.jdesktop.layout.GroupLayout inputPanelLayout = new org.jdesktop.layout.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
@@ -303,10 +321,7 @@ public class KaryawanForm extends javax.swing.JFrame {
                                 .add(noRekeningLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(noRekeningTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 213, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(32, 32, 32)
-                                .add(bankLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(bankCombo, 0, 216, Short.MAX_VALUE))
+                                .add(335, 335, 335))
                             .add(inputPanelLayout.createSequentialGroup()
                                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                                     .add(org.jdesktop.layout.GroupLayout.LEADING, posisiKaryawanLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,9 +392,7 @@ public class KaryawanForm extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(noRekeningLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(noRekeningTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(bankLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(bankCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(noRekeningTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -524,12 +537,12 @@ public class KaryawanForm extends javax.swing.JFrame {
         String nama = namaKaryawanTextField.getText();
         activeKaryawan.setNip(nip);
         activeKaryawan.setNama(nama);
-        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan Nama = " + nama + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin Akan Menghapus Data\nDengan NIP = " + nip + "", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try {
                 DaoFactory.getKaryawanDao().delete(activeKaryawan);
-                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan nama\n"
-                        + "<html><font color=#FF0000>" + nama + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus dengan NIP\n"
+                        + "<html><font color=#FF0000>" + nip + "</font></html>", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Data Gagal Dihapus\n"
@@ -552,6 +565,7 @@ public class KaryawanForm extends javax.swing.JFrame {
             String posisi = karyawanTable.getValueAt(row, 5).toString();
             String outlet = karyawanTable.getValueAt(row, 6).toString();
             String department = karyawanTable.getValueAt(row, 7).toString();
+            String no_rekening = karyawanTable.getValueAt(row, 8).toString();
             int year = Integer.parseInt(tanggal.substring(0, 4));
             year = year - 1900;
             int month = Integer.parseInt(tanggal.substring(5, 7));
@@ -567,6 +581,7 @@ public class KaryawanForm extends javax.swing.JFrame {
             posisiCombo.setSelectedItem(posisi + "-" + DaoFactory.getPosisiDao().getByKode(posisi).getNama_posisi());
             outletCombo.setSelectedItem(outlet + "-" + DaoFactory.getOutletDao().getByKodeOutlet(outlet).getNamaOutlet());
             departmentCombo.setSelectedItem(department + "-" + DaoFactory.getDepartmentDao().getByKode(department).getNamaDepartment());
+            noRekeningTextField.setText(no_rekening);
 
             // TODO add your handling code here:
         } catch (SQLException ex) {
@@ -593,44 +608,59 @@ public class KaryawanForm extends javax.swing.JFrame {
         String kodeOutlet = outlet.substring(0, outlet.indexOf("-"));
         String department = departmentCombo.getSelectedItem().toString();
         String kodeDepartment = department.substring(0, department.indexOf("-"));
-        Karyawan karyawanBaru = new Karyawan();
-        karyawanBaru.setNip(nip);
-        karyawanBaru.setNama(nama);
-        karyawanBaru.setAlamat(alamat);
-        karyawanBaru.setTanggal_masuk(tanggal);
-        karyawanBaru.setKodeGolongan(kodeGolongan);
-        karyawanBaru.setKodePosisi(kodePosisi);
-        karyawanBaru.setKodeOutlet(kodeOutlet);
-        karyawanBaru.setKodeDepartment(kodeDepartment);
-        if ("Simpan".equals(simpanButton.getText())) {
-            try {
-                DaoFactory.getKaryawanDao().insert(karyawanBaru);
+        String no_rekening = noRekeningTextField.getText();
+        char[] charArray = nip.toCharArray();
+        if (nipKaryawanCombo.getSelectedItem() == null || String.valueOf(nipKaryawanCombo.getSelectedItem()).matches("")
+                || namaKaryawanTextField.getText() == null || namaKaryawanTextField.getText().matches("")
+                || alamatKaryawanTextField.getText() == null || alamatKaryawanTextField.getText().matches("")
+                || noRekeningTextField.getText() == null || noRekeningTextField.getText().matches("")
+                || String.valueOf(tanggalMasukDateChooser.getDateFormatString())==null) {
+            JOptionPane.showMessageDialog(this, "Semua field harus terisi", "ERROR", JOptionPane.ERROR_MESSAGE);
 
-                JOptionPane.showMessageDialog(this, "Data dengan Nama \n"
-                        + "<html><font color=#FF0000>" + nama + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
-
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+        } else if (charArray.length > 10) {
+            JOptionPane.showMessageDialog(this, "NIP tidak boleh melibihi 10 karakter", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            try {
-                Karyawan karyawanLama = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip);
-                karyawanLama.setNip(nip);
-                karyawanLama.setNama(nama);
-                karyawanLama.setAlamat(alamat);
-                karyawanLama.setTanggal_masuk(tanggal);
-                karyawanLama.setKodeGolongan(kodeGolongan);
-                karyawanLama.setKodePosisi(kodePosisi);
-                karyawanLama.setKodeOutlet(kodeOutlet);
-                karyawanLama.setKodeDepartment(kodeDepartment);
-                DaoFactory.getKaryawanDao().update(karyawanLama);
-                JOptionPane.showMessageDialog(this, "Data dengan nama\n"
-                        + "<html><font color=#FF0000>" + nama + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+            Karyawan karyawanBaru = new Karyawan();
+            karyawanBaru.setNip(nip);
+            karyawanBaru.setNama(nama);
+            karyawanBaru.setAlamat(alamat);
+            karyawanBaru.setTanggal_masuk(tanggal);
+            karyawanBaru.setKodeGolongan(kodeGolongan);
+            karyawanBaru.setKodePosisi(kodePosisi);
+            karyawanBaru.setKodeOutlet(kodeOutlet);
+            karyawanBaru.setKodeDepartment(kodeDepartment);
+            karyawanBaru.setNo_rekening(no_rekening);
+            if ("Simpan".equals(simpanButton.getText())) {
+                try {
+                    DaoFactory.getKaryawanDao().insert(karyawanBaru);
 
-                batalButton.doClick();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Data dengan Nama \n"
+                            + "<html><font color=#FF0000>" + nama + "</font></html>" + "\nBerhasil diSimpan", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                try {
+                    Karyawan karyawanLama = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip);
+                    karyawanLama.setNip(nip);
+                    karyawanLama.setNama(nama);
+                    karyawanLama.setAlamat(alamat);
+                    karyawanLama.setTanggal_masuk(tanggal);
+                    karyawanLama.setKodeGolongan(kodeGolongan);
+                    karyawanLama.setKodePosisi(kodePosisi);
+                    karyawanLama.setKodeOutlet(kodeOutlet);
+                    karyawanLama.setKodeDepartment(kodeDepartment);
+                    karyawanLama.setNo_rekening(no_rekening);
+                    DaoFactory.getKaryawanDao().update(karyawanLama);
+                    JOptionPane.showMessageDialog(this, "Data dengan nama\n"
+                            + "<html><font color=#FF0000>" + nama + "</font></html>" + "\nBerhasil diUpdate", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
+
+                    batalButton.doClick();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
@@ -651,17 +681,23 @@ public class KaryawanForm extends javax.swing.JFrame {
         //jika ditemukan
         if (activeKaryawan != null) {
             String tanggal = activeKaryawan.getTanggal_masuk();
-            int year = Integer.parseInt(tanggal.substring(0, 4));
-            int month = Integer.parseInt(tanggal.substring(5, 7));
-            int day = Integer.parseInt(tanggal.substring(8, 10));
-            Date date = new Date(year, month - 1, day);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date tanggalMasuk = null;
+            try {
+                tanggalMasuk = simpleDateFormat.parse(tanggal);
+            } catch (ParseException ex) {
+                Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("department: "+activeKaryawan.getKodeDepartment());
             namaKaryawanTextField.setText(activeKaryawan.getNama());
             alamatKaryawanTextField.setText(activeKaryawan.getAlamat());
-            tanggalMasukDateChooser.setDate(date);
+            tanggalMasukDateChooser.setDate(tanggalMasuk);
             golonganCombo.setSelectedItem(activeKaryawan.getKodeGolongan());
             posisiCombo.setSelectedItem(activeKaryawan.getKodePosisi());
             outletCombo.setSelectedItem(activeKaryawan.getKodeOutlet());
+            System.out.println(activeKaryawan.getKodeDepartment());
             departmentCombo.setSelectedItem(activeKaryawan.getKodeDepartment());
+            noRekeningTextField.setText(activeKaryawan.getNo_rekening());
             simpanButton.setText("Update");
             simpanButton.setMnemonic('U');
             simpanButton.setEnabled(true);
@@ -670,6 +706,8 @@ public class KaryawanForm extends javax.swing.JFrame {
 
         } else {
             namaKaryawanTextField.setText(null);
+            alamatKaryawanTextField.setText(null);
+            noRekeningTextField.setText(null);
             namaKaryawanTextField.requestFocus();
             hapusButton.setEnabled(false);
             simpanButton.setText("Simpan");
@@ -681,8 +719,7 @@ public class KaryawanForm extends javax.swing.JFrame {
     }//GEN-LAST:event_nipKaryawanComboActionPerformed
 
     private void namaKaryawanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaKaryawanTextFieldActionPerformed
-        simpanButton.setEnabled(true);
-        simpanButton.requestFocus();
+        alamatKaryawanTextField.requestFocus();
 // TODO add your handling code here:
     }//GEN-LAST:event_namaKaryawanTextFieldActionPerformed
 
@@ -698,6 +735,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         hapusButton.setEnabled(true);
         tanggalMasukDateChooser.setDate(gc.getTime());
         alamatKaryawanTextField.setText(null);
+        noRekeningTextField.setText(null);
         golonganCombo.setSelectedIndex(0);
         posisiCombo.setSelectedIndex(0);
         outletCombo.setSelectedIndex(0);
@@ -712,6 +750,12 @@ public class KaryawanForm extends javax.swing.JFrame {
         }
         KaryawanTableModel model = new KaryawanTableModel(karyawans);
         karyawanTable.setModel(model);
+        karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(250);
+        karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(200);
+        karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(150);
+        karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(200);
+        karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         for (Karyawan k : karyawans) {
             nipKaryawanCombo.addItem(k.getNip());
@@ -721,6 +765,7 @@ public class KaryawanForm extends javax.swing.JFrame {
 
     private void alamatKaryawanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alamatKaryawanTextFieldActionPerformed
         // TODO add your handling code here:
+        tanggalMasukDateChooser.requestFocus();
     }//GEN-LAST:event_alamatKaryawanTextFieldActionPerformed
 
 private void tanggalMasukDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tanggalMasukDateChooserPropertyChange
@@ -729,7 +774,29 @@ private void tanggalMasukDateChooserPropertyChange(java.beans.PropertyChangeEven
 
 private void noRekeningTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noRekeningTextFieldActionPerformed
 // TODO add your handling code here:
+    simpanButton.setEnabled(true);
+    simpanButton.requestFocus();
 }//GEN-LAST:event_noRekeningTextFieldActionPerformed
+
+    private void golonganComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_golonganComboActionPerformed
+        // TODO add your handling code here:
+        outletCombo.requestFocus();
+    }//GEN-LAST:event_golonganComboActionPerformed
+
+    private void outletComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outletComboActionPerformed
+        // TODO add your handling code here:
+        posisiCombo.requestFocus();
+    }//GEN-LAST:event_outletComboActionPerformed
+
+    private void posisiComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posisiComboActionPerformed
+        // TODO add your handling code here:
+        departmentCombo.actionPerformed(evt);
+    }//GEN-LAST:event_posisiComboActionPerformed
+
+    private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
+        // TODO add your handling code here:
+        noRekeningTextField.requestFocus();
+    }//GEN-LAST:event_departmentComboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -756,8 +823,6 @@ private void noRekeningTextFieldActionPerformed(java.awt.event.ActionEvent evt) 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel alamatKaryawanLabel;
     private javax.swing.JTextField alamatKaryawanTextField;
-    private javax.swing.JComboBox bankCombo;
-    private javax.swing.JLabel bankLabel;
     private javax.swing.JButton batalButton;
     private javax.swing.JButton cmdKeluar;
     private javax.swing.JPanel daftarKaryawanPanel;

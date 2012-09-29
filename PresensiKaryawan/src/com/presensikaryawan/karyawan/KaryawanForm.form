@@ -102,10 +102,7 @@
                                       <Component id="noRekeningLabel" pref="100" max="32767" attributes="1"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="noRekeningTextField" min="-2" pref="213" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Component id="bankLabel" min="-2" pref="83" max="-2" attributes="1"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="bankCombo" pref="216" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -202,8 +199,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="noRekeningLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="noRekeningTextField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="bankLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="bankCombo" alignment="3" min="-2" pref="29" max="-2" attributes="1"/>
                       </Group>
                       <EmptySpace pref="11" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -372,6 +367,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="golonganComboActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="kodeOutletLabel">
               <Properties>
@@ -395,6 +393,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="posisiComboActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="outletCombo">
               <Properties>
@@ -402,6 +403,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="outletComboActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="departmentCombo">
               <Properties>
@@ -409,13 +413,16 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="departmentComboActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="noRekeningLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="No REK"/>
+                <Property name="text" type="java.lang.String" value="No Rek"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="noRekeningTextField">
@@ -432,21 +439,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="noRekeningTextFieldActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="bankLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="BANK"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="bankCombo">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
