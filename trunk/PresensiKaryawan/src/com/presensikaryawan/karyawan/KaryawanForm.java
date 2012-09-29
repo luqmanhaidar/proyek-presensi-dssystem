@@ -94,7 +94,10 @@ public class KaryawanForm extends javax.swing.JFrame {
         DepartmentDao dao4 = DaoFactory.getDepartmentDao();
         List<Department> departments = dao4.getAllDepartment();
         for (Department d : departments) {
+            System.out.println("kode dept: " + d.getKodeDepartment());
+            System.out.println("nama dept: " + d.getNamaDepartment());
             departmentCombo.addItem(d.getKodeDepartment() + "-" + d.getNamaDepartment());
+            departmentCombo.setSelectedIndex(0);
         }
         if (karyawans.isEmpty()) {
             hapusButton.setEnabled(false);
@@ -107,6 +110,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         alamatKaryawanTextField.addFocusListener(new ComponentFocus(alamatKaryawanTextField));
         nipKaryawanCombo.addFocusListener(new ComponentFocus(nipKaryawanCombo));
         simpanButton.addFocusListener(new ComponentFocus(simpanButton));
+        noRekeningTextField.addFocusListener(new ComponentFocus(noRekeningTextField));
     }
 
     /**
@@ -138,9 +142,9 @@ public class KaryawanForm extends javax.swing.JFrame {
         kodeDepartmentLabel = new javax.swing.JLabel();
         posisiCombo = new javax.swing.JComboBox();
         outletCombo = new javax.swing.JComboBox();
-        departmentCombo = new javax.swing.JComboBox();
         noRekeningLabel = new javax.swing.JLabel();
         noRekeningTextField = new javax.swing.JTextField();
+        departmentCombo = new javax.swing.JComboBox();
         daftarKaryawanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         karyawanTable = new javax.swing.JTable();
@@ -226,6 +230,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         batalButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         batalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Undo.gif"))); // NOI18N
         batalButton.setText("Batal");
+        batalButton.setToolTipText("Klik untuk batal");
         batalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batalButtonActionPerformed(evt);
@@ -283,12 +288,6 @@ public class KaryawanForm extends javax.swing.JFrame {
             }
         });
 
-        departmentCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                departmentComboActionPerformed(evt);
-            }
-        });
-
         noRekeningLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         noRekeningLabel.setText("No Rek");
 
@@ -297,6 +296,12 @@ public class KaryawanForm extends javax.swing.JFrame {
         noRekeningTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noRekeningTextFieldActionPerformed(evt);
+            }
+        });
+
+        departmentCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentComboActionPerformed(evt);
             }
         });
 
@@ -566,12 +571,14 @@ public class KaryawanForm extends javax.swing.JFrame {
             String outlet = karyawanTable.getValueAt(row, 6).toString();
             String department = karyawanTable.getValueAt(row, 7).toString();
             String no_rekening = karyawanTable.getValueAt(row, 8).toString();
-            int year = Integer.parseInt(tanggal.substring(0, 4));
-            year = year - 1900;
-            int month = Integer.parseInt(tanggal.substring(5, 7));
-            month = month - 1;
-            int day = Integer.parseInt(tanggal.substring(8, 10));
-            Date date = new Date(year, month, day);
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = null;
+            try {
+                date = simpleDateFormat.parse(tanggal);
+            } catch (ParseException ex) {
+                Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
             String kode = karyawanTable.getValueAt(row, 4).toString();
             namaKaryawanTextField.setText(nama);
             nipKaryawanCombo.setSelectedItem(nip);
@@ -614,7 +621,7 @@ public class KaryawanForm extends javax.swing.JFrame {
                 || namaKaryawanTextField.getText() == null || namaKaryawanTextField.getText().matches("")
                 || alamatKaryawanTextField.getText() == null || alamatKaryawanTextField.getText().matches("")
                 || noRekeningTextField.getText() == null || noRekeningTextField.getText().matches("")
-                || String.valueOf(tanggalMasukDateChooser.getDateFormatString())==null) {
+                || tanggalMasukDateChooser.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Semua field harus terisi", "ERROR", JOptionPane.ERROR_MESSAGE);
 
         } else if (charArray.length > 10) {
@@ -671,50 +678,54 @@ public class KaryawanForm extends javax.swing.JFrame {
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
     private void nipKaryawanComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipKaryawanComboActionPerformed
-        String pilih = String.valueOf(nipKaryawanCombo.getSelectedItem());
 
-        try {
-            activeKaryawan = DaoFactory.getKaryawanDao().getByNIPKaryawan(pilih);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        //jika ditemukan
-        if (activeKaryawan != null) {
-            String tanggal = activeKaryawan.getTanggal_masuk();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            Date tanggalMasuk = null;
+        if (nipKaryawanCombo.getSelectedItem() != null) {
+            String pilih = String.valueOf(nipKaryawanCombo.getSelectedItem());
             try {
-                tanggalMasuk = simpleDateFormat.parse(tanggal);
-            } catch (ParseException ex) {
-                Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+                activeKaryawan = DaoFactory.getKaryawanDao().getByNIPKaryawan(pilih);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-            System.out.println("department: "+activeKaryawan.getKodeDepartment());
-            namaKaryawanTextField.setText(activeKaryawan.getNama());
-            alamatKaryawanTextField.setText(activeKaryawan.getAlamat());
-            tanggalMasukDateChooser.setDate(tanggalMasuk);
-            golonganCombo.setSelectedItem(activeKaryawan.getKodeGolongan());
-            posisiCombo.setSelectedItem(activeKaryawan.getKodePosisi());
-            outletCombo.setSelectedItem(activeKaryawan.getKodeOutlet());
-            System.out.println(activeKaryawan.getKodeDepartment());
-            departmentCombo.setSelectedItem(activeKaryawan.getKodeDepartment());
-            noRekeningTextField.setText(activeKaryawan.getNo_rekening());
-            simpanButton.setText("Update");
-            simpanButton.setMnemonic('U');
-            simpanButton.setEnabled(true);
-            hapusButton.setEnabled(true);
-            nipKaryawanCombo.requestFocus();
+            //jika ditemukan
+            if (activeKaryawan != null) {
+                String tanggal = activeKaryawan.getTanggal_masuk();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                Date tanggalMasuk = null;
+                try {
+                    tanggalMasuk = simpleDateFormat.parse(tanggal);
+                } catch (ParseException ex) {
+                    Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println("department: " + activeKaryawan.getKodeDepartment());
+                namaKaryawanTextField.setText(activeKaryawan.getNama());
+                alamatKaryawanTextField.setText(activeKaryawan.getAlamat());
+                tanggalMasukDateChooser.setDate(tanggalMasuk);
+                golonganCombo.setSelectedItem(activeKaryawan.getKodeGolongan());
+                posisiCombo.setSelectedItem(activeKaryawan.getKodePosisi());
+                outletCombo.setSelectedItem(activeKaryawan.getKodeOutlet());
+                System.out.println(activeKaryawan.getKodeDepartment());
+                departmentCombo.setSelectedItem(activeKaryawan.getKodeDepartment());
+                noRekeningTextField.setText(activeKaryawan.getNo_rekening());
+                simpanButton.setText("Update");
+                simpanButton.setMnemonic('U');
+                simpanButton.setEnabled(true);
+                hapusButton.setEnabled(true);
+                nipKaryawanCombo.requestFocus();
 
+            } else {
+                namaKaryawanTextField.setText(null);
+                alamatKaryawanTextField.setText(null);
+                noRekeningTextField.setText(null);
+                namaKaryawanTextField.requestFocus();
+                hapusButton.setEnabled(false);
+                simpanButton.setText("Simpan");
+                simpanButton.setMnemonic('S');
+                simpanButton.setEnabled(true);
+            }
         } else {
-            namaKaryawanTextField.setText(null);
-            alamatKaryawanTextField.setText(null);
-            noRekeningTextField.setText(null);
-            namaKaryawanTextField.requestFocus();
+            simpanButton.setEnabled(false);
             hapusButton.setEnabled(false);
-            simpanButton.setText("Simpan");
-            simpanButton.setMnemonic('S');
-            simpanButton.setEnabled(true);
         }
-
 // TODO add your handling code here:
     }//GEN-LAST:event_nipKaryawanComboActionPerformed
 
@@ -795,7 +806,6 @@ private void noRekeningTextFieldActionPerformed(java.awt.event.ActionEvent evt) 
 
     private void departmentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboActionPerformed
         // TODO add your handling code here:
-        noRekeningTextField.requestFocus();
     }//GEN-LAST:event_departmentComboActionPerformed
 
     /**

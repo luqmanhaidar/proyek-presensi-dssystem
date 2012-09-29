@@ -218,11 +218,28 @@ public class KaryawanDaoImplemen implements KaryawanDao {
             result = statement.executeQuery();
             Karyawan karyawan = null;
             if (result.next()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String[] tanggalArr = new String[3];
+                int counter = 0;
+                StringTokenizer stoken = new StringTokenizer(result.getString("tanggal_masuk"));
+                while (stoken.hasMoreElements()) {
+
+                    tanggalArr[counter] = stoken.nextToken("-");
+                    counter++;
+                }
+                String tanggalGabung = tanggalArr[2] + "-" + tanggalArr[1] + "-" + tanggalArr[0];
+                Date tanggal = null;
+                try {
+                    tanggal = sdf.parse(tanggalGabung);
+                } catch (ParseException ex) {
+                    Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 karyawan = new Karyawan();
                 karyawan.setNip(result.getString("nip"));
                 karyawan.setNama(result.getString("nama"));
                 karyawan.setAlamat(result.getString("alamat"));
-                karyawan.setTanggal_masuk(result.getString("tanggal_masuk"));
+                karyawan.setTanggal_masuk(sdf.format(tanggal));
                 karyawan.setKodeGolongan(result.getString("kode_golongan"));
                 karyawan.setKodePosisi(result.getString("kode_posisi"));
                 karyawan.setKodeOutlet(result.getString("kode_outlet"));
@@ -262,11 +279,28 @@ public class KaryawanDaoImplemen implements KaryawanDao {
             result = statement.executeQuery();
             List<Karyawan> karyawans = new ArrayList<Karyawan>();
             while (result.next()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String[] tanggalArr = new String[3];
+                int counter = 0;
+                StringTokenizer stoken = new StringTokenizer(result.getString("tanggal_masuk"));
+                while (stoken.hasMoreElements()) {
+
+                    tanggalArr[counter] = stoken.nextToken("-");
+                    counter++;
+                }
+                String tanggalGabung = tanggalArr[2] + "-" + tanggalArr[1] + "-" + tanggalArr[0];
+                Date tanggal = null;
+                try {
+                    tanggal = sdf.parse(tanggalGabung);
+                } catch (ParseException ex) {
+                    Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 Karyawan karyawan = new Karyawan();
                 karyawan.setNip(result.getString("nip"));
                 karyawan.setNama(result.getString("nama"));
                 karyawan.setAlamat(result.getString("alamat"));
-                karyawan.setTanggal_masuk(result.getString("tanggal_masuk"));
+                karyawan.setTanggal_masuk(sdf.format(tanggal));
                 karyawan.setKodeGolongan(result.getString("kode_golongan"));
                 karyawan.setKodePosisi(result.getString("kode_posisi"));
                 karyawan.setKodeOutlet(result.getString("kode_outlet"));
