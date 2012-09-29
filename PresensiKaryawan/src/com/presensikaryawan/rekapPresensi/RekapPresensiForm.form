@@ -71,6 +71,7 @@
               <Image iconType="3" name="/icon/24/Exit.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Keluar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Klik Untuk Kembali Ke Window Utama"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keluarButtonActionPerformed"/>
@@ -110,21 +111,17 @@
                           <Component id="nilaiNamaDepartment" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace min="-2" pref="457" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="bulanLabel" max="32767" attributes="1"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="monthChooser" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="yearChooser" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="prosesButton" min="-2" pref="145" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="bulanLabel" max="32767" attributes="1"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="monthChooser" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="yearChooser" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="prosesButton" min="-2" pref="145" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -209,7 +206,11 @@
             </Component>
             <Component class="javax.swing.JButton" name="prosesButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Proses"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/24/Search.gif"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Lihat"/>
+                <Property name="toolTipText" type="java.lang.String" value="Klik Untuk Lihat Rekap"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prosesButtonActionPerformed"/>

@@ -122,6 +122,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         cmdKeluar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmdKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         cmdKeluar.setText("Keluar");
+        cmdKeluar.setToolTipText("Klik Untuk Kembali Ke Window Utama");
         cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdKeluarActionPerformed(evt);
@@ -142,7 +143,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
         lihatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Search.gif"))); // NOI18N
         lihatButton.setMnemonic('S');
         lihatButton.setText("Lihat");
-        lihatButton.setToolTipText("Klik Untuk Simpan");
+        lihatButton.setToolTipText("Klik Untuk Lihat Rekap");
         lihatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lihatButtonActionPerformed(evt);
@@ -419,43 +420,56 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     Date date = new Date();
     if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
         JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if ((departmentCombo.getSelectedItem() == null
+            || String.valueOf(departmentCombo.getSelectedItem()).matches(""))) {
+        JOptionPane.showMessageDialog(this, "Kotak kode department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-        String maxDayOfMonth;
-        if (bulan < 10) {
-            maxDayOfMonth = tahun + "-0" + bulan + "-" + day;
-        } else {
-            maxDayOfMonth = tahun + "-" + bulan + "-" + day;
-        }
-        System.out.println(maxDayOfMonth);
+        Department dept = new Department();
         try {
-            TransaksiDepartmentDao dao = DaoFactory.getTransaksiDepartmentDao();
-            List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
-
-            TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
-            karyawanTable.setModel(model);
-            karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-            karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
-            karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+            dept = DaoFactory.getDepartmentDao().getByKode(department);
         } catch (SQLException ex) {
             Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (dept == null) {
+            JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+            String maxDayOfMonth;
+            if (bulan < 10) {
+                maxDayOfMonth = tahun + "-0" + bulan + "-" + day;
+            } else {
+                maxDayOfMonth = tahun + "-" + bulan + "-" + day;
+            }
+            System.out.println(maxDayOfMonth);
+            try {
+                TransaksiDepartmentDao dao = DaoFactory.getTransaksiDepartmentDao();
+                List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
+
+                TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
+                karyawanTable.setModel(model);
+                karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+                karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
+                karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
