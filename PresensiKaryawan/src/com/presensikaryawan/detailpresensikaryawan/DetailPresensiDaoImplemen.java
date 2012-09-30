@@ -24,7 +24,8 @@ import java.util.logging.Logger;
 public class DetailPresensiDaoImplemen implements DetailPresensiDao {
 
     private final String SQL_UPDATE_GETPRESENSI = "UPDATE detail_presensi set keterangan = ? where nip = ? and tanggal = ?";
-    private final String SQL_GETDETAILPRESENSI_BYNIP = "SELECT tanggal, keterangan FROM detail_presensi where nip = ? and keterangan = 'K' and tanggal like ?";
+    private final String SQL_GETDETAILPRESENSI_BYNIP = "SELECT tanggal, keterangan FROM detail_presensi where nip = ? and tanggal like ?";
+    private final String SQL_GETWAKTU = "select timelog from eventlog where datelog like ? and userid = ? and fkmode = '0'"; 
     private Connection connection;
 
     public DetailPresensiDaoImplemen(Connection connection) {
@@ -63,6 +64,7 @@ public class DetailPresensiDaoImplemen implements DetailPresensiDao {
     public List<DetailPresensi> getDetailPresensiByNIP(String nip, String bulan, String tahun) throws SQLException {
         PreparedStatement statement = null;
         ResultSet result = null;
+        ResultSet result2 = null;
         try {
             connection.setAutoCommit(false);
 
@@ -91,10 +93,22 @@ public class DetailPresensiDaoImplemen implements DetailPresensiDao {
                 } catch (ParseException ex) {
                     Logger.getLogger(DetailPresensiDialog.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                
+                
 
                 detailPresensi.setTanggal(sdf.format(tanggal));
                 detailPresensi.setKeterangan(result.getString("keterangan"));
+                
+                statement = connection.prepareStatement(SQL_GETWAKTU);
+                statement.setString(1, result.getString("tanggal"));
+                statement.setString(2, nip);
+                result2 = statement.executeQuery();
+                if(!result.getString("keterangan").matches("T")&&!result.getString("keterangan").matches("M")){
+                    detailPresensi.setWaktu("-");
+                }
+                while (result2.next()) {
+                    detailPresensi.setWaktu(result.getString("timelog"));
+                }
                 detailPresensis.add(detailPresensi);
 
             }

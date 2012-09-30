@@ -94,17 +94,17 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
 
         detailPresensiTableModel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Tanggal", "Keterangan"
+                "Tanggal", "Keterangan", "Jam Masuk"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
