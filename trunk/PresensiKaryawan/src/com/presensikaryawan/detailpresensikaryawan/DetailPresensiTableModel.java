@@ -26,7 +26,7 @@ private List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -38,6 +38,8 @@ private List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
                 return dP.getTanggal();
             case 1:
                 return dP.getKeterangan();
+            case 2:
+                return dP.getWaktu();
             default:
                 return "";
         }
@@ -50,6 +52,8 @@ private List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
                 return "TANGGAL";
             case 1:
                 return "KETERANGAN";
+            case 2:
+                return "JAM MASUK";
             default:
                 return "";
         }

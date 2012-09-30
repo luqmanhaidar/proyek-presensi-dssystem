@@ -9,7 +9,7 @@ package com.presensikaryawan.detailpresensikaryawan;
  * @author Tinus
  */
 public class DetailPresensi {
-    private String nip, tanggal, keterangan;
+    private String nip, tanggal, keterangan, waktu;
 
     /**
      * @return the nip
@@ -51,6 +51,20 @@ public class DetailPresensi {
      */
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
+    }
+
+    /**
+     * @return the waktu
+     */
+    public String getWaktu() {
+        return waktu;
+    }
+
+    /**
+     * @param waktu the waktu to set
+     */
+    public void setWaktu(String waktu) {
+        this.waktu = waktu;
     }
     
 }
