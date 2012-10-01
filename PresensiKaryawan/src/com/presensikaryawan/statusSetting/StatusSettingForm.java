@@ -27,19 +27,21 @@ public class StatusSettingForm extends javax.swing.JFrame {
     private DaoFactory service;
     private StatusSetting activeStatusSetting;
     private JFrame frame;
+    private JMenuItem menuItem;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public StatusSettingForm(final JFrame frame) throws SQLException {
+    public StatusSettingForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        this.menuItem = menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -386,8 +388,8 @@ public class StatusSettingForm extends javax.swing.JFrame {
         StatusSetting statusSettingBaru = new StatusSetting();
         statusSettingBaru.setKodeStatus(kodeStatus);
         statusSettingBaru.setKeteranganStatus(keteranganStatus);
-        String pattern="[0-9]*";
-        if (!keteranganStatusTextField.getText().matches("") && !String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") && kodeStatusCombo.getSelectedItem()!=null
+        String pattern = "[0-9]*";
+        if (!keteranganStatusTextField.getText().matches("") && !String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") && kodeStatusCombo.getSelectedItem() != null
                 && String.valueOf(kodeStatusCombo.getSelectedItem()).matches(pattern)) {
             if ("Simpan".equals(simpanButton.getText())) {
                 try {
@@ -413,14 +415,13 @@ public class StatusSettingForm extends javax.swing.JFrame {
                     ex.printStackTrace();
                 }
             }
-        } else if (String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") || kodeStatusCombo.getSelectedItem()==null) {
+        } else if (String.valueOf(kodeStatusCombo.getSelectedItem()).matches("") || kodeStatusCombo.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Kode Status Belum Diisi");
             kodeStatusCombo.requestFocus();
-        }  else if (!String.valueOf(kodeStatusCombo.getSelectedItem()).matches(pattern)) {
+        } else if (!String.valueOf(kodeStatusCombo.getSelectedItem()).matches(pattern)) {
             JOptionPane.showMessageDialog(this, "Kode Status Harus Berupa Angka");
             kodeStatusCombo.requestFocus();
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(this, "Keterangan Status Belum Disii");
             keteranganStatusTextField.requestFocus();
         }
@@ -428,6 +429,7 @@ public class StatusSettingForm extends javax.swing.JFrame {
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
         frame.setEnabled(true);
+        menuItem.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -578,7 +580,7 @@ public class StatusSettingForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new StatusSettingForm(null).setVisible(true);
+                    new StatusSettingForm(null, null).setVisible(true);
 
 
                 } catch (SQLException ex) {

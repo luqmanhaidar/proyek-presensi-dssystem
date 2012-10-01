@@ -27,19 +27,20 @@ public class OutletForm extends javax.swing.JFrame {
     private DaoFactory service;
     private Outlet activeOutlet;
     private JFrame frame;
-
+    private JMenuItem menuItem;
     /**
      * Creates new form masterInventoryGrup
      */
-    public OutletForm(final JFrame frame) throws SQLException {
+    public OutletForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        this.menuItem=menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -464,6 +465,7 @@ public class OutletForm extends javax.swing.JFrame {
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
         frame.setEnabled(true);
+        menuItem.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -556,7 +558,7 @@ private void alamatOutletTextFieldActionPerformed(java.awt.event.ActionEvent evt
             @Override
             public void run() {
                 try {
-                    new OutletForm(null).setVisible(true);
+                    new OutletForm(null, null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(OutletForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -28,19 +28,20 @@ public class GroupShiftForm extends javax.swing.JFrame {
     private DaoFactory service;
     private GroupShift activeGroupShift;
     private JFrame frame;
-
+    private JMenuItem menuItem;
     /**
      * Creates new form masterInventoryGrup
      */
-    public GroupShiftForm(final JFrame frame) throws SQLException {
+    public GroupShiftForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        this.menuItem=menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -851,6 +852,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
         frame.setEnabled(true);
+        menuItem.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -1127,7 +1129,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new GroupShiftForm(null).setVisible(true);
+                    new GroupShiftForm(null, null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(GroupShiftForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

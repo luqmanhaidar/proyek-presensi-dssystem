@@ -29,19 +29,21 @@ public class GolonganForm extends javax.swing.JFrame {
     private DaoFactory service;
     private Golongan activeGolongan;
     private JFrame frame;
+    private JMenuItem menuItem;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public GolonganForm(final JFrame frame) throws SQLException {
+    public GolonganForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        this.menuItem = menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -64,7 +66,7 @@ public class GolonganForm extends javax.swing.JFrame {
         for (Golongan g : golongans) {
             kodeGolonganCombo.addItem(g.getKodeGolongan());
         }
-        if (golongans.isEmpty()){
+        if (golongans.isEmpty()) {
             hapusButton.setEnabled(false);
         }
     }
@@ -624,6 +626,7 @@ public class GolonganForm extends javax.swing.JFrame {
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
         frame.setEnabled(true);
+        menuItem.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -832,7 +835,7 @@ private void gajiPokokTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FI
             @Override
             public void run() {
                 try {
-                    new GolonganForm(null).setVisible(true);
+                    new GolonganForm(null, null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(GolonganForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

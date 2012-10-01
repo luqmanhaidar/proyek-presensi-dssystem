@@ -27,19 +27,21 @@ public class PosisiForm extends javax.swing.JFrame {
     private DaoFactory service;
     private Posisi activePosisi;
     private JFrame frame;
+    private JMenuItem menuItem;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public PosisiForm(final JFrame frame) throws SQLException {
+    public PosisiForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        this.menuItem = menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -419,7 +421,7 @@ public class PosisiForm extends javax.swing.JFrame {
         } else if (String.valueOf(kodePosisiCombo.getSelectedItem()).matches("") || kodePosisiCombo.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Kode Posisi Belum Diisi", "ERROR", JOptionPane.ERROR_MESSAGE);
             kodePosisiCombo.requestFocus();
-        } else if (String.valueOf(namaPosisiTextField.getText()).matches("")||namaPosisiTextField.getText()==null){
+        } else if (String.valueOf(namaPosisiTextField.getText()).matches("") || namaPosisiTextField.getText() == null) {
             JOptionPane.showMessageDialog(this, "Nama Posisi Belum Disii");
             namaPosisiTextField.requestFocus();
         }
@@ -427,6 +429,7 @@ public class PosisiForm extends javax.swing.JFrame {
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
         frame.setEnabled(true);
+        menuItem.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -518,7 +521,7 @@ public class PosisiForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new PosisiForm(null).setVisible(true);
+                    new PosisiForm(null, null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(PosisiForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

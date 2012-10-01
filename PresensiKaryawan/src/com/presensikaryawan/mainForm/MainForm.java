@@ -31,12 +31,51 @@ import java.util.logging.Logger;
  */
 public class MainForm extends javax.swing.JFrame {
 
+    RekapPresensiForm rekapPresensiForm;
+    TransaksiDepartmentForm transaksiDepartmentForm;
+    PayrollBankReportForm payrollBankReportForm;
+    TransaksiGajiDepartmentReportForm transaksiGajiDepartmentReportForm;
+    GolonganForm golonganForm;
+    ShiftForm shiftForm;
+    GajiPerKaryawanReportForm gajiPerKaryawanReportForm;
+    RekapPresensiPerBulanForm rekapPresensiPerBulanForm;
+    RekapGajiForm rekapGajiForm;
+    DepartmentForm departmentForm;
+    OutletForm outletForm;
+    PosisiForm posisiForm;
+    GroupShiftForm groupShiftForm;
+    StatusSettingForm statusSettingForm;
+    KaryawanForm karyawanForm;
+    LiburNasionalForm liburNasionalForm;
+    LiburPerusahaanForm liburPerusahaanForm;
+
     /**
      * Creates new form MainForm
      */
     public MainForm() {
-        initComponents();
-        this.setLocationRelativeTo(null);
+        try {
+            initComponents();
+            this.setLocationRelativeTo(null);
+            rekapPresensiForm = new RekapPresensiForm(this);
+            transaksiDepartmentForm = new TransaksiDepartmentForm(this);
+            payrollBankReportForm = new PayrollBankReportForm(this);
+            transaksiGajiDepartmentReportForm = new TransaksiGajiDepartmentReportForm(this);
+            gajiPerKaryawanReportForm = new GajiPerKaryawanReportForm(this);
+            rekapPresensiPerBulanForm = new RekapPresensiPerBulanForm(this);
+            outletForm = new OutletForm(this, menuItemMasterOutlet);
+            departmentForm = new DepartmentForm(this, menuItemMasterDepartment);
+            rekapGajiForm = new RekapGajiForm(this);
+            shiftForm = new ShiftForm(this, menuItemMasterShift);
+            golonganForm = new GolonganForm(this, menuItemMasterGolongan);
+            posisiForm = new PosisiForm(this, menuItemMasterPosisi);
+            groupShiftForm = new GroupShiftForm(this, menuItemMasterGroupShift);
+            statusSettingForm = new StatusSettingForm(this, menuItemMasterStatus);
+            karyawanForm = new KaryawanForm(this, menuItemMasterKaryawan);
+            liburNasionalForm = new LiburNasionalForm(this, menuItemMasterLiburNasional);
+            liburPerusahaanForm = new LiburPerusahaanForm(this, menuItemMasterLiburPerusahaan);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -298,69 +337,47 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemTransaksiPresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaksiPresensiActionPerformed
-        try {
-            // TODO add your handling code here:
-            RekapPresensiForm rekapPresensiForm = new RekapPresensiForm(this);
+        // TODO add your handling code here:         
+        if (!rekapPresensiForm.isVisible()) {
             rekapPresensiForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemTransaksiPresensi.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemTransaksiPresensiActionPerformed
 
     private void menuItemTransaksiGajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransaksiGajiActionPerformed
-        try {
-            // TODO add your handling code here:
-            TransaksiDepartmentForm transaksiDepartmentForm = new TransaksiDepartmentForm(this);
+        // TODO add your handling code here:
+        if (!transaksiDepartmentForm.isVisible()) {
             transaksiDepartmentForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_menuItemTransaksiGajiActionPerformed
 
     private void menuItemPayrollBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPayrollBankActionPerformed
-        try {
-            // TODO add your handling code here:
-            PayrollBankReportForm payrollBankReportForm = new PayrollBankReportForm(this);
+        // TODO add your handling code here:
+        if (!payrollBankReportForm.isVisible()) {
             payrollBankReportForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_menuItemPayrollBankActionPerformed
 
     private void menuItemLaporanGajiTotalReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemLaporanGajiTotalReportActionPerformed
-        try {
-            // TODO add your handling code here:
-            TransaksiGajiDepartmentReportForm transaksiGajiDepartmentReportForm = new TransaksiGajiDepartmentReportForm(this);
+        // TODO add your handling code here:
+        if (!transaksiGajiDepartmentReportForm.isVisible()) {
             transaksiGajiDepartmentReportForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_menuItemLaporanGajiTotalReportActionPerformed
 
     private void menuItemMasterGolonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterGolonganActionPerformed
-        try {
-            // TODO add your handling code here:
-            GolonganForm golonganForm = new GolonganForm(this);
+        // TODO add your handling code here:
+        if (!golonganForm.isVisible()) {
             golonganForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterGolongan.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterGolonganActionPerformed
 
     private void menuItemMasterShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterShiftActionPerformed
-        try {
-            // TODO add your handling code here:
-            ShiftForm shiftForm = new ShiftForm(this);
+        // TODO add your handling code here:
+        if (!shiftForm.isVisible()) {
             shiftForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterShift.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterShiftActionPerformed
 
@@ -370,123 +387,87 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void meuItemSlipGajiReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meuItemSlipGajiReportActionPerformed
-        try {
-            // TODO add your handling code here:
-            GajiPerKaryawanReportForm gajiPerKaryawanReportForm = new GajiPerKaryawanReportForm(this);
+        // TODO add your handling code here:
+        if (!gajiPerKaryawanReportForm.isVisible()) {
             gajiPerKaryawanReportForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_meuItemSlipGajiReportActionPerformed
 
     private void menuItemRekapPresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRekapPresensiActionPerformed
-        try {
-            // TODO add your handling code here:
-            RekapPresensiPerBulanForm rekapPresensiPerBulanForm = new RekapPresensiPerBulanForm(this);
+        // TODO add your handling code here:
+        if (!rekapPresensiPerBulanForm.isVisible()) {
             rekapPresensiPerBulanForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_menuItemRekapPresensiActionPerformed
 
     private void menuItemHistoryGajiReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemHistoryGajiReportActionPerformed
-        try {
-            // TODO add your handling code here:
-            RekapGajiForm rekapGajiForm = new RekapGajiForm(this);
+        // TODO add your handling code here:
+        if (!rekapGajiForm.isVisible()) {
             rekapGajiForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_menuItemHistoryGajiReportActionPerformed
 
     private void menuItemMasterDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterDepartmentActionPerformed
-        try {
-            // TODO add your handling code here:
-            DepartmentForm departmentForm = new DepartmentForm(this);
+        // TODO add your handling code here:
+        if (!departmentForm.isVisible()) {
             departmentForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterDepartment.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterDepartmentActionPerformed
 
     private void menuItemMasterOutletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterOutletActionPerformed
-        try {
-            // TODO add your handling code here:
-            OutletForm outletForm = new OutletForm(this);
+        // TODO add your handling code here:
+        if (!outletForm.isVisible()) {
             outletForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterOutlet.setEnabled(true);
         }
     }//GEN-LAST:event_menuItemMasterOutletActionPerformed
 
     private void menuItemMasterPosisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterPosisiActionPerformed
-        try {
-            // TODO add your handling code here:
-            PosisiForm posisiForm = new PosisiForm(this);
+        // TODO add your handling code here:
+        if (!posisiForm.isVisible()) {
             posisiForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterPosisi.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterPosisiActionPerformed
 
     private void menuItemMasterGroupShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterGroupShiftActionPerformed
-        try {
-            // TODO add your handling code here:
-            GroupShiftForm groupShiftForm = new GroupShiftForm(this);
+        // TODO add your handling code here:
+        if (!groupShiftForm.isVisible()) {
             groupShiftForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterGroupShift.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterGroupShiftActionPerformed
 
     private void menuItemMasterStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterStatusActionPerformed
-        try {
-            // TODO add your handling code here:
-            StatusSettingForm statusSettingForm = new StatusSettingForm(this);
+        // TODO add your handling code here:
+        if (!statusSettingForm.isVisible()) {
             statusSettingForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterStatus.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterStatusActionPerformed
 
     private void menuItemMasterKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterKaryawanActionPerformed
-        try {
-            // TODO add your handling code here:
-            KaryawanForm karyawanForm = new KaryawanForm(this);
+        // TODO add your handling code here:
+        if (!karyawanForm.isVisible()) {
             karyawanForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterKaryawan.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterKaryawanActionPerformed
 
     private void menuItemMasterLiburNasionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterLiburNasionalActionPerformed
-        try {
-            // TODO add your handling code here:
-            LiburNasionalForm liburNasionalForm = new LiburNasionalForm(this);
+        // TODO add your handling code here:
+        if (!liburNasionalForm.isVisible()) {
             liburNasionalForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterLiburNasional.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterLiburNasionalActionPerformed
 
     private void menuItemMasterLiburPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMasterLiburPerusahaanActionPerformed
-        try {
-            // TODO add your handling code here:
-            LiburPerusahaanForm liburPerusahaanForm = new LiburPerusahaanForm(this);
+        // TODO add your handling code here:
+        if (!liburPerusahaanForm.isVisible()) {
             liburPerusahaanForm.setVisible(true);
-            this.setEnabled(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            menuItemMasterLiburPerusahaan.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemMasterLiburPerusahaanActionPerformed
 
