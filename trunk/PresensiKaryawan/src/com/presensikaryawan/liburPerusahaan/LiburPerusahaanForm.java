@@ -34,19 +34,20 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
     private LiburPerusahaan activeLiburPerusahaan;
     private GregorianCalendar gc = new GregorianCalendar();
     private JFrame frame;
-
+    private JMenuItem menuItem;
     /**
      * Creates new form masterInventoryGrup
      */
-    public LiburPerusahaanForm(final JFrame frame) throws SQLException {
+    public LiburPerusahaanForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        this.menuItem=menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -468,6 +469,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
         frame.setEnabled(true);
+        menuItem.setEnabled(true);
         this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -577,7 +579,7 @@ public class LiburPerusahaanForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new LiburPerusahaanForm(null).setVisible(true);
+                    new LiburPerusahaanForm(null, null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -1,11 +1,10 @@
 package com.presensikaryawan.departmentSetting;
 
-import com.presensikaryawan.groupShift.*;
-import com.presensikaryawan.shiftSetting.*;
-import com.presensikaryawan.posisi.*;
-import com.presensikaryawan.tools.DaoFactory;
 import com.dssystem.umum.ChangeCase;
 import com.dssystem.umum.ComponentFocus;
+import com.presensikaryawan.groupShift.*;
+import com.presensikaryawan.shiftSetting.*;
+import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
@@ -30,17 +29,18 @@ public class DepartmentForm extends javax.swing.JFrame {
     private DaoFactory service;
     private Department activeDepartment;
     private JFrame frame;
-
+    private JMenuItem menuItem;
     /**
      * Creates new form masterInventoryGrup
      */
-    public DepartmentForm(final JFrame frame) throws SQLException {
+    public DepartmentForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         this.frame = frame;
+        this.menuItem=menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         initComponents();
@@ -468,6 +468,7 @@ public class DepartmentForm extends javax.swing.JFrame {
 
     private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
         frame.setEnabled(true);
+        menuItem.setEnabled(true);
         this.dispose();
 
 }//GEN-LAST:event_cmdKeluarActionPerformed
@@ -680,7 +681,7 @@ public class DepartmentForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new DepartmentForm(null).setVisible(true);
+                    new DepartmentForm(null, null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(DepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
