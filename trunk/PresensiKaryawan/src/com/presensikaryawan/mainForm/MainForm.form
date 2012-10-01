@@ -53,7 +53,7 @@
                 <Property name="text" type="java.lang.String" value="Report"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="meuItemSlipGajiReport">
+                <MenuItem class="javax.swing.JMenuItem" name="menuItemSlipGajiReport">
                   <Properties>
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                       <KeyStroke key="Shift+L"/>
@@ -61,7 +61,7 @@
                     <Property name="text" type="java.lang.String" value="Report Slip Gaji"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="meuItemSlipGajiReportActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemSlipGajiReportActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="menuItemLaporanGajiTotalReport">

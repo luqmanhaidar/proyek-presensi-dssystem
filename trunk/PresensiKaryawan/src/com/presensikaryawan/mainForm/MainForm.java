@@ -56,12 +56,12 @@ public class MainForm extends javax.swing.JFrame {
         try {
             initComponents();
             this.setLocationRelativeTo(null);
-            rekapPresensiForm = new RekapPresensiForm(this);
-            transaksiDepartmentForm = new TransaksiDepartmentForm(this);
-            payrollBankReportForm = new PayrollBankReportForm(this);
-            transaksiGajiDepartmentReportForm = new TransaksiGajiDepartmentReportForm(this);
-            gajiPerKaryawanReportForm = new GajiPerKaryawanReportForm(this);
-            rekapPresensiPerBulanForm = new RekapPresensiPerBulanForm(this);
+            rekapPresensiForm = new RekapPresensiForm(this, menuItemTransaksiPresensi);
+            transaksiDepartmentForm = new TransaksiDepartmentForm(this, menuItemTransaksiGaji);
+            payrollBankReportForm = new PayrollBankReportForm(this, menuItemPayrollBank);
+            transaksiGajiDepartmentReportForm = new TransaksiGajiDepartmentReportForm(this, menuItemLaporanGajiTotalReport);
+            gajiPerKaryawanReportForm = new GajiPerKaryawanReportForm(this, menuItemSlipGajiReport);
+            rekapPresensiPerBulanForm = new RekapPresensiPerBulanForm(this, menuItemRekapPresensi);
             outletForm = new OutletForm(this, menuItemMasterOutlet);
             departmentForm = new DepartmentForm(this, menuItemMasterDepartment);
             rekapGajiForm = new RekapGajiForm(this);
@@ -97,7 +97,7 @@ public class MainForm extends javax.swing.JFrame {
         menuItemTransaksiPresensi = new javax.swing.JMenuItem();
         menuItemTransaksiGaji = new javax.swing.JMenuItem();
         reportMenu = new javax.swing.JMenu();
-        meuItemSlipGajiReport = new javax.swing.JMenuItem();
+        menuItemSlipGajiReport = new javax.swing.JMenuItem();
         menuItemLaporanGajiTotalReport = new javax.swing.JMenuItem();
         menuItemRekapPresensi = new javax.swing.JMenuItem();
         menuItemPayrollBank = new javax.swing.JMenuItem();
@@ -164,14 +164,14 @@ public class MainForm extends javax.swing.JFrame {
 
         reportMenu.setText("Report");
 
-        meuItemSlipGajiReport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK));
-        meuItemSlipGajiReport.setText("Report Slip Gaji");
-        meuItemSlipGajiReport.addActionListener(new java.awt.event.ActionListener() {
+        menuItemSlipGajiReport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK));
+        menuItemSlipGajiReport.setText("Report Slip Gaji");
+        menuItemSlipGajiReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                meuItemSlipGajiReportActionPerformed(evt);
+                menuItemSlipGajiReportActionPerformed(evt);
             }
         });
-        reportMenu.add(meuItemSlipGajiReport);
+        reportMenu.add(menuItemSlipGajiReport);
 
         menuItemLaporanGajiTotalReport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
         menuItemLaporanGajiTotalReport.setText("Report Laporan Gaji Total");
@@ -348,6 +348,7 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!transaksiDepartmentForm.isVisible()) {
             transaksiDepartmentForm.setVisible(true);
+            menuItemTransaksiGaji.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemTransaksiGajiActionPerformed
 
@@ -355,6 +356,7 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!payrollBankReportForm.isVisible()) {
             payrollBankReportForm.setVisible(true);
+            menuItemPayrollBank.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemPayrollBankActionPerformed
 
@@ -362,6 +364,7 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!transaksiGajiDepartmentReportForm.isVisible()) {
             transaksiGajiDepartmentReportForm.setVisible(true);
+            menuItemLaporanGajiTotalReport.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemLaporanGajiTotalReportActionPerformed
 
@@ -386,17 +389,19 @@ public class MainForm extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void meuItemSlipGajiReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meuItemSlipGajiReportActionPerformed
+    private void menuItemSlipGajiReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSlipGajiReportActionPerformed
         // TODO add your handling code here:
         if (!gajiPerKaryawanReportForm.isVisible()) {
             gajiPerKaryawanReportForm.setVisible(true);
+            menuItemSlipGajiReport.setEnabled(false);
         }
-    }//GEN-LAST:event_meuItemSlipGajiReportActionPerformed
+    }//GEN-LAST:event_menuItemSlipGajiReportActionPerformed
 
     private void menuItemRekapPresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRekapPresensiActionPerformed
         // TODO add your handling code here:
         if (!rekapPresensiPerBulanForm.isVisible()) {
             rekapPresensiPerBulanForm.setVisible(true);
+            menuItemRekapPresensi.setEnabled(false);
         }
     }//GEN-LAST:event_menuItemRekapPresensiActionPerformed
 
@@ -528,9 +533,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemMasterStatus;
     private javax.swing.JMenuItem menuItemPayrollBank;
     private javax.swing.JMenuItem menuItemRekapPresensi;
+    private javax.swing.JMenuItem menuItemSlipGajiReport;
     private javax.swing.JMenuItem menuItemTransaksiGaji;
     private javax.swing.JMenuItem menuItemTransaksiPresensi;
-    private javax.swing.JMenuItem meuItemSlipGajiReport;
     private javax.swing.JLabel picLabel;
     private javax.swing.JMenu reportMenu;
     private javax.swing.JMenu transaksiMenu;
