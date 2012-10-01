@@ -428,25 +428,43 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     Date date = new Date();
     if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
         JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if ((nipCombo.getSelectedItem() == null && nipCombo2.getSelectedItem() == null)
+            || (String.valueOf(nipCombo.getSelectedItem()).matches("") && String.valueOf(nipCombo2.getSelectedItem()).matches(""))) {
+        JOptionPane.showMessageDialog(this, "Field nip harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-        String bulanTahun;
-        String nip1 = String.valueOf(nipCombo.getSelectedItem());
-        String nip2 = String.valueOf(nipCombo2.getSelectedItem());
-        if (bulan < 10) {
-            bulanTahun = tahun + "-0" + bulan;
-        } else {
-            bulanTahun = tahun + "-" + bulan;
-        }
+        String nip1a = String.valueOf(nipCombo.getSelectedItem());
+        String nip2a = String.valueOf(nipCombo2.getSelectedItem());
+        Karyawan karyawan = null, karyawan1 = null;
         try {
-            List<TransaksiDepartment> transaksiDepartments = DaoFactory.getGajiPerKaryawanReportDao().getAllTransaksiDepartment(nip1, nip2, bulanTahun);
-            TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
-            gajiKaryawanTable.setModel(model);
-
-
+            karyawan = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip1a);
+            karyawan1 = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip2a);
         } catch (SQLException ex) {
-            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (karyawan == null) {
+            JOptionPane.showMessageDialog(this, "Pegawai dengan NIP seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (karyawan1 == null) {
+            JOptionPane.showMessageDialog(this, "Pegawai dengan NIP seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+            String bulanTahun;
+            String nip1 = String.valueOf(nipCombo.getSelectedItem());
+            String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+            if (bulan < 10) {
+                bulanTahun = tahun + "-0" + bulan;
+            } else {
+                bulanTahun = tahun + "-" + bulan;
+            }
+            try {
+                List<TransaksiDepartment> transaksiDepartments = DaoFactory.getGajiPerKaryawanReportDao().getAllTransaksiDepartment(nip1, nip2, bulanTahun);
+                TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);
+                gajiKaryawanTable.setModel(model);
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
@@ -460,27 +478,50 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_nipCombo2KeyPressed
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        try {
-            // TODO add your handling code here:
-            String bulanTahun;
-            int bulan = bulanMonthChooser.getMonth() + 1;
-            int tahun = tahunYearChooser1.getYear();
-            if (bulan < 10) {
-                bulanTahun = tahun + "-0" + bulan;
-            } else {
-                bulanTahun = tahun + "-" + bulan;
+        Date date = new Date();
+        if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if ((nipCombo.getSelectedItem() == null && nipCombo2.getSelectedItem() == null)
+                || (String.valueOf(nipCombo.getSelectedItem()).matches("") && String.valueOf(nipCombo2.getSelectedItem()).matches(""))) {
+            JOptionPane.showMessageDialog(this, "Field nip harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String nip1a = String.valueOf(nipCombo.getSelectedItem());
+            String nip2a = String.valueOf(nipCombo2.getSelectedItem());
+            Karyawan karyawan = null, karyawan1 = null;
+            try {
+                karyawan = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip1a);
+                karyawan1 = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip2a);
+            } catch (SQLException ex) {
+                Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String reportSource = "./report/SlipGajiKaryawan.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("bulan", bulanTahun);
-            params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
-            params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (SQLException ex) {
-            Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
+            if (karyawan == null) {
+                JOptionPane.showMessageDialog(this, "Pegawai dengan NIP seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (karyawan1 == null) {
+                JOptionPane.showMessageDialog(this, "Pegawai dengan NIP seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    // TODO add your handling code here:
+                    String bulanTahun;
+                    int bulan = bulanMonthChooser.getMonth() + 1;
+                    int tahun = tahunYearChooser1.getYear();
+                    if (bulan < 10) {
+                        bulanTahun = tahun + "-0" + bulan;
+                    } else {
+                        bulanTahun = tahun + "-" + bulan;
+                    }
+                    String reportSource = "./report/SlipGajiKaryawan.jasper";
+                    Map<String, Object> params = new HashMap<String, Object>();
+                    params.put("bulan", bulanTahun);
+                    params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
+                    params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+                    JasperViewer.viewReport(jasperPrint, false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (JRException ex) {
+                    Logger.getLogger(GajiPerKaryawanReportForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }//GEN-LAST:event_cetakButtonActionPerformed
     private void isitable() {

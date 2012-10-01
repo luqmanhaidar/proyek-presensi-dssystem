@@ -54,30 +54,34 @@ public class RekapGajiTableModel extends AbstractTableModel {
             case 1:
                 return rG.getBulan();
             case 2:
-                return String.valueOf(rG.getS());
+                return rG.getNip();
             case 3:
-                return String.valueOf(rG.getI());
+                return rG.getNama();
             case 4:
-                return String.valueOf(rG.getA());
+                return String.valueOf(rG.getS());
             case 5:
-                return String.valueOf(rG.getT());
+                return String.valueOf(rG.getI());
             case 6:
-                return String.valueOf(rG.getLembur());
+                return String.valueOf(rG.getA());
             case 7:
-                return String.valueOf(rG.getGaji_pokok());
+                return String.valueOf(rG.getT());
             case 8:
-                return String.valueOf(rG.getUang_makan());
+                return String.valueOf(rG.getLembur());
             case 9:
-                return String.valueOf(rG.getUang_hadir());
+                return String.valueOf(rG.getGaji_pokok());
             case 10:
-                return String.valueOf(rG.getUang_lembur());
+                return String.valueOf(rG.getUang_makan());
             case 11:
-                return String.valueOf(rG.getPotongan_terlambat());
+                return String.valueOf(rG.getUang_hadir());
             case 12:
-                return String.valueOf(rG.getPotongan_lain());
+                return String.valueOf(rG.getUang_lembur());
             case 13:
-                return String.valueOf(rG.getLain_lain());
+                return String.valueOf(rG.getPotongan_terlambat());
             case 14:
+                return String.valueOf(rG.getPotongan_lain());
+            case 15:
+                return String.valueOf(rG.getLain_lain());
+            case 16:
                 return String.valueOf(rG.getTotal());
             default:
                 return "";
@@ -92,30 +96,34 @@ public class RekapGajiTableModel extends AbstractTableModel {
             case 1:
                 return "Bulan";
             case 2:
-                return "S";
+                return "NIP";
             case 3:
-                return "I";
+                return "Nama";
             case 4:
-                return "A";
+                return "S";
             case 5:
-                return "T";
+                return "I";
             case 6:
-                return "L";
+                return "A";
             case 7:
-                return "Gaji Pokok";
+                return "T";
             case 8:
-                return "Uang Makan";
+                return "L";
             case 9:
-                return "Uang Hadir";
+                return "Gaji Pokok";
             case 10:
-                return "Uang Lembur";
+                return "Uang Makan";
             case 11:
-                return "P. Terlambat";
+                return "Uang Hadir";
             case 12:
-                return "P. Lain";
+                return "Uang Lembur";
             case 13:
-                return "Lain";
+                return "P. Terlambat";
             case 14:
+                return "P. Lain";
+            case 15:
+                return "Lain";
+            case 16:
                 return "Total";
             default:
                 return "";

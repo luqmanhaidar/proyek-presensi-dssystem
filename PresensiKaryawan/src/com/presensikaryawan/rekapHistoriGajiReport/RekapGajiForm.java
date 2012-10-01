@@ -54,8 +54,12 @@ public class RekapGajiForm extends javax.swing.JFrame {
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 
         initComponentFocus();
+        List<Karyawan> karyawans = DaoFactory.getKaryawanDao().getAllKaryawan();
+        for (Karyawan k : karyawans) {
+            nipCombo.addItem(k.getNip());
+            nipCombo2.addItem(k.getNip());
+        }
         rekapTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        rekapTable.setVisible(false);
     }
 
     private void initComponentFocus() {
@@ -102,7 +106,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tahunLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        tahunLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         tahunLabel.setText("Tahun :");
 
         yearChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -119,11 +123,11 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
-        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nipLabel.setText("NIP");
 
         nipCombo.setEditable(true);
-        nipCombo.setFont(new java.awt.Font("Arial", 0, 11));
+        nipCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         nipCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nipComboActionPerformed(evt);
@@ -135,7 +139,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
-        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
         cetakButton.setText("Cetak");
         cetakButton.addActionListener(new java.awt.event.ActionListener() {
@@ -144,11 +148,11 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
-        sampaiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        sampaiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         sampaiLabel.setText("sampai");
 
         nipCombo2.setEditable(true);
-        nipCombo2.setFont(new java.awt.Font("Arial", 0, 11));
+        nipCombo2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         nipCombo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nipCombo2ActionPerformed(evt);
@@ -215,7 +219,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         rekapTable.setAutoCreateRowSorter(true);
-        rekapTable.setFont(new java.awt.Font("Arial", 0, 11));
+        rekapTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         rekapTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -248,6 +252,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
         rekapTable.getColumnModel().getColumn(2).setPreferredWidth(150);
         rekapTable.getColumnModel().getColumn(3).setResizable(false);
         rekapTable.getColumnModel().getColumn(3).setPreferredWidth(250);
+        rekapTable.getColumnModel().getColumn(3).setHeaderValue("Nama");
         rekapTable.getColumnModel().getColumn(4).setResizable(false);
         rekapTable.getColumnModel().getColumn(4).setPreferredWidth(50);
         rekapTable.getColumnModel().getColumn(5).setResizable(false);
@@ -275,10 +280,10 @@ public class RekapGajiForm extends javax.swing.JFrame {
         rekapTable.getColumnModel().getColumn(16).setResizable(false);
         rekapTable.getColumnModel().getColumn(16).setPreferredWidth(200);
 
-        totalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        totalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         totalLabel.setText("Total");
 
-        nilaiTotalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiTotalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiTotalLabel.setText("nilai total");
 
         org.jdesktop.layout.GroupLayout posisiPanelLayout = new org.jdesktop.layout.GroupLayout(posisiPanel);
@@ -301,7 +306,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 .add(posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(totalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         posisiPanel.setBounds(0, 300, 1020, 250);
@@ -311,10 +316,10 @@ public class RekapGajiForm extends javax.swing.JFrame {
 
         logoLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
-        menuLabel9.setFont(new java.awt.Font("Dialog", 1, 18));
+        menuLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         menuLabel9.setText("Menu Transaksi Gaji Karyawan");
 
-        fungsiLabel9.setFont(new java.awt.Font("Dialog", 0, 12));
+        fungsiLabel9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         fungsiLabel9.setText("Digunakan menghitung transaksi gaji & rekap karyawan per bulan/per tahun");
 
         org.jdesktop.layout.GroupLayout headPanel9Layout = new org.jdesktop.layout.GroupLayout(headPanel9);
@@ -346,7 +351,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
         headPanel9.setBounds(0, 0, 1020, 77);
         jDesktopPane1.add(headPanel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        keluarButton.setFont(new java.awt.Font("Dialog", 0, 12));
+        keluarButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         keluarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         keluarButton.setText("Keluar");
         keluarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -379,39 +384,12 @@ public class RekapGajiForm extends javax.swing.JFrame {
     }
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-        if (!rekapTable.isVisible()) {
-            JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menekan Tombol Lihat Terlebih Dahulu\n"
-                    + "Untuk Melihat Hasil Rekap", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            try {
-
-                String nip = String.valueOf(nipCombo.getSelectedItem());
-                String year = String.valueOf(yearChooser.getYear());
-
-                String reportSource = "./report/HistoryGajiKaryawan.jasper";
-                Map<String, Object> params = new HashMap<String, Object>();
-                params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
-                params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
-                params.put("tahun", year + "%");
-
-                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
-                JasperViewer.viewReport(jasperPrint, false);
-            } catch (JRException ex) {
-                Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException SQLex) {
-                Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, SQLex);
-            }
-        }
-}//GEN-LAST:event_cetakButtonActionPerformed
-
-    private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
-        // TODO add your handling code here:
         Date date = new Date();
         if (yearChooser.getYear() >= (date.getYear() + 1900)) {
             JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
         } else if ((nipCombo.getSelectedItem() == null || nipCombo2.getSelectedItem() == null
                 || String.valueOf(nipCombo.getSelectedItem()).matches("") || String.valueOf(nipCombo2.getSelectedItem()).matches(""))) {
-            JOptionPane.showMessageDialog(this, "Kotak kode department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "NIP harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             String nip1 = String.valueOf(nipCombo.getSelectedItem());
             String nip2 = String.valueOf(nipCombo2.getSelectedItem());
@@ -424,36 +402,83 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (karyawan1 == null) {
-                JOptionPane.showMessageDialog(this, "Nip I tidak ditemukan dalam database","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Nip I tidak ditemukan dalam database", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else if (karyawan2 == null) {
-                JOptionPane.showMessageDialog(this, "Nip II tidak ditemukan dalam database","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Nip II tidak ditemukan dalam database", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+
+                    String nip = String.valueOf(nipCombo.getSelectedItem());
+                    String year = String.valueOf(yearChooser.getYear());
+
+                    String reportSource = "./report/HistoryGajiKaryawan.jasper";
+                    Map<String, Object> params = new HashMap<String, Object>();
+                    params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
+                    params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
+                    params.put("tahun", year + "%");
+
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+                    JasperViewer.viewReport(jasperPrint, false);
+                } catch (JRException ex) {
+                    Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException SQLex) {
+                    Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, SQLex);
+                }
+            }
+        }
+}//GEN-LAST:event_cetakButtonActionPerformed
+
+    private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
+        // TODO add your handling code here:
+        Date date = new Date();
+        if (yearChooser.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if ((nipCombo.getSelectedItem() == null || nipCombo2.getSelectedItem() == null
+                || String.valueOf(nipCombo.getSelectedItem()).matches("") || String.valueOf(nipCombo2.getSelectedItem()).matches(""))) {
+            JOptionPane.showMessageDialog(this, "NIP harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String nip1 = String.valueOf(nipCombo.getSelectedItem());
+            String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+            Karyawan karyawan1 = new Karyawan();
+            Karyawan karyawan2 = new Karyawan();
+            try {
+                karyawan1 = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip1);
+                karyawan2 = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip2);
+            } catch (SQLException ex) {
+                Logger.getLogger(RekapGajiForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (karyawan1 == null) {
+                JOptionPane.showMessageDialog(this, "Nip I tidak ditemukan dalam database", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (karyawan2 == null) {
+                JOptionPane.showMessageDialog(this, "Nip II tidak ditemukan dalam database", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
 
                 GregorianCalendar gc = new GregorianCalendar();
-                String nip = String.valueOf(nipCombo.getSelectedItem());
                 String tahun = String.valueOf(yearChooser.getYear());
                 try {
-                    List<RekapGaji> rekapGajis = DaoFactory.getRekapGajiDao().getRekapGajiByNIPAndYear(nip, tahun);
+                    List<RekapGaji> rekapGajis = DaoFactory.getRekapGajiDao().getRekapGajiByNIPAndYear(nip1, nip2, tahun);
                     RekapGajiTableModel model = new RekapGajiTableModel(rekapGajis);
                     rekapTable.setModel(model);
                     rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(200);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-                    rekapTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+                    rekapTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(3).setPreferredWidth(200);
+                    rekapTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(5).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(6).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(7).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(8).setPreferredWidth(50);
+                    rekapTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(10).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(11).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(12).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(13).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+                    rekapTable.getColumnModel().getColumn(16).setPreferredWidth(150);
                     rekapTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                     rekapTable.setVisible(true);
-                    double totalGaji = DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip, tahun);
+                    double totalGaji = DaoFactory.getRekapGajiDao().getTotalGajiSetahun(nip1, nip2, tahun);
                     String totalGajiString = ChangeFormatDoubleToString.getToString(totalGaji);
                     nilaiTotalLabel.setText(totalGajiString);
                 } catch (SQLException ex) {
@@ -474,7 +499,6 @@ public class RekapGajiForm extends javax.swing.JFrame {
 
     private void yearChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_yearChooserPropertyChange
         // TODO add your handling code here:
-        rekapTable.setVisible(false);
     }//GEN-LAST:event_yearChooserPropertyChange
 
     private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
@@ -483,13 +507,13 @@ public class RekapGajiForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_keluarButtonActionPerformed
 
-    private void nipCombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipCombo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nipCombo2ActionPerformed
-
     private void nipCombo2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipCombo2KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_nipCombo2KeyPressed
+
+    private void nipCombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipCombo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nipCombo2ActionPerformed
 
     /**
      * @param args the command line arguments

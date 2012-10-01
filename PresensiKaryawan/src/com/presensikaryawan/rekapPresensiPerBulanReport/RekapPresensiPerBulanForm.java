@@ -455,6 +455,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
 
     private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
         // TODO add your handling code here:
+        String department = departmentCombo.getSelectedItem().toString();
         Date date = new Date();
         if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
             JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
@@ -462,26 +463,35 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
                 || String.valueOf(departmentCombo.getSelectedItem()).matches(""))) {
             JOptionPane.showMessageDialog(this, "Kotak kode department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-
-            GregorianCalendar gc = new GregorianCalendar();
-            gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
-            String year = String.valueOf(yearChooser.getYear());
-            String month = String.valueOf(monthChooser.getMonth() + 1);
-            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-            String maxDayOfMonth = year + "-" + month + "-" + day;
-
-            String kode_department = String.valueOf(departmentCombo.getSelectedItem());
+            Department dept = new Department();
             try {
-                List<Karyawan> karyawans = DaoFactory.getRekapPresensiPerBulanDao().getAllKaryawanByDepartmentCode(kode_department);
-                while (!karyawans.isEmpty()) {
-                    Karyawan karyawan = karyawans.remove(0);
-                    DaoFactory.getRekapPresensiPerBulanDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
-                }
-                List<RekapPresensiPerBulan> rekapPresensiPerBulans = DaoFactory.getRekapPresensiPerBulanDao().callGetPresensi(month, year, kode_department);
-                RekapPresensiPerBulanTableModel model = new RekapPresensiPerBulanTableModel(rekapPresensiPerBulans);
-                rekapTable.setModel(model);
-                rekapTable.setVisible(true);
+                dept = DaoFactory.getDepartmentDao().getByKode(department);
             } catch (SQLException ex) {
+                Logger.getLogger(RekapPresensiPerBulanForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (dept == null) {
+                JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
+                String year = String.valueOf(yearChooser.getYear());
+                String month = String.valueOf(monthChooser.getMonth() + 1);
+                String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+                String maxDayOfMonth = year + "-" + month + "-" + day;
+
+                String kode_department = String.valueOf(departmentCombo.getSelectedItem());
+                try {
+                    List<Karyawan> karyawans = DaoFactory.getRekapPresensiPerBulanDao().getAllKaryawanByDepartmentCode(kode_department);
+                    while (!karyawans.isEmpty()) {
+                        Karyawan karyawan = karyawans.remove(0);
+                        DaoFactory.getRekapPresensiPerBulanDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
+                    }
+                    List<RekapPresensiPerBulan> rekapPresensiPerBulans = DaoFactory.getRekapPresensiPerBulanDao().callGetPresensi(month, year, kode_department);
+                    RekapPresensiPerBulanTableModel model = new RekapPresensiPerBulanTableModel(rekapPresensiPerBulans);
+                    rekapTable.setModel(model);
+                    rekapTable.setVisible(true);
+                } catch (SQLException ex) {
+                }
             }
         }
     }//GEN-LAST:event_lihatButtonActionPerformed

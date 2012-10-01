@@ -13,6 +13,7 @@ import com.presensikaryawan.posisi.PosisiDao;
 import com.presensikaryawan.tools.DaoFactory;
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
@@ -41,6 +42,7 @@ public class KaryawanForm extends javax.swing.JFrame {
     GregorianCalendar gc = new GregorianCalendar();
     private JFrame frame;
     private JMenuItem menuItem;
+
     /**
      * Creates new form masterInventoryGrup
      */
@@ -48,7 +50,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
-        this.menuItem=menuItem;
+        this.menuItem = menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -56,6 +58,7 @@ public class KaryawanForm extends javax.swing.JFrame {
                 menuItem.setEnabled(true);
             }
         });
+        
         UIManager.put("nimbusBase", new Color(204, 204, 255));
 //        Tampilan();
         // isitable();
@@ -95,8 +98,6 @@ public class KaryawanForm extends javax.swing.JFrame {
         DepartmentDao dao4 = DaoFactory.getDepartmentDao();
         List<Department> departments = dao4.getAllDepartment();
         for (Department d : departments) {
-            System.out.println("kode dept: " + d.getKodeDepartment());
-            System.out.println("nama dept: " + d.getNamaDepartment());
             departmentCombo.addItem(d.getKodeDepartment() + "-" + d.getNamaDepartment());
             departmentCombo.setSelectedIndex(0);
         }
@@ -104,6 +105,21 @@ public class KaryawanForm extends javax.swing.JFrame {
             hapusButton.setEnabled(false);
         }
         nipKaryawanCombo.requestFocus();
+    }
+
+    private void panelStatus1AncestorResized(java.awt.event.HierarchyEvent evt) {
+        // TODO add your handling code here:
+        Rectangle r = new Rectangle(panelStatus1.getX(), panelStatus1.getY(), jDesktopPane1.getWidth(), panelStatus1.getHeight());
+        panelStatus1.setBounds(r);
+    }
+
+    private void cmdKeluarAncestorResized(java.awt.event.HierarchyEvent evt) {
+        // TODO add your handling code here:
+        int minimumX = this.getWidth() - cmdKeluar.getX();
+        if (minimumX != 0) {
+            Rectangle r = new Rectangle((this.getWidth() - minimumX), cmdKeluar.getY(), cmdKeluar.getWidth(), cmdKeluar.getHeight());
+            cmdKeluar.setBounds(r);
+        }
     }
 
     private void initComponentFocus() {
@@ -698,14 +714,12 @@ public class KaryawanForm extends javax.swing.JFrame {
                 } catch (ParseException ex) {
                     Logger.getLogger(KaryawanForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("department: " + activeKaryawan.getKodeDepartment());
                 namaKaryawanTextField.setText(activeKaryawan.getNama());
                 alamatKaryawanTextField.setText(activeKaryawan.getAlamat());
                 tanggalMasukDateChooser.setDate(tanggalMasuk);
                 golonganCombo.setSelectedItem(activeKaryawan.getKodeGolongan());
                 posisiCombo.setSelectedItem(activeKaryawan.getKodePosisi());
                 outletCombo.setSelectedItem(activeKaryawan.getKodeOutlet());
-                System.out.println(activeKaryawan.getKodeDepartment());
                 departmentCombo.setSelectedItem(activeKaryawan.getKodeDepartment());
                 noRekeningTextField.setText(activeKaryawan.getNo_rekening());
                 simpanButton.setText("Update");

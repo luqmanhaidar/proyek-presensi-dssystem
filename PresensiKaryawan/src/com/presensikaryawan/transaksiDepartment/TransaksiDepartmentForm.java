@@ -434,7 +434,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (dept == null) {
-            JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di field tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
             String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));

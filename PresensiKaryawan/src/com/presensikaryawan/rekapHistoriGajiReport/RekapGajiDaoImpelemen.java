@@ -21,7 +21,7 @@ public class RekapGajiDaoImpelemen implements RekapGajiDao {
 
     private final String SQL_GET_NAMAGOLONGANBYCODE="SELECT nama_golongan FROM golongan WHERE kode_golongan = ?";
     private final String SQL_GET_TOTALGAJI="SELECT SUM(Total) FROM temptransaksidepartment WHERE nip = ? and bulan like ?";
-    private final String SQL_GET_REKAPGAJI_BYNIPANDYEAR = "SELECT * FROM temptransaksidepartment WHERE NIP = ? and bulan like ?";
+    private final String SQL_GET_REKAPGAJI_BYNIPANDYEAR = "SELECT * FROM temptransaksidepartment WHERE NIP BETWEEN ? AND ? and bulan like ?";
     private final String SQL_GET_NIPBYKODEDEPARTMENT = "SELECT * FROM karyawan WHERE kode_department = ?";
     private final String SQL_GET_KARYAWANBYNIP = "SELECT * FROM karyawan WHERE nip=?";
     private Connection connection;
@@ -31,23 +31,27 @@ public class RekapGajiDaoImpelemen implements RekapGajiDao {
     }
 
     @Override
-    public List<RekapGaji> getRekapGajiByNIPAndYear(String nip, String year) throws SQLException {
+    public List<RekapGaji> getRekapGajiByNIPAndYear(String nip1, String nip2, String year) throws SQLException {
         PreparedStatement statement = null;
         ResultSet result = null;
         try {
             connection.setAutoCommit(false);
 
             statement = connection.prepareStatement(SQL_GET_REKAPGAJI_BYNIPANDYEAR);
-            statement.setString(1, nip);
-            statement.setString(2, year+"%");
+            statement.setString(1, nip1);
+            statement.setString(2, nip2);
+            statement.setString(3, year+"%");
 
             result = statement.executeQuery();
             List<RekapGaji> rekapGajis = new ArrayList<RekapGaji>();
             int counter = 1;
             while (result.next()) {
                 RekapGaji rekapGaji = new RekapGaji();
+                Karyawan karyawan=getKaryawanByNIP(result.getString("nip"));
+                
                 rekapGaji.setNo(counter);
                 rekapGaji.setNip(result.getString("nip"));
+                rekapGaji.setNama(karyawan.getNama());
                 rekapGaji.setBulan(result.getString("bulan"));
                 rekapGaji.setS(result.getInt("S"));
                 rekapGaji.setI(result.getInt("I"));
@@ -128,7 +132,6 @@ public class RekapGajiDaoImpelemen implements RekapGajiDao {
         PreparedStatement statement = null;
         ResultSet result = null;
         try {
-            connection.setAutoCommit(false);
 
             statement = connection.prepareStatement(SQL_GET_KARYAWANBYNIP);
             statement.setString(1, nip);
@@ -142,13 +145,11 @@ public class RekapGajiDaoImpelemen implements RekapGajiDao {
                 karyawan.setKodeGolongan(result.getString("kode_golongan"));
             }
 
-            connection.commit();
             return karyawan;
         } catch (SQLException exception) {
             throw exception;
         } finally {
             try {
-                connection.setAutoCommit(true);
                 if (result != null) {
                     result.close();
                 }
@@ -162,15 +163,16 @@ public class RekapGajiDaoImpelemen implements RekapGajiDao {
     }
 
     @Override
-    public double getTotalGajiSetahun(String nip, String year) throws SQLException {
+    public double getTotalGajiSetahun(String nip1, String nip2, String year) throws SQLException {
         PreparedStatement statement = null;
         ResultSet result = null;
         try {
             connection.setAutoCommit(false);
 
             statement = connection.prepareStatement(SQL_GET_TOTALGAJI);
-            statement.setString(1, nip);
-            statement.setString(2, year+"%");
+            statement.setString(1, nip1);
+            statement.setString(2, nip2);
+            statement.setString(3, year+"%");
 
             result = statement.executeQuery();
             RekapGaji rekapGaji=null;

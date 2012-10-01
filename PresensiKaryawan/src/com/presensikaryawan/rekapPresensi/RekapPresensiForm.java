@@ -420,7 +420,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
                 Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (dept == null) {
-                JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di field tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 GregorianCalendar gc = new GregorianCalendar();
                 gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());

@@ -250,7 +250,7 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
                     .add(nipLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(42, 42, 42)
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(cetakButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(14, 14, 14))
         );
@@ -418,33 +418,53 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     Date date = new Date();
     if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
         JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if ((nipCombo1.getSelectedItem() == null && nipCombo2.getSelectedItem() == null)
+            || (String.valueOf(nipCombo1.getSelectedItem()).matches("") && String.valueOf(nipCombo2.getSelectedItem()).matches(""))) {
+        JOptionPane.showMessageDialog(this, "Field nip harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if (namaBankTextField.getText() == null || namaBankTextField.getText().matches("")) {
+        JOptionPane.showMessageDialog(this, "Nama bank harus diisi", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-        String maxDayOfMonth;
-        if (bulan < 10) {
-            maxDayOfMonth = tahun + "-0" + bulan;
-        } else {
-            maxDayOfMonth = tahun + "-" + bulan;
-        }
-        System.out.println(maxDayOfMonth);
-        String nip1 = String.valueOf(nipCombo1.getSelectedItem());
-        String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+        String nip1a = String.valueOf(nipCombo1.getSelectedItem());
+        String nip2a = String.valueOf(nipCombo2.getSelectedItem());
+        Karyawan karyawan = null, karyawan1 = null;
         try {
-            List<PayrollBankReport> payrollBankReports = DaoFactory.getPayrollBankDao().getPayrollBank(nip1, nip2, maxDayOfMonth);
-            for (int i = 0; i < payrollBankReports.size(); i++) {
-                jumlah = jumlah + payrollBankReports.get(i).getJumlahGaji();
-            }
-
-            PayrollBankReportTableModel model = new PayrollBankReportTableModel(payrollBankReports);
-            transferTable.setModel(model);
-            nilaiTotalLabel.setText(ChangeFormatDoubleToString.getToString(jumlah));
-            FormatTerbilang ft = new FormatTerbilang();
-            nilaiTotaTerbilangLabel.setText(ft.FormatTerbilang(String.valueOf(jumlah)));
-
-
+            karyawan = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip1a);
+            karyawan1 = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip2a);
         } catch (SQLException ex) {
-            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (karyawan == null) {
+            JOptionPane.showMessageDialog(this, "Pegawai dengan NIP seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (karyawan1 == null) {
+            JOptionPane.showMessageDialog(this, "Pegawai dengan NIP seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+            String maxDayOfMonth;
+            if (bulan < 10) {
+                maxDayOfMonth = tahun + "-0" + bulan;
+            } else {
+                maxDayOfMonth = tahun + "-" + bulan;
+            }
+            System.out.println(maxDayOfMonth);
+            String nip1 = String.valueOf(nipCombo1.getSelectedItem());
+            String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+            try {
+                List<PayrollBankReport> payrollBankReports = DaoFactory.getPayrollBankDao().getPayrollBank(nip1, nip2, maxDayOfMonth);
+                for (int i = 0; i < payrollBankReports.size(); i++) {
+                    jumlah = jumlah + payrollBankReports.get(i).getJumlahGaji();
+                }
+
+                PayrollBankReportTableModel model = new PayrollBankReportTableModel(payrollBankReports);
+                transferTable.setModel(model);
+                nilaiTotalLabel.setText(ChangeFormatDoubleToString.getToString(jumlah));
+                FormatTerbilang ft = new FormatTerbilang();
+                nilaiTotaTerbilangLabel.setText(ft.FormatTerbilang(String.valueOf(jumlah)));
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
@@ -466,78 +486,98 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_nipCombo2KeyPressed
 
 private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
-    if (!transferTable.isVisible()) {
-        JOptionPane.showMessageDialog(this, "Maaf Anda Harus Menekan Tombol Lihat Terlebih Dahulu\n"
-                + "Untuk Melihat Hasil Rekap", "PEMBERITAHUAN", JOptionPane.INFORMATION_MESSAGE);
+    Date date = new Date();
+    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if ((nipCombo1.getSelectedItem() == null && nipCombo2.getSelectedItem() == null)
+            || (String.valueOf(nipCombo1.getSelectedItem()).matches("") && String.valueOf(nipCombo2.getSelectedItem()).matches(""))) {
+        JOptionPane.showMessageDialog(this, "Field nip harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if (namaBankTextField.getText() == null || namaBankTextField.getText().matches("")) {
+        JOptionPane.showMessageDialog(this, "Nama bank harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
+        String nip1a = String.valueOf(nipCombo1.getSelectedItem());
+        String nip2a = String.valueOf(nipCombo2.getSelectedItem());
+        Karyawan karyawan = null, karyawan1 = null;
         try {
-
-            String bulanS = null;
-            switch (bulanMonthChooser.getMonth()) {
-                case 0:
-                    bulanS = "Januari";
-                    break;
-                case 1:
-                    bulanS = "Februari";
-                    break;
-                case 2:
-                    bulanS = "Maret";
-                    break;
-                case 3:
-                    bulanS = "April";
-                    break;
-                case 4:
-                    bulanS = "Mei";
-                    break;
-                case 5:
-                    bulanS = "Juni";
-                    break;
-                case 6:
-                    bulanS = "Juli";
-                    break;
-                case 7:
-                    bulanS = "Agustus";
-                    break;
-                case 8:
-                    bulanS = "September";
-                    break;
-                case 9:
-                    bulanS = "Oktober";
-                    break;
-                case 10:
-                    bulanS = "November";
-                    break;
-                case 11:
-                    bulanS = "Desember";
-                    break;
-            }
-            bulanS = bulanS + " " + tahunYearChooser1.getYear();
-            String nip1 = String.valueOf(nipCombo1.getSelectedItem());
-            String nip2 = String.valueOf(nipCombo2.getSelectedItem());
-            String bank = namaBankTextField.getText();
-            String bln;
-            if (bulanMonthChooser.getMonth() + 1 < 10) {
-                bln = tahunYearChooser1.getYear() + "-0" + (bulanMonthChooser.getMonth() + 1);
-            } else {
-                bln = tahunYearChooser1.getYear() + "-" + (bulanMonthChooser.getMonth() + 1);
-            }
-            String terbilang = nilaiTotaTerbilangLabel.getText();
-
-            String reportSource = "./report/PayrollBank.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("nip1", nip1);
-            params.put("nip2", nip2);
-            params.put("bank", bank);
-            params.put("bulanString", bulanS);
-            params.put("bulan", bln);
-            params.put("terbilang", terbilang);
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (JRException ex) {
+            karyawan = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip1a);
+            karyawan1 = DaoFactory.getKaryawanDao().getByNIPKaryawan(nip2a);
+        } catch (SQLException ex) {
             Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException SQLex) {
-            Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
+        }
+        if (karyawan == null) {
+            JOptionPane.showMessageDialog(this, "Pegawai dengan NIP seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (karyawan1 == null) {
+            JOptionPane.showMessageDialog(this, "Pegawai dengan NIP seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+
+                String bulanS = null;
+                switch (bulanMonthChooser.getMonth()) {
+                    case 0:
+                        bulanS = "Januari";
+                        break;
+                    case 1:
+                        bulanS = "Februari";
+                        break;
+                    case 2:
+                        bulanS = "Maret";
+                        break;
+                    case 3:
+                        bulanS = "April";
+                        break;
+                    case 4:
+                        bulanS = "Mei";
+                        break;
+                    case 5:
+                        bulanS = "Juni";
+                        break;
+                    case 6:
+                        bulanS = "Juli";
+                        break;
+                    case 7:
+                        bulanS = "Agustus";
+                        break;
+                    case 8:
+                        bulanS = "September";
+                        break;
+                    case 9:
+                        bulanS = "Oktober";
+                        break;
+                    case 10:
+                        bulanS = "November";
+                        break;
+                    case 11:
+                        bulanS = "Desember";
+                        break;
+                }
+                bulanS = bulanS + " " + tahunYearChooser1.getYear();
+                String nip1 = String.valueOf(nipCombo1.getSelectedItem());
+                String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+                String bank = namaBankTextField.getText();
+                String bln;
+                if (bulanMonthChooser.getMonth() + 1 < 10) {
+                    bln = tahunYearChooser1.getYear() + "-0" + (bulanMonthChooser.getMonth() + 1);
+                } else {
+                    bln = tahunYearChooser1.getYear() + "-" + (bulanMonthChooser.getMonth() + 1);
+                }
+                String terbilang = nilaiTotaTerbilangLabel.getText();
+
+                String reportSource = "./report/PayrollBank.jasper";
+                Map<String, Object> params = new HashMap<String, Object>();
+                params.put("nip1", nip1);
+                params.put("nip2", nip2);
+                params.put("bank", bank);
+                params.put("bulanString", bulanS);
+                params.put("bulan", bln);
+                params.put("terbilang", terbilang);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+                JasperViewer.viewReport(jasperPrint, false);
+            } catch (JRException ex) {
+                Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException SQLex) {
+                Logger.getLogger(PayrollBankReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
+            }
         }
     }
 }//GEN-LAST:event_cetakButtonActionPerformed

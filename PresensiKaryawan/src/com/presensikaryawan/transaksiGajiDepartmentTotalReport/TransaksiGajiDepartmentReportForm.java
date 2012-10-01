@@ -491,66 +491,66 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
-//    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
-//        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//    } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
-//            || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
-//        JOptionPane.showMessageDialog(this, "Kotak department salah satu harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
-//    } else {
-    Department dept = new Department();
-    Department dept2 = new Department();
-    try {
-        dept = DaoFactory.getDepartmentDao().getByKode(department);
-        dept2 = DaoFactory.getDepartmentDao().getByKode(department2);
-    } catch (SQLException ex) {
-        Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    if (dept == null) {
-        JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
-    } else if (dept2 == null) {
-        JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
+            || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
+        JOptionPane.showMessageDialog(this, "Kotak department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-
-        String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-        String maxDayOfMonth;
-        if (bulan < 10) {
-            maxDayOfMonth = tahun + "-0" + bulan;
-        } else {
-            maxDayOfMonth = tahun + "-" + bulan;
-        }
-        System.out.println(maxDayOfMonth);
+        Department dept = new Department();
+        Department dept2 = new Department();
         try {
-            TransaksiGajiDepartmentReportDao dao = DaoFactory.getTransaksiGajiDepartmentReportDao();
-            List<TransaksiGajiDepartmentReport> transaksiDepartments = dao.getAllTransaksiDepartment(department, department2, maxDayOfMonth);
-
-            TransaksiGajiDepartmentReportTableModel model = new TransaksiGajiDepartmentReportTableModel(transaksiDepartments);
-            karyawanTable.setModel(model);
-            karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-            karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
-            karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
-            karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
-            karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-
+            dept = DaoFactory.getDepartmentDao().getByKode(department);
+            dept2 = DaoFactory.getDepartmentDao().getByKode(department2);
         } catch (SQLException ex) {
-            Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (dept == null) {
+            JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (dept2 == null) {
+            JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+
+            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+            String maxDayOfMonth;
+            if (bulan < 10) {
+                maxDayOfMonth = tahun + "-0" + bulan;
+            } else {
+                maxDayOfMonth = tahun + "-" + bulan;
+            }
+            System.out.println(maxDayOfMonth);
+            try {
+                TransaksiGajiDepartmentReportDao dao = DaoFactory.getTransaksiGajiDepartmentReportDao();
+                List<TransaksiGajiDepartmentReport> transaksiDepartments = dao.getAllTransaksiDepartment(department, department2, maxDayOfMonth);
+
+                TransaksiGajiDepartmentReportTableModel model = new TransaksiGajiDepartmentReportTableModel(transaksiDepartments);
+                karyawanTable.setModel(model);
+                karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+                karyawanTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(4).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(5).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(6).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(7).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(8).setPreferredWidth(70);
+                karyawanTable.getColumnModel().getColumn(9).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(10).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(11).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(12).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(13).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+                karyawanTable.getColumnModel().getColumn(16).setPreferredWidth(150);
+                karyawanTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-//    }
 }//GEN-LAST:event_lihatButtonActionPerformed
 
 private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_karyawanTableMouseClicked
@@ -600,38 +600,54 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
         // TODO add your handling code here:
+        String department = departmentCombo1.getSelectedItem().toString();
+        String department2 = departmentCombo2.getSelectedItem().toString();
         Date date = new Date();
-//        if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
-//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
-//                || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
-//            JOptionPane.showMessageDialog(this, "Kotak department salah satu harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-        try {
-
-            String dep1 = String.valueOf(departmentCombo1.getSelectedItem());
-            String dep2 = String.valueOf(departmentCombo2.getSelectedItem());
-            String bln;
-            if (bulanMonthChooser.getMonth() + 1 < 10) {
-                bln = tahunYearChooser1.getYear() + "-0" + (bulanMonthChooser.getMonth() + 1);
-            } else {
-                bln = tahunYearChooser1.getYear() + "-" + (bulanMonthChooser.getMonth() + 1);
+        if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
+                || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
+            JOptionPane.showMessageDialog(this, "Kotak department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Department dept = new Department();
+            Department dept2 = new Department();
+            try {
+                dept = DaoFactory.getDepartmentDao().getByKode(department);
+                dept2 = DaoFactory.getDepartmentDao().getByKode(department2);
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(bln);
-            String reportSource = "./report/LaporanGajiTotalDepartment.jasper";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("kode1", dep1);
-            params.put("kode2", dep2);
-            params.put("tahun", bln);
+            if (dept == null) {
+                JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak I tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (dept2 == null) {
+                JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (JRException ex) {
-            Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException SQLex) {
-            Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
+                    String dep1 = String.valueOf(departmentCombo1.getSelectedItem());
+                    String dep2 = String.valueOf(departmentCombo2.getSelectedItem());
+                    String bln;
+                    if (bulanMonthChooser.getMonth() + 1 < 10) {
+                        bln = tahunYearChooser1.getYear() + "-0" + (bulanMonthChooser.getMonth() + 1);
+                    } else {
+                        bln = tahunYearChooser1.getYear() + "-" + (bulanMonthChooser.getMonth() + 1);
+                    }
+                    System.out.println(bln);
+                    String reportSource = "./report/LaporanGajiTotalDepartment.jasper";
+                    Map<String, Object> params = new HashMap<String, Object>();
+                    params.put("kode1", dep1);
+                    params.put("kode2", dep2);
+                    params.put("tahun", bln);
+
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+                    JasperViewer.viewReport(jasperPrint, false);
+                } catch (JRException ex) {
+                    Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException SQLex) {
+                    Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
+                }
+            }
         }
-//        }
     }//GEN-LAST:event_cetakButtonActionPerformed
 
     private void cetakButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cetakButtonKeyPressed

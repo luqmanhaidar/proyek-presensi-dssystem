@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
@@ -258,7 +258,7 @@
                           <Component id="totalLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="nilaiTotalLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -323,7 +323,7 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="250" resizable="false">
-                          <Title/>
+                          <Title value="Nama"/>
                           <Editor/>
                           <Renderer/>
                         </Column>
