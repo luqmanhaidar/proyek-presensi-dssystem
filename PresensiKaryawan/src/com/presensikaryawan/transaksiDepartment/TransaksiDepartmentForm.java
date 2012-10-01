@@ -33,19 +33,21 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
     private Department activeDepartment;
     GregorianCalendar gc = new GregorianCalendar();
     private JFrame frame;
+    private JMenuItem menuItem;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public TransaksiDepartmentForm(final JFrame frame) throws SQLException {
+    public TransaksiDepartmentForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        this.menuItem = menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -379,6 +381,7 @@ public class TransaksiDepartmentForm extends javax.swing.JFrame {
 
 private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
     frame.setEnabled(true);
+    menuItem.setEnabled(true);
     this.dispose();
 }//GEN-LAST:event_cmdKeluarActionPerformed
 
@@ -508,7 +511,7 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
             @Override
             public void run() {
                 try {
-                    new TransaksiDepartmentForm(null).setVisible(true);
+                    new TransaksiDepartmentForm(null, null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

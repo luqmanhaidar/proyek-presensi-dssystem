@@ -38,19 +38,21 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
     private Posisi activePosisi;
     private Department activeDepartment;
     private JFrame frame;
+    private JMenuItem menuItem;
 
     /**
      * Creates new form masterInventoryGrup
      */
-    public RekapPresensiPerBulanForm(final JFrame frame) throws SQLException {
+    public RekapPresensiPerBulanForm(final JFrame frame, final JMenuItem menuItem) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.frame = frame;
+        this.menuItem = menuItem;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
-
+                menuItem.setEnabled(true);
             }
         });
         UIManager.put("nimbusBase", new Color(204, 204, 255));
@@ -487,6 +489,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
     private void keluarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarButtonActionPerformed
         // TODO add your handling code here:
         frame.setEnabled(true);
+        menuItem.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_keluarButtonActionPerformed
 
@@ -531,7 +534,7 @@ public class RekapPresensiPerBulanForm extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new RekapPresensiPerBulanForm(null).setVisible(true);
+                    new RekapPresensiPerBulanForm(null, null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(RekapPresensiPerBulanForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
