@@ -9,7 +9,7 @@ package com.presensikaryawan.rekapHistoriGajiReport;
  * @author Tinus
  */
 public class RekapGaji {
-    private String nip, bulan, tahun;
+    private String nip, bulan, tahun, nama;
     private int S, I, A, T, lembur, no;
     private double gaji_pokok, uang_hadir, lain_lain, potongan_terlambat, potongan_lain, total, uang_makan, uang_lembur;
 
@@ -254,6 +254,20 @@ public class RekapGaji {
      */
     public void setNo(int no) {
         this.no = no;
+    }
+
+    /**
+     * @return the nama
+     */
+    public String getNama() {
+        return nama;
+    }
+
+    /**
+     * @param nama the nama to set
+     */
+    public void setNama(String nama) {
+        this.nama = nama;
     }
     
     
