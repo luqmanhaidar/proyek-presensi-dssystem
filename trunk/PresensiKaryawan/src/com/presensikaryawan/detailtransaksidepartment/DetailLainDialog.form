@@ -183,6 +183,7 @@
         <Component class="javax.swing.JTextField" name="potonganTextField">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="potonganTextFieldActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="potonganTextFieldKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="updateButton">
@@ -237,6 +238,7 @@
         <Component class="javax.swing.JTextField" name="prestasiTextField">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prestasiTextFieldActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="prestasiTextFieldKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
