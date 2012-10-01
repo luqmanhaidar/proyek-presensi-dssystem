@@ -9,6 +9,8 @@ import com.dssystem.bank.BankDaoImplemen;
 import com.mysql.jdbc.Driver;
 import com.presensikaryawan.departmentSetting.DepartmentDao;
 import com.presensikaryawan.departmentSetting.DepartmentDaoImplemen;
+import com.presensikaryawan.detailPresensiKaryawanReport.DetailPresensiReportDao;
+import com.presensikaryawan.detailPresensiKaryawanReport.DetailPresensiReportDaoImplemen;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDaoImplemen;
 import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportDao;
@@ -81,6 +83,7 @@ public class DaoFactory {
     private static RekapPresensiPerBulanDao rekapPresensiPerBulanDao;
     private static GajiPerKaryawanReportDao gajiPerKaryawanReportDao;
     private static PayrollBankDao payrollBankDao;
+    private static DetailPresensiReportDao detailPresensiReportDao;
     private static TransaksiGajiDepartmentReportDao transaksiGajiDepartmentReportDao;
 
     public static Connection getConnection() throws SQLException {
@@ -243,5 +246,12 @@ public class DaoFactory {
             transaksiGajiDepartmentReportDao = new TransaksiGajiDepartmentReportDaoImplemen(getConnection());
         }
         return transaksiGajiDepartmentReportDao;
+    }
+    
+    public static DetailPresensiReportDao getDetailPresensiReportDao() throws SQLException {
+        if (detailPresensiReportDao == null) {
+            detailPresensiReportDao = new DetailPresensiReportDaoImplemen(getConnection());
+        }
+        return detailPresensiReportDao;
     }
 }
