@@ -107,7 +107,7 @@ public class DetailPresensiDaoImplemen implements DetailPresensiDao {
                     detailPresensi.setWaktu("-");
                 }
                 while (result2.next()) {
-                    detailPresensi.setWaktu(result.getString("timelog"));
+                    detailPresensi.setWaktu(result2.getString("timelog"));
                 }
                 detailPresensis.add(detailPresensi);
 

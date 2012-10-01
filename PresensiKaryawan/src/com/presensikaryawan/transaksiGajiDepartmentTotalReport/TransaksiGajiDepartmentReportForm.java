@@ -487,12 +487,12 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
-    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
-        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-    } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
-            || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
-        JOptionPane.showMessageDialog(this, "Kotak department salah satu harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
-    } else {
+//    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+//        JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+//    } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
+//            || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
+//        JOptionPane.showMessageDialog(this, "Kotak department salah satu harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+//    } else {
         Department dept = new Department();
         Department dept2 = new Department();
         try {
@@ -546,7 +546,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
+//    }
 }//GEN-LAST:event_lihatButtonActionPerformed
 
 private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_karyawanTableMouseClicked
@@ -597,12 +597,12 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
         // TODO add your handling code here:
         Date date = new Date();
-        if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
-            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
-                || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
-            JOptionPane.showMessageDialog(this, "Kotak department salah satu harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+//        if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+//            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else if ((departmentCombo1.getSelectedItem() == null && departmentCombo2.getSelectedItem() == null)
+//                || (String.valueOf(departmentCombo1.getSelectedItem()).matches("") && String.valueOf(departmentCombo2.getSelectedItem()).matches(""))) {
+//            JOptionPane.showMessageDialog(this, "Kotak department salah satu harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else {
             try {
 
                 String dep1 = String.valueOf(departmentCombo1.getSelectedItem());
@@ -627,7 +627,7 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
             } catch (SQLException SQLex) {
                 Logger.getLogger(TransaksiGajiDepartmentReportForm.class.getName()).log(Level.SEVERE, null, SQLex);
             }
-        }
+//        }
     }//GEN-LAST:event_cetakButtonActionPerformed
 
     private void cetakButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cetakButtonKeyPressed

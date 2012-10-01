@@ -11,6 +11,7 @@ package com.presensikaryawan.detailtransaksidepartment;
 public class DetailLain {
     private String nip, tanggal;
     private double potonganLain;
+    private double prestasi;
 
     public DetailLain() {
     }
@@ -55,6 +56,20 @@ public class DetailLain {
      */
     public void setPotonganLain(double potonganLain) {
         this.potonganLain = potonganLain;
+    }
+
+    /**
+     * @return the prestasi
+     */
+    public double getPrestasi() {
+        return prestasi;
+    }
+
+    /**
+     * @param prestasi the prestasi to set
+     */
+    public void setPrestasi(double prestasi) {
+        this.prestasi = prestasi;
     }
 
 

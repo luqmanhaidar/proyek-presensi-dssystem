@@ -4,6 +4,7 @@
  */
 package com.presensikaryawan.detailtransaksidepartment;
 
+import com.dssystem.umum.ChangeFormatDoubleToString;
 import com.presensikaryawan.tools.DaoFactory;
 import com.presensikaryawan.transaksiDepartment.TransaksiDepartment;
 import com.presensikaryawan.transaksiDepartment.TransaksiDepartmentTableModel;
@@ -40,6 +41,10 @@ public class DetailLainDialog extends javax.swing.JDialog {
         this.kode_department = kodeDepartment;
         bln = bulan;
         thn = tahun;
+        DetailLain d=new DetailLain();
+        d=DaoFactory.getTransaksiDepartmentDao().getLain(nip, nilaiTanggalLabel.getText());
+        potonganTextField.setText(ChangeFormatDoubleToString.getToString(d.getPotonganLain()));
+        prestasiTextField.setText(ChangeFormatDoubleToString.getToString(d.getPrestasi()));
 //        this.kode_department=kode_department;
 //        List<DetailLain> detailLains = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip, bulan, tahun);
 //        DetailLainTableModel model=new DetailLainTableModel(detailPresensis);
@@ -97,6 +102,11 @@ public class DetailLainDialog extends javax.swing.JDialog {
                 potonganTextFieldActionPerformed(evt);
             }
         });
+        potonganTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                potonganTextFieldKeyReleased(evt);
+            }
+        });
 
         updateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Edit.gif"))); // NOI18N
         updateButton.setText("Update");
@@ -131,6 +141,11 @@ public class DetailLainDialog extends javax.swing.JDialog {
         prestasiTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prestasiTextFieldActionPerformed(evt);
+            }
+        });
+        prestasiTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                prestasiTextFieldKeyReleased(evt);
             }
         });
 
@@ -245,11 +260,11 @@ public class DetailLainDialog extends javax.swing.JDialog {
 
                 if (!potonganTextField.getText().matches("") || !prestasiTextField.getText().matches("")) {
                     if (potonganTextField.getText().matches("")) {
-                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, 0, Double.parseDouble(prestasiTextField.getText()));
+                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, 0, Double.parseDouble(prestasiTextField.getText().replace(".", "")));
                     } else if (prestasiTextField.getText().matches("")) {
-                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, Double.parseDouble(potonganTextField.getText()), 0);
+                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, Double.parseDouble(potonganTextField.getText().replace(".", "")), 0);
                     } else {
-                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, Double.parseDouble(potonganTextField.getText()), Double.parseDouble(prestasiTextField.getText()));
+                        DaoFactory.getTransaksiDepartmentDao().updatePotongan(nip, tanggal, Double.parseDouble(potonganTextField.getText().replace(".", "")), Double.parseDouble(prestasiTextField.getText().replace(".", "")));
                     }
                 }
 //                List<DetailLain> detailPresensis = DaoFactory.getDetailLainDao().getDetailPresensiByNIP(nip, bln, thn);
@@ -291,6 +306,33 @@ private void potonganTextFieldActionPerformed(java.awt.event.ActionEvent evt) {/
 private void prestasiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prestasiTextFieldActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_prestasiTextFieldActionPerformed
+
+private void potonganTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_potonganTextFieldKeyReleased
+// TODO add your handling code here:
+    if (!Character.isDigit(evt.getKeyChar())) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+    } else {
+        if (!potonganTextField.getText().isEmpty()) {
+            double gaji = Double.parseDouble(potonganTextField.getText().replace(".", ""));
+            potonganTextField.setText(ChangeFormatDoubleToString.getToString(gaji));
+        }
+    }
+}//GEN-LAST:event_potonganTextFieldKeyReleased
+
+private void prestasiTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prestasiTextFieldKeyReleased
+// TODO add your handling code here:
+    if (!Character.isDigit(evt.getKeyChar())) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+    } else {
+        if (!prestasiTextField.getText().isEmpty()) {
+            double gaji = Double.parseDouble(prestasiTextField.getText().replace(".", ""));
+            prestasiTextField.setText(ChangeFormatDoubleToString.getToString(gaji));
+        }
+    }
+}//GEN-LAST:event_prestasiTextFieldKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Potongan;
     private javax.swing.JLabel Potongan1;

@@ -5,6 +5,7 @@
 package com.presensikaryawan.transaksiDepartment;
 
 
+import com.presensikaryawan.detailtransaksidepartment.DetailLain;
 import com.presensikaryawan.golongan.Golongan;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,4 +21,5 @@ public interface TransaksiDepartmentDao {
     List<TransaksiDepartment> getAllTransaksiDepartment(String department, String maxdate) throws SQLException;
     void insertTemp(List<TransaksiDepartment> list, String department, String bulantahun) throws SQLException;
     void updatePotongan(String nip, String bulan, double potongan, double prestasi) throws SQLException;
+    public DetailLain getLain(String nip, String bulan) throws SQLException;
 }

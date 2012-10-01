@@ -102,7 +102,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
 
         inputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tahunLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        tahunLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         tahunLabel.setText("Tahun :");
 
         yearChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -119,11 +119,11 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
-        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nipLabel.setText("NIP");
 
         nipCombo.setEditable(true);
-        nipCombo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        nipCombo.setFont(new java.awt.Font("Arial", 0, 11));
         nipCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nipComboActionPerformed(evt);
@@ -135,7 +135,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
-        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cetakButton.setFont(new java.awt.Font("Dialog", 0, 12));
         cetakButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Printer.gif"))); // NOI18N
         cetakButton.setText("Cetak");
         cetakButton.addActionListener(new java.awt.event.ActionListener() {
@@ -144,11 +144,11 @@ public class RekapGajiForm extends javax.swing.JFrame {
             }
         });
 
-        sampaiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        sampaiLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         sampaiLabel.setText("sampai");
 
         nipCombo2.setEditable(true);
-        nipCombo2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        nipCombo2.setFont(new java.awt.Font("Arial", 0, 11));
         nipCombo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nipCombo2ActionPerformed(evt);
@@ -215,20 +215,20 @@ public class RekapGajiForm extends javax.swing.JFrame {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         rekapTable.setAutoCreateRowSorter(true);
-        rekapTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        rekapTable.setFont(new java.awt.Font("Arial", 0, 11));
         rekapTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No", "Bulan", "S", "I", "A", "T", "L", "Gaji Pokok", "Uang Makan", "Uang Hadir", "Uang Lembur", "P. Terlambat", "P. Lain", "Lain", "Total"
+                "No", "Bulan", "NIP", "Nama", "S", "I", "A", "T", "L", "Gaji Pokok", "Uang Makan", "Uang Hadir", "Uang Lembur", "P. Terlambat", "P. Lain", "Lain", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -245,9 +245,9 @@ public class RekapGajiForm extends javax.swing.JFrame {
         rekapTable.getColumnModel().getColumn(1).setResizable(false);
         rekapTable.getColumnModel().getColumn(1).setPreferredWidth(200);
         rekapTable.getColumnModel().getColumn(2).setResizable(false);
-        rekapTable.getColumnModel().getColumn(2).setPreferredWidth(50);
+        rekapTable.getColumnModel().getColumn(2).setPreferredWidth(150);
         rekapTable.getColumnModel().getColumn(3).setResizable(false);
-        rekapTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+        rekapTable.getColumnModel().getColumn(3).setPreferredWidth(250);
         rekapTable.getColumnModel().getColumn(4).setResizable(false);
         rekapTable.getColumnModel().getColumn(4).setPreferredWidth(50);
         rekapTable.getColumnModel().getColumn(5).setResizable(false);
@@ -255,9 +255,9 @@ public class RekapGajiForm extends javax.swing.JFrame {
         rekapTable.getColumnModel().getColumn(6).setResizable(false);
         rekapTable.getColumnModel().getColumn(6).setPreferredWidth(50);
         rekapTable.getColumnModel().getColumn(7).setResizable(false);
-        rekapTable.getColumnModel().getColumn(7).setPreferredWidth(150);
+        rekapTable.getColumnModel().getColumn(7).setPreferredWidth(50);
         rekapTable.getColumnModel().getColumn(8).setResizable(false);
-        rekapTable.getColumnModel().getColumn(8).setPreferredWidth(150);
+        rekapTable.getColumnModel().getColumn(8).setPreferredWidth(50);
         rekapTable.getColumnModel().getColumn(9).setResizable(false);
         rekapTable.getColumnModel().getColumn(9).setPreferredWidth(150);
         rekapTable.getColumnModel().getColumn(10).setResizable(false);
@@ -269,12 +269,16 @@ public class RekapGajiForm extends javax.swing.JFrame {
         rekapTable.getColumnModel().getColumn(13).setResizable(false);
         rekapTable.getColumnModel().getColumn(13).setPreferredWidth(150);
         rekapTable.getColumnModel().getColumn(14).setResizable(false);
-        rekapTable.getColumnModel().getColumn(14).setPreferredWidth(200);
+        rekapTable.getColumnModel().getColumn(14).setPreferredWidth(150);
+        rekapTable.getColumnModel().getColumn(15).setResizable(false);
+        rekapTable.getColumnModel().getColumn(15).setPreferredWidth(150);
+        rekapTable.getColumnModel().getColumn(16).setResizable(false);
+        rekapTable.getColumnModel().getColumn(16).setPreferredWidth(200);
 
-        totalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        totalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         totalLabel.setText("Total");
 
-        nilaiTotalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nilaiTotalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
         nilaiTotalLabel.setText("nilai total");
 
         org.jdesktop.layout.GroupLayout posisiPanelLayout = new org.jdesktop.layout.GroupLayout(posisiPanel);
@@ -297,7 +301,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
                 .add(posisiPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(totalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         posisiPanel.setBounds(0, 300, 1020, 250);
@@ -307,10 +311,10 @@ public class RekapGajiForm extends javax.swing.JFrame {
 
         logoLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
-        menuLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        menuLabel9.setFont(new java.awt.Font("Dialog", 1, 18));
         menuLabel9.setText("Menu Transaksi Gaji Karyawan");
 
-        fungsiLabel9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        fungsiLabel9.setFont(new java.awt.Font("Dialog", 0, 12));
         fungsiLabel9.setText("Digunakan menghitung transaksi gaji & rekap karyawan per bulan/per tahun");
 
         org.jdesktop.layout.GroupLayout headPanel9Layout = new org.jdesktop.layout.GroupLayout(headPanel9);
@@ -342,7 +346,7 @@ public class RekapGajiForm extends javax.swing.JFrame {
         headPanel9.setBounds(0, 0, 1020, 77);
         jDesktopPane1.add(headPanel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        keluarButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        keluarButton.setFont(new java.awt.Font("Dialog", 0, 12));
         keluarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Exit.gif"))); // NOI18N
         keluarButton.setText("Keluar");
         keluarButton.addActionListener(new java.awt.event.ActionListener() {
