@@ -14,10 +14,16 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * masterInventoryGrup.java
@@ -58,8 +64,8 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
         for (Department d : departments) {
             departmentCombo.addItem(d.getKodeDepartment());
         }
-        List<Karyawan> karyawans=DaoFactory.getDetailPresensiReportDao().getKaryawanByDepartmentCode(String.valueOf(departmentCombo.getSelectedItem()));
-        for (Karyawan k:karyawans){
+        List<Karyawan> karyawans = DaoFactory.getDetailPresensiReportDao().getKaryawanByDepartmentCode(String.valueOf(departmentCombo.getSelectedItem()));
+        for (Karyawan k : karyawans) {
             nipCombo.addItem(k.getNip());
         }
 
@@ -469,22 +475,22 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
         if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
             JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
         } else if ((departmentCombo.getSelectedItem() == null || String.valueOf(departmentCombo.getSelectedItem()).matches(""))
-                || nipCombo.getSelectedItem()==null || String.valueOf(nipCombo.getSelectedItem()).matches("")) {
+                || nipCombo.getSelectedItem() == null || String.valueOf(nipCombo.getSelectedItem()).matches("")) {
             JOptionPane.showMessageDialog(this, "Kotak kode department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             Department dept = new Department();
             Karyawan karyawanTemp = new Karyawan();
             try {
                 dept = DaoFactory.getDepartmentDao().getByKode(String.valueOf(departmentCombo.getSelectedItem()));
-                karyawanTemp=DaoFactory.getKaryawanDao().getByNIPKaryawan(String.valueOf(nipCombo.getSelectedItem()));
+                karyawanTemp = DaoFactory.getKaryawanDao().getByNIPKaryawan(String.valueOf(nipCombo.getSelectedItem()));
             } catch (SQLException ex) {
                 Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (dept == null) {
                 JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di field tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else if(karyawanTemp==null){
+            } else if (karyawanTemp == null) {
                 JOptionPane.showMessageDialog(this, "Karyawan dengan NIP seperti \n di field tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }else {
+            } else {
                 GregorianCalendar gc = new GregorianCalendar();
                 gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
                 String year = String.valueOf(yearChooser.getYear());
@@ -536,11 +542,93 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
 
     private void nipComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipComboKeyPressed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_nipComboKeyPressed
 
     private void cetakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakButtonActionPerformed
         // TODO add your handling code here:
+        Date date = new Date();
+        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
+            JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if ((departmentCombo.getSelectedItem() == null || String.valueOf(departmentCombo.getSelectedItem()).matches(""))
+                || nipCombo.getSelectedItem() == null || String.valueOf(nipCombo.getSelectedItem()).matches("")) {
+            JOptionPane.showMessageDialog(this, "Kotak kode department harus diisi ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Department dept = new Department();
+            Karyawan karyawanTemp = new Karyawan();
+            try {
+                dept = DaoFactory.getDepartmentDao().getByKode(String.valueOf(departmentCombo.getSelectedItem()));
+                karyawanTemp = DaoFactory.getKaryawanDao().getByNIPKaryawan(String.valueOf(nipCombo.getSelectedItem()));
+            } catch (SQLException ex) {
+                Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (dept == null) {
+                JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di field tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (karyawanTemp == null) {
+                JOptionPane.showMessageDialog(this, "Karyawan dengan NIP seperti \n di field tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String bulanS = null;
+                String bulan = null;
+                switch (monthChooser.getMonth()) {
+                    case 0:
+                        bulanS = "JANUARI";
+                        break;
+                    case 1:
+                        bulanS = "FEBRUARI";
+                        break;
+                    case 2:
+                        bulanS = "MARET";
+                        break;
+                    case 3:
+                        bulanS = "APRIL";
+                        break;
+                    case 4:
+                        bulanS = "MEI";
+                        break;
+                    case 5:
+                        bulanS = "JUNI";
+                        break;
+                    case 6:
+                        bulanS = "JULI";
+                        break;
+                    case 7:
+                        bulanS = "AGUSTUS";
+                        break;
+                    case 8:
+                        bulanS = "SEPTEMBER";
+                        break;
+                    case 9:
+                        bulanS = "OKTOBER";
+                        break;
+                    case 10:
+                        bulanS = "NOVEMBER";
+                        break;
+                    case 11:
+                        bulanS = "DESEMBER";
+                        break;
+                }
+                bulanS = bulanS + " " + String.valueOf(yearChooser.getYear());
+                if (monthChooser.getMonth() + 1 < 10) {
+                    bulan = yearChooser.getYear() + "-0" + (monthChooser.getMonth() + 1);
+                } else {
+                    bulan = yearChooser.getYear() + "-" + (monthChooser.getMonth() + 1);
+                }
+
+                try {
+                    String reportSource = "./report/RekapPresensiKaryawan.jasper";
+                    Map<String, Object> params = new HashMap<String, Object>();
+                    params.put("nip",String.valueOf(nipCombo.getSelectedItem()));
+                    params.put("bulan", bulan);
+                    params.put("bulanString",bulanS);
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
+                    JasperViewer.viewReport(jasperPrint, false);
+                } catch (JRException ex) {
+                    Logger.getLogger(DetailPresensiReportForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(DetailPresensiReportForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
     }//GEN-LAST:event_cetakButtonActionPerformed
 
     /**

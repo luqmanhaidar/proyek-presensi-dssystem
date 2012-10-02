@@ -49,10 +49,37 @@ public class RekapGajiDaoImpelemen implements RekapGajiDao {
                 RekapGaji rekapGaji = new RekapGaji();
                 Karyawan karyawan=getKaryawanByNIP(result.getString("nip"));
                 
+                String bulan=result.getString("bulan").substring(5, 7);
+                if (bulan.matches("01")){
+                    bulan="JAN";
+                }else if (bulan.matches("02")){
+                    bulan="FEB";
+                }else if (bulan.matches("03")){
+                    bulan="MAR";
+                }else if (bulan.matches("04")){
+                    bulan="APR";
+                }else if (bulan.matches("05")){
+                    bulan="MEI";
+                }else if (bulan.matches("06")){
+                    bulan="JUNI";
+                }else if (bulan.matches("07")){
+                    bulan="JULI";
+                }else if (bulan.matches("08")){
+                    bulan="AGT";
+                }else if (bulan.matches("09")){
+                    bulan="SEPT";
+                }else if (bulan.matches("10")){
+                    bulan="OKT";
+                }else if (bulan.matches("11")){
+                    bulan="NOV";
+                }else if (bulan.matches("12")){
+                    bulan="DES";
+                }
+                
                 rekapGaji.setNo(counter);
                 rekapGaji.setNip(result.getString("nip"));
                 rekapGaji.setNama(karyawan.getNama());
-                rekapGaji.setBulan(result.getString("bulan"));
+                rekapGaji.setBulan(bulan);
                 rekapGaji.setS(result.getInt("S"));
                 rekapGaji.setI(result.getInt("I"));
                 rekapGaji.setA(result.getInt("A"));
