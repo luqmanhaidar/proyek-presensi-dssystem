@@ -743,8 +743,13 @@ private void gajiPokokTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRS
 
 private void gajiPokokTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_gajiPokokTextFieldKeyReleased
 // TODO add your handling code here:
-    if (!Character.isDigit(evt.getKeyChar())) {
+//    if (!Character.isDigit(evt.getKeyChar())) {
+        if(!gajiPokokTextField.getText().replace(".", "").matches("[0-9]*")){
         evt.consume();
+        if(!gajiPokokTextField.getText().replaceAll("[^\\dxX]+", "").isEmpty())
+            gajiPokokTextField.setText(ChangeFormatDoubleToString.getToString(Double.parseDouble(gajiPokokTextField.getText().replaceAll("[^\\dxX]+", ""))));
+        else
+            gajiPokokTextField.setText(gajiPokokTextField.getText().replaceAll("[^\\dxX]+", ""));
         simpanButton.setEnabled(false);
         JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
     } else {
