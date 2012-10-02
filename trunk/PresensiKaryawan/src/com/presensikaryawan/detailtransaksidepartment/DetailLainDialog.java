@@ -23,6 +23,7 @@ public class DetailLainDialog extends javax.swing.JDialog {
     int thn;
     JTable presensiTable;
     String kode_department;
+    double potongan, prestasi;
 
     /**
      * Creates new form DetailLainDialog
@@ -43,6 +44,8 @@ public class DetailLainDialog extends javax.swing.JDialog {
         thn = tahun;
         DetailLain d=new DetailLain();
         d=DaoFactory.getTransaksiDepartmentDao().getLain(nip, nilaiTanggalLabel.getText());
+       potongan=d.getPotonganLain();
+       prestasi=d.getPrestasi();
         potonganTextField.setText(ChangeFormatDoubleToString.getToString(d.getPotonganLain()));
         prestasiTextField.setText(ChangeFormatDoubleToString.getToString(d.getPrestasi()));
 //        this.kode_department=kode_department;
@@ -97,6 +100,11 @@ public class DetailLainDialog extends javax.swing.JDialog {
         Potongan.setFont(new java.awt.Font("Dialog", 0, 12));
         Potongan.setText("Potongan Lain");
 
+        potonganTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                potonganTextFieldMouseClicked(evt);
+            }
+        });
         potonganTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 potonganTextFieldActionPerformed(evt);
@@ -138,6 +146,11 @@ public class DetailLainDialog extends javax.swing.JDialog {
         Potongan1.setFont(new java.awt.Font("Dialog", 0, 12));
         Potongan1.setText("Lain - lain / Prestasi");
 
+        prestasiTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prestasiTextFieldMouseClicked(evt);
+            }
+        });
         prestasiTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prestasiTextFieldActionPerformed(evt);
@@ -290,8 +303,10 @@ public class DetailLainDialog extends javax.swing.JDialog {
 
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
         // TODO add your handling code here:
-        nilaiNIPLabel.setText(null);
-        nilaiTanggalLabel.setText("-");
+//        nilaiNIPLabel.setText(null);
+//        nilaiTanggalLabel.setText("-");
+        potonganTextField.setText(ChangeFormatDoubleToString.getToString(potongan));
+        prestasiTextField.setText(ChangeFormatDoubleToString.getToString(prestasi));
     }//GEN-LAST:event_batalButtonActionPerformed
 
     private void kembaliButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliButtonActionPerformed
@@ -332,6 +347,16 @@ private void prestasiTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FI
         }
     }
 }//GEN-LAST:event_prestasiTextFieldKeyReleased
+
+private void potonganTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_potonganTextFieldMouseClicked
+// TODO add your handling code here:
+potonganTextField.setText(null);
+}//GEN-LAST:event_potonganTextFieldMouseClicked
+
+private void prestasiTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prestasiTextFieldMouseClicked
+// TODO add your handling code here:
+    prestasiTextField.setText(null);
+}//GEN-LAST:event_prestasiTextFieldMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Potongan;
