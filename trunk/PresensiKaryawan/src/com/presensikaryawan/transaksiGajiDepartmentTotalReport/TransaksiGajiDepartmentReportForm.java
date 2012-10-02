@@ -329,11 +329,6 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        karyawanTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                karyawanTableMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(karyawanTable);
         karyawanTable.getColumnModel().getColumn(0).setResizable(false);
         karyawanTable.getColumnModel().getColumn(0).setPreferredWidth(70);
@@ -552,24 +547,6 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }
 }//GEN-LAST:event_lihatButtonActionPerformed
-
-private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_karyawanTableMouseClicked
-    int row = karyawanTable.getSelectedRow();
-    String kodegroup = karyawanTable.getValueAt(row, 1).toString();
-    String namagroup = karyawanTable.getValueAt(row, 2).toString();
-    String kodedepartment = String.valueOf(departmentCombo1.getSelectedItem());
-    int bulan = bulanMonthChooser.getMonth() + 1;
-    int tahun = tahunYearChooser1.getYear();
-
-    DetailLainDialog detailDialog = null;
-    try {
-        detailDialog = new DetailLainDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup, bulan, tahun, karyawanTable, kodedepartment);
-    } catch (SQLException ex) {
-        Logger.getLogger(TransaksiDepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    detailDialog.setVisible(true);
-
-}//GEN-LAST:event_karyawanTableMouseClicked
 
     private void departmentCombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentCombo2ActionPerformed
         // TODO add your handling code here:
