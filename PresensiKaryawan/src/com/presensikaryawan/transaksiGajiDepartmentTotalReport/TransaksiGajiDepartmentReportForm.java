@@ -623,7 +623,46 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
                 JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di kotak II tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 try {
-
+                    String bulanS = null;
+                    switch (bulanMonthChooser.getMonth()) {
+                        case 0:
+                            bulanS = "JANUARI";
+                            break;
+                        case 1:
+                            bulanS = "FEBRUARI";
+                            break;
+                        case 2:
+                            bulanS = "MARET";
+                            break;
+                        case 3:
+                            bulanS = "APRIL";
+                            break;
+                        case 4:
+                            bulanS = "MEI";
+                            break;
+                        case 5:
+                            bulanS = "JUNI";
+                            break;
+                        case 6:
+                            bulanS = "JULI";
+                            break;
+                        case 7:
+                            bulanS = "AGUSTUS";
+                            break;
+                        case 8:
+                            bulanS = "SEPTEMBER";
+                            break;
+                        case 9:
+                            bulanS = "OKTOBER";
+                            break;
+                        case 10:
+                            bulanS = "NOVEMBER";
+                            break;
+                        case 11:
+                            bulanS = "DESEMBER";
+                            break;
+                    }
+                    bulanS = bulanS + " " + String.valueOf(tahunYearChooser1.getYear());
                     String dep1 = String.valueOf(departmentCombo1.getSelectedItem());
                     String dep2 = String.valueOf(departmentCombo2.getSelectedItem());
                     String bln;
@@ -637,8 +676,8 @@ private void karyawanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
                     Map<String, Object> params = new HashMap<String, Object>();
                     params.put("kode1", dep1);
                     params.put("kode2", dep2);
-                    params.put("tahun", bln);
-
+                    params.put("bulan", bln);
+                    params.put("bulanString", bulanS);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
                     JasperViewer.viewReport(jasperPrint, false);
                 } catch (JRException ex) {
