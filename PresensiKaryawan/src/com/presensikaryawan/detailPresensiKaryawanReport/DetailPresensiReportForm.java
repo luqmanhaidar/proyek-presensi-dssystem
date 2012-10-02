@@ -231,11 +231,11 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
                                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(inputPanelLayout.createSequentialGroup()
                                         .add(nilaiNamaKaryawan, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .add(0, 0, Short.MAX_VALUE))
                                     .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
                                         .add(0, 0, Short.MAX_VALUE)
-                                        .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
+                                        .add(lihatButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(cetakButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 145, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                         .add(45, 45, 45))))
         );
@@ -301,11 +301,6 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
-            }
-        });
-        presenstiTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                presenstiTableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(presenstiTable);
@@ -409,30 +404,6 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-1036)/2, (screenSize.height-737)/2, 1036, 737);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void presenstiTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_presenstiTableMouseClicked
-        int row = presenstiTable.getSelectedRow();
-        String kodegroup = presenstiTable.getValueAt(row, 1).toString();
-        String namagroup = presenstiTable.getValueAt(row, 2).toString();
-        String kodedepartment = String.valueOf(departmentCombo.getSelectedItem());
-        String bulan;
-        if (monthChooser.getMonth() + 1 < 10) {
-            bulan = "0" + String.valueOf(monthChooser.getMonth() + 1);
-        } else {
-            bulan = String.valueOf(monthChooser.getMonth() + 1);
-        }
-        String tahun = String.valueOf(yearChooser.getYear());
-
-        DetailPresensiDialog detailDialog = null;
-        try {
-            detailDialog = new DetailPresensiDialog(this, rootPaneCheckingEnabled, kodegroup, namagroup, bulan, tahun, presenstiTable, kodedepartment);
-        } catch (SQLException ex) {
-            Logger.getLogger(RekapPresensiForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        detailDialog.setVisible(true);
-
-
-    }//GEN-LAST:event_presenstiTableMouseClicked
     private void isitable() {
     }
 
