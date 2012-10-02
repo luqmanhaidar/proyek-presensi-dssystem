@@ -34,7 +34,7 @@
 	</parameter>
 	<queryString><![CDATA[select t.*, d.nama_department 
 from temptransaksidepartment t, department_setting d, karyawan k
-where k.nip=t.nip and k.kode_department = d.kode_department
+where k.nip=t.nip and k.kode_department = d.kode_department AND k.kode_department = t.department
 and d.kode_department between $P{kode1} and $P{kode2} 
 and t.bulan like $P{tahun};]]></queryString>
 
@@ -58,7 +58,7 @@ and t.bulan like $P{tahun};]]></queryString>
 	<field name="department" class="java.lang.String"/>
 	<field name="nama_department" class="java.lang.String"/>
 
-	<variable name="total" class="java.lang.Double" resetType="Report" calculation="Sum">
+	<variable name="total" class="java.lang.Double" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{total}]]></variableExpression>
 	</variable>
 

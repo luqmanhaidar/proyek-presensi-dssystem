@@ -34,7 +34,7 @@
 	</parameter>
 	<queryString><![CDATA[select t.*, d.nama_department 
 from temptransaksidepartment t, department_setting d, karyawan k
-where k.nip=t.nip and k.kode_department = d.kode_department
+where k.nip=t.nip and k.kode_department = d.kode_department AND k.kode_department = t.department
 and d.kode_department between $P{kode1} and $P{kode2} 
 and t.bulan like $P{tahun};]]></queryString>
 
@@ -77,7 +77,7 @@ and t.bulan like $P{tahun};]]></queryString>
 						width="781"
 						height="21"
 						key="staticText-20"/>
-					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="3" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="3" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="14"/>
 					</textElement>
