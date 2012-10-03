@@ -324,9 +324,13 @@ private void prestasiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void potonganTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_potonganTextFieldKeyReleased
 // TODO add your handling code here:
-    if (!Character.isDigit(evt.getKeyChar())) {
+    if(!potonganTextField.getText().replace(".", "").matches("[0-9]*")){
         evt.consume();
-        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if(!potonganTextField.getText().replaceAll("[^\\dxX]+", "").isEmpty())
+            potonganTextField.setText(ChangeFormatDoubleToString.getToString(Double.parseDouble(potonganTextField.getText().replaceAll("[^\\dxX]+", ""))));
+        else
+            potonganTextField.setText(potonganTextField.getText().replaceAll("[^\\dxX]+", ""));
+//        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
     } else {
         if (!potonganTextField.getText().isEmpty()) {
             double gaji = Double.parseDouble(potonganTextField.getText().replace(".", ""));
@@ -337,9 +341,13 @@ private void potonganTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FI
 
 private void prestasiTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prestasiTextFieldKeyReleased
 // TODO add your handling code here:
-    if (!Character.isDigit(evt.getKeyChar())) {
+    if(!prestasiTextField.getText().replace(".", "").matches("[0-9]*")){
         evt.consume();
-        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if(!prestasiTextField.getText().replaceAll("[^\\dxX]+", "").isEmpty())
+            prestasiTextField.setText(ChangeFormatDoubleToString.getToString(Double.parseDouble(prestasiTextField.getText().replaceAll("[^\\dxX]+", ""))));
+        else
+            prestasiTextField.setText(prestasiTextField.getText().replaceAll("[^\\dxX]+", ""));
+//        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
     } else {
         if (!prestasiTextField.getText().isEmpty()) {
             double gaji = Double.parseDouble(prestasiTextField.getText().replace(".", ""));

@@ -751,7 +751,7 @@ private void gajiPokokTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-F
         else
             gajiPokokTextField.setText(gajiPokokTextField.getText().replaceAll("[^\\dxX]+", ""));
         simpanButton.setEnabled(false);
-        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
     } else {
         if (!gajiPokokTextField.getText().isEmpty()) {
             double gaji = Double.parseDouble(gajiPokokTextField.getText().replace(".", ""));
@@ -763,10 +763,14 @@ private void gajiPokokTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-F
 
 private void uangMakanTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uangMakanTextFieldKeyReleased
 // TODO add your handling code here:
-    if (!Character.isDigit(evt.getKeyChar())) {
+    if(!uangMakanTextField.getText().replace(".", "").matches("[0-9]*")){
         evt.consume();
+        if(!uangMakanTextField.getText().replaceAll("[^\\dxX]+", "").isEmpty())
+            uangMakanTextField.setText(ChangeFormatDoubleToString.getToString(Double.parseDouble(uangMakanTextField.getText().replaceAll("[^\\dxX]+", ""))));
+        else
+            uangMakanTextField.setText(uangMakanTextField.getText().replaceAll("[^\\dxX]+", ""));
         simpanButton.setEnabled(false);
-        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
     } else {
         if (!uangMakanTextField.getText().isEmpty()) {
             double gaji = Double.parseDouble(uangMakanTextField.getText().replace(".", ""));
@@ -778,10 +782,14 @@ private void uangMakanTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-F
 
 private void uangLemburTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uangLemburTextFieldKeyReleased
 // TODO add your handling code here:
-    if (!Character.isDigit(evt.getKeyChar())) {
+    if(!uangLemburTextField.getText().replace(".", "").matches("[0-9]*")){
         evt.consume();
+        if(!uangLemburTextField.getText().replaceAll("[^\\dxX]+", "").isEmpty())
+            uangLemburTextField.setText(ChangeFormatDoubleToString.getToString(Double.parseDouble(uangLemburTextField.getText().replaceAll("[^\\dxX]+", ""))));
+        else
+            uangLemburTextField.setText(uangLemburTextField.getText().replaceAll("[^\\dxX]+", ""));
         simpanButton.setEnabled(false);
-        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
     } else {
         if (!uangLemburTextField.getText().isEmpty()) {
             double gaji = Double.parseDouble(uangLemburTextField.getText().replace(".", ""));
@@ -793,10 +801,14 @@ private void uangLemburTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-
 
 private void uangHadirTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uangHadirTextFieldKeyReleased
 // TODO add your handling code here:
-    if (!Character.isDigit(evt.getKeyChar())) {
+    if(!uangHadirTextField.getText().replace(".", "").matches("[0-9]*")){
         evt.consume();
+        if(!uangHadirTextField.getText().replaceAll("[^\\dxX]+", "").isEmpty())
+            uangHadirTextField.setText(ChangeFormatDoubleToString.getToString(Double.parseDouble(uangHadirTextField.getText().replaceAll("[^\\dxX]+", ""))));
+        else
+            uangHadirTextField.setText(uangHadirTextField.getText().replaceAll("[^\\dxX]+", ""));
         simpanButton.setEnabled(false);
-        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
     } else {
         if (!uangHadirTextField.getText().isEmpty()) {
             double gaji = Double.parseDouble(uangHadirTextField.getText().replace(".", ""));
@@ -808,10 +820,14 @@ private void uangHadirTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-F
 
 private void potonganTelatTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_potonganTelatTextFieldKeyReleased
 // TODO add your handling code here:
-    if (!Character.isDigit(evt.getKeyChar())) {
+    if(!potonganTelatTextField.getText().replace(".", "").matches("[0-9]*")){
         evt.consume();
+        if(!potonganTelatTextField.getText().replaceAll("[^\\dxX]+", "").isEmpty())
+            potonganTelatTextField.setText(ChangeFormatDoubleToString.getToString(Double.parseDouble(potonganTelatTextField.getText().replaceAll("[^\\dxX]+", ""))));
+        else
+            potonganTelatTextField.setText(potonganTelatTextField.getText().replaceAll("[^\\dxX]+", ""));
         simpanButton.setEnabled(false);
-        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(this, "Masukan harus berupa angka", "ERROR", JOptionPane.ERROR_MESSAGE);
     } else {
         if (!potonganTelatTextField.getText().isEmpty()) {
             double gaji = Double.parseDouble(potonganTelatTextField.getText().replace(".", ""));
