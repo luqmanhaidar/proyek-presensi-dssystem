@@ -32,6 +32,9 @@
 	<parameter name="nip2" isForPrompting="false" class="java.lang.String">
 		<defaultValueExpression ><![CDATA["05"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="bulanString" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["September 2012"]]></defaultValueExpression>
+	</parameter>
 	<queryString><![CDATA[SELECT karyawan.*, temptransaksidepartment.*, 
 (temptransaksidepartment.pokok+temptransaksidepartment.makan+temptransaksidepartment.hadir+temptransaksidepartment.lembur+temptransaksidepartment.lain_lain)totalkotor, golongan.nama_golongan, department_setting.nama_department
 FROM karyawan, temptransaksidepartment, golongan, department_setting 
@@ -454,6 +457,32 @@ and temptransaksidepartment.bulan like $P{bulan};]]></queryString>
 						<font fontName="Times New Roman" size="12"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{total}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="342"
+						y="44"
+						width="51"
+						height="19"
+						key="staticText-15"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" pdfFontName="Helvetica" size="12" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Bulan]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="393"
+						y="44"
+						width="124"
+						height="19"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{bulanString}]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageHeader>
