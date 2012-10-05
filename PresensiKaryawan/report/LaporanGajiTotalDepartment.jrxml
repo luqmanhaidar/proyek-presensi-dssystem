@@ -156,7 +156,7 @@ and t.bulan like $P{bulan};]]></queryString>
 					<reportElement
 						x="87"
 						y="37"
-						width="166"
+						width="188"
 						height="17"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
@@ -169,7 +169,7 @@ and t.bulan like $P{bulan};]]></queryString>
 					<reportElement
 						x="87"
 						y="57"
-						width="159"
+						width="189"
 						height="18"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>

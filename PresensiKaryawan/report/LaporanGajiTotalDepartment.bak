@@ -32,6 +32,9 @@
 	<parameter name="bulan" isForPrompting="false" class="java.lang.String">
 		<defaultValueExpression ><![CDATA["2012-09"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="bulanString" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["September 2012"]]></defaultValueExpression>
+	</parameter>
 	<queryString><![CDATA[select t.*, d.nama_department 
 from temptransaksidepartment t, department_setting d, karyawan k
 where k.nip=t.nip and k.kode_department = d.kode_department AND k.kode_department = t.department
@@ -160,7 +163,7 @@ and t.bulan like $P{bulan};]]></queryString>
 					<textElement>
 						<font fontName="Times New Roman" size="14"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{bulan}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{bulanString}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
