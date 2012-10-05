@@ -34,7 +34,7 @@ public class DetailPresensiReportDaoImplemen implements DetailPresensiReportDao 
     }
 
     @Override
-    public List<DetailPresensiReport> getDetailPresensiByNIP(String nip, String bulan, String tahun) throws SQLException {
+    public List<DetailPresensiReport> getDetailPresensiByNIP(String nip, String bulan) throws SQLException {
         PreparedStatement statement = null;
         ResultSet result = null;
         ResultSet result2 = null;
@@ -43,7 +43,7 @@ public class DetailPresensiReportDaoImplemen implements DetailPresensiReportDao 
 
             statement = connection.prepareStatement(SQL_GETDETAILPRESENSI_BYNIP);
             statement.setString(1, nip);
-            statement.setString(2, tahun + "-" + bulan + "%");
+            statement.setString(2, bulan + "%");
 
             result = statement.executeQuery();
             List<DetailPresensiReport> detailPresensiReports = new ArrayList<DetailPresensiReport>();

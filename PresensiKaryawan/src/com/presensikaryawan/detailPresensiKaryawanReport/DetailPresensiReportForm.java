@@ -51,6 +51,7 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
         this.frame = frame;
         this.menuItem = menuItem;
         addWindowListener(new WindowAdapter() {
+
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.setEnabled(true);
@@ -404,6 +405,7 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-1036)/2, (screenSize.height-737)/2, 1036, 737);
     }// </editor-fold>//GEN-END:initComponents
+
     private void isitable() {
     }
 
@@ -469,16 +471,20 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
                 String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
                 String maxDayOfMonth = year + "-" + month + "-" + day;
 
+                String bulan=null;
+                if (monthChooser.getMonth() + 1 < 10) {
+                    bulan = yearChooser.getYear() + "-0" + (monthChooser.getMonth() + 1);
+                } else {
+                    bulan = yearChooser.getYear() + "-" + (monthChooser.getMonth() + 1);
+                }
+
                 String kode_department = String.valueOf(departmentCombo.getSelectedItem());
                 try {
-                    List<Karyawan> karyawans = DaoFactory.getRekapPresensiDao().getAllKaryawanByDepartmentCode(kode_department);
-                    while (!karyawans.isEmpty()) {
-                        Karyawan karyawan = karyawans.remove(0);
-                        DaoFactory.getRekapPresensiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
-                    }
-                    List<DetailPresensi> detailPresensis = DaoFactory.getRekapPresensiDao().callGetPresensi(month, year, kode_department);
-                    System.out.println(detailPresensis.size());
-                    PresensiTableModel model = new PresensiTableModel(detailPresensis);
+                    List<DetailPresensiReport> detailPresensiReports = DaoFactory.getDetailPresensiReportDao().getDetailPresensiByNIP(String.valueOf(nipCombo.getSelectedItem()), bulan);
+
+
+                    System.out.println(detailPresensiReports.size());
+                    DetailPresensiReportTableModel model = new DetailPresensiReportTableModel(detailPresensiReports);
                     presenstiTable.setModel(model);
                     presenstiTable.setVisible(true);
                 } catch (SQLException ex) {
@@ -585,11 +591,11 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
                 }
 
                 try {
-                    String reportSource = "./report/RekapPresensiKaryawan.jasper";
+                    String reportSource = "./report/PresensiReport.jasper";
                     Map<String, Object> params = new HashMap<String, Object>();
-                    params.put("nip",String.valueOf(nipCombo.getSelectedItem()));
-                    params.put("bulan", bulan);
-                    params.put("bulanString",bulanS);
+                    params.put("nip", String.valueOf(nipCombo.getSelectedItem()));
+                    params.put("bulan", bulan+"%");
+                    params.put("bulanString", bulanS);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
                     JasperViewer.viewReport(jasperPrint, false);
                 } catch (JRException ex) {
@@ -613,6 +619,7 @@ public class DetailPresensiReportForm extends javax.swing.JFrame {
             Logger.getLogger(DetailPresensiReportForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 try {
