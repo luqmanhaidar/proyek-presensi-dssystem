@@ -427,8 +427,10 @@ public class RekapPresensiForm extends javax.swing.JFrame {
                 String year = String.valueOf(yearChooser.getYear());
                 String month = String.valueOf(monthChooser.getMonth() + 1);
                 String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+                if(month.length()<2)
+                    month="0"+month;
                 String maxDayOfMonth = year + "-" + month + "-" + day;
-
+                System.out.println(maxDayOfMonth+" max day");
                 String kode_department = String.valueOf(departmentCombo.getSelectedItem());
                 try {
                     List<Karyawan> karyawans = DaoFactory.getRekapPresensiDao().getAllKaryawanByDepartmentCode(kode_department);
@@ -436,7 +438,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
                         Karyawan karyawan = karyawans.remove(0);
                         DaoFactory.getRekapPresensiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
                     }
-                    List<DetailPresensi> detailPresensis = DaoFactory.getRekapPresensiDao().callGetPresensi(month, year, kode_department);
+                    List<DetailPresensi> detailPresensis = DaoFactory.getRekapPresensiDao().callGetPresensi(maxDayOfMonth, kode_department);
                     System.out.println(detailPresensis.size());
                     PresensiTableModel model = new PresensiTableModel(detailPresensis);
                     presenstiTable.setModel(model);

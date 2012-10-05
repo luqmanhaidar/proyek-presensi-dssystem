@@ -27,6 +27,7 @@ public class RekapPresensiDaoImplemen implements RekapPresensiDao {
     private final String SQL_GETKARYAWANBYDEPARTMENT = "SELECT nip, nama FROM karyawan WHERE kode_department LIKE ? order by nip asc";
     private final String SQL_GETDEPARTMENTNAME_BYCODE = "SELECT nama_department from department_setting where kode_department LIKE ?";
     private final String SQL_GET_INSERTALFA_SP = "CALL insertAlfa (?,?)";
+    private final String SQL_GET_GETPRESENSI_SP2 = "CALL getPresensi2 (?,?)";
     private final String SQL_GET_GETPRESENSI_SP = "CALL getPresensi (?,?,?)";
     private final String SQL_UPDATE_GETPRESENSI="UPDATE detail_presensi set keterangan =?";
     private Connection connection;
@@ -157,19 +158,21 @@ public class RekapPresensiDaoImplemen implements RekapPresensiDao {
     }
 
     @Override
-    public List<DetailPresensi> callGetPresensi(String bulan, String tahun, String kode_department) throws SQLException {
+    public List<DetailPresensi> callGetPresensi(String max, String kode_department) throws SQLException {
         ResultSet result;
         connection.setAutoCommit(false);
         CallableStatement callableStatement;
-        callableStatement = connection.prepareCall(SQL_GET_GETPRESENSI_SP);
-        if(bulan.length()<2){
-            callableStatement.setString(1, "0"+bulan);
-        }
-        else{
-            callableStatement.setString(1, bulan);
-        }
-        callableStatement.setString(2, tahun);
-        callableStatement.setString(3, kode_department);
+        callableStatement = connection.prepareCall(SQL_GET_GETPRESENSI_SP2);
+//        if(bulan.length()<2){
+//            callableStatement.setString(1, "0"+bulan);
+//        }
+//        else{
+//            callableStatement.setString(1, bulan);
+//        }
+//        callableStatement.setString(2, tahun);
+//        callableStatement.setString(3, kode_department);
+        callableStatement.setString(1, max);
+        callableStatement.setString(2, kode_department);
         result = callableStatement.executeQuery();
 
         List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
@@ -194,6 +197,47 @@ public class RekapPresensiDaoImplemen implements RekapPresensiDao {
         connection.commit();
         return detailPresensis;
 
+    }
+
+    @Override
+    public List<DetailPresensi> callGetPresensi(String bulan, String tahun, String kode_department) throws SQLException {
+            ResultSet result;
+        connection.setAutoCommit(false);
+        CallableStatement callableStatement;
+        callableStatement = connection.prepareCall(SQL_GET_GETPRESENSI_SP);
+        if(bulan.length()<2){
+            callableStatement.setString(1, "0"+bulan);
+        }
+        else{
+            callableStatement.setString(1, bulan);
+        }
+        callableStatement.setString(2, tahun);
+        callableStatement.setString(3, kode_department);
+//        callableStatement.setString(1, max);
+//        callableStatement.setString(2, kode_department);
+        result = callableStatement.executeQuery();
+
+        List<DetailPresensi> detailPresensis = new ArrayList<DetailPresensi>();
+        int counter=0;
+        
+        while (result.next()) {
+            DetailPresensi detailPresensi=new DetailPresensi();
+
+            detailPresensi.setNo(counter+1);
+            detailPresensi.setNip(result.getString("nip"));
+            detailPresensi.setNama_karyawan(result.getString("nama"));
+            detailPresensi.setJumlah_s(Integer.parseInt(result.getString("S")));
+            detailPresensi.setJumlah_i(Integer.parseInt(result.getString("I")));
+            detailPresensi.setJumlah_a(Integer.parseInt(result.getString("A")));
+            detailPresensi.setJumlah_t(Integer.parseInt(result.getString("T")));
+            detailPresensi.setJumlah_m(Integer.parseInt(result.getString("M")));
+
+            
+            detailPresensis.add(detailPresensi);
+            counter++;
+        }
+        connection.commit();
+        return detailPresensis;
     }
 
 
