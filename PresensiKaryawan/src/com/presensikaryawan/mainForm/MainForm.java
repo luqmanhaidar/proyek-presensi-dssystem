@@ -5,6 +5,7 @@
 package com.presensikaryawan.mainForm;
 
 import com.presensikaryawan.departmentSetting.DepartmentForm;
+import com.presensikaryawan.detailPresensiKaryawanReport.DetailPresensiReportForm;
 import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportForm;
 import com.presensikaryawan.golongan.GolonganForm;
 import com.presensikaryawan.groupShift.GroupShiftForm;
@@ -48,6 +49,7 @@ public class MainForm extends javax.swing.JFrame {
     KaryawanForm karyawanForm;
     LiburNasionalForm liburNasionalForm;
     LiburPerusahaanForm liburPerusahaanForm;
+    DetailPresensiReportForm detailPresensiReportForm;
 
     /**
      * Creates new form MainForm
@@ -73,6 +75,7 @@ public class MainForm extends javax.swing.JFrame {
             karyawanForm = new KaryawanForm(this, menuItemMasterKaryawan);
             liburNasionalForm = new LiburNasionalForm(this, menuItemMasterLiburNasional);
             liburPerusahaanForm = new LiburPerusahaanForm(this, menuItemMasterLiburPerusahaan);
+            detailPresensiReportForm=new DetailPresensiReportForm(this, detailPrensensiReportMenuItem);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -102,6 +105,7 @@ public class MainForm extends javax.swing.JFrame {
         menuItemRekapPresensi = new javax.swing.JMenuItem();
         menuItemPayrollBank = new javax.swing.JMenuItem();
         menuItemHistoryGajiReport = new javax.swing.JMenuItem();
+        detailPrensensiReportMenuItem = new javax.swing.JMenuItem();
         masterMenu = new javax.swing.JMenu();
         menuItemMasterDepartment = new javax.swing.JMenuItem();
         menuItemMasterGolongan = new javax.swing.JMenuItem();
@@ -208,6 +212,15 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         reportMenu.add(menuItemHistoryGajiReport);
+
+        detailPrensensiReportMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.SHIFT_MASK));
+        detailPrensensiReportMenuItem.setText("Report Detail Presensi Karyawan");
+        detailPrensensiReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailPrensensiReportMenuItemActionPerformed(evt);
+            }
+        });
+        reportMenu.add(detailPrensensiReportMenuItem);
 
         menuBar.add(reportMenu);
 
@@ -476,6 +489,15 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuItemMasterLiburPerusahaanActionPerformed
 
+    private void detailPrensensiReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailPrensensiReportMenuItemActionPerformed
+        // TODO add your handling code here:
+        if (!detailPresensiReportForm.isVisible()) {
+            detailPresensiReportForm.setVisible(true);
+            detailPrensensiReportMenuItem.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_detailPrensensiReportMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -511,6 +533,7 @@ public class MainForm extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem detailPrensensiReportMenuItem;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
