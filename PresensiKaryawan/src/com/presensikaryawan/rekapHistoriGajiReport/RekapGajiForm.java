@@ -439,6 +439,12 @@ public class RekapGajiForm extends javax.swing.JFrame {
         } else {
             String nip1 = String.valueOf(nipCombo.getSelectedItem());
             String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+            if (nip1.compareTo(nip2) > 0) {
+                String nipTemp = nip1;
+                nip1 = nip2;
+                nip2 = nipTemp;
+            }
+
             Karyawan karyawan1 = new Karyawan();
             Karyawan karyawan2 = new Karyawan();
             try {

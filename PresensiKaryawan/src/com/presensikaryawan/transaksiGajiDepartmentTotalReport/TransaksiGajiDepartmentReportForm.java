@@ -514,6 +514,11 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             } else {
                 maxDayOfMonth = tahun + "-" + bulan;
             }
+            if (department.compareTo(department2) > 0) {
+                String deptTemp = department;
+                department = department2;
+                department2 = deptTemp;
+            }
             System.out.println(maxDayOfMonth);
             try {
                 TransaksiGajiDepartmentReportDao dao = DaoFactory.getTransaksiGajiDepartmentReportDao();

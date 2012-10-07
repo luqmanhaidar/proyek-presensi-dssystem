@@ -456,6 +456,11 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             } else {
                 bulanTahun = tahun + "-" + bulan;
             }
+            if (nip1.compareTo(nip2)>0){
+                String nipTemp=nip1;
+                nip1=nip2;
+                nip2=nipTemp;
+            }
             try {
                 List<TransaksiDepartment> transaksiDepartments = DaoFactory.getGajiPerKaryawanReportDao().getAllTransaksiDepartment(nip1, nip2, bulanTahun);
                 TransaksiDepartmentTableModel model = new TransaksiDepartmentTableModel(transaksiDepartments);

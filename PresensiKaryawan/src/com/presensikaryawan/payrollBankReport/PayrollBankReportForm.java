@@ -320,10 +320,9 @@ public class PayrollBankReportForm extends javax.swing.JFrame {
                         .add(nilaiTotalLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 263, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(daftarPermintaanTransferPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE))
-                    .add(daftarPermintaanTransferPanelLayout.createSequentialGroup()
-                        .add(360, 360, 360)
-                        .add(nilaiTotaTerbilangLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)))
+                        .add(daftarPermintaanTransferPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, nilaiTotaTerbilangLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         daftarPermintaanTransferPanelLayout.setVerticalGroup(
@@ -449,6 +448,11 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             System.out.println(maxDayOfMonth);
             String nip1 = String.valueOf(nipCombo1.getSelectedItem());
             String nip2 = String.valueOf(nipCombo2.getSelectedItem());
+            if (nip1.compareTo(nip2) > 0) {
+                String nipTemp = nip1;
+                nip1 = nip2;
+                nip2 = nipTemp;
+            }
             try {
                 List<PayrollBankReport> payrollBankReports = DaoFactory.getPayrollBankDao().getPayrollBank(nip1, nip2, maxDayOfMonth);
                 for (int i = 0; i < payrollBankReports.size(); i++) {
