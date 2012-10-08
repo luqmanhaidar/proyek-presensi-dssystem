@@ -169,7 +169,7 @@ and k.nip between $P{nip1} and $P{nip2};]]></queryString>
 					<reportElement
 						x="138"
 						y="16"
-						width="100"
+						width="182"
 						height="18"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>

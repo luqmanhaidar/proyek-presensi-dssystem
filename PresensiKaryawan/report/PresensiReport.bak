@@ -34,8 +34,7 @@
 	</parameter>
 	<queryString><![CDATA[SELECT k.nip, k.nama, d.tanggal, d.keterangan, 
 (SELECT IF(COUNT(TimeLog)=0,'-',TimeLog) FROM eventlog WHERE DateLog = d.tanggal AND FKMode='0')waktu 
-FROM detail_presensi d, karyawan k WHERE k.nip = $P{nip} AND k.nip = d.nip AND d.tanggal LIKE $P{bulan}
-]]></queryString>
+FROM detail_presensi d, karyawan k WHERE k.nip = $P{nip} AND k.nip = d.nip AND d.tanggal LIKE $P{bulan}]]></queryString>
 
 	<field name="nip" class="java.lang.String"/>
 	<field name="nama" class="java.lang.String"/>
@@ -58,7 +57,7 @@ FROM detail_presensi d, karyawan k WHERE k.nip = $P{nip} AND k.nip = d.nip AND d
 						key="staticText-1"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<textElement>
-						<font pdfFontName="Helvetica-Bold" size="22" isBold="true"/>
+						<font fontName="Times New Roman" pdfFontName="Helvetica-Bold" size="22" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Report Presensi karyawan]]></text>
 				</staticText>
@@ -135,7 +134,7 @@ FROM detail_presensi d, karyawan k WHERE k.nip = $P{nip} AND k.nip = d.nip AND d
 					<reportElement
 						x="380"
 						y="3"
-						width="100"
+						width="142"
 						height="18"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
