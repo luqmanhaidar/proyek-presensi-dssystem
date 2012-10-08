@@ -17,11 +17,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 /*
@@ -420,7 +418,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
             String month = String.valueOf(monthChooser.getMonth() + 1);
             String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
             String maxDayOfMonth = year + "-" + month + "-" + day;
-
+            System.out.println(maxDayOfMonth+" max day");
             String kode_department = String.valueOf(departmentCombo.getSelectedItem());
             try {
                 List<Karyawan> karyawans = DaoFactory.getTranskasiGajiDao().getAllKaryawanByDepartmentCode(kode_department);
@@ -429,7 +427,7 @@ public class TransaksiGajiForm extends javax.swing.JFrame {
                     DaoFactory.getTranskasiGajiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
                 }
 //                System.out.println(month+" "+year+" "+kode_department);
-                 List<RekapPresensi> detailPresensis = DaoFactory.getTranskasiGajiDao().callGetPresensi(month, year, kode_department);
+                 List<RekapPresensi> detailPresensis = DaoFactory.getTranskasiGajiDao().callGetPresensi(maxDayOfMonth, kode_department);
                  PresensiTableModel model=new PresensiTableModel(detailPresensis);
                  presenstiTable.setModel(model);
                  presenstiTable.setVisible(true);

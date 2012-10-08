@@ -25,7 +25,8 @@ public class DetailPresensiDaoImplemen implements DetailPresensiDao {
 
     private final String SQL_UPDATE_GETPRESENSI = "UPDATE detail_presensi set keterangan = ? where nip = ? and tanggal = ?";
     private final String SQL_GETDETAILPRESENSI_BYNIP = "SELECT tanggal, keterangan FROM detail_presensi where nip = ? and tanggal like ?";
-    private final String SQL_GETWAKTU = "select timelog from eventlog where datelog like ? and userid = ? and fkmode = '0'"; 
+    private final String SQL_GETWAKTU = "select timelog from eventlog where datelog like ? and userid = ? and fkmode = '0'";
+    private final String SQL_UPDATETEMP = "call updateTempTransaksi(?,?)";
     private Connection connection;
 
     public DetailPresensiDaoImplemen(Connection connection) {
@@ -115,6 +116,39 @@ public class DetailPresensiDaoImplemen implements DetailPresensiDao {
 
             connection.commit();
             return detailPresensis;
+        } catch (SQLException exception) {
+            throw exception;
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException exception) {
+                throw exception;
+            }
+        }
+    }
+
+    @Override
+    public void updateGaji(String maxday, String nip) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        ResultSet result2 = null;
+        try {
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(SQL_UPDATETEMP);
+            statement.setString(1, nip);
+            statement.setString(2, maxday);
+
+            statement.executeQuery();
+            
+
+            connection.commit();
         } catch (SQLException exception) {
             throw exception;
         } finally {

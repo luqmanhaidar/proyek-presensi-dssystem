@@ -436,6 +436,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
                     List<Karyawan> karyawans = DaoFactory.getRekapPresensiDao().getAllKaryawanByDepartmentCode(kode_department);
                     while (!karyawans.isEmpty()) {
                         Karyawan karyawan = karyawans.remove(0);
+//                        System.out.println("NIP "+karyawan.getNip());
                         DaoFactory.getRekapPresensiDao().callInsertAlfa(maxDayOfMonth, karyawan.getNip());
                     }
                     List<DetailPresensi> detailPresensis = DaoFactory.getRekapPresensiDao().callGetPresensi(maxDayOfMonth, kode_department);

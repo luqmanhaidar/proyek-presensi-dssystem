@@ -475,7 +475,7 @@ and temptransaksidepartment.bulan like $P{bulan};]]></queryString>
 					<reportElement
 						x="393"
 						y="44"
-						width="124"
+						width="140"
 						height="19"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>

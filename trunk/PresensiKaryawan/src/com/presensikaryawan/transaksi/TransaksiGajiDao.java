@@ -18,5 +18,8 @@ public interface TransaksiGajiDao {
     List<Department> getAllDepartments() throws SQLException;
     Department getNamaDepartmentByCode(String code) throws SQLException;
     void callInsertAlfa(String maxTanggal, String nip) throws SQLException;
-    List<RekapPresensi> callGetPresensi(String bulan, String tahun, String kode_department) throws SQLException;
+    List<RekapPresensi> callGetPresensi(String max, String kode_department) throws SQLException;
+
+    List<RekapPresensi> callGetPresensi(String bln, String thn, String kode_department) throws SQLException;
+
 }

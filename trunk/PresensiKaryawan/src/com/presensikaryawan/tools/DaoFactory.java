@@ -89,7 +89,7 @@ public class DaoFactory {
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
             try {
-                FileInputStream in = new FileInputStream("./ipAddressDatabasePresensi.xml");
+                FileInputStream in = new FileInputStream("./ipAddressDatabase.xml");
                 prop = new Properties();
                 prop.loadFromXML(in);
 
@@ -102,7 +102,7 @@ public class DaoFactory {
 
             String url = "jdbc:mysql://" + alamatIp + "/" + namaDB;
             String user = "presensi";
-            String password = "adminpresensi";
+            String password = "presensi";
             connection = DriverManager.getConnection(url, user, password);
         }
         return connection;
@@ -254,4 +254,11 @@ public class DaoFactory {
         }
         return detailPresensiReportDao;
     }
+    
+//    public static Golo getGolonganDao() throws SQLException {
+//        if (golonganDao == null) {
+//            golonganDao = new GolonganDaoImplemen(getConnection());
+//        }
+//        return golonganDao;
+//    }
 }

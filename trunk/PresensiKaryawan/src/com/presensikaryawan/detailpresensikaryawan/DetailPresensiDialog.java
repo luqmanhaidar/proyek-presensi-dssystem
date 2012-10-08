@@ -4,7 +4,6 @@
  */
 package com.presensikaryawan.detailpresensikaryawan;
 
-
 import com.presensikaryawan.tools.DaoFactory;
 import com.presensikaryawan.transaksi.PresensiTableModel;
 import com.presensikaryawan.transaksi.RekapPresensi;
@@ -23,7 +22,7 @@ import javax.swing.JTable;
  * @author Tinus
  */
 public class DetailPresensiDialog extends javax.swing.JDialog {
-    
+
     String bln;
     String thn;
     JTable presensiTable;
@@ -38,12 +37,12 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
         initComponents();
         nilaiNamaLabel.setText(nama);
         nilaiNIPLabel.setText(nip);
-        this.presensiTable=presensiTable;
-        bln=bulan;
-        thn=tahun;
-        this.kode_department=kode_department;
+        this.presensiTable = presensiTable;
+        bln = bulan;
+        thn = tahun;
+        this.kode_department = kode_department;
         List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip, bulan, tahun);
-        DetailPresensiTableModel model=new DetailPresensiTableModel(detailPresensis);
+        DetailPresensiTableModel model = new DetailPresensiTableModel(detailPresensis);
         detailPresensiTableModel.setModel(model);
 
     }
@@ -220,10 +219,10 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-if (!nilaiTanggalLabel.getText().matches("-") && keteranganTextField.getText() != null) {
+        if (!nilaiTanggalLabel.getText().matches("-") && keteranganTextField.getText() != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String tanggal = nilaiTanggalLabel.getText();
-            tanggal = tanggal.substring(6, 10)+"-"+tanggal.substring(3, 5)+"-"+tanggal.substring(0, 2);
+            tanggal = tanggal.substring(6, 10) + "-" + tanggal.substring(3, 5) + "-" + tanggal.substring(0, 2);
             System.out.println(tanggal);
 //            Date date = null;
 //            try {
@@ -236,14 +235,29 @@ if (!nilaiTanggalLabel.getText().matches("-") && keteranganTextField.getText() !
 //            System.out.println(tanggal);
             String nip = nilaiNIPLabel.getText();
             try {
-//                System.out.println("masuk");
+                System.out.println("masuk");
                 DaoFactory.getPresensiTidakMasukDao().updateDetailPresensi(tanggal, nip, keteranganTextField.getText());
                 List<DetailPresensi> detailPresensis = DaoFactory.getPresensiTidakMasukDao().getDetailPresensiByNIP(nip, bln, thn);
-                DetailPresensiTableModel model=new DetailPresensiTableModel(detailPresensis);
+                DetailPresensiTableModel model = new DetailPresensiTableModel(detailPresensis);
                 detailPresensiTableModel.setModel(model);
+            } catch (SQLException ex) {
+                ex.getMessage();
+            }
+            try {
+                System.out.println("masuk2");
                 List<RekapPresensi> detailPresensis2 = DaoFactory.getTranskasiGajiDao().callGetPresensi(bln, thn, kode_department);
-                 PresensiTableModel model2=new PresensiTableModel(detailPresensis2);
-                 presensiTable.setModel(model2);
+                PresensiTableModel model2 = new PresensiTableModel(detailPresensis2);
+                presensiTable.setModel(model2);
+                
+                    presensiTable.setVisible(true);
+            } catch (SQLException ex) {
+                ex.getMessage();
+            }
+            try {
+                System.out.println("masuk3");
+                String bulan = tanggal.substring(0, 7) + "%";
+                System.out.println(bulan + " " + nip);
+                DaoFactory.getPresensiTidakMasukDao().updateGaji(bulan, nip);
             } catch (SQLException ex) {
                 ex.getMessage();
             }
@@ -279,7 +293,6 @@ if (!nilaiTanggalLabel.getText().matches("-") && keteranganTextField.getText() !
         }
         nilaiTanggalLabel.setText(sdf.format(tanggal));
     }//GEN-LAST:event_detailPresensiTableModelMouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalButton;
     private javax.swing.JTable detailPresensiTableModel;

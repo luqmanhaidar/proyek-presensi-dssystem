@@ -14,4 +14,5 @@ import java.util.List;
 public interface DetailPresensiDao {
     void updateDetailPresensi(String tanggal, String nip, String keterangan) throws SQLException;
     List<DetailPresensi> getDetailPresensiByNIP(String nip, String bulan, String keterangan) throws SQLException;
+    void updateGaji(String maxday, String nip) throws SQLException;
 }
