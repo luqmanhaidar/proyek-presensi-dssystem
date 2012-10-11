@@ -26,6 +26,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
     private double pokok, uangMakan, uangHadir, lain, potonganTelat, potonganLain, total, uanglembur;
     private final String SQL_GETALLGAJI = "call getGaji(?,?,?)";
     private final String SQL_GETALLGAJI2 = "call getGaji2(?,?)";
+    private final String SQL_UPDATETEMP = "call updateTempTransaksi(?,?)";
     private final String SQL_INSERTTEMP = "call inserttemptransaksi(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String SQL_SELECTALL = "select * from temptransaksidepartment where department = ? and bulan like ?";
     private final String SQL_UPDATEPOTONGAN = "call updatePotongan(?,?,?,?)";
@@ -151,7 +152,7 @@ public class TransaksiDepartmentDaoImplemen implements TransaksiDepartmentDao {
                 potonganTelat = result.getDouble("potongan_telat") * t;
 //                potonganLain=result.getDouble("gaji_pokok");
                 total = pokok + uangMakan + uangHadir + lain + uanglembur - potonganTelat - potonganLain;
-
+                System.out.println("T = "+t);
                 statement = connection.prepareStatement(SQL_INSERTTEMP);
                 statement.setString(1, nip);
                 statement.setString(2, nama);

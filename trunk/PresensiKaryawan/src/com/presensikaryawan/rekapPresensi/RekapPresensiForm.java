@@ -407,7 +407,7 @@ public class RekapPresensiForm extends javax.swing.JFrame {
     private void prosesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prosesButtonActionPerformed
         // TODO add your handling code here:
         Date date = new Date();
-        if (monthChooser.getMonth() >= date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
+        if (monthChooser.getMonth() > date.getMonth() && yearChooser.getYear() >= (date.getYear() + 1900)) {
             JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
         } else if ((departmentCombo.getSelectedItem() == null
                 || String.valueOf(departmentCombo.getSelectedItem()).matches(""))) {
@@ -422,15 +422,26 @@ public class RekapPresensiForm extends javax.swing.JFrame {
             if (dept == null) {
                 JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di field tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                GregorianCalendar gc = new GregorianCalendar();
-                gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
-                String year = String.valueOf(yearChooser.getYear());
-                String month = String.valueOf(monthChooser.getMonth() + 1);
-                String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-                if(month.length()<2)
-                    month="0"+month;
-                String maxDayOfMonth = year + "-" + month + "-" + day;
-                System.out.println(maxDayOfMonth+" max day");
+                String maxDayOfMonth;
+                if(monthChooser.getMonth() == date.getMonth() && yearChooser.getYear() == (date.getYear() + 1900)){
+                    String year = String.valueOf(yearChooser.getYear());
+                    String month = String.valueOf(monthChooser.getMonth() + 1);
+                    String day = String.valueOf(date.getDate());
+                    if(month.length()<2)
+                        month="0"+month;
+                    maxDayOfMonth = year + "-" + month + "-" + day;
+                } else {
+                    GregorianCalendar gc = new GregorianCalendar();
+                    gc.set(yearChooser.getYear(), monthChooser.getMonth(), date.getDate());
+                    String year = String.valueOf(yearChooser.getYear());
+                    String month = String.valueOf(monthChooser.getMonth() + 1);
+                    String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+                    if(month.length()<2)
+                        month="0"+month;
+                    maxDayOfMonth = year + "-" + month + "-" + day;
+                    System.out.println(maxDayOfMonth+" max day"); 
+                }
+                
                 String kode_department = String.valueOf(departmentCombo.getSelectedItem());
                 try {
                     List<Karyawan> karyawans = DaoFactory.getRekapPresensiDao().getAllKaryawanByDepartmentCode(kode_department);
