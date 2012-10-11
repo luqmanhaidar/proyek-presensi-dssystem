@@ -13,6 +13,8 @@ import com.presensikaryawan.detailPresensiKaryawanReport.DetailPresensiReportDao
 import com.presensikaryawan.detailPresensiKaryawanReport.DetailPresensiReportDaoImplemen;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDao;
 import com.presensikaryawan.detailpresensikaryawan.DetailPresensiDaoImplemen;
+import com.presensikaryawan.eventlogReport.EventlogDaoImplemen;
+import com.presensikaryawan.eventlogReport.EventlogReportDao;
 import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportDao;
 import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportDaoImplemen;
 import com.presensikaryawan.golongan.GolonganDao;
@@ -85,6 +87,7 @@ public class DaoFactory {
     private static PayrollBankDao payrollBankDao;
     private static DetailPresensiReportDao detailPresensiReportDao;
     private static TransaksiGajiDepartmentReportDao transaksiGajiDepartmentReportDao;
+    private static EventlogReportDao eventlogReportDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -101,8 +104,8 @@ public class DaoFactory {
             String namaDB = prop.getProperty("NAMADB");
 
             String url = "jdbc:mysql://" + alamatIp + "/" + namaDB;
-            String user = "presensi";
-            String password = "presensi";
+            String user = "root";
+            String password = "root";
             connection = DriverManager.getConnection(url, user, password);
         }
         return connection;
@@ -255,10 +258,10 @@ public class DaoFactory {
         return detailPresensiReportDao;
     }
     
-//    public static Golo getGolonganDao() throws SQLException {
-//        if (golonganDao == null) {
-//            golonganDao = new GolonganDaoImplemen(getConnection());
-//        }
-//        return golonganDao;
-//    }
+    public static EventlogReportDao getEventlogReportDao() throws SQLException {
+        if (eventlogReportDao == null) {
+            eventlogReportDao = new EventlogDaoImplemen(getConnection());
+        }
+        return eventlogReportDao;
+    }
 }
