@@ -421,7 +421,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     int bulan = bulanMonthChooser.getMonth() + 1;
     int tahun = tahunYearChooser1.getYear();
     Date date = new Date();
-    if (bulanMonthChooser.getMonth() >= date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
+    if (bulanMonthChooser.getMonth() > date.getMonth() && tahunYearChooser1.getYear() >= (date.getYear() + 1900)) {
         JOptionPane.showMessageDialog(this, "Data yang diminta belum direkap ", "Error", JOptionPane.ERROR_MESSAGE);
     } else if ((departmentCombo.getSelectedItem() == null
             || String.valueOf(departmentCombo.getSelectedItem()).matches(""))) {
@@ -436,16 +436,27 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         if (dept == null) {
             JOptionPane.showMessageDialog(this, "Department dengan kode seperti \n di field tidak ada", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
-            String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
             String maxDayOfMonth;
-            if (bulan < 10) {
-                maxDayOfMonth = tahun + "-0" + bulan + "-" + day;
-            } else {
-                maxDayOfMonth = tahun + "-" + bulan + "-" + day;
-            }
-            System.out.println(maxDayOfMonth);
+                if(bulanMonthChooser.getMonth() == date.getMonth() && tahunYearChooser1.getYear() == (date.getYear() + 1900)){
+                    String year = String.valueOf(tahunYearChooser1.getYear());
+                    String month = String.valueOf(bulanMonthChooser.getMonth() + 1);
+                    String day = String.valueOf(date.getDate());
+                    if(month.length()<2)
+                        month="0"+month;
+                    maxDayOfMonth = year + "-" + month + "-" + day;
+                } else {
+                    GregorianCalendar gc = new GregorianCalendar();
+                    gc.set(tahunYearChooser1.getYear(), bulanMonthChooser.getMonth(), date.getDate());
+                    String year = String.valueOf(tahunYearChooser1.getYear());
+                    String month = String.valueOf(bulanMonthChooser.getMonth() + 1);
+                    String day = String.valueOf(gc.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+                    if(month.length()<2)
+                        month="0"+month;
+                    maxDayOfMonth = year + "-" + month + "-" + day;
+                    System.out.println(maxDayOfMonth+" max day"); 
+                }
             try {
+                DaoFactory.getRekapPresensiDao().callGetPresensi(maxDayOfMonth, department);
                 TransaksiDepartmentDao dao = DaoFactory.getTransaksiDepartmentDao();
                 List<TransaksiDepartment> transaksiDepartments = dao.getAllTransaksiDepartment(department, maxDayOfMonth);
 
