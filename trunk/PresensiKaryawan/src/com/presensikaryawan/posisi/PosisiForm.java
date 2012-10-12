@@ -94,7 +94,7 @@ public class PosisiForm extends javax.swing.JFrame {
         posisiTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Data Kategori");
+        setTitle("Master Posisi");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));

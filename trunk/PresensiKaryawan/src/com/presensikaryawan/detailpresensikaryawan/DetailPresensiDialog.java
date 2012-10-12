@@ -72,23 +72,24 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
         kembaliButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Detail Presensi");
 
-        namaLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        namaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaLabel.setText("Nama");
 
-        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nipLabel.setText("NIP");
 
-        nilaiNamaLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiNamaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiNamaLabel.setText("nilai Nama");
 
-        nilaiNIPLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiNIPLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiNIPLabel.setText("nilai NIP");
 
-        tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         tanggalLabel.setText("Tanggal");
 
-        keteranganLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        keteranganLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         keteranganLabel.setText("Keterangan");
 
         detailPresensiTableModel.setModel(new javax.swing.table.DefaultTableModel(
@@ -133,7 +134,7 @@ public class DetailPresensiDialog extends javax.swing.JDialog {
             }
         });
 
-        nilaiTanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiTanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiTanggalLabel.setText("-");
 
         kembaliButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Left.gif"))); // NOI18N

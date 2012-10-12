@@ -115,7 +115,7 @@ public class GolonganForm extends javax.swing.JFrame {
         golonganTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Data Kategori");
+        setTitle("Master Golongan");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
@@ -334,7 +334,7 @@ public class GolonganForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(inputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, inputPanelLayout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
+                        .add(0, 654, Short.MAX_VALUE)
                         .add(simpanButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(hapusButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)

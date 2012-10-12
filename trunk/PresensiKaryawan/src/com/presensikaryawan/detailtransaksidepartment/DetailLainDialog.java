@@ -81,23 +81,24 @@ public class DetailLainDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Detail Potongan dan Lain-lain");
 
-        namaLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        namaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         namaLabel.setText("Nama");
 
-        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nipLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nipLabel.setText("NIP");
 
-        nilaiNamaLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiNamaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiNamaLabel.setText("nilai Nama");
 
-        nilaiNIPLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiNIPLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiNIPLabel.setText("nilai NIP");
 
-        tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        tanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         tanggalLabel.setText("Bulan");
 
-        Potongan.setFont(new java.awt.Font("Dialog", 0, 12));
+        Potongan.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Potongan.setText("Potongan Lain");
 
         potonganTextField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,7 +133,7 @@ public class DetailLainDialog extends javax.swing.JDialog {
             }
         });
 
-        nilaiTanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+        nilaiTanggalLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nilaiTanggalLabel.setText("-");
 
         kembaliButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/24/Left.gif"))); // NOI18N
@@ -143,7 +144,7 @@ public class DetailLainDialog extends javax.swing.JDialog {
             }
         });
 
-        Potongan1.setFont(new java.awt.Font("Dialog", 0, 12));
+        Potongan1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Potongan1.setText("Lain - lain / Prestasi");
 
         prestasiTextField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,7 +195,6 @@ public class DetailLainDialog extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUtamaLayout.createSequentialGroup()
                                 .addComponent(Potongan, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(prestasiTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(potonganTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))

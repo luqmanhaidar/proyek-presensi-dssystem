@@ -98,7 +98,7 @@ public class OutletForm extends javax.swing.JFrame {
         outletTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Data Outlet");
+        setTitle("Master Outlet");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));

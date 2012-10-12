@@ -148,7 +148,7 @@ public class GroupShiftForm extends javax.swing.JFrame {
         groupShiftTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Data Kategori");
+        setTitle("Master Group Shift");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 

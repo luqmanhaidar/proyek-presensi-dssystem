@@ -116,7 +116,7 @@ public class DepartmentForm extends javax.swing.JFrame {
         departmentTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Data Kategori");
+        setTitle("Master Department");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
