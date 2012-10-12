@@ -93,7 +93,7 @@ public class StatusSettingForm extends javax.swing.JFrame {
         statusTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Data Kategori");
+        setTitle("Master Status Setting");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));

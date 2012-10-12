@@ -172,7 +172,7 @@ public class KaryawanForm extends javax.swing.JFrame {
         panelStatus1 = new com.sistem.panelstatus.PanelStatus();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Data Kategori");
+        setTitle("Master Karyawan");
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 255, 153));
 

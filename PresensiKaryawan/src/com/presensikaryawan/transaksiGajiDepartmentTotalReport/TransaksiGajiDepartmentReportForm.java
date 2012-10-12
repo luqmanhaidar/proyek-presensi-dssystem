@@ -129,7 +129,7 @@ public class TransaksiGajiDepartmentReportForm extends javax.swing.JFrame {
         panelStatus1 = new com.sistem.panelstatus.PanelStatus();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Data Kategori");
+        setTitle("Transaksi Gaji Department Report");
 
         desktopPaneTransaksiDepartment.setBackground(new java.awt.Color(153, 255, 153));
 

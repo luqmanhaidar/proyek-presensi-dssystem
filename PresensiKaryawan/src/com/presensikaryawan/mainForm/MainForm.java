@@ -6,6 +6,7 @@ package com.presensikaryawan.mainForm;
 
 import com.presensikaryawan.departmentSetting.DepartmentForm;
 import com.presensikaryawan.detailPresensiKaryawanReport.DetailPresensiReportForm;
+import com.presensikaryawan.eventlogReport.EventlogReportForm;
 import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportForm;
 import com.presensikaryawan.golongan.GolonganForm;
 import com.presensikaryawan.groupShift.GroupShiftForm;
@@ -50,6 +51,7 @@ public class MainForm extends javax.swing.JFrame {
     LiburNasionalForm liburNasionalForm;
     LiburPerusahaanForm liburPerusahaanForm;
     DetailPresensiReportForm detailPresensiReportForm;
+    EventlogReportForm eventlogReportForm;
 
     /**
      * Creates new form MainForm
@@ -76,6 +78,7 @@ public class MainForm extends javax.swing.JFrame {
             liburNasionalForm = new LiburNasionalForm(this, menuItemMasterLiburNasional);
             liburPerusahaanForm = new LiburPerusahaanForm(this, menuItemMasterLiburPerusahaan);
             detailPresensiReportForm = new DetailPresensiReportForm(this, detailPrensensiReportMenuItem);
+            eventlogReportForm=new EventlogReportForm(this, reportEventlogMenuItem);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,6 +109,7 @@ public class MainForm extends javax.swing.JFrame {
         menuItemPayrollBank = new javax.swing.JMenuItem();
         menuItemHistoryGajiReport = new javax.swing.JMenuItem();
         detailPrensensiReportMenuItem = new javax.swing.JMenuItem();
+        reportEventlogMenuItem = new javax.swing.JMenuItem();
         masterMenu = new javax.swing.JMenu();
         menuItemMasterDepartment = new javax.swing.JMenuItem();
         menuItemMasterGolongan = new javax.swing.JMenuItem();
@@ -125,6 +129,7 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Presense App");
 
         picLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dssbackground1024.jpg"))); // NOI18N
 
@@ -221,6 +226,15 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         reportMenu.add(detailPrensensiReportMenuItem);
+
+        reportEventlogMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK));
+        reportEventlogMenuItem.setText("Report Eventlog");
+        reportEventlogMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportEventlogMenuItemActionPerformed(evt);
+            }
+        });
+        reportMenu.add(reportEventlogMenuItem);
 
         menuBar.add(reportMenu);
 
@@ -590,6 +604,19 @@ public class MainForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_detailPrensensiReportMenuItemActionPerformed
 
+    private void reportEventlogMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportEventlogMenuItemActionPerformed
+        // TODO add your handling code here:
+        if (!eventlogReportForm.isVisible()) {
+            try {
+                eventlogReportForm = new EventlogReportForm(this, reportEventlogMenuItem);
+            } catch (SQLException ex) {
+                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            eventlogReportForm.setVisible(true);
+            reportEventlogMenuItem.setEnabled(false);
+        }
+    }//GEN-LAST:event_reportEventlogMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -652,6 +679,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemTransaksiGaji;
     private javax.swing.JMenuItem menuItemTransaksiPresensi;
     private javax.swing.JLabel picLabel;
+    private javax.swing.JMenuItem reportEventlogMenuItem;
     private javax.swing.JMenu reportMenu;
     private javax.swing.JMenu transaksiMenu;
     // End of variables declaration//GEN-END:variables
