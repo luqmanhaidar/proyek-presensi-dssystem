@@ -471,6 +471,46 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             } else {
                 try {
                     // TODO add your handling code here:
+                    String bulanS = null;
+                    switch (bulanMonthChooser.getMonth()) {
+                        case 0:
+                            bulanS = "JANUARI";
+                            break;
+                        case 1:
+                            bulanS = "FEBRUARI";
+                            break;
+                        case 2:
+                            bulanS = "MARET";
+                            break;
+                        case 3:
+                            bulanS = "APRIL";
+                            break;
+                        case 4:
+                            bulanS = "MEI";
+                            break;
+                        case 5:
+                            bulanS = "JUNI";
+                            break;
+                        case 6:
+                            bulanS = "JULI";
+                            break;
+                        case 7:
+                            bulanS = "AGUSTUS";
+                            break;
+                        case 8:
+                            bulanS = "SEPTEMBER";
+                            break;
+                        case 9:
+                            bulanS = "OKTOBER";
+                            break;
+                        case 10:
+                            bulanS = "NOVEMBER";
+                            break;
+                        case 11:
+                            bulanS = "DESEMBER";
+                            break;
+                    }
+                    
                     String bulanTahun;
                     int bulan = bulanMonthChooser.getMonth() + 1;
                     int tahun = tahunYearChooser1.getYear();
@@ -481,7 +521,8 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }
                     String reportSource = "./report/SlipGajiKaryawan.jasper";
                     Map<String, Object> params = new HashMap<String, Object>();
-                    params.put("bulan", bulanTahun);
+                    params.put("bulantahun", bulanTahun);
+                    params.put("bulanString", bulanS);
                     params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
                     params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, DaoFactory.getConnection());
