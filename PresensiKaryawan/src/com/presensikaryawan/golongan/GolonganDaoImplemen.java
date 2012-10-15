@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class GolonganDaoImplemen implements GolonganDao {
 
-    private final String SQL_INSERT = "insert into golongan(kode_golongan,nama_golongan, gaji_pokok, uang_makan, uang_lembur, uang_hadir, potongan_telat) values (?,?,?,?,?,?,?)";
-    private final String SQL_UPDATE = "update golongan set nama_golongan = ?, gaji_pokok = ?, uang_makan = ?, uang_lembur = ?, uang_hadir = ?, potongan_telat = ? where kode_golongan = ?";
+    private final String SQL_INSERT = "insert into golongan(kode_golongan,nama_golongan, gaji_pokok, uang_makan, uang_lembur, uang_hadir, potongan_telat, tunjangan_jabatan, tunjangan_kesehatan, tunjangan_transport, tunjangan_prestasi, bonus) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String SQL_UPDATE = "update golongan set nama_golongan = ?, gaji_pokok = ?, uang_makan = ?, uang_lembur = ?, uang_hadir = ?, potongan_telat = ?, tunjangan_jabatan = ?, tunjangan_kesehatan = ?, tunjangan_transport = ?, tunjangan_prestasi = ?, bonus = ? where kode_golongan = ?";
     private final String SQL_DELETE = "delete from golongan where kode_golongan like ?";
     private final String SQL_GETBYKODE = "select * from golongan where kode_golongan like ?";
     private final String SQL_GETBYNAMA = "select * from golongan where nama_golongan like ?";
@@ -45,6 +45,11 @@ public class GolonganDaoImplemen implements GolonganDao {
             statement.setDouble(5, golongan.getUangLembur());
             statement.setDouble(6, golongan.getUangHadir());
             statement.setDouble(7, golongan.getPotonganTelat());
+            statement.setDouble(8, golongan.getTunjanganJabatan());
+            statement.setDouble(9, golongan.getTunjanganKesehatan());
+            statement.setDouble(10, golongan.getTunjanganTransport());
+            statement.setDouble(11, golongan.getTunjanganPrestasi());
+            statement.setDouble(12, golongan.getBonus());
             statement.executeUpdate();
 
             connection.commit();
@@ -79,7 +84,12 @@ public class GolonganDaoImplemen implements GolonganDao {
             statement.setDouble(4, golongan.getUangLembur());
             statement.setDouble(5, golongan.getUangHadir());
             statement.setDouble(6, golongan.getPotonganTelat());
-            statement.setString(7, golongan.getKodeGolongan());
+            statement.setDouble(7, golongan.getTunjanganJabatan());
+            statement.setDouble(8, golongan.getTunjanganKesehatan());
+            statement.setDouble(9, golongan.getTunjanganTransport());
+            statement.setDouble(10, golongan.getTunjanganPrestasi());
+            statement.setDouble(11, golongan.getBonus());
+            statement.setString(12, golongan.getKodeGolongan());
             statement.executeUpdate();
 
             connection.commit();
@@ -144,6 +154,11 @@ public class GolonganDaoImplemen implements GolonganDao {
                 golongan.setUangLembur(result.getDouble("uang_lembur"));
                 golongan.setUangHadir(result.getDouble("uang_hadir"));
                 golongan.setPotonganTelat(result.getDouble("potongan_telat"));
+                golongan.setTunjanganJabatan(result.getDouble("tunjangan_jabatan"));
+                golongan.setTunjanganKesehatan(result.getDouble("tunjangan_kesehatan"));
+                golongan.setTunjanganTransport(result.getDouble("tunjangan_transport"));
+                golongan.setTunjanganPrestasi(result.getDouble("tunjangan_prestasi"));
+                golongan.setBonus(result.getDouble("bonus"));
             }
 
             connection.commit();
@@ -187,6 +202,11 @@ public class GolonganDaoImplemen implements GolonganDao {
                 golongan.setUangLembur(result.getDouble("uang_lembur"));
                 golongan.setUangHadir(result.getDouble("uang_hadir"));
                 golongan.setPotonganTelat(result.getDouble("potongan_telat"));
+                golongan.setTunjanganJabatan(result.getDouble("tunjangan_jabatan"));
+                golongan.setTunjanganKesehatan(result.getDouble("tunjangan_kesehatan"));
+                golongan.setTunjanganTransport(result.getDouble("tunjangan_transport"));
+                golongan.setTunjanganPrestasi(result.getDouble("tunjangan_prestasi"));
+                golongan.setBonus(result.getDouble("bonus"));
             }
 
             connection.commit();
@@ -229,6 +249,11 @@ public class GolonganDaoImplemen implements GolonganDao {
                 golongan.setUangLembur(result.getDouble("uang_lembur"));
                 golongan.setUangHadir(result.getDouble("uang_hadir"));
                 golongan.setPotonganTelat(result.getDouble("potongan_telat"));
+                golongan.setTunjanganJabatan(result.getDouble("tunjangan_jabatan"));
+                golongan.setTunjanganKesehatan(result.getDouble("tunjangan_kesehatan"));
+                golongan.setTunjanganTransport(result.getDouble("tunjangan_transport"));
+                golongan.setTunjanganPrestasi(result.getDouble("tunjangan_prestasi"));
+                golongan.setBonus(result.getDouble("bonus"));
                 golongans.add(golongan);
             }
 

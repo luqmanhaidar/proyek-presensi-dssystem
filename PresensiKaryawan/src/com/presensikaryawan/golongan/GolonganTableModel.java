@@ -21,13 +21,13 @@ public class GolonganTableModel extends AbstractTableModel {
         this.golongans = golongans;
     }
 
-    public void deleteGolongan(int row){
+    public void deleteGolongan(int row) {
         golongans.remove(row);
         fireTableRowsDeleted(row, row);
     }
 
-    public void updateGolongan(int row, Golongan golongan){
-        golongans.set(row,golongan);
+    public void updateGolongan(int row, Golongan golongan) {
+        golongans.set(row, golongan);
         fireTableRowsUpdated(row, row);
     }
 
@@ -35,6 +35,7 @@ public class GolonganTableModel extends AbstractTableModel {
         golongans.add(golongan);
         fireTableRowsInserted(getRowCount() - 1, getColumnCount() - 1);
     }
+
     @Override
     public int getRowCount() {
         return golongans.size();
@@ -42,7 +43,7 @@ public class GolonganTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 12;
     }
 
     @Override
@@ -63,6 +64,16 @@ public class GolonganTableModel extends AbstractTableModel {
                 return ChangeFormatDoubleToString.getToString(g.getUangHadir());
             case 6:
                 return ChangeFormatDoubleToString.getToString(g.getPotonganTelat());
+            case 7:
+                return ChangeFormatDoubleToString.getToString(g.getTunjanganJabatan());
+            case 8:
+                return ChangeFormatDoubleToString.getToString(g.getTunjanganKesehatan());
+            case 9:
+                return ChangeFormatDoubleToString.getToString(g.getTunjanganTransport());
+            case 10:
+                return ChangeFormatDoubleToString.getToString(g.getTunjanganPrestasi());
+            case 11:
+                return ChangeFormatDoubleToString.getToString(g.getBonus());
             default:
                 return "";
         }
@@ -85,6 +96,16 @@ public class GolonganTableModel extends AbstractTableModel {
                 return "UANG HADIR";
             case 6:
                 return "POTONGAN TELAT";
+            case 7:
+                return "TUNJANGAN JABATAN";
+            case 8:
+                return "TUNJANGAN KESEHATAN";
+            case 9:
+                return "TUNJANGAN TRANSPORT";
+            case 10:
+                return "TUNJANGAN PRESTASI";
+            case 11:
+                return "BONUS";
             default:
                 return "";
         }
