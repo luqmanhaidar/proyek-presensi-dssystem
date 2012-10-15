@@ -16,7 +16,7 @@ public class Golongan {
     private double uangMakan;
     private double uangLembur;
     private double uangHadir;
-    private double potonganTelat;
+    private double potonganTelat, tunjanganJabatan, tunjanganPrestasi, tunjanganKesehatan, tunjanganTransport, bonus;
 
     /**
      * @return the kodeGolongan
@@ -114,6 +114,76 @@ public class Golongan {
      */
     public void setPotonganTelat(double potonganTelat) {
         this.potonganTelat = potonganTelat;
+    }
+
+    /**
+     * @return the tunjanganJabatan
+     */
+    public double getTunjanganJabatan() {
+        return tunjanganJabatan;
+    }
+
+    /**
+     * @param tunjanganJabatan the tunjanganJabatan to set
+     */
+    public void setTunjanganJabatan(double tunjanganJabatan) {
+        this.tunjanganJabatan = tunjanganJabatan;
+    }
+
+    /**
+     * @return the tunjanganPrestasi
+     */
+    public double getTunjanganPrestasi() {
+        return tunjanganPrestasi;
+    }
+
+    /**
+     * @param tunjanganPrestasi the tunjanganPrestasi to set
+     */
+    public void setTunjanganPrestasi(double tunjanganPrestasi) {
+        this.tunjanganPrestasi = tunjanganPrestasi;
+    }
+
+    /**
+     * @return the tunjanganKesehatan
+     */
+    public double getTunjanganKesehatan() {
+        return tunjanganKesehatan;
+    }
+
+    /**
+     * @param tunjanganKesehatan the tunjanganKesehatan to set
+     */
+    public void setTunjanganKesehatan(double tunjanganKesehatan) {
+        this.tunjanganKesehatan = tunjanganKesehatan;
+    }
+
+    /**
+     * @return the tunjanganTransport
+     */
+    public double getTunjanganTransport() {
+        return tunjanganTransport;
+    }
+
+    /**
+     * @param tunjanganTransport the tunjanganTransport to set
+     */
+    public void setTunjanganTransport(double tunjanganTransport) {
+        this.tunjanganTransport = tunjanganTransport;
+    }
+
+    /**
+     * @return the bonus
+     */
+    public double getBonus() {
+        return bonus;
+    }
+
+    /**
+     * @param bonus the bonus to set
+     */
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
     }
     
 }
