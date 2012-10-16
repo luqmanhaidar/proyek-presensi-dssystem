@@ -91,7 +91,7 @@ and t.bulan like $P{bulan};]]></queryString>
 					<reportElement
 						x="86"
 						y="38"
-						width="100"
+						width="157"
 						height="18"
 						key="textField"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
