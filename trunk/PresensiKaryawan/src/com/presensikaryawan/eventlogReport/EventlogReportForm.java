@@ -521,7 +521,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }
                     String reportSource = "./report/eventreport.jasper";
                     Map<String, Object> params = new HashMap<String, Object>();
-                    params.put("bulantahun", bulanTahun);
+                    params.put("bulantahun", bulanTahun+"%");
                     params.put("bulanString", bulanS);
                     params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
                     params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
