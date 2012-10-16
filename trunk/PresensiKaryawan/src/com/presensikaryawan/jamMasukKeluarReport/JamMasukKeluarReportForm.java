@@ -514,9 +514,9 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     } else {
                         bulanTahun = tahun + "-" + bulan;
                     }
-                    String reportSource = "./report/SlipGajiKaryawan.jasper";
+                    String reportSource = "./report/keluar_masuk.jasper";
                     Map<String, Object> params = new HashMap<String, Object>();
-                    params.put("bulantahun", bulanTahun);
+                    params.put("bulan", bulanTahun);
                     params.put("bulanString", bulanS);
                     params.put("nip1", String.valueOf(nipCombo.getSelectedItem()));
                     params.put("nip2", String.valueOf(nipCombo2.getSelectedItem()));
