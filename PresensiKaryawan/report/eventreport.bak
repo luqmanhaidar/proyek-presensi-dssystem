@@ -17,7 +17,7 @@
 		 whenNoDataType="NoPages"
 		 isTitleNewPage="false"
 		 isSummaryNewPage="false">
-	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.scriptlethandling" value="0" />
 	<property name="ireport.encoding" value="UTF-8" />
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
@@ -50,7 +50,7 @@ and karyawan.nip = eventlog.userid]]></queryString>
 
 
 		<group  name="karyawan" isStartNewPage="true" >
-			<groupExpression><![CDATA[]]></groupExpression>
+			<groupExpression><![CDATA[$F{nama}]]></groupExpression>
 			<groupHeader>
 			<band height="0"  isSplitAllowed="true" >
 			</band>
