@@ -519,7 +519,7 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     } else {
                         bulanTahun = tahun + "-" + bulan;
                     }
-                    String reportSource = "./report/SlipGajiKaryawan.jasper";
+                    String reportSource = "./report/eventreport.jasper";
                     Map<String, Object> params = new HashMap<String, Object>();
                     params.put("bulantahun", bulanTahun);
                     params.put("bulanString", bulanS);
