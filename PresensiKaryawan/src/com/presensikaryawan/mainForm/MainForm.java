@@ -10,6 +10,7 @@ import com.presensikaryawan.eventlogReport.EventlogReportForm;
 import com.presensikaryawan.gajiPerKaryawanReport.GajiPerKaryawanReportForm;
 import com.presensikaryawan.golongan.GolonganForm;
 import com.presensikaryawan.groupShift.GroupShiftForm;
+import com.presensikaryawan.jamMasukKeluarReport.JamMasukKeluarReportForm;
 import com.presensikaryawan.karyawan.KaryawanForm;
 import com.presensikaryawan.liburNasional.LiburNasionalForm;
 import com.presensikaryawan.liburPerusahaan.LiburPerusahaanForm;
@@ -52,6 +53,7 @@ public class MainForm extends javax.swing.JFrame {
     LiburPerusahaanForm liburPerusahaanForm;
     DetailPresensiReportForm detailPresensiReportForm;
     EventlogReportForm eventlogReportForm;
+    JamMasukKeluarReportForm jamMasukKeluarReportForm;
 
     /**
      * Creates new form MainForm
@@ -79,6 +81,7 @@ public class MainForm extends javax.swing.JFrame {
             liburPerusahaanForm = new LiburPerusahaanForm(this, menuItemMasterLiburPerusahaan);
             detailPresensiReportForm = new DetailPresensiReportForm(this, detailPrensensiReportMenuItem);
             eventlogReportForm=new EventlogReportForm(this, reportEventlogMenuItem);
+            jamMasukKeluarReportForm=new JamMasukKeluarReportForm(this, jamMasukKeluarReportMenuItem);
         } catch (SQLException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,6 +113,7 @@ public class MainForm extends javax.swing.JFrame {
         menuItemHistoryGajiReport = new javax.swing.JMenuItem();
         detailPrensensiReportMenuItem = new javax.swing.JMenuItem();
         reportEventlogMenuItem = new javax.swing.JMenuItem();
+        jamMasukKeluarReportMenuItem = new javax.swing.JMenuItem();
         masterMenu = new javax.swing.JMenu();
         menuItemMasterDepartment = new javax.swing.JMenuItem();
         menuItemMasterGolongan = new javax.swing.JMenuItem();
@@ -235,6 +239,15 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         reportMenu.add(reportEventlogMenuItem);
+
+        jamMasukKeluarReportMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
+        jamMasukKeluarReportMenuItem.setText("Report Jam Masuk dan Keluar");
+        jamMasukKeluarReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jamMasukKeluarReportMenuItemActionPerformed(evt);
+            }
+        });
+        reportMenu.add(jamMasukKeluarReportMenuItem);
 
         menuBar.add(reportMenu);
 
@@ -617,6 +630,19 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_reportEventlogMenuItemActionPerformed
 
+    private void jamMasukKeluarReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jamMasukKeluarReportMenuItemActionPerformed
+        // TODO add your handling code here:
+        if (!jamMasukKeluarReportForm.isVisible()) {
+            try {
+                jamMasukKeluarReportForm = new JamMasukKeluarReportForm(this, jamMasukKeluarReportMenuItem);
+            } catch (SQLException ex) {
+                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jamMasukKeluarReportForm.setVisible(true);
+            jamMasukKeluarReportMenuItem.setEnabled(false);
+        }
+    }//GEN-LAST:event_jamMasukKeluarReportMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -659,6 +685,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem jamMasukKeluarReportMenuItem;
     private javax.swing.JMenu masterMenu;
     private javax.swing.JMenu menuBar;
     private javax.swing.JMenuItem menuItemHistoryGajiReport;
