@@ -6,6 +6,7 @@ package com.presensikaryawan.jamMasukKeluarReport;
 
 import com.presensikaryawan.karyawan.Karyawan;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -13,5 +14,5 @@ import java.sql.SQLException;
  */
 public interface JamMasukKeluarReportDao {
     Karyawan getKaryawanByNIP(String nip) throws SQLException;
-    
+    List<JamMasukKeluarReport> getJamMasukKeluarReport(String nip1, String nip2, String bulanTahun) throws SQLException;
 }

@@ -307,10 +307,10 @@ public class JamMasukKeluarReportForm extends javax.swing.JFrame {
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logosimtel.jpg"))); // NOI18N
 
         menuLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        menuLabel.setText("Menu Cetak Eventlog Per Karyawan");
+        menuLabel.setText("Menu Cetak Daftar Jam Masuk dan Keluar Per Karyawan");
 
         fungsiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        fungsiLabel.setText("Digunakan untuk mencetak eventlog per karyawan per bulan");
+        fungsiLabel.setText("Digunakan untuk mencetak daftar jam masuk dan keluar per karyawan per bulan");
 
         org.jdesktop.layout.GroupLayout headPanelLayout = new org.jdesktop.layout.GroupLayout(headPanel);
         headPanel.setLayout(headPanelLayout);
@@ -323,7 +323,7 @@ public class JamMasukKeluarReportForm extends javax.swing.JFrame {
                 .add(headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(menuLabel)
                     .add(fungsiLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 437, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(519, Short.MAX_VALUE))
+                .addContainerGap(467, Short.MAX_VALUE))
         );
         headPanelLayout.setVerticalGroup(
             headPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -423,8 +423,8 @@ private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 nip2 = nipTemp;
             }
             try {
-                List<EventlogReport> eventlogReports = DaoFactory.getEventlogReportDao().eventlogReports(nip1, nip2, bulanTahun);
-                EventlogReportTableModel model = new EventlogReportTableModel(eventlogReports);
+                List<JamMasukKeluarReport> jamMasukKeluarReports = DaoFactory.getJamMasukKeluarReportDao().getJamMasukKeluarReport(nip1, nip2, bulanTahun);
+                JamMasukKeluarTableModel model = new JamMasukKeluarTableModel(jamMasukKeluarReports);
               
                 eventlogTable.setModel(model);
             } catch (SQLException ex) {

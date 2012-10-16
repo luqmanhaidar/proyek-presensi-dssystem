@@ -21,6 +21,9 @@ import com.presensikaryawan.golongan.GolonganDao;
 import com.presensikaryawan.golongan.GolonganDaoImplemen;
 import com.presensikaryawan.groupShift.GroupShiftDao;
 import com.presensikaryawan.groupShift.GroupShiftDaoImplemen;
+import com.presensikaryawan.jamMasukKeluarReport.JamMasukKeluarReport;
+import com.presensikaryawan.jamMasukKeluarReport.JamMasukKeluarReportDao;
+import com.presensikaryawan.jamMasukKeluarReport.JamMasukKeluarReportDaoImplemen;
 import com.presensikaryawan.karyawan.KaryawanDao;
 import com.presensikaryawan.karyawan.KaryawanDaoImplemen;
 import com.presensikaryawan.liburNasional.LiburNasionalDao;
@@ -88,6 +91,7 @@ public class DaoFactory {
     private static DetailPresensiReportDao detailPresensiReportDao;
     private static TransaksiGajiDepartmentReportDao transaksiGajiDepartmentReportDao;
     private static EventlogReportDao eventlogReportDao;
+    private static JamMasukKeluarReportDao jamMasukKeluarReportDao;
 
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
@@ -263,5 +267,12 @@ public class DaoFactory {
             eventlogReportDao = new EventlogDaoImplemen(getConnection());
         }
         return eventlogReportDao;
+    }
+    
+    public static JamMasukKeluarReportDao getJamMasukKeluarReportDao() throws SQLException {
+        if (jamMasukKeluarReportDao == null) {
+            jamMasukKeluarReportDao = new JamMasukKeluarReportDaoImplemen(getConnection());
+        }
+        return jamMasukKeluarReportDao;
     }
 }

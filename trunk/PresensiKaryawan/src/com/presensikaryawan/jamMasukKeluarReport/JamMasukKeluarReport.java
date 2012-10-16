@@ -10,6 +10,7 @@ package com.presensikaryawan.jamMasukKeluarReport;
  */
 public class JamMasukKeluarReport {
     private String nip, nama, jamMasuk, jamKeluar, tanggal;
+    private int no;
 
     public JamMasukKeluarReport() {
     }
@@ -82,5 +83,19 @@ public class JamMasukKeluarReport {
      */
     public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
+    }
+
+    /**
+     * @return the no
+     */
+    public int getNo() {
+        return no;
+    }
+
+    /**
+     * @param no the no to set
+     */
+    public void setNo(int no) {
+        this.no = no;
     }
 }
