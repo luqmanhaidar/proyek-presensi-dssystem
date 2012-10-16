@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class JamMasukKeluarReportDaoImplemen implements JamMasukKeluarReportDao {
 
     private static final String SQL_GET_KARYAWANBYNIP = "SELECT * FROM karyawan WHERE nip = ?";
-    private static final String SQL_GET_JAMMASUKKELUAR="select e.UserId, e.datelog, e.timelog, f.timelog from eventlog e, eventlog f where e.datelog = f.datelog and e.fkmode = '0' and f.fkmode = '1' and e.datelog like ? and e.UserId BETWEEN ? AND ?";
+    private static final String SQL_GET_JAMMASUKKELUAR="select e.UserId, e.datelog, e.timelog, f.timelog from eventlog e, eventlog f where e.datelog = f.datelog and f.userid = e.userid and e.fkmode = '0' and f.fkmode = '1' and e.datelog like ? and e.UserId BETWEEN ? AND ?";
     private Connection connection;
 
     public JamMasukKeluarReportDaoImplemen(Connection connection) {
