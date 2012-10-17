@@ -32,6 +32,9 @@
 	<parameter name="bulantahun" isForPrompting="false" class="java.lang.String">
 		<defaultValueExpression ><![CDATA["2012-09%"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="bulanString" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["September 2012"]]></defaultValueExpression>
+	</parameter>
 	<queryString><![CDATA[select eventlog.*, karyawan.nama 
 from eventlog, karyawan 
 where eventlog.datelog like $P{bulantahun} 
@@ -134,7 +137,7 @@ and karyawan.nip = eventlog.userid]]></queryString>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="14"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{bulantahun}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{bulanString}]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageHeader>
